@@ -5,7 +5,7 @@ Aplicativo de venda e estoque
 projeto de base 
 
 configurar device em mac
- -> seta permissao geral na anterior, e aplica a todos os arquivos
+ -> seta permissao geral na anterior, e aplica a todos os arquivos <br>
  -> pra assinar, conecta o iphone via usb
  -> setar a privacidade de uso da camera
 
