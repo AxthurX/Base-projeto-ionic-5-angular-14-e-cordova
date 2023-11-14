@@ -1,0 +1,35 @@
+<ion-header class="osahan-nav">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <app-btn-voltar #btnVoltar></app-btn-voltar>
+    </ion-buttons>
+    <ion-title> Inicio </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="main_content_div">
+    <div class="content_div">
+      <div class="grid_box">
+        <div class="box_div" (click)="goTo('/home/vendas')">
+          <ion-icon name="reader-outline"></ion-icon>
+          <ion-label>Vendas</ion-label>
+        </div>
+        <div class="box_div" (click)="goTo('/home/balanco')">
+          <ion-icon name="reader-outline"></ion-icon>
+          <ion-label>Balanço</ion-label>
+        </div>
+      </div>
+      <div class="grid_box">
+        <div class="box_div" (click)="showTelaConsulta()">
+          <ion-icon name="reader-outline"></ion-icon>
+          <ion-label>Consulta de preço</ion-label>
+        </div>
+        <div class="box_div" (click)="goTo('/home/importacao')">
+          <ion-icon name="reader-outline"></ion-icon>
+          <ion-label>Importação</ion-label>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,30 @@
+export class ViewCliente {
+  id: number;
+  id_erp: number;
+  id_municipio: number;
+  id_bairro_erp: number;
+  id_tabela_preco_erp?: number;
+  localizacao_latitude?: number;
+  localizacao_longitude?: number;
+  id_rota_erp?: number;
+  id_cliente_atividade_erp?: number;
+  razao: string;
+  cep: string;
+  fantasia: string;
+  cpf_cnpj: string;
+  logradouro: string;
+  numero: string;
+  telefone_principal: string;
+  telefone_whatsapp: string;
+  complemento: string;
+  bairro: string;
+  municipio: string;
+  codigo_municipio: string;
+  sigla_uf: string;
+  atividade: string;
+  limite_credito_disponivel: number;
+  limite_credito: number;
+  status?: number;
+  inscricao_estadual?: number;
+  indicador_ie?: number;
+}

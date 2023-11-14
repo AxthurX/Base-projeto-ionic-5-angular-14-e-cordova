@@ -1,0 +1,30 @@
+<ion-segment scrollable="true" mode="ios" [value]="filtro_pesquisa" (ionChange)="segmentChangedFiltro($event)">
+  <ion-segment-button style="min-width: 90px;" scrollable="true" value="geral">
+    <ion-label>Geral</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="id">
+    <ion-label>ID</ion-label>
+  </ion-segment-button>
+  <ion-segment-button style="min-width: 90px;" value="gtin">
+    <ion-label>Cód.Barra</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-searchbar [disabled]=" consultando === true || (tela_consulta && tela_consulta.consultando === true)"
+        #pesquisa (keyup.enter)="onPesquisar()" [(ngModel)]="texto_pesquisado" placeholder="Pesquisar produto">
+      </ion-searchbar>
+    </ion-col>
+    <ion-col size="2" style="font-size: 30px; margin-top: 12px;">
+      <ion-icon (click)="onPesquisar()" name="search-outline"></ion-icon>
+    </ion-col>
+    <ion-col size="2" style="font-size: 30px; margin-top: 12px;">
+      <ion-icon (click)="lerQrCode()" name="barcode-outline"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+<app-consultando *ngIf="consultando && !nao_exibir_consultando"></app-consultando>

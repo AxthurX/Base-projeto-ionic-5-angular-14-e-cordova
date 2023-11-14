@@ -1,0 +1,36 @@
+<div class="addresses-item mb-2 card">
+  <div class="gold-members p-3">
+    <div class="media">
+      <div class="media-body">
+        <span class="mb-2 text-dark font-weight-bold">{{icone}} {{titulo}}:
+          <span *ngIf="!value || !value.descricao" class="text-secondary sem-margem">&nbsp;&nbsp;&nbsp;[Não
+            selecionado]</span>
+          <span *ngIf="value && value.descricao" class="text-secondary sem-margem">&nbsp;&nbsp;&nbsp;
+            {{value.descricao}}</span>
+        </span>
+        <p class="mb-0 small">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3" class="input-group">
+                <input (keyup.enter)="onBuscaPorId($event)" *ngIf="value" [value]="value.id_erp" style="height: 25px;"
+                  type="number" class="form-control border-form-control form-control-sm input-number" />
+                <input (keyup.enter)="onBuscaPorId($event)" *ngIf="!value" style="height: 25px;" type="number"
+                  class="form-control border-form-control form-control-sm input-number" />
+              </ion-col>
+              <ion-col style="padding-top: 7px;">
+                <span (click)="sendOnSelecionar()" class="text-primary mr-3">
+                  <ion-icon name="search-outline"></ion-icon>
+                  Pesquisar
+                </span>
+                <span (click)="sendOnLimpar()" class="text-danger">
+                  <ion-icon name="trash-outline"></ion-icon>
+                  Limpar
+                </span>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

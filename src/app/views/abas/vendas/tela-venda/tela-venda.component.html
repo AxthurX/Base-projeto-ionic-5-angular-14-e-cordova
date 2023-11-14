@@ -1,0 +1,146 @@
+<ion-header class="osahan-nav">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <app-btn-voltar #btnVoltar [solicitar_confirmacao]="true">
+      </app-btn-voltar>
+    </ion-buttons>
+    <ion-title>{{acao}} - <span class="badge badge-light" *ngIf="objVenda.dados_json.pedido === true">Pedido</span>
+      <span class="badge badge-warning" *ngIf="objVenda.dados_json.pedido === false">Orçamento</span>
+    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-toggle color="light" [(ngModel)]="objVenda.dados_json.pedido"></ion-toggle>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding order-list-page shop-cart-page" color="light">
+  <ion-segment mode="ios" [value]="aba_selecionada" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="detalhes">
+      <ion-label *ngIf="objVenda.dados_json.pedido === true">Detalhes do pedido</ion-label>
+      <ion-label *ngIf="objVenda.dados_json.pedido === false">Detalhes do orçamento</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [disabled]="!objVenda.dados_json.cliente" value="produtos">
+      <ion-label>Produtos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ng-container *ngIf="aba_selecionada === 'detalhes'">
+    <!--  <app-lookup (OnBuscaPorId)="OnSelecionarTipoOperacao($event)" [value]="objVenda.dados_json.tipo_operacao"
+      (OnSelecionar)="OnSelecionarTipoOperacao()" (OnLimpar)="OnLimparTipoOperacao()" [titulo]="'Operação'"
+      [icone]="'🛒'"></app-lookup>
+    <app-lookup *ngIf="objVenda.dados_json.tipo_operacao" (OnBuscaPorId)="OnSelecionarCliente($event)"
+      [value]="objVenda.dados_json.cliente" (OnSelecionar)="OnSelecionarCliente()" (OnLimpar)="OnLimparCliente()"
+      [titulo]="'Cliente'" [icone]="'👤'"></app-lookup>
+    <app-lookup *ngIf="objVenda.dados_json.tipo_operacao && objVenda.dados_json.cliente"
+      (OnBuscaPorId)="OnSelecionarFormaPagamento($event)" [value]="objVenda.dados_json.forma_pagamento"
+      (OnSelecionar)="OnSelecionarFormaPagamento()" (OnLimpar)="OnLimparFormaPagamento()" [titulo]="'Pagamento'"
+      [icone]="'💰'"></app-lookup>
+    -->
+
+    <app-dropdown [value]="objVenda.dados_json.tipo_operacao" (OnSelecionar)="RetornoDoValor($event)" [modal]="false"
+      [titulo]="'Operação'" [icone]="'🛒'" [get]="'getTiposOperacao'">
+    </app-dropdown>
+
+    <div class="card" *ngIf="objVenda && objVenda.dados_json">
+      <ion-list lines=" full" class="ion-no-margin ion-no-padding">
+        <ion-item *ngIf="empresa_logada.confirmar_alteracao_preco_tela_vendas_ao_alterar_forma_pagamento"
+          class="ion-text-wrap">
+          <ion-toggle slot="start" color="primary" [(ngModel)]="nao_recalcular_ao_alterar_parcelamento"></ion-toggle>
+          <ion-label class="ion-text-wrap">Não recalcular preço ao alterar o parcelamento</ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <ion-button (click)="mostrarOpcoesGerais()" expand="block" size="small" color="primary">
+      Opções gerais da venda
+    </ion-button>
+    <div class="card mb-2">
+      <div class="p-3">
+        <div class="d-flex justify-content-between mb-2">
+          <div class="text-secondary">Quantidade produtos lançados</div>
+          <div class="text-secondary">{{objVenda.dados_json.quantidade_produtos_lancados | number: '1.0-3'}}</div>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <div class="text-secondary">Total bruto</div>
+          <div class="text-secondary">R$ {{objVenda.dados_json.total_bruto | number: '1.2-2'}}</div>
+        </div>
+        <div *ngIf="objVenda.dados_json.desconto_vlr > 0" class="d-flex justify-content-between mb-2">
+          <div class="text-secondary">Descontos</div>
+          <div class="text-success">-R${{objVenda.dados_json.desconto_vlr | number: '1.2-2'}}
+            -{{objVenda.dados_json.desconto_prc | number: '1.2-2'}}%</div>
+        </div>
+        <div *ngIf="objVenda.dados_json.total_desconto_suframa > 0" class="d-flex justify-content-between mb-2">
+          <div class="text-secondary">Desconto suframa</div>
+          <div class="text-success">-R${{objVenda.dados_json.total_desconto_suframa | number: '1.2-2'}}</div>
+        </div>
+        <div *ngIf="objVenda.dados_json.acrescimo_vlr > 0" class="d-flex justify-content-between">
+          <div class="text-secondary">
+            Acréscimos
+          </div>
+          <div class="text-danger">
+            +R${{objVenda.dados_json.acrescimo_vlr | number: '1.2-2'}}
+            +{{objVenda.dados_json.acrescimo_prc | number: '1.2-2'}}%
+          </div>
+        </div>
+        <div *ngIf="objVenda.dados_json.total_ipi > 0" class="d-flex justify-content-between">
+          <div class="text-secondary">
+            IPI
+          </div>
+          <div class="text-danger">+R${{objVenda.dados_json.total_ipi | number: '1.2-2'}}</div>
+        </div>
+        <div *ngIf="objVenda.dados_json.total_icms_st > 0" class="d-flex justify-content-between">
+          <div class="text-secondary">
+            ICMS ST
+          </div>
+          <div class="text-danger">+R${{objVenda.dados_json.total_icms_st | number: '1.2-2'}}</div>
+        </div>
+        <p *ngIf="objVenda.dados_json.observacao" class="justify-content-between py-3 px-3 border-top text-dark">
+          <ion-icon style="float: right;" color="danger" name="close-circle-outline" (click)="limparObservacaoVenda()">
+          </ion-icon>
+          <b>Observação:</b> {{objVenda.dados_json.observacao}}
+        </p>
+
+        <div class="d-flex justify-content-between align-items-center py-3 px-3 border-top text-dark">
+          <h6 class="font-weight-bold m-0">Total líquido</h6>
+          <h6 class="font-weight-bold m-0">R$ {{objVenda.dados_json.total_liquido | number: '1.2-2'}}</h6>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="aba_selecionada === 'produtos'">
+    <app-cabecalho-pesquisa-produto [juros_aplicar]="juros_aplicar" [nao_exibir_consultando]="true" [tela_vendas]="this"
+      [tipo_preco_produto]="objVenda.dados_json.tipo_preco_produto"
+      [id_tabela_preco_erp]="objVenda.dados_json.id_tabela_preco_erp"
+      [id_forma_pagamento]="objVenda.dados_json.id_forma_pagamento" (OnConsultou)="OnConsultou($event)" #cabecalho
+      [modal]="modal" [permitir_quantidade_zero]="false">
+    </app-cabecalho-pesquisa-produto>
+    <p class="text-center" *ngIf="objVenda.dados_json.produtos">
+      {{objVenda.dados_json.produtos.length}} produto(s) lançado(s)
+    </p>
+
+    <app-item-venda *ngFor="let registro of objVenda.dados_json.produtos, let i = index" [registro]="registro"
+      (OnMostrarOpcoesProduto)="mostrarOpcoesProduto(registro, i)"
+      (OnLimparObservacaoItem)="limparObservacaoItem(registro)"
+      (OnAjustarQuantidade)="ajustarQuantidade(registro, i, $event)"
+      (OnAlterouQuantidadeManualmente)="alterouQuantidadeManualmente(registro, $event)">
+    </app-item-venda>
+  </ng-container>
+</ion-content>
+
+<ion-footer class="border-0">
+  <ion-progress-bar *ngIf="recalculando_totais" type="indeterminate"></ion-progress-bar>
+  <button [disabled]="recalculando_totais" (click)="SalvarVenda()"
+    class="btn btn-primary btn-lg btn-block fix-btn text-left" type="button">
+    <span class="float-left">
+      <ion-icon name="cart-outline"></ion-icon>
+      Salvar
+      <span *ngIf="objVenda.dados_json.pedido === true">Pedido</span>
+      <span *ngIf="objVenda.dados_json.pedido === false">Orçamento</span>
+    </span>
+    <span class="float-right">
+      <strong>R$ {{objVenda.dados_json.total_liquido | number: '1.2-2'}}</strong>
+    </span>
+  </button>
+  <ion-progress-bar *ngIf="recalculando_totais" type="indeterminate"></ion-progress-bar>
+</ion-footer>

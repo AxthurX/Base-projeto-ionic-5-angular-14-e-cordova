@@ -1,0 +1,62 @@
+<div class="d-flex p-3 shop-cart-item bg-white mb-2">
+  <div *ngIf="readonly === false" class="shop-cart-left">
+    <app-img [base64]="registro.imagem"></app-img>
+  </div>
+  <div class="shop-cart-right">
+    <div (click)="mostrarOpcoesProduto()">
+      <h6 class="font-weight-bold text-dark mb-2 small">
+        <span class="text-secondary font-weight-normal">Cód: {{registro.id_produto_erp}}</span> |
+        <ion-badge *ngIf="registro.tipo_preco === 'P' || registro.tipo_preco === 'T'"
+          [color]="getColor(registro.tipo_preco)">
+          R$ {{registro.valor_unitario | number: '1.2-2'}}
+        </ion-badge>
+        <span *ngIf="registro.tipo_preco !== 'P' && registro.tipo_preco !== 'T'">
+          R$ {{registro.valor_unitario | number: '1.2-2'}}
+        </span>
+      </h6>
+      <div class="mb-2">
+        {{registro.descricao}}
+        <br />
+        <small style="font-size: 11px;"> Bruto: <b>R${{registro.total_bruto | number: '1.2-2'}}</b>
+          <span *ngIf="registro.desconto_vlr > 0"> Desc.
+            <span class="text-success font-weight-bold">
+              -R${{registro.desconto_vlr | number: '1.2-2'}}-{{registro.desconto_prc | number: '1.2-2'}}%
+            </span>
+          </span><br />
+          <span *ngIf="registro.acrescimo_vlr > 0"> Acrés.
+            <span class="text-danger font-weight-bold">
+              +R${{registro.acrescimo_vlr | number: '1.2-2'}}+{{registro.acrescimo_prc | number: '1.2-2'}}%
+            </span>
+          </span>
+        </small>
+      </div>
+    </div>
+    <p *ngIf="registro.observacao" class="justify-content-between py-3 px-3 border-top text-dark">
+      <ion-icon style="float: right;" color="danger" name="close-circle-outline" (click)="limparObservacaoItem()">
+      </ion-icon>
+      <b>Observação:</b> {{registro.observacao}}
+    </p>
+
+    <div class="small text-gray-500 d-flex align-items-center justify-content-between">
+      <div class="input-group shop-cart-value">
+        <span class="input-group-btn">
+          <button [disabled]="readonly" (click)="ajustarQuantidade(-1)" class="btn btn-sm" type="button">-</button>
+        </span>
+        <input [readonly]="readonly" (ngModelChange)="alterouQuantidadeManualmente($event)" type="number"
+          [(ngModel)]="registro.quantidade" class="form-control border-form-control form-control-sm input-number" />
+        <span class="input-group-btn">
+          <button [disabled]="readonly" (click)="ajustarQuantidade(1)" class="btn btn-sm" type="button">+</button>
+        </span>
+      </div>
+      <h6>
+        Líq.: <b>R${{registro.total_liquido | number: '1.2-2'}}</b>
+      </h6>
+    </div>
+    <div style="margin-top: 10px" class="alert-danger" *ngIf="registro.invalidades?.length > 0">
+      <ul>
+        <li *ngFor="let item of registro.invalidades">{{item}}</li>
+      </ul>
+    </div>
+
+  </div>
+</div>

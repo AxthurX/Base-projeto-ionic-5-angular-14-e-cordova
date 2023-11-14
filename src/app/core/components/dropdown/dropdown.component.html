@@ -1,0 +1,61 @@
+<div class="addresses-item mb-2 card">
+  <div class="gold-members" style="padding: .6rem .6rem 0;">
+    <div class="media">
+      <div class="media-body">
+        <span class="mb-2 text-dark font-weight-bold">{{icone}} {{titulo}}:
+          <span *ngIf="!selecionado && !value" class="text-secondary sem-margem">
+            &nbsp;&nbsp;&nbsp;[Não selecionado]
+          </span>
+          <span *ngIf="selecionado || value" class="text-secondary sem-margem">
+            &nbsp;&nbsp;&nbsp;{{selecionado?.descricao ?? value?.descricao}}
+          </span>
+          <p class="mb-0 small ">
+            <ion-grid *ngIf="!modal">
+              <ion-row>
+                <ion-col size="8" style="padding: 0px 0px 7px; display: flex; align-items: center;">
+                  <ion-select interface="action-sheet" class="my-custom-select" placeholder="{{titulo}}"
+                    cancelText="Cancelar" [interfaceOptions]="interfaceOptions" (ionChange)="onSelecionar($event)"
+                    (click)="onClicou()" [(ngModel)]="selecionado">
+                    <ion-select-option *ngFor="let registro of registros" style="width: 100%;" [value]="registro">
+                      <b style="font-size: 14px;" class="text-dark mb-2">
+                        {{registro.descricao ?? registro.fantasia}}
+                      </b>
+                    </ion-select-option>
+                  </ion-select>
+                </ion-col>
+                <ion-col style="padding: 0px 7px 7px; display: flex; align-items: center;" size="4">
+                  <span (click)="onLimpar()" class="text-danger">
+                    <ion-icon name="trash-outline"></ion-icon>
+                    Limpar
+                  </span>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-grid *ngIf="modal">
+              <ion-row>
+                <ion-col size="3" class="input-group">
+                  <input (keyup.enter)="onBuscarPorId($event)" *ngIf="value" [value]="value.id_erp"
+                    style="height: 25px;" type="number"
+                    class="form-control border-form-control form-control-sm input-number" />
+                  <input (keyup.enter)="onBuscarPorId($event)" *ngIf="!value" style="height: 25px;" type="number"
+                    class="form-control border-form-control form-control-sm input-number" />
+                </ion-col>
+                <ion-col style="padding-top: 7px;">
+                  <span (click)="onSelecionar($event)" class="text-primary mr-3">
+                    <ion-icon name="search-outline"></ion-icon>
+                    Pesquisar
+                  </span>
+                  <span (click)="onLimpar()" class="text-danger">
+                    <ion-icon name="trash-outline"></ion-icon>
+                    Limpar
+                  </span>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </p>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

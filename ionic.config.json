@@ -1,0 +1,7 @@
+{
+  "name": "Computaria",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

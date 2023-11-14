@@ -1,0 +1,63 @@
+<div class="card mb-2 {{GetClasse()}}">
+  <div class="p-1">
+    <div *ngIf="objVenda.cliente" class="d-flex justify-content-between mb-2">
+      <div class="text-secondary"><span style="font-size: 12px;">Cliente</span>
+        <br /> <b>{{objVenda.cliente.id_erp}} -
+          {{objVenda.cliente.descricao}}</b>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between mb-2">
+      <ion-grid style="padding: 0;">
+        <ion-row style="margin: -5px;">
+          <ion-col *ngIf="objVenda.tipo_operacao">
+            <div class="text-secondary"><span style="font-size: 12px;">Tipo de operação</span> <br />
+              <b>{{objVenda.tipo_operacao.id_erp}} - {{objVenda.tipo_operacao.descricao}}</b>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="d-flex justify-content-between mb-2">
+      <div class="text-secondary"><span style="font-size: 12px;">Data do {{GetTipoVenda(objVenda.pedido)}}</span> <br />
+        <b>{{objVenda.data | date:'dd/MM/yyyy HH:mm'}}</b>
+      </div>
+      <div class="text-secondary"><span style="font-size: 12px;">Total bruto</span> <br />
+        <b>R$ {{objVenda.total_bruto | number: '1.2-2'}}</b>
+      </div>
+    </div>
+    <div *ngIf="objVenda.id_nuvem" class="d-flex justify-content-between mb-2">
+      <div class="text-secondary"><span style="font-size: 12px;">Sincronizado em</span> <br />
+        <b>{{objVenda.sincronizado_em}}</b>
+      </div>
+      <div class="text-secondary"><span style="font-size: 12px;">Cód nuvem</span> <br />
+        <b>{{objVenda.id_nuvem}}</b>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between mb-2" *ngIf="objVenda.desconto_vlr > 0 || objVenda.acrescimo_vlr > 0">
+      <div class="text-secondary" *ngIf="objVenda.desconto_vlr > 0"><span style="font-size: 12px;">Descontos</span>
+        <br />
+        <span class="text-success">-R${{objVenda.desconto_vlr | number: '1.2-2'}}
+          -{{objVenda.desconto_prc | number: '1.2-2'}}%</span>
+      </div>
+      <div class="text-secondary" *ngIf="objVenda.acrescimo_vlr > 0">
+        <span style="font-size: 12px;">Acréscimos</span> <br />
+        <span class="text-danger">+R${{objVenda.acrescimo_vlr | number: '1.2-2'}}
+          +{{objVenda.acrescimo_prc | number: '1.2-2'}}%</span>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center py-1 px-3 border-top text-dark">
+      <h6 class="font-weight-bold m-0">Total líquido</h6>
+      <h6 class="font-weight-bold m-0">
+        <ion-badge [color]="GetColor(objVenda.pedido)">R$ {{objVenda.total_liquido | number: '1.2-2'}}</ion-badge>
+      </h6>
+    </div>
+    <ng-container *ngIf="objVenda.status_manipulacao === 1">
+      <p class="text-center">Sincronizando com o servidor online...</p>
+      <ion-progress-bar color="primary" type="indeterminate"></ion-progress-bar>
+    </ng-container>
+    <ng-container *ngIf="objVenda.status_manipulacao === 2">
+      <p class="text-center">Excluindo...</p>
+      <ion-progress-bar color="danger" type="indeterminate"></ion-progress-bar>
+    </ng-container>
+  </div>
+</div>
