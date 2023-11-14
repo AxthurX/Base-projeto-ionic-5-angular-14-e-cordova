@@ -1,8 +1,5 @@
 # Projeto-final-back-e-front-end
-Aplicativo de venda e estoque 
-
-# base-ionic5-cordova-angular-
-projeto de base 
+Aplicativo de venda e estoque para um trabalho da faculdade fé 
 
 configurar device em mac<br>
  -> seta permissao geral na anterior, e aplica a todos os arquivos <br>
