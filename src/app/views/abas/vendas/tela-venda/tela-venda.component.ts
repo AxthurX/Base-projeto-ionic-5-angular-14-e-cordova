@@ -21,14 +21,10 @@ import { AuthService } from 'src/app/core/service/auth.service';
   templateUrl: './tela-venda.component.html',
   styleUrls: ['./tela-venda.component.scss'],
 })
-export class TelaVendaComponent
-  extends ClasseBase
-  implements OnInit, OnDestroy
-{
+export class TelaVendaComponent implements OnInit, OnDestroy {
   @ViewChild('btnVoltar') btnVoltar;
   @Input() objVenda: OperacaoSaida;
   @Input() copiando?: boolean;
-  aba_selecionada: string;
   carregando: boolean;
   nao_recalcular_ao_alterar_parcelamento: boolean = false;
   empresa_logada: Empresa;
@@ -47,8 +43,6 @@ export class TelaVendaComponent
     private router: Router,
     auth: AuthService
   ) {
-    super(auth, environment.id_tela_vendas);
-    this.aba_selecionada = 'detalhes';
     this.acao = '';
     this.carregando = false;
     this.objVenda = new OperacaoSaida();
@@ -136,10 +130,6 @@ export class TelaVendaComponent
     this.RecalcularTotais();
   }
 
-  segmentChanged(event) {
-    this.aba_selecionada = event.detail.value;
-  }
-
   getByIdOrGtin(filtro: string, valor: string) {
     if (filtro === 'id') {
       return this.objVenda.dados_json.produtos.find(
@@ -218,7 +208,6 @@ export class TelaVendaComponent
       this.recalculando_totais = false;
     } catch (e) {
       this.recalculando_totais = false;
-      this.TratarErro(e);
     }
   }
 
@@ -601,7 +590,6 @@ export class TelaVendaComponent
           handler: () => {
             Util.Confirm('Limpar venda', () => {
               OperacaoSaidaUtil.LimparVenda(this.objVenda.dados_json);
-              this.aba_selecionada = 'detalhes';
             });
           },
         },
@@ -630,41 +618,31 @@ export class TelaVendaComponent
   }
 
   async SalvarVenda() {
-    if (
-      OperacaoSaidaUtil.Validar(
-        this.objVenda.dados_json,
-        this.auth.getDadosEmpresaLogada()
-      ) === true
-    ) {
-      try {
-        if (
-          this.objVenda.dados_json.pedido &&
-          this.empresa_logada
-            .bloquear_pedidos_a_prazo_cliente_limite_excedido &&
-          this.objVenda.dados_json.view_cliente.limite_credito > 0 &&
-          this.objVenda.dados_json.total_liquido >
-            this.objVenda.dados_json.view_cliente.limite_credito_disponivel
-        ) {
-          let mensagem =
-            'Cliente sem limite de crédito disponível para realizar esta venda à prazo!';
-          if (this.empresa_logada.mensagem_bloqueio_venda_limite_credito) {
-            mensagem =
-              this.empresa_logada.mensagem_bloqueio_venda_limite_credito;
-          }
-
-          mensagem +=
-            ' Esta venda será salva como ORÇAMENTO, deseja continuar?';
-
-          Util.Confirm(mensagem, () => {
-            this.objVenda.dados_json.pedido = false;
-            this.salvarSemValidar();
-          });
-        } else {
-          this.salvarSemValidar();
+    try {
+      if (
+        this.objVenda.dados_json.pedido &&
+        this.empresa_logada.bloquear_pedidos_a_prazo_cliente_limite_excedido &&
+        this.objVenda.dados_json.view_cliente.limite_credito > 0 &&
+        this.objVenda.dados_json.total_liquido >
+          this.objVenda.dados_json.view_cliente.limite_credito_disponivel
+      ) {
+        let mensagem =
+          'Cliente sem limite de crédito disponível para realizar esta venda à prazo!';
+        if (this.empresa_logada.mensagem_bloqueio_venda_limite_credito) {
+          mensagem = this.empresa_logada.mensagem_bloqueio_venda_limite_credito;
         }
-      } catch (e) {
-        Util.AlertError(e);
+
+        mensagem += ' Esta venda será salva como ORÇAMENTO, deseja continuar?';
+
+        Util.Confirm(mensagem, () => {
+          this.objVenda.dados_json.pedido = false;
+          this.salvarSemValidar();
+        });
+      } else {
+        this.salvarSemValidar();
       }
+    } catch (e) {
+      Util.AlertError(e);
     }
   }
 
@@ -674,7 +652,6 @@ export class TelaVendaComponent
       OperacaoSaidaUtil.PreecherJson(this.objVenda);
       await this.dados.salvarVenda(this.objVenda);
       this.overlay.notificarSucesso('Venda salva com sucesso!');
-      this.auth.informarSalvouVenda();
       this.router.navigate(['home/vendas']);
     } catch (err) {
       Util.logarErro(err);
