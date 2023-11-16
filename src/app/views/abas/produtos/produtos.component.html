@@ -11,7 +11,7 @@
 
 <ion-content color="light">
   <app-cabecalho-pesquisa-produto [tipo_preco_produto]="tipo_preco_produto" [texto_pesquisado]="texto_pesquisado"
-    [tela_consulta]="this" [nao_exibir_consultando]="true">
+    [nao_exibir_consultando]="true">
   </app-cabecalho-pesquisa-produto>
   <p class="text-center" *ngIf="registros">
     {{registros.length}} produto(s) localizado(s)
@@ -28,7 +28,7 @@
   <div class="card" *ngIf="!consultando">
     <div *ngFor="let registro of registros; let i = index" class="d-flex p-3 shop-cart-item bg-white mb-2 sem-mb">
       <div class="shop-cart-left" *ngIf="registro.mostrar_foto">
-        <app-img [base64]="registro.imagem" [consulta]="this" [index]="i" [descricao]="registro.descricao"></app-img>
+        <app-img [base64]="registro.imagem" [index]="i" [descricao]="registro.descricao"></app-img>
       </div>
       <div class="shop-cart-right">
         <h6 style="font-size: 10px !important;" class="font-weight-bold text-dark mb-2 small"
@@ -91,6 +91,11 @@
   </div>
 
   <br />
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="AbrirTelaCadastro()">
+    <ion-fab-button>
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <br />
 </ion-content>
 <ion-footer class="border-0">
