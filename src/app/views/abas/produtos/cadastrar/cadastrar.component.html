@@ -1,0 +1,101 @@
+<ion-header class="osahan-nav">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <app-btn-voltar #btnVoltar [fechar_modal]="true"></app-btn-voltar>
+    </ion-buttons>
+    <ion-title>Cadastrar produto
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" color="light">
+
+  <div class="card">
+    <!-- <app-consultando *ngIf="consultando"></app-consultando> -->
+
+    <form (ngSubmit)="onSalvar()" novalidate>
+      <ion-input style="display: none;" [disabled]="true" placeholder="Preencha os dados do produto">
+      </ion-input>
+      <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <ion-item class="py-1 align-items-center">
+          <ion-label color="primary" position="stacked" class="mb-1 align-self-center">
+            <b>Nome</b>
+            <ion-text color="danger">*</ion-text>
+            <ion-text class="pulse" color="danger" *ngIf="submitted && !produto.nome">
+              <b>Campo obrigatório</b>
+            </ion-text>
+          </ion-label>
+          <input class="native-input sc-ion-input-md p-1 mb-3 rounded-4 align-self-center text-center" type="text"
+            [(ngModel)]="produto.nome" name="nome" maxlength="60" required />
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" position="stacked" class="mb-1 align-self-center">
+            <b>Data de fabricação</b>
+          </ion-label>
+          <ion-datetime presentation="date" max="2100" cancel-tex="Cancelar" done-text="Ok" displayFormat="D/MM/YYYY"
+            [ngModel]="produto.data_fabricacao | date:'yyyy-MM-dd'" (ngModelChange)="produto.data_fabricacao = $event"
+            name="data_fabricacao">
+          </ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" position="stacked" class="mb-1 align-self-center">
+            <b>Data de vencimento</b>
+          </ion-label>
+          <ion-datetime presentation="date" max="2100" cancel-tex="Cancelar" done-text="Ok" displayFormat="D/MM/YYYY"
+            [ngModel]="produto.data_vencimento | date:'yyyy-MM-dd'" (ngModelChange)="produto.data_vencimento = $event"
+            name="data_vencimento">
+          </ion-datetime>
+        </ion-item>
+
+        <ion-item class="py-1 d-flex align-items-center justify-content-center">
+          <div class="small text-gray-500 d-inline-flex m-auto align-items-center justify-content-center flex-column">
+            <p class="text-clima"><b> Quantidade Produtos </b></p>
+            <div class="input-group shop-cart-value align-items-center justify-content-center mb-3">
+              <span class="input-group-btn align-self-center p-1">
+                <button (click)="ajustarQuantidade(produto, -1)" class="btn btn-sm" type="button">-</button>
+              </span>
+              <input (ngModelChange)="alterouQuantidadeManualmente(produto, $event)" type="number"
+                [(ngModel)]="produto.qtde_produto" name="qtde_produto" id="qtde_produto"
+                class="form-control borda-numero border-form-control form-control-sm input-number align-self-center" />
+              <span class="input-group-btn align-self-center">
+                <button (click)="ajustarQuantidade(produto, 1)" class="btn btn-sm" type="button">+</button>
+              </span>
+            </div>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" position="stacked" class="mb-1 text-center align-self-center">
+            <b>Valor Únitario</b>
+            <ion-text color="danger">*</ion-text>
+          </ion-label>
+          <input class="native-input sc-ion-input-md p-1 mb-3 rounded-4 align-self-center text-center" type="text"
+            [(ngModel)]="produto.valor_unitario" name="valor_unitario" mask="separator.2" [thousandSeparator]="'.'"
+            [decimalMarker]="','" prefix="R$ " [dropSpecialCharacters]="true" id="valor_unitario" maxlength="60" />
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" position="stacked" class="mb-1 text-center align-self-center">
+            <b>Valor total</b>
+            <ion-text color="danger">*</ion-text>
+          </ion-label>
+          <input class="native-input sc-ion-input-md p-1 mb-3 rounded-4 align-self-center text-center" type="text"
+            [(ngModel)]="produto.valor_total" name="valor_total" mask="separator.2" [thousandSeparator]="'.'"
+            [decimalMarker]="','" prefix="R$ " [dropSpecialCharacters]="true" id="valor_total" maxlength="60" />
+        </ion-item>
+
+        <ion-item>
+          <ion-toggle [(ngModel)]="produto.produto_perecivel"></ion-toggle>
+          <ion-label (click)="produto.produto_perecivel = !produto.produto_perecivel">Produto perecivel</ion-label>
+        </ion-item>
+
+        <div class="ion-padding">
+          <ion-button expand="block" type="submit" class="ion-no-margin">
+            Salvar
+          </ion-button>
+        </div>
+      </ion-list>
+    </form>
+  </div>
+</ion-content>

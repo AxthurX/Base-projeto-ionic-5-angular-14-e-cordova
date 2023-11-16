@@ -13,4 +13,11 @@ export class Produto {
   referencia: boolean;
   movimenta_fracionado: boolean;
   nao_calcula_saldo_flex: boolean;
+  nome: string;
+  data_fabricacao: string;
+  data_vencimento: string;
+  qtde_produto: number;
+  valor_unitario: number;
+  valor_total: number;
+  produto_perecivel: boolean;
 }

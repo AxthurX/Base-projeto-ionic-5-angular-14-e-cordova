@@ -8,13 +8,15 @@ import { fromEvent, Subscription } from 'rxjs';
 import { CabecalhoPesquisaProdutoComponent } from 'src/app/core/components/cabecalho-pesquisa-produto/cabecalho-pesquisa-produto.component';
 import { OverlayService } from 'src/app/core/service/overlay.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
+import { Produto } from 'src/app/core/model/data-base/produto.model';
+import { CadastrarComponent } from './cadastrar/cadastrar.component';
 
 @Component({
-  selector: 'app-consulta-produto',
-  templateUrl: './consulta-produto.component.html',
-  styleUrls: ['./consulta-produto.component.scss'],
+  selector: 'app-produtos',
+  templateUrl: './produtos.component.html',
+  styleUrls: ['./produtos.component.scss'],
 })
-export class ConsultaProdutoComponent implements OnInit, OnDestroy {
+export class ProdutosComponent implements OnInit, OnDestroy {
   @ViewChild('pesquisa') pesquisa;
   cabecalho_parente: CabecalhoPesquisaProdutoComponent;
   registros: ViewProdutoEmpresa[] = [];
@@ -268,5 +270,16 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
     } else if (tipo_preco === 'T') {
       return 'tertiary';
     }
+  }
+
+  async AbrirTelaCadastro(objProdutos?: Produto) {
+    const modal = await this.modal.create({
+      component: CadastrarComponent,
+      componentProps: {
+        // objProdutos,
+      },
+    });
+
+    await modal.present();
   }
 }

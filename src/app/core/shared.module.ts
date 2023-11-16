@@ -15,7 +15,6 @@ import { ConsultandoComponent } from './components/consultando/consultando.compo
 import { DropDownComponent } from './components/dropdown/dropdown.component';
 import { CabecalhoComponent } from './components/cabecalho/cabecalho.component';
 import { CabecalhoBalancoComponent } from './components/cabecalho-balanco/cabecalho-balanco.component';
-import { CadastrarProdutoComponent } from '../views/modais/cadastrar-produto/cadastrar-produto.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +28,6 @@ import { CadastrarProdutoComponent } from '../views/modais/cadastrar-produto/cad
     ImgComponent,
     ConsultaLocalEstoqueComponent,
     ConsultaProdutoComponent,
-    CadastrarProdutoComponent,
     ConsultandoComponent,
     DropDownComponent,
   ],
@@ -49,13 +47,12 @@ import { CadastrarProdutoComponent } from '../views/modais/cadastrar-produto/cad
     CabecalhoComponent,
     CabecalhoPesquisaProdutoComponent,
     CabecalhoBalancoComponent,
-    CadastrarProdutoComponent,
+    ConsultaProdutoComponent,
     CabecalhoVendaComponent,
     LookupComponent,
     TxtPesquisarComponent,
     ImgComponent,
     ConsultaLocalEstoqueComponent,
-    ConsultaProdutoComponent,
     ConsultandoComponent,
     DropDownComponent,
   ],
