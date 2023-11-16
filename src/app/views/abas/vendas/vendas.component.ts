@@ -1,20 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   ActionSheetButton,
   ActionSheetController,
   ModalController,
 } from '@ionic/angular';
-import { ClasseBase } from 'src/app/core/model/classe-base.model';
 import { OperacaoSaidaUtil } from 'src/app/core/model/operacao-saida-util.model';
 import { OperacaoSaida } from 'src/app/core/model/operacao-saida.model';
 import { Util } from 'src/app/core/util.model';
-import { environment } from 'src/environments/environment';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { IonContent } from '@ionic/angular';
 import { OverlayService } from 'src/app/core/service/overlay.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
-import { AuthService } from 'src/app/core/service/auth.service';
 import { SincronizacaoService } from 'src/app/core/service/sincronizacao.service';
 
 @Component({
@@ -24,45 +21,28 @@ import { SincronizacaoService } from 'src/app/core/service/sincronizacao.service
 })
 export class VendasComponent implements OnInit {
   @ViewChild(IonContent) content: IonContent;
-  carregando_mais_vendas: boolean = false;
   nenhuma_venda_localizada: boolean = false;
   abaSelecionada: string;
   consultando: boolean;
   sincronizando: boolean;
-  apenas_pendentes: boolean;
-  apenas_sincronizadas: boolean;
   pendentes: OperacaoSaida[] = [];
   sincronizados: OperacaoSaida[] = [];
-  ultimaVenda: number;
   offSet_pendentes: number = 0;
   offSet_sincronizadas: number = 0;
   limit: number = 3;
-  nao_consultar_nada_ao_abrir_tela_vendas: boolean;
   constructor(
     private actionSheetController: ActionSheetController,
     private dados: DataBaseProvider,
     private overlay: OverlayService,
     private sincSrv: SincronizacaoService,
-    private route: ActivatedRoute,
     private modal: ModalController,
-    private router: Router,
-    auth: AuthService
+    private router: Router
   ) {
     this.abaSelecionada = 'pendentes';
     this.consultando = false;
     this.sincronizando = false;
     this.pendentes = [];
     this.sincronizados = [];
-  }
-
-  apenasPendentes() {
-    this.apenas_sincronizadas = false;
-    this.onForcarConsultarNovamente();
-  }
-
-  apenasSicronizadas() {
-    this.apenas_pendentes = false;
-    this.onForcarConsultarNovamente();
   }
 
   onForcarConsultarNovamente() {
@@ -75,7 +55,6 @@ export class VendasComponent implements OnInit {
     this.offSet_sincronizadas = 0;
     this.pendentes = [];
     this.sincronizados = [];
-    this.carregando_mais_vendas = false;
   }
 
   doRefresh(event) {
@@ -85,19 +64,12 @@ export class VendasComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.nao_consultar_nada_ao_abrir_tela_vendas) {
-      this.OnConsultar();
-    }
+    this.OnConsultar();
   }
 
   async OnConsultar() {
     setTimeout(() => {
       try {
-        if (!this.carregando_mais_vendas) {
-          this.abaSelecionada = 'pendentes';
-          this.consultando = true;
-        }
-
         this.nenhuma_venda_localizada = false;
 
         const apenas_pendentes = this.abaSelecionada === 'pendentes';
@@ -126,7 +98,6 @@ export class VendasComponent implements OnInit {
               this.nenhuma_venda_localizada = true;
             }
             this.consultando = false;
-            this.carregando_mais_vendas = false;
 
             if (this.abaSelecionada === 'pendentes') {
               this.offSet_pendentes += this.limit;
@@ -136,11 +107,9 @@ export class VendasComponent implements OnInit {
           })
           .catch((err) => {
             this.consultando = false;
-            this.carregando_mais_vendas = false;
           });
       } catch (e) {
         this.consultando = false;
-        this.carregando_mais_vendas = false;
       }
     }, 500);
   }
@@ -173,9 +142,6 @@ export class VendasComponent implements OnInit {
         }
         this.limparConsultas();
         this.OnConsultar();
-        try {
-          this.informarQueTemNovasVendas();
-        } catch {}
       } else {
         Util.AlertInfo('Nenhum PEDIDO pendente foi localizado');
       }
@@ -237,7 +203,6 @@ export class VendasComponent implements OnInit {
             }
 
             await this.sincronizarPedido(venda, index, false, true);
-            this.informarQueTemNovasVendas();
           }
         },
       });
@@ -279,21 +244,6 @@ export class VendasComponent implements OnInit {
       buttons,
     });
     await actionSheet.present();
-  }
-
-  informarQueTemNovasVendas() {
-    try {
-      this.sincSrv.informarQueTemNovasVendas().subscribe({
-        next: (retorno) => {
-          if (!retorno.success) {
-            console.error('informarQueTemNovasVendas');
-          }
-        },
-        error: (e) => {
-          console.error('informarQueTemNovasVendas', e);
-        },
-      });
-    } catch {}
   }
 
   sincronizarPedido(

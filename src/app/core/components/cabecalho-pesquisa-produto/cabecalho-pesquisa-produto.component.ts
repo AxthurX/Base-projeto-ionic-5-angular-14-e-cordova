@@ -157,7 +157,6 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
           if (registros.length === 0) {
             this.overlay.showToast('Nenhum resultado encontrado', 'light');
           } else {
-            console.log('CalcularPrecoETotalBruto');
             registros.forEach((r) => {
               r.quantidade = 1;
               ProdutoUtil.CalcularPrecoETotalBruto(
@@ -172,7 +171,6 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
                 this.juros_aplicar
               );
             });
-            console.log('OnConsultou.emit');
 
             this.OnConsultou.emit(registros);
           }

@@ -3,7 +3,8 @@
     <ion-buttons slot="start">
       <app-btn-voltar [fechar_modal]="true"></app-btn-voltar>
     </ion-buttons>
-    <ion-title>Detalhes da venda
+    <ion-title>
+      Detalhes da venda
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +13,6 @@
   <div #imprimir id="imprimir">
     <app-cabecalho *ngIf="gerando"></app-cabecalho>
     <table class="table">
-
       <thead>
         <tr>
           <th style="font-size: 25px;" colspan="4" class="text-center">

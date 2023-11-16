@@ -13,9 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { File } from '@ionic-native/file/ngx';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { AppVersion } from '@awesome-cordova-plugins/app-version/ngx';
-import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,20 +25,18 @@ import { Camera } from '@awesome-cordova-plugins/camera/ngx';
     SweetAlert2Module.forRoot(),
     ReactiveFormsModule,
     NgxMaskModule.forRoot({
-      dropSpecialCharacters: true, // ao salvar, vai limpar a mascara,
+      dropSpecialCharacters: true,
       validation: true,
     }),
     provideAuth(() => getAuth()),
   ],
   providers: [
-    BarcodeScanner,
-    SQLite,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     File,
+    SQLite,
     StatusBar,
-    LocalNotifications,
     AppVersion,
-    Camera,
+    BarcodeScanner,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent],
   exports: [HttpClientModule],

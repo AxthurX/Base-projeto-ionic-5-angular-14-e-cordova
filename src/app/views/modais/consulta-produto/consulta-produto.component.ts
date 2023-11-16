@@ -93,16 +93,15 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
         this.consultando = true;
         this.registros = [];
 
-        this.registros = await this.dbProvider.getProdutosComPrecoJaCalculado(
-          filtro_pesquisa,
-          texto_pesquisado,
+        this.registros = this.dbProvider.teste;
+        // await this.dbProvider.getProdutosComPrecoJaCalculado(
+        //   filtro_pesquisa,
+        //   texto_pesquisado,
 
-          this.tipo_preco_produto,
-          this.id_tabela_preco_erp,
-          this.id_forma_pagamento
-        );
-
-        console.log('f1');
+        //   this.tipo_preco_produto,
+        //   this.id_tabela_preco_erp,
+        //   this.id_forma_pagamento
+        // );
 
         if (this.registros.length === 0) {
           this.overlay.showToast('Nenhum resultado encontrado', 'light');
@@ -112,11 +111,9 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
           this.tem_produto_preco_tabelado =
             this.registros.filter((c) => c.tipo_preco === 'T').length > 0;
         }
-        console.log('f2');
 
         const forcarPrecoAtacado =
           this.apenas_consulta && this.exibir_preco_atacado_consulta_produto;
-        console.log('f3');
 
         this.registros.forEach((produto) => {
           if (this.cabecalho_parente?.permitir_quantidade_zero === true) {
@@ -137,14 +134,10 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
           //this.carregarImagemProduto(produto);
         });
 
-        console.log('f4');
-
         const produtosJaAdicionados =
           this.cabecalho_parente?.tela_vendas?.getQuantidadesJaLancadas();
 
         if (produtosJaAdicionados?.length > 0) {
-          console.log('f5');
-
           produtosJaAdicionados.forEach((lancada) => {
             const pConsulta = this.registros.find(
               (c) => c.id_produto_erp === lancada.id
@@ -163,11 +156,7 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
           });
         }
 
-        console.log('fim');
-
         this.consultando = false;
-        console.log('valor', this.consultando);
-        console.log('qtde', this.registros?.length);
       }, 400);
     } catch (e) {
       this.consultando = false;

@@ -6,9 +6,11 @@ import { Util } from '../util.model';
 
 @Component({
   selector: 'app-btn-voltar',
-  template: `<ion-button class="top-cart" color="primary" (click)="voltar()">
-    <ion-icon slot="start" name="arrow-back"></ion-icon>
-  </ion-button>`,
+  template: `
+    <ion-button class="top-cart" color="primary" (click)="voltar()">
+      <ion-icon slot="start" name="arrow-back"></ion-icon>
+    </ion-button>
+  `,
 })
 export class BtnVoltarComponent {
   @Input() fechar_modal: boolean;

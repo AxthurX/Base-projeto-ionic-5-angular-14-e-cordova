@@ -4,19 +4,16 @@
       <app-btn-voltar #btnVoltar [solicitar_confirmacao]="true">
       </app-btn-voltar>
     </ion-buttons>
-    <ion-title>{{acao}} - <span class="badge badge-light" *ngIf="objVenda.dados_json.pedido === true">Pedido</span>
-      <span class="badge badge-warning" *ngIf="objVenda.dados_json.pedido === false">Orçamento</span>
+    <ion-title>
+      {{acao}} - <span class="badge badge-light">Pedido</span>
     </ion-title>
-    <ion-buttons slot="primary">
-      <ion-toggle color="light" [(ngModel)]="objVenda.dados_json.pedido"></ion-toggle>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding order-list-page shop-cart-page" color="light">
   <ion-label>Produtos</ion-label>
   <ng-container>
-    <app-cabecalho-pesquisa-produto [juros_aplicar]="juros_aplicar" [nao_exibir_consultando]="true" [tela_vendas]="this"
+    <app-cabecalho-pesquisa-produto [nao_exibir_consultando]="true" [tela_vendas]="this"
       [tipo_preco_produto]="objVenda.dados_json.tipo_preco_produto"
       [id_tabela_preco_erp]="objVenda.dados_json.id_tabela_preco_erp"
       [id_forma_pagamento]="objVenda.dados_json.id_forma_pagamento" (OnConsultou)="OnConsultou($event)" #cabecalho

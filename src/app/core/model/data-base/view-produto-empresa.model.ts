@@ -66,6 +66,10 @@ export class ViewProdutoEmpresa {
   observacao: string;
   alterou_valor_manualmente?: boolean;
   valor_liquido?: number;
+  //validação que não foram supridas, ex: desconto inválido
+  /**
+   *
+   */
   constructor() {
     this.quantidade =
       this.valor_unitario =

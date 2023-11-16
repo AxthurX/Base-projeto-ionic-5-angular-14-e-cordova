@@ -14,18 +14,11 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <br />
-
   <app-consultando *ngIf="consultando; else exibirDados"></app-consultando>
 
   <ng-template #exibirDados>
-    <p class="alert alert-info text-center">
-      Clique aqui 👇🏼 para consultar suas últimas vendas enviadas para o Nosso ERP
-    </p>
-    <hr />
     <h6 class="text-center">
-      <ion-badge color="primary">Pedidos</ion-badge>
-      &nbsp;&nbsp;&nbsp;<ion-badge color="warning">Orçamentos</ion-badge>
+      <ion-badge color="primary">Vender</ion-badge>
     </h6>
     <ng-container *ngIf="abaSelecionada === 'pendentes'">
       <ion-progress-bar *ngIf="sincronizando === true" type="indeterminate"></ion-progress-bar>
@@ -45,10 +38,12 @@
     <ng-container *ngIf="abaSelecionada === 'sincronizados'">
       <h5 class="text-center">{{sincronizados.length}} vendas sincronizadas</h5>
       <app-cabecalho-venda *ngFor="let objVenda of sincronizados; let i = index"
-        (click)="mostrarOpcoesVenda(objVenda, i)" [objVenda]="objVenda.dados_json"></app-cabecalho-venda>
+        (click)="mostrarOpcoesVenda(objVenda, i)" [objVenda]="objVenda.dados_json">
+      </app-cabecalho-venda>
     </ng-container>
-    <h5 *ngIf="nenhuma_venda_localizada" style="margin-top: 5px;" class="text-center alert alert-warning">Nenhuma
-      venda localizada</h5>
+    <h5 *ngIf="nenhuma_venda_localizada" style="margin-top: 5px;" class="text-center alert alert-warning">
+      Nenhuma venda localizada
+    </h5>
   </ng-template>
 
   <br />
@@ -63,7 +58,7 @@
 </ion-content>
 
 <ion-footer>
-  <ion-segment mode="ios" [(ngModel)]="abaSelecionada" [disabled]="carregando_mais_vendas || sincronizando">
+  <ion-segment mode="ios" [(ngModel)]="abaSelecionada" [disabled]="sincronizando">
     <ion-segment-button value="pendentes">
       <ion-label>Pendentes ({{pendentes.length}})</ion-label>
     </ion-segment-button>

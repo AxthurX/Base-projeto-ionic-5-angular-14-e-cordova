@@ -27,20 +27,11 @@
     "@awesome-cordova-plugins/pdf-generator": "^6.4.0",
     "@awesome-cordova-plugins/sqlite": "^5.46.0",
     "@capacitor/core": "3.6.0",
-    "@fullcalendar/angular": "^6.1.0",
-    "@fullcalendar/core": "^6.1.0",
-    "@fullcalendar/daygrid": "^6.1.0",
-    "@fullcalendar/interaction": "^6.1.0",
-    "@fullcalendar/list": "^6.1.0",
-    "@fullcalendar/timegrid": "^6.1.0",
     "@ionic-native/core": "^5.36.0",
     "@ionic-native/file": "^5.36.0",
     "@ionic-native/file-opener": "^5.36.0",
-    "@ionic-native/fingerprint-aio": "^5.36.0",
-    "@ionic-native/geolocation": "^5.36.0",
     "@ionic-native/http": "^5.36.0",
     "@ionic-native/ionic-webview": "^5.31.1",
-    "@ionic-native/local-notifications": "^5.36.0",
     "@ionic-native/status-bar": "^5.36.0",
     "@ionic-native/zip": "^5.36.0",
     "@ionic/angular": "^6.1.15",
@@ -51,12 +42,8 @@
     "br-mask": "0.0.10",
     "browser-sync": "^2.27.11",
     "chart.js": "^2.9.4",
-    "cordova-plugin-camera": "^6.0.0",
-    "cordova-plugin-local-notification-12": "^0.1.4",
     "cordova-zip-plugin": "^2.0.0",
-    "cpf-cnpj-validator": "^1.0.3",
     "firebase": "^10.6.0",
-    "fullcalendar": "^6.1.9",
     "ng2-charts": "^2.4.2",
     "ng2-google-charts": "^6.1.0",
     "ngx-mask": "^14.0.3",
@@ -94,10 +81,8 @@
     "cordova-plugin-androidx": "^3.0.0",
     "cordova-plugin-androidx-adapter": "^1.1.3",
     "cordova-plugin-app-version": "^0.1.14",
-    "cordova-plugin-badge-fix": "^0.8.10",
     "cordova-plugin-device": "^2.1.0",
     "cordova-plugin-file": "^7.0.0",
-    "cordova-plugin-fingerprint-aio": "^5.0.1",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-splashscreen": "6.0.2",
@@ -133,9 +118,6 @@
       "phonegap-plugin-barcodescanner": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
-      "cordova-plugin-camera": {
-        "ANDROIDX_CORE_VERSION": "1.6.+"
-      },
       "cordova-plugin-file": {
         "ANDROIDX_WEBKIT_VERSION": "1.4.0"
       },
@@ -147,8 +129,7 @@
       },
       "cordova-plugin-zip": {},
       "cordova-pdf-generator": {},
-      "cordova-plugin-app-version": {},
-      "cordova-plugin-local-notification-12": {}
+      "cordova-plugin-app-version": {}
     },
     "platforms": [
       "browser",

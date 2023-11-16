@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-img',
-  template: `<img
+  template: ` <img
     style="width: {{ largura_px }}px; height: {{ altura_px }}px "
     class="not-found-img"
     (click)="mostrarImagem()"
