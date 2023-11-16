@@ -93,14 +93,15 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
         this.consultando = true;
         this.registros = [];
 
-        this.registros = await this.dbProvider.getProdutosComPrecoJaCalculado(
-          filtro_pesquisa,
-          texto_pesquisado,
+        this.registros = this.dbProvider.teste;
+        // await this.dbProvider.getProdutosComPrecoJaCalculado(
+        //   filtro_pesquisa,
+        //   texto_pesquisado,
 
-          this.tipo_preco_produto,
-          this.id_tabela_preco_erp,
-          this.id_forma_pagamento
-        );
+        //   this.tipo_preco_produto,
+        //   this.id_tabela_preco_erp,
+        //   this.id_forma_pagamento
+        // );
 
         if (this.registros.length === 0) {
           this.overlay.showToast('Nenhum resultado encontrado', 'light');
