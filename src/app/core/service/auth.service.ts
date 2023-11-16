@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { RetornoAPIModel } from '../model/retorno-api.model';
 import { fromEvent, merge, Observable, of, Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { Util } from '../util.model';
 import { map } from 'rxjs/operators';
 
 @Injectable({

@@ -42,7 +42,8 @@
 
     <ng-container *ngIf="abaSelecionada === 'sincronizados'">
       <app-cabecalho-balanco *ngFor="let objBalanco of sincronizados; let i = index"
-        (click)="mostrarOpcoesBalanco(objBalanco, i)" [objBalanco]="objBalanco.dados_json"></app-cabecalho-balanco>
+        (click)="mostrarOpcoesBalanco(objBalanco, i)" [objBalanco]="objBalanco.dados_json">
+      </app-cabecalho-balanco>
     </ng-container>
   </ng-template>
 

@@ -8,13 +8,10 @@ import { Util } from 'src/app/core/util.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, Subscription } from 'rxjs';
 import { Empresa } from 'src/app/core/model/data-base/empresa.model';
-import { environment } from 'src/environments/environment';
-import { ClasseBase } from 'src/app/core/model/classe-base.model';
 import { ValueBaseModel } from 'src/app/core/model/value-base.model';
 import { OverlayService } from 'src/app/core/service/overlay.service';
 import { SincronizacaoService } from 'src/app/core/service/sincronizacao.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
-import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-tela-venda',
@@ -26,12 +23,9 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
   @Input() objVenda: OperacaoSaida;
   @Input() copiando?: boolean;
   carregando: boolean;
-  nao_recalcular_ao_alterar_parcelamento: boolean = false;
   empresa_logada: Empresa;
-  juros_aplicar?: number;
-  //nova ou editando
   acao: string;
-  recalculando_totais: boolean = false;
+recalculando_totais: boolean = false;
   private backbuttonSubscription: Subscription;
   constructor(
     public modal: ModalController,
@@ -40,8 +34,7 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
     private sincSrv: SincronizacaoService,
     private dados: DataBaseProvider,
     private route: ActivatedRoute,
-    private router: Router,
-    auth: AuthService
+    private router: Router
   ) {
     this.acao = '';
     this.carregando = false;
@@ -65,47 +58,12 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
         const id_venda = params.id_venda;
         const empresa = await this.dados.getEmpresaLogada();
         this.empresa_logada = empresa;
-        this.nao_recalcular_ao_alterar_parcelamento = false;
 
         if (this.acao === 'novo') {
           this.objVenda = new OperacaoSaida();
         } else if (this.acao === 'copiando_do_erp') {
           this.acao = 'copiando do erp';
           this.overlay.showLoading('Copiando venda da nuvem...');
-          const vendaDoERP = await this.sincSrv
-            .getJsonVendaNuvem(id_venda)
-            .toPromise();
-          if (vendaDoERP.retorno) {
-            this.objVenda = new OperacaoSaida();
-            this.objVenda.json = vendaDoERP.retorno;
-            this.objVenda.id = 0;
-            this.objVenda.id_nuvem = null;
-            this.objVenda.sincronizado_em = null;
-            this.CompletarPreenchimentoDaVendaAtual();
-            this.objVenda.dados_json.status_manipulacao = null;
-            //blz fera, so q na nuvem, ta sem a descricao dos produtos, entao bora consultar, e atualizar
-            let ids_produtos: string = '';
-            this.objVenda.dados_json.produtos.forEach((c) => {
-              ids_produtos += ',' + c.id_produto_erp.toString();
-            });
-            if (ids_produtos) {
-              //tiro a virgula do começo
-              ids_produtos = ids_produtos.substring(1);
-              const produtos = await this.dados.getProdutosEmpresa(
-                'ids_produtos',
-                ids_produtos
-              );
-              this.objVenda.dados_json.produtos.forEach((c) => {
-                c.descricao = produtos.find(
-                  (p) => p.id_produto_erp === c.id_produto_erp
-                ).descricao;
-              });
-            }
-          } else {
-            Util.AlertWarning('Não foi possível copiar esta venda');
-            this.objVenda = new OperacaoSaida();
-          }
-
           this.overlay.dismissLoadCtrl();
         } else {
           const venda = await this.dados.getVenda(id_venda);
@@ -192,8 +150,6 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
   //No recalculo, sempre aplico a regra da tributação pra garantir que qualquer alteração aplique tal regra
   async RecalcularTotais() {
     try {
-      this.recalculando_totais = true;
-
       if (
         this.objVenda?.dados_json?.cliente?.id_erp > 0 &&
         this.objVenda?.dados_json?.produtos?.length > 0
@@ -205,10 +161,7 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
       }
 
       OperacaoSaidaUtil.RecalcularTotais(this.objVenda.dados_json);
-      this.recalculando_totais = false;
-    } catch (e) {
-      this.recalculando_totais = false;
-    }
+    } catch (e) {}
   }
 
   getQuantidadesJaLancadas(): ValueBaseModel[] {
@@ -678,8 +631,6 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
           this.objVenda?.dados_json?.tipo_operacao?.id &&
           this.objVenda?.dados_json?.produtos.length > 0
         ) {
-          this.nao_recalcular_ao_alterar_parcelamento = false;
-          //ajuste pra n obrigar alterar o preço
           if (
             this.empresa_logada
               .confirmar_alteracao_preco_tela_vendas_ao_alterar_forma_pagamento
@@ -688,10 +639,7 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
               'Deseja recalcular os preços?'
             );
             if (retorno.isConfirmed) {
-              this.nao_recalcular_ao_alterar_parcelamento = false;
               this.consultarEAtualizarPrecos();
-            } else {
-              this.nao_recalcular_ao_alterar_parcelamento = true;
             }
           } else {
             Util.Confirm(

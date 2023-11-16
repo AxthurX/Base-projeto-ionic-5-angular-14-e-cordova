@@ -3,9 +3,10 @@
     <ion-buttons slot="start">
       <app-btn-voltar #btnVoltar [solicitar_confirmacao]="true"></app-btn-voltar>
     </ion-buttons>
-    <ion-title>Balanço - <span class="badge badge-light"
-        *ngIf="objBalanco.dados_json.finalizado === false">Pendente</span> <span class="badge badge-warning"
-        *ngIf="objBalanco.dados_json.finalizado === true">Finalizado</span>
+    <ion-title>
+      Balanço -
+      <span class="badge badge-light" *ngIf="objBalanco.dados_json.finalizado === false">Pendente</span>
+      <span class="badge badge-warning" *ngIf="objBalanco.dados_json.finalizado === true">Finalizado</span>
     </ion-title>
     <ion-buttons slot="primary">
       <ion-toggle color="light" [(ngModel)]="objBalanco.dados_json.finalizado"></ion-toggle>
@@ -20,13 +21,13 @@
       [icone]="'📦'">
     </app-lookup>
 
-    <ion-button (click)="mostrarOpcoesGerais()" expand="block" size="small" color="primary">Opções gerais do balanço
+    <ion-button (click)="mostrarOpcoesGerais()" expand="block" size="small" color="primary">
+      Opções gerais do balanço
     </ion-button>
 
     <div class="card mb-2">
       <p *ngIf="objBalanco.dados_json.observacao" class="justify-content-between py-3 px-3 border-top text-dark">
-        <ion-icon style="float: right;" color="danger" name="close-circle-outline" (click)="limparObservacaoBalanco()">
-        </ion-icon>
+        <ion-icon style="float: right;" color="danger" name="close-circle-outline" (click)="limparObservacaoBalanco()"></ion-icon>
         <b>Observação:</b> {{objBalanco.dados_json.observacao}}
       </p>
     </div>
@@ -74,7 +75,6 @@
             </span>
           </div>
         </div>
-
       </div>
     </div>
   </ng-container>

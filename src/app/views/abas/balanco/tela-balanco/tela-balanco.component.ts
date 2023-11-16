@@ -29,7 +29,6 @@ export class TelaBalancoComponent
   aba_selecionada: string;
   carregando: boolean;
   empresa_logada: Empresa;
-  //nova ou editando
   acao: string;
   private backbuttonSubscription: Subscription;
   constructor(

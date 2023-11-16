@@ -27,7 +27,7 @@ import { Camera } from '@awesome-cordova-plugins/camera/ngx';
     SweetAlert2Module.forRoot(),
     ReactiveFormsModule,
     NgxMaskModule.forRoot({
-      dropSpecialCharacters: true, // ao salvar, vai limpar a mascara,
+      dropSpecialCharacters: true,
       validation: true,
     }),
     provideAuth(() => getAuth()),

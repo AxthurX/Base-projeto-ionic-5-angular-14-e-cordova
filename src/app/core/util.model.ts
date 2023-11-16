@@ -39,7 +39,6 @@ export class Util {
     try {
       setTimeout(() => {
         const input = document.getElementsByClassName('swal2-input');
-        console.log(input);
       }, 500);
     } catch (e) {
       console.error('setFocusDocumento', e);
@@ -77,7 +76,6 @@ export class Util {
 
   static TratarErroEFecharLoading(e, overlay: OverlayService) {
     Util.AlertErrorPadrao();
-    console.log(e);
     overlay.dismissLoadCtrl();
   }
 
