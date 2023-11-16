@@ -741,13 +741,27 @@ export class DataBaseProvider {
     let comando = '';
     if (balanco.id > 0) {
       comando =
-        'update operacao_balanco set data = ?, json = ? where id = ' +
-        balanco.id;
+        'update produto set data = ?, json = ? where id = ' + balanco.id;
     } else {
-      comando = 'insert into operacao_balanco (data, json) values (?, ?)';
+      comando = 'insert into produto (data, json) values (?, ?)';
     }
 
     sqlStatements.push([comando, [balanco.data, balanco.json]]);
+
+    return this.dados.sqlBatch(sqlStatements);
+  }
+
+  public salvarProduto(produto: Produto): Promise<any> {
+    const sqlStatements: any[] = [];
+
+    let comando = '';
+    if (produto.id > 0) {
+      comando = 'update produto set data = ? where id = ' + produto.id;
+    } else {
+      comando = 'insert into produto (data) values (?, ?)';
+    }
+
+    sqlStatements.push([comando, [produto.data]]);
 
     return this.dados.sqlBatch(sqlStatements);
   }

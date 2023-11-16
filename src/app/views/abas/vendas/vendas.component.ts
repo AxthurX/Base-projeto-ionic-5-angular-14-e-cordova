@@ -22,7 +22,7 @@ import { SincronizacaoService } from 'src/app/core/service/sincronizacao.service
   templateUrl: './vendas.component.html',
   styleUrls: ['./vendas.component.scss'],
 })
-export class VendasComponent extends ClasseBase implements OnInit {
+export class VendasComponent implements OnInit {
   @ViewChild(IonContent) content: IonContent;
   carregando_mais_vendas: boolean = false;
   nenhuma_venda_localizada: boolean = false;
@@ -48,16 +48,11 @@ export class VendasComponent extends ClasseBase implements OnInit {
     private router: Router,
     auth: AuthService
   ) {
-    super(auth, environment.id_tela_vendas);
     this.abaSelecionada = 'pendentes';
     this.consultando = false;
     this.sincronizando = false;
     this.pendentes = [];
     this.sincronizados = [];
-    this.auth.salvouVenda$.subscribe((c) => {
-      this.limparConsultas();
-      this.OnConsultar();
-    });
   }
 
   apenasPendentes() {
@@ -73,10 +68,6 @@ export class VendasComponent extends ClasseBase implements OnInit {
   onForcarConsultarNovamente() {
     this.limparConsultas();
     this.OnConsultar();
-  }
-
-  override limparTela(): void {
-    this.limparConsultas();
   }
 
   limparConsultas() {
@@ -146,44 +137,12 @@ export class VendasComponent extends ClasseBase implements OnInit {
           .catch((err) => {
             this.consultando = false;
             this.carregando_mais_vendas = false;
-            this.TratarErro(err);
           });
       } catch (e) {
         this.consultando = false;
         this.carregando_mais_vendas = false;
-        this.TratarErro(e);
       }
     }, 500);
-  }
-
-  carregarSincronizadasSePrecisar() {
-    if (
-      this.sincronizados.length === 0 &&
-      !this.nao_consultar_nada_ao_abrir_tela_vendas
-    ) {
-      //volto um limite pq o metodo de carrega mais vai incrementar
-      this.offSet_sincronizadas -= this.limit;
-      if (this.offSet_sincronizadas < 0) {
-        //n pode ficar negativo
-        this.offSet_sincronizadas = 0;
-      }
-      this.carregarMaisVendas();
-    }
-  }
-
-  carregarMaisVendas() {
-    if (this.carregando_mais_vendas || this.sincronizando) {
-      return;
-    }
-    this.carregando_mais_vendas = true;
-    setTimeout(() => {
-      try {
-        this.OnConsultar();
-      } catch (e) {
-        this.carregando_mais_vendas = false;
-        this.TratarErro(e);
-      }
-    }, 100);
   }
 
   async sincronizarTudo() {
@@ -277,7 +236,6 @@ export class VendasComponent extends ClasseBase implements OnInit {
               }
             }
 
-            //venda.id_nuvem = -1;
             await this.sincronizarPedido(venda, index, false, true);
             this.informarQueTemNovasVendas();
           }
@@ -424,20 +382,5 @@ export class VendasComponent extends ClasseBase implements OnInit {
     }
 
     this.router.navigate(['home/vendas/tela-venda', { id_venda, acao }]);
-  }
-
-  async scrolling(event: any) {
-    if (this.nenhuma_venda_localizada) {
-      return;
-    }
-    const scrollElement = await this.content.getScrollElement(); // get scroll element
-    const dif =
-      scrollElement.scrollHeight -
-      scrollElement.clientHeight -
-      scrollElement.scrollTop;
-    // calculate if max bottom was reached
-    if (dif < 200) {
-      this.carregarMaisVendas();
-    }
   }
 }

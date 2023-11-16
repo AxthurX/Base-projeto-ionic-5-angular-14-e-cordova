@@ -1,4 +1,3 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Util } from 'src/app/core/util.model';
 import { ModalController } from '@ionic/angular';
 import { OverlayService } from 'src/app/core/service/overlay.service';
@@ -104,7 +103,7 @@ export class CadastrarComponent implements OnInit {
       novoProduto.produto_perecivel = this.produto.produto_perecivel;
 
       this.dados
-        .setProdutos([novoProduto])
+        .salvarProduto(novoProduto)
         .then((result) => {
           this.overlay.dismissLoadCtrl();
           this.overlay.notificarSucesso('Produto salvo com sucesso!');
