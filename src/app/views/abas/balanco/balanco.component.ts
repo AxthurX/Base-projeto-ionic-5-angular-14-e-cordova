@@ -22,11 +22,8 @@ import { SincronizacaoService } from 'src/app/core/service/sincronizacao.service
   styleUrls: ['./balanco.component.scss'],
 })
 export class BalancoComponent extends ClasseBase implements OnInit {
-  abaSelecionada: string;
   consultando: boolean;
-  sincronizando: boolean;
-  pendentes: OperacaoBalanco[];
-  sincronizados: OperacaoBalanco[];
+  balancos: OperacaoBalanco[];
   constructor(
     private actionSheetController: ActionSheetController,
     private dados: DataBaseProvider,
@@ -37,11 +34,8 @@ export class BalancoComponent extends ClasseBase implements OnInit {
     auth: AuthService
   ) {
     super(auth, environment.id_tela_balanco);
-    this.abaSelecionada = 'pendentes';
     this.consultando = false;
-    this.sincronizando = false;
-    this.pendentes = [];
-    this.sincronizados = [];
+    this.balancos = [];
     this.auth.salvouBalanco$.subscribe((c) => {
       this.OnConsultar();
     });
@@ -59,22 +53,19 @@ export class BalancoComponent extends ClasseBase implements OnInit {
   }
 
   override limparTela(): void {
-    this.pendentes = [];
-    this.sincronizados = [];
+    this.balancos = [];
     this.consultando = false;
   }
 
   async OnConsultar() {
     try {
-      this.abaSelecionada = 'pendentes';
       this.consultando = true;
       this.dados
         .getBalancos()
         .then((balanco) => {
           balanco.forEach((v) => OperacaoBalancoUtil.PreecherDadosJson(v));
 
-          this.pendentes = balanco.filter((c) => !c.id_nuvem);
-          this.sincronizados = balanco.filter((c) => c.id_nuvem);
+          this.balancos = balanco.filter((c) => !c.id_nuvem);
           this.consultando = false;
         })
         .catch((err) => {
@@ -85,30 +76,6 @@ export class BalancoComponent extends ClasseBase implements OnInit {
       this.consultando = false;
       Util.TratarErro(e);
     }
-  }
-
-  segmentChanged(ev: any) {
-    this.abaSelecionada = ev.detail.value;
-  }
-
-  async sincronizarTudo() {
-    try {
-      this.sincronizando = true;
-      const sincronizar = this.pendentes.filter(
-        (c) => !c.dados_json.status_manipulacao
-      );
-      if (sincronizar.length > 0) {
-        for (let i = 0; i < sincronizar.length; i++) {
-          await this.sincronizarBalanco(sincronizar[i], i, true);
-        }
-        this.OnConsultar();
-      } else {
-        Util.AlertInfo('Nenhum BALANÇO pendente foi localizado');
-      }
-    } catch (e) {
-      Util.TratarErro(e);
-    }
-    this.sincronizando = false;
   }
 
   async mostrarOpcoesBalanco(balanco: OperacaoBalanco, index: number) {
@@ -145,22 +112,6 @@ export class BalancoComponent extends ClasseBase implements OnInit {
           this.AbrirTelaBalanco(balanco);
         },
       });
-      buttons.push({
-        text: 'Sincronizar',
-        icon: 'sync',
-        handler: async () => {
-          if (!balanco.dados_json.status_manipulacao) {
-            await this.sincronizarBalanco(balanco, index);
-          } else {
-            Util.Confirm(
-              'Não é possível sincronizar BALANÇO, deseja reabrir a balanço para alterá-la?',
-              () => {
-                this.AbrirTelaBalanco(balanco);
-              }
-            );
-          }
-        },
-      });
 
       buttons.push({
         text: 'Cancelar',
@@ -174,7 +125,7 @@ export class BalancoComponent extends ClasseBase implements OnInit {
                   this.overlay.notificarSucesso(
                     'Balanço excluído com sucesso!'
                   );
-                  this.pendentes.splice(index, 1);
+                  this.balancos.splice(index, 1);
                 })
                 .catch((e) => {
                   Util.TratarErroEFecharLoading(e, this.overlay);
@@ -199,68 +150,6 @@ export class BalancoComponent extends ClasseBase implements OnInit {
       buttons,
     });
     await actionSheet.present();
-  }
-
-  sincronizarBalanco(
-    balanco: OperacaoBalanco,
-    index: number,
-    nao_fazer_nada_apos_sincronizar?: boolean
-  ): Promise<any> {
-    if (balanco.dados_json.status_manipulacao) {
-      //ja ta fazendo alguma coisa (sincronizando ou ta excluido)
-      return;
-    }
-    balanco.dados_json.status_manipulacao = 1;
-    try {
-      return this.sincSrv
-        .enviarBalanco(balanco.dados_json)
-        .toPromise()
-        .then(
-          (r) => {
-            balanco.dados_json.status_manipulacao = null;
-            if (r.success === true) {
-              balanco.id_nuvem = r.retorno.id;
-              balanco.sincronizado_em = r.retorno.sincronizado_em;
-              OperacaoBalancoUtil.PreecherDadosJson(balanco);
-              this.dados
-                .atualizarIdNuvemBalanco(
-                  balanco.id,
-                  r.retorno.id,
-                  r.retorno.sincronizado_em
-                )
-                .then(async () => {
-                  if (!nao_fazer_nada_apos_sincronizar) {
-                    this.overlay.notificarSucesso(
-                      'Balanço sincronizado com sucesso!'
-                    );
-                    this.pendentes.splice(index, 1);
-                    this.sincronizados.unshift(balanco);
-                    // await this.sincSrv
-                    //   .informarQueTemNovasSincronizacoesDiversas()
-                    //   .toPromise();
-                  }
-                })
-                .catch((e) => {
-                  Util.TratarErro(e);
-                  balanco.dados_json.status_manipulacao = null;
-                });
-            } else {
-              this.overlay.notificarErro(r.message);
-            }
-
-            return;
-          },
-          (e) => {
-            Util.TratarErro(e);
-            balanco.dados_json.status_manipulacao = null;
-            return;
-          }
-        );
-    } catch (e) {
-      Util.TratarErro(e);
-      balanco.dados_json.status_manipulacao = null;
-      return;
-    }
   }
 
   AbrirTelaBalanco(objBalanco?: OperacaoBalanco, copiando?: boolean) {

@@ -18,27 +18,11 @@
 
   <ng-template #exibirDados>
     <h6 class="text-center">
-      <ion-badge color="primary">Vender</ion-badge>
+      <ion-badge color="primary">Realizar venda de produtos</ion-badge>
     </h6>
-    <ng-container *ngIf="abaSelecionada === 'pendentes'">
-      <ion-progress-bar *ngIf="sincronizando === true" type="indeterminate"></ion-progress-bar>
-      <ion-button [disabled]="sincronizando === true" (click)="sincronizarTudo()" expand="block">
-        <ion-icon *ngIf="sincronizando === false" slot="start" name="sync-outline"></ion-icon>
-        <ion-spinner *ngIf="sincronizando === true" name="bubbles"></ion-spinner>
-        Sincronizar tudo
-      </ion-button>
-
-      <h5 class="text-center">{{pendentes.length}} pedidos pendentes</h5>
-      <ion-progress-bar *ngIf="sincronizando === true" type="indeterminate"></ion-progress-bar>
-      <app-cabecalho-venda *ngFor="let objVenda of pendentes; let i = index" (click)="mostrarOpcoesVenda(objVenda, i)"
+    <ng-container>
+      <app-cabecalho-venda *ngFor="let objVenda of vendas; let i = index" (click)="mostrarOpcoesVenda(objVenda, i)"
         [objVenda]="objVenda.dados_json">
-      </app-cabecalho-venda>
-    </ng-container>
-
-    <ng-container *ngIf="abaSelecionada === 'sincronizados'">
-      <h5 class="text-center">{{sincronizados.length}} vendas sincronizadas</h5>
-      <app-cabecalho-venda *ngFor="let objVenda of sincronizados; let i = index"
-        (click)="mostrarOpcoesVenda(objVenda, i)" [objVenda]="objVenda.dados_json">
       </app-cabecalho-venda>
     </ng-container>
     <h5 *ngIf="nenhuma_venda_localizada" style="margin-top: 5px;" class="text-center alert alert-warning">
@@ -56,11 +40,3 @@
     </ion-fab-button>
   </ion-fab>
 </ion-content>
-
-<ion-footer>
-  <ion-segment mode="ios" [(ngModel)]="abaSelecionada" [disabled]="sincronizando">
-    <ion-segment-button value="pendentes">
-      <ion-label>Pendentes ({{pendentes.length}})</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-</ion-footer>

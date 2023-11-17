@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { ColorSchemeService } from 'src/app/core/color-scheme.service';
-import { ConsultaProdutoComponent } from '../../modais/consulta-produto/consulta-produto.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Util } from 'src/app/core/util.model';
 
@@ -13,7 +11,6 @@ import { Util } from 'src/app/core/util.model';
 export class InicioComponent implements OnInit {
   constructor(
     protected color: ColorSchemeService,
-    private modal: ModalController,
     private actRoute: ActivatedRoute,
     protected rota: Router
   ) {
@@ -39,22 +36,6 @@ export class InicioComponent implements OnInit {
         this.color.update('light');
       }
     });
-  }
-
-  async showTelaConsulta() {
-    const modal = await this.modal.create({
-      component: ConsultaProdutoComponent,
-      componentProps: {
-        apenas_consulta: true,
-      },
-    });
-
-    modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
-      }
-    });
-
-    return await modal.present();
   }
 
   goTo(rota) {

@@ -5,13 +5,12 @@
       </app-btn-voltar>
     </ion-buttons>
     <ion-title>
-      {{acao}} - <span class="badge badge-light">Pedido</span>
+      {{acao}} - <span class="badge badge-light">Venda</span>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding order-list-page shop-cart-page" color="light">
-  <ion-label>Produtos</ion-label>
   <ng-container>
     <app-cabecalho-pesquisa-produto [nao_exibir_consultando]="true" [tela_vendas]="this"
       [tipo_preco_produto]="objVenda.dados_json.tipo_preco_produto"
@@ -38,8 +37,7 @@
     class="btn btn-primary btn-lg btn-block fix-btn text-left" type="button">
     <span class="float-left">
       <ion-icon name="cart-outline"></ion-icon>
-      Salvar
-      <span>Pedido</span>
+      Salvar Venda
     </span>
     <span class="float-right">
       <strong>R$ {{objVenda.dados_json.total_liquido | number: '1.2-2'}}</strong>

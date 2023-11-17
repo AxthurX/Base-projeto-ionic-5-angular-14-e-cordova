@@ -25,6 +25,10 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+.card {
+  background-color: var(--ion-color-dark-contrast);
+}
+
 p {
   font-size: 13px;
   line-height: 22px;

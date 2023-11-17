@@ -7,10 +7,8 @@ import { ProdutoUtil } from 'src/app/core/model/produto-util.model';
 import { Util } from 'src/app/core/util.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, Subscription } from 'rxjs';
-import { Empresa } from 'src/app/core/model/data-base/empresa.model';
 import { ValueBaseModel } from 'src/app/core/model/value-base.model';
 import { OverlayService } from 'src/app/core/service/overlay.service';
-import { SincronizacaoService } from 'src/app/core/service/sincronizacao.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
 
 @Component({
@@ -23,15 +21,13 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
   @Input() objVenda: OperacaoSaida;
   @Input() copiando?: boolean;
   carregando: boolean;
-  empresa_logada: Empresa;
   acao: string;
-recalculando_totais: boolean = false;
+  recalculando_totais: boolean = false;
   private backbuttonSubscription: Subscription;
   constructor(
     public modal: ModalController,
     private overlay: OverlayService,
     private actionSheetController: ActionSheetController,
-    private sincSrv: SincronizacaoService,
     private dados: DataBaseProvider,
     private route: ActivatedRoute,
     private router: Router
@@ -56,8 +52,6 @@ recalculando_totais: boolean = false;
       this.route.params.subscribe(async (params) => {
         this.acao = params.acao;
         const id_venda = params.id_venda;
-        const empresa = await this.dados.getEmpresaLogada();
-        this.empresa_logada = empresa;
 
         if (this.acao === 'novo') {
           this.objVenda = new OperacaoSaida();
@@ -95,55 +89,6 @@ recalculando_totais: boolean = false;
       );
     } else {
       return this.objVenda.dados_json.produtos.find((c) => c.gtin === valor);
-    }
-  }
-
-  preencherCliente(dataReturned, recalcularTotais: boolean) {
-    this.objVenda.dados_json.cliente = {
-      descricao: dataReturned.data.fantasia
-        ? dataReturned.data.fantasia
-        : dataReturned.data.razao,
-      id: dataReturned.data.id,
-      id_erp: dataReturned.data.id_erp,
-    };
-
-    this.objVenda.dados_json.id_tabela_preco_erp =
-      dataReturned.data.id_tabela_preco_erp;
-    this.objVenda.dados_json.view_cliente = dataReturned.data;
-
-    if (recalcularTotais) {
-      this.RecalcularTotais();
-    }
-  }
-
-  OnLimparCliente() {
-    this.objVenda.dados_json.cliente = null;
-  }
-
-  async consultarEAtualizarPrecos() {
-    try {
-      let sql = 'produto.id_erp in (';
-      this.objVenda.dados_json.produtos.forEach((c) => {
-        sql = sql.replace(')', ', ') + c.id_produto_erp + ')';
-      });
-      const produtos = await this.dados.getProdutosComPrecoJaCalculado(
-        '',
-        sql,
-        this.objVenda.dados_json.tipo_preco_produto,
-        this.objVenda.dados_json.id_tabela_preco_erp,
-        this.objVenda.dados_json.id_forma_pagamento
-      );
-
-      produtos.forEach((consulta) => {
-        const produto = this.objVenda.dados_json.produtos.find(
-          (c) => c.id_erp === consulta.id_erp
-        );
-        if (produto && produto.valor_unitario !== consulta.valor_unitario) {
-          produto.valor_unitario = consulta.valor_unitario;
-        }
-      });
-    } catch (e) {
-      Util.TratarErro(e);
     }
   }
 
@@ -572,28 +517,8 @@ recalculando_totais: boolean = false;
 
   async SalvarVenda() {
     try {
-      if (
-        this.objVenda.dados_json.pedido &&
-        this.empresa_logada.bloquear_pedidos_a_prazo_cliente_limite_excedido &&
-        this.objVenda.dados_json.view_cliente.limite_credito > 0 &&
-        this.objVenda.dados_json.total_liquido >
-          this.objVenda.dados_json.view_cliente.limite_credito_disponivel
-      ) {
-        let mensagem =
-          'Cliente sem limite de crédito disponível para realizar esta venda à prazo!';
-        if (this.empresa_logada.mensagem_bloqueio_venda_limite_credito) {
-          mensagem = this.empresa_logada.mensagem_bloqueio_venda_limite_credito;
-        }
-
-        mensagem += ' Esta venda será salva como ORÇAMENTO, deseja continuar?';
-
-        Util.Confirm(mensagem, () => {
-          this.objVenda.dados_json.pedido = false;
-          this.salvarSemValidar();
-        });
-      } else {
-        this.salvarSemValidar();
-      }
+      this.objVenda.dados_json.pedido = false;
+      this.salvarSemValidar();
     } catch (e) {
       Util.AlertError(e);
     }
@@ -622,48 +547,5 @@ recalculando_totais: boolean = false;
     Util.Confirm('Limpar observação', () => {
       produto.observacao = '';
     });
-  }
-
-  async RetornoDoValor(valor) {
-    if (valor?.a_prazo !== undefined) {
-      if (valor.id) {
-        if (
-          this.objVenda?.dados_json?.tipo_operacao?.id &&
-          this.objVenda?.dados_json?.produtos.length > 0
-        ) {
-          if (
-            this.empresa_logada
-              .confirmar_alteracao_preco_tela_vendas_ao_alterar_forma_pagamento
-          ) {
-            const retorno = await Util.ConfirmComRetorno(
-              'Deseja recalcular os preços?'
-            );
-            if (retorno.isConfirmed) {
-              this.consultarEAtualizarPrecos();
-            }
-          } else {
-            Util.Confirm(
-              'Esta alteração irá recalcular os preços novamente',
-              () => {
-                setTimeout(() => {
-                  this.consultarEAtualizarPrecos();
-                }, 500);
-              }
-            );
-          }
-        }
-      }
-    } else if (valor?.tipo_preco_produto !== undefined) {
-      if (valor && valor.id !== this.objVenda?.dados_json?.tipo_operacao?.id) {
-        if (
-          this.objVenda?.dados_json?.tipo_operacao?.id &&
-          this.objVenda?.dados_json?.produtos.length > 0
-        ) {
-          Util.Confirm('Esta ação irá recalcular os preços novamente', () => {
-            this.consultarEAtualizarPrecos();
-          });
-        }
-      }
-    }
   }
 }
