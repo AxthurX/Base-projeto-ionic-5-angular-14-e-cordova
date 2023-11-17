@@ -21,13 +21,7 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
   texto_pesquisado: string;
   path_imagens_produtos: string;
   consultando: boolean;
-  tem_produto_em_promocao: boolean;
-  tem_produto_preco_tabelado: boolean;
   apenas_consulta: boolean;
-  exibir_preco_atacado_consulta_produto: boolean;
-  tipo_preco_produto?: number;
-  id_tabela_preco_erp?: number;
-  id_forma_pagamento?: number;
   juros_aplicar?: number;
   private backbuttonSubscription: Subscription;
   constructor(
@@ -39,8 +33,6 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
   ) {
     this.consultando = false;
     this.apenas_consulta = false;
-    this.tem_produto_em_promocao = false;
-    this.tem_produto_preco_tabelado = false;
     this.path_imagens_produtos = Util.GetPathImagens(file);
   }
 
@@ -58,17 +50,8 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
 
     try {
       this.apenas_consulta = this.navParams.data.apenas_consulta;
-
-      if (this.apenas_consulta) {
-        this.exibir_preco_atacado_consulta_produto = (
-          await this.dbProvider.getEmpresaLogada()
-        ).exibir_preco_atacado_consulta_produto;
-      }
-
       this.texto_pesquisado = this.navParams.data.texto_pesquisado;
       this.cabecalho_parente = this.navParams.data.cabecalho;
-      this.tipo_preco_produto = this.navParams.data.tipo_preco_produto;
-      this.id_forma_pagamento = this.navParams.data.id_forma_pagamento;
       if (this.texto_pesquisado || this.navParams.data.filtro_pesquisa) {
         this.onPesquisar(
           this.navParams.data.filtro_pesquisa,
@@ -87,8 +70,6 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
   onPesquisar(filtro_pesquisa: string, texto_pesquisado: string) {
     try {
       texto_pesquisado = texto_pesquisado?.toUpperCase();
-      this.tem_produto_em_promocao = false;
-      this.tem_produto_preco_tabelado = false;
       setTimeout(async () => {
         this.consultando = true;
         this.registros = [];
@@ -99,30 +80,16 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
         //   texto_pesquisado,
 
         //   this.tipo_preco_produto,
-        //   this.id_tabela_preco_erp,
         //   this.id_forma_pagamento
         // );
 
         if (this.registros.length === 0) {
           this.overlay.showToast('Nenhum resultado encontrado', 'light');
-        } else {
-          this.tem_produto_em_promocao =
-            this.registros.filter((c) => c.tipo_preco === 'P').length > 0;
-          this.tem_produto_preco_tabelado =
-            this.registros.filter((c) => c.tipo_preco === 'T').length > 0;
         }
-
-        const forcarPrecoAtacado =
-          this.apenas_consulta && this.exibir_preco_atacado_consulta_produto;
 
         this.registros.forEach((produto) => {
           if (this.cabecalho_parente?.permitir_quantidade_zero === true) {
             produto.quantidade = null;
-          }
-          if (forcarPrecoAtacado) {
-            produto.tipo_preco = 'A';
-            produto.valor_unitario = produto.valor_unitario_original =
-              produto.pvenda_atacado;
           }
           if (this.juros_aplicar > 0) {
             ProdutoUtil.AplicarAcrescimoNoValorUnitario(
@@ -140,7 +107,7 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
         if (produtosJaAdicionados?.length > 0) {
           produtosJaAdicionados.forEach((lancada) => {
             const pConsulta = this.registros.find(
-              (c) => c.id_produto_erp === lancada.id
+              (c) => c.id_produto === lancada.id
             );
             if (pConsulta) {
               if (pConsulta.quantidade_adicionada > 0) {
@@ -168,7 +135,7 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
     try {
       const base = await this.file.readAsDataURL(
         this.path_imagens_produtos,
-        `${produto.id_produto_erp}_1.png`
+        `${produto.id_produto}_1.png`
       );
       produto.imagem = base;
     } catch {}
@@ -184,10 +151,6 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
 
   onAlterouQuantidadeManualmente(registro: ViewProdutoEmpresa) {
     if (registro.quantidade > 0) {
-      if (registro.movimenta_fracionado === false) {
-        //forço ficar como inteiro
-        registro.quantidade = +registro.quantidade;
-      }
       this.CalcularPrecoETotalBruto(registro);
     }
   }
@@ -214,7 +177,6 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
     ProdutoUtil.CalcularPrecoETotalBruto(
       registro,
       null,
-      this.tipo_preco_produto,
       null,
       null,
       null,

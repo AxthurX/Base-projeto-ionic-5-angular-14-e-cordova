@@ -42,7 +42,7 @@
       <div class="border-bottom order-item-card mb-1" *ngIf="conta.detalhar" (click)="conta.detalhar = !conta.detalhar">
         <div class="p-3">
           <div class="d-flex justify-content-between mb-1">
-            <small class="text-secondary">Conta Nº {{conta.id_erp}} Parcela</small>
+            <small class="text-secondary">Conta Nº {{conta.id}} Parcela</small>
             <small class="text-secondary">{{conta.parcela_numero}}/{{conta.parcela_quantidade}}</small>
           </div>
           <div class="d-flex justify-content-between mb-1">
@@ -70,14 +70,6 @@
           <div class="d-flex justify-content-between mb-1 negrito">
             <small class="negrito">Valor total</small>
             <small class="negrito">R$ {{conta.valor_total | number: '1.2-2'}}</small>
-          </div>
-          <div *ngIf="conta.id_venda" class="d-flex justify-content-between mb-1">
-            <small class="text-secondary">Nº Venda no ERP</small>
-            <small class="text-secondary">{{conta.id_venda}}</small>
-          </div>
-          <div *ngIf="conta.id_os" class="d-flex justify-content-between mb-1">
-            <small class="text-secondary">Nº Ordem de Serviço no ERP</small>
-            <small class="text-secondary">{{conta.id_os}}</small>
           </div>
         </div>
       </div>

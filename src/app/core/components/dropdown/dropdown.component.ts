@@ -58,7 +58,7 @@ export class DropDownComponent implements OnInit, OnDestroy {
 
     this.onPesquisar('');
     this.selecionado = this.registros.find(
-      (a) => a?.id_erp === this.value?.id_erp
+      (a) => a?.id === this.value?.id
     );
   }
 
@@ -76,7 +76,7 @@ export class DropDownComponent implements OnInit, OnDestroy {
               if (this.registros.length !== result.length) {
                 this.registros = result;
                 this.selecionado = this.registros.find(
-                  (obj) => obj.id_erp === this.value?.id_erp
+                  (obj) => obj.id === this.value?.id
                 );
                 if (this.registros.length === 0) {
                   this.overlay.showToast(

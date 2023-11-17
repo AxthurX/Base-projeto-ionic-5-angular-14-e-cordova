@@ -43,17 +43,6 @@ export class FinanceiroComponent implements OnInit, OnDestroy {
           this.modal.dismiss();
         } catch {}
       });
-
-      this.dados
-        .getEmpresaLogada()
-        .then((empresa) => {
-          this.multa = empresa.multa_contas_a_receber_em_atraso;
-          this.juros = empresa.juros_mensal_contas_a_receber_em_atraso;
-        })
-        .catch((e) => {
-          Util.TratarErro(e);
-          this.consultando = false;
-        });
     } catch (e) {
       Util.TratarErro(e);
       this.consultando = false;

@@ -186,14 +186,10 @@ export class DadosEmpresa {
   email: string;
   guid_instalacao: string;
   permissoes_mobile_json: string;
-  id_empresa_erp: number;
-  id_empresa_nuvem: number;
   id_colaborador: number;
-  id_colaborador_erp: number;
   id_usuario: number;
   id_banco_dados: number;
   id_banco_gerenciador: number;
-  nosso_id: string;
   desconto_porcentagem_maximo_permitido_empresa: number;
   desconto_porcentagem_maximo_permitido_usuario: number;
   bloquear_acesso_aos_custos_produto_usuario: boolean;

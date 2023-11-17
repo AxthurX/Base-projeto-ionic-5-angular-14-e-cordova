@@ -56,10 +56,6 @@ export class DetalhesComponent implements OnInit, OnDestroy {
     }
   }
 
-  GetTipoVenda(pedido: boolean) {
-    return OperacaoSaidaUtil.GetTipoVenda(pedido);
-  }
-
   downloadPdf() {
     try {
       setTimeout(() => {

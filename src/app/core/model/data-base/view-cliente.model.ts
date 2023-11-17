@@ -1,13 +1,5 @@
 export class ViewCliente {
   id: number;
-  id_erp: number;
-  id_municipio: number;
-  id_bairro_erp: number;
-  id_tabela_preco_erp?: number;
-  localizacao_latitude?: number;
-  localizacao_longitude?: number;
-  id_rota_erp?: number;
-  id_cliente_atividade_erp?: number;
   razao: string;
   cep: string;
   fantasia: string;

@@ -70,7 +70,6 @@ export class TelaBalancoComponent
               this.objBalanco = balanco;
               if (this.acao === 'copiando') {
                 this.objBalanco.id = 0;
-                this.objBalanco.id_nuvem = null;
                 this.objBalanco.sincronizado_em = null;
               }
               OperacaoBalancoUtil.PreecherDadosJson(this.objBalanco);
@@ -91,7 +90,7 @@ export class TelaBalancoComponent
   getByIdOrGtin(filtro: string, valor: string) {
     if (filtro === 'id') {
       return this.objBalanco.dados_json.produtos.find(
-        (c) => c.id_produto_erp === +valor
+        (c) => c.id_produto === +valor
       );
     } else {
       return this.objBalanco.dados_json.produtos.find((c) => c.gtin === valor);
@@ -101,7 +100,7 @@ export class TelaBalancoComponent
   OnConsultou(produtos: ViewProdutoEmpresa[]) {
     produtos.forEach((p) => {
       const existente = this.objBalanco.dados_json.produtos.find(
-        (c) => c.id_produto_erp === p.id_produto_erp
+        (c) => c.id_produto === p.id_produto
       );
       if (existente) {
         existente.quantidade += p.quantidade;
@@ -232,11 +231,6 @@ export class TelaBalancoComponent
     registro.quantidade = novoValor;
     if (registro.quantidade && registro.quantidade < 0) {
       registro.quantidade = 1;
-    }
-
-    if (registro.movimenta_fracionado === false) {
-      //forço ficar como inteiro
-      registro.quantidade = +registro.quantidade;
     }
 
     OperacaoBalancoUtil.RecalcularTotais(this.objBalanco.dados_json);

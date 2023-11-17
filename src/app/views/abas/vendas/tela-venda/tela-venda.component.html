@@ -13,9 +13,7 @@
 <ion-content class="ion-padding order-list-page shop-cart-page" color="light">
   <ng-container>
     <app-cabecalho-pesquisa-produto [nao_exibir_consultando]="true" [tela_vendas]="this"
-      [tipo_preco_produto]="objVenda.dados_json.tipo_preco_produto"
-      [id_tabela_preco_erp]="objVenda.dados_json.id_tabela_preco_erp"
-      [id_forma_pagamento]="objVenda.dados_json.id_forma_pagamento" (OnConsultou)="OnConsultou($event)" #cabecalho
+      [tipo_preco_produto]="objVenda.dados_json.tipo_preco_produto" (OnConsultou)="OnConsultou($event)" #cabecalho
       [modal]="modal" [permitir_quantidade_zero]="false">
     </app-cabecalho-pesquisa-produto>
     <p class="text-center" *ngIf="objVenda.dados_json.produtos">

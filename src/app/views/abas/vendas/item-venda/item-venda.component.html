@@ -5,7 +5,7 @@
   <div class="shop-cart-right">
     <div (click)="mostrarOpcoesProduto()">
       <h6 class="font-weight-bold text-dark mb-2 small">
-        <span class="text-secondary font-weight-normal">Cód: {{registro.id_produto_erp}}</span> |
+        <span class="text-secondary font-weight-normal">Cód: {{registro.id_produto}}</span> |
         <ion-badge *ngIf="registro.tipo_preco === 'P' || registro.tipo_preco === 'T'"
           [color]="getColor(registro.tipo_preco)">
           R$ {{registro.valor_unitario | number: '1.2-2'}}

@@ -27,7 +27,7 @@
         <tr>
           <td class="text-right"><b>Local de estoque</b></td>
           <td>
-            {{ objBalanco.estoque_locais.id_erp }} -
+            {{ objBalanco.estoque_locais.id }} -
             {{ objBalanco.estoque_locais.descricao }}
           </td>
           <td class="text-right"><b>Qtde de produtos</b></td>
@@ -55,7 +55,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let registro of objBalanco.produtos">
-          <td>{{ registro.id_produto_erp }}</td>
+          <td>{{ registro.id_produto }}</td>
           <td>{{ registro.descricao }}</td>
           <td>{{ registro.gtin }}</td>
           <td class="text-right">

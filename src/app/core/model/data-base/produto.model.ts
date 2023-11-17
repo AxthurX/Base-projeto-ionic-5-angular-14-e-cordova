@@ -1,6 +1,5 @@
 export class Produto {
   id: number;
-  id_erp: number;
   data: number;
   id_produto_sub_grupo: number;
   id_produto_fabricante: number;

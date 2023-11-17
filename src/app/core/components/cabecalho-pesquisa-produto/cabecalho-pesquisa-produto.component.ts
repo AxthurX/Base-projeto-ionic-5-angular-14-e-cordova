@@ -31,9 +31,6 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
   @Input() tela_vendas: TelaVendaComponent;
   @Input() tela_balanco: TelaBalancoComponent;
   @Input() modal: ModalController;
-  @Input() tipo_preco_produto?: number;
-  @Input() id_forma_pagamento?: number;
-  @Input() id_tabela_preco_erp?: number;
   @Input() juros_aplicar?: number;
   @Output() OnConsultou: EventEmitter<ViewProdutoEmpresa[]> =
     new EventEmitter();
@@ -147,10 +144,7 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
           this.consultando = true;
           const registros = await this.dados.getProdutosComPrecoJaCalculado(
             this.filtro_pesquisa,
-            this.texto_pesquisado,
-            this.tipo_preco_produto,
-            this.id_tabela_preco_erp,
-            this.id_forma_pagamento
+            this.texto_pesquisado
           );
 
           this.consultando = false;
@@ -162,7 +156,6 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
               ProdutoUtil.CalcularPrecoETotalBruto(
                 r,
                 null,
-                this.tipo_preco_produto,
                 null,
                 null,
                 null,
@@ -201,9 +194,6 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
         filtro_pesquisa: this.filtro_pesquisa,
         texto_pesquisado: this.texto_pesquisado,
         cabecalho: this,
-        tipo_preco_produto: this.tipo_preco_produto,
-        id_tabela_preco_erp: this.id_tabela_preco_erp,
-        id_forma_pagamento: this.id_forma_pagamento,
         juros_aplicar: this.juros_aplicar,
       },
     });

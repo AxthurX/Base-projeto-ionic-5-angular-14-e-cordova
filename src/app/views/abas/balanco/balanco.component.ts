@@ -14,7 +14,6 @@ import { environment } from 'src/environments/environment';
 import { DataBaseProvider } from 'src/app/core/service/database';
 import { OverlayService } from 'src/app/core/service/overlay.service';
 import { AuthService } from '../../../core/service/auth.service';
-import { SincronizacaoService } from 'src/app/core/service/sincronizacao.service';
 
 @Component({
   selector: 'app-balanco',
@@ -28,7 +27,6 @@ export class BalancoComponent extends ClasseBase implements OnInit {
     private actionSheetController: ActionSheetController,
     private dados: DataBaseProvider,
     private overlay: OverlayService,
-    private sincSrv: SincronizacaoService,
     private modal: ModalController,
     private router: Router,
     auth: AuthService
@@ -65,7 +63,7 @@ export class BalancoComponent extends ClasseBase implements OnInit {
         .then((balanco) => {
           balanco.forEach((v) => OperacaoBalancoUtil.PreecherDadosJson(v));
 
-          this.balancos = balanco.filter((c) => !c.id_nuvem);
+          this.balancos = balanco;
           this.consultando = false;
         })
         .catch((err) => {
@@ -104,39 +102,35 @@ export class BalancoComponent extends ClasseBase implements OnInit {
     });
 
     //nao ta sincronizado
-    if (!balanco.id_nuvem) {
-      buttons.push({
-        text: 'Reabrir',
-        icon: 'pencil',
-        handler: () => {
-          this.AbrirTelaBalanco(balanco);
-        },
-      });
+    buttons.push({
+      text: 'Reabrir',
+      icon: 'pencil',
+      handler: () => {
+        this.AbrirTelaBalanco(balanco);
+      },
+    });
 
-      buttons.push({
-        text: 'Cancelar',
-        icon: 'trash',
-        handler: () => {
-          Util.Confirm('Excluindo balanço', async () => {
-            try {
-              this.dados
-                .excluirBalanco(balanco.id)
-                .then(() => {
-                  this.overlay.notificarSucesso(
-                    'Balanço excluído com sucesso!'
-                  );
-                  this.balancos.splice(index, 1);
-                })
-                .catch((e) => {
-                  Util.TratarErroEFecharLoading(e, this.overlay);
-                });
-            } catch (e) {
-              Util.TratarErroEFecharLoading(e, this.overlay);
-            }
-          });
-        },
-      });
-    }
+    buttons.push({
+      text: 'Cancelar',
+      icon: 'trash',
+      handler: () => {
+        Util.Confirm('Excluindo balanço', async () => {
+          try {
+            this.dados
+              .excluirBalanco(balanco.id)
+              .then(() => {
+                this.overlay.notificarSucesso('Balanço excluído com sucesso!');
+                this.balancos.splice(index, 1);
+              })
+              .catch((e) => {
+                Util.TratarErroEFecharLoading(e, this.overlay);
+              });
+          } catch (e) {
+            Util.TratarErroEFecharLoading(e, this.overlay);
+          }
+        });
+      },
+    });
 
     buttons.push({
       text: 'Voltar',

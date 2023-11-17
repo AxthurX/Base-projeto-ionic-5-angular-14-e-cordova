@@ -21,34 +21,17 @@ import { OperacaoBalanco } from '../model/operacao-balanco.model';
 })
 export class DataBaseProvider {
   dados: SQLiteObject;
-
   teste: ViewProdutoEmpresa[] = [
     {
       mostrar_foto: false,
       imagem: 'assets/icon/favicon.png',
-      frete_vlr: 0,
-      acrescimo_prc: 0,
-      acrescimo_vlr: 0,
-      desconto_prc: 0,
-      desconto_vlr: 0,
       total_liquido: 0,
       total_bruto: 0,
       valor_unitario: 15,
       quantidade: 0,
       descricao: ' ADAPTADOR SOQUETE 14"X1/2"-2" - WORKER',
-      aplicacao: null,
       id: 698868,
-      id_erp: 2982,
       id_produto: 841572,
-      id_produto_erp: 51017187,
-      id_produto_grupo: 1969,
-      id_produto_grupo_erp: 63,
-      id_produto_sub_grupo: 9964,
-      id_produto_sub_grupo_erp: 2,
-      id_produto_fabricante: 26941,
-      id_produto_fabricante_erp: 1,
-      tipo_alteracao_preco: 1,
-      id_empresa: 170,
       pcusto: 0,
       pvenda_atacado: 0,
       pvenda_super_atacado: 0,
@@ -63,49 +46,22 @@ export class DataBaseProvider {
       sub_grupo: 'IMPORTACAO DE DADOS',
       grupo: 'IMPORTACAO DE DADOS',
       fabricante: 'IMPORTACAO DE DADOS',
-      desconto_maximo_varejo_vlr: 0,
-      desconto_maximo_atacado_vlr: 0,
-      desconto_maximo_super_atacado_vlr: 0,
-      desconto_maximo_varejo_prc: 0,
-      desconto_maximo_atacado_prc: 0,
-      desconto_maximo_super_atacado_prc: 0,
-      quantidade_minima_atacado: 0,
-      quantidade_minima_super_atacado: 0,
-      movimenta_fracionado: false,
-      nao_calcula_saldo_flex: false,
       valor_unitario_original: 15,
       desconto_maximo: 0,
       desconto_maximo_prc: 0,
       tipo_preco: 'V',
-      invalidades: null,
-      observacao: null
+      observacao: null,
     },
     {
       mostrar_foto: false,
       imagem: 'assets/icon/favicon.png',
-      frete_vlr: 0,
-      acrescimo_prc: 0,
-      acrescimo_vlr: 0,
-      desconto_prc: 0,
-      desconto_vlr: 0,
       total_liquido: 0,
       total_bruto: 0,
       valor_unitario: 7.35,
       quantidade: 0,
       descricao: ' BARRA ROSCADA UNC ZB 1/4" 1M - CISER',
-      aplicacao: null,
       id: 699033,
-      id_erp: 3147,
       id_produto: 841573,
-      id_produto_erp: 51017194,
-      id_produto_grupo: 1969,
-      id_produto_grupo_erp: 63,
-      id_produto_sub_grupo: 9964,
-      id_produto_sub_grupo_erp: 2,
-      id_produto_fabricante: 26941,
-      id_produto_fabricante_erp: 1,
-      tipo_alteracao_preco: 1,
-      id_empresa: 170,
       pcusto: 0,
       pvenda_atacado: 0,
       pvenda_super_atacado: 0,
@@ -120,49 +76,22 @@ export class DataBaseProvider {
       sub_grupo: 'IMPORTACAO DE DADOS',
       grupo: 'IMPORTACAO DE DADOS',
       fabricante: 'IMPORTACAO DE DADOS',
-      desconto_maximo_varejo_vlr: 0,
-      desconto_maximo_atacado_vlr: 0,
-      desconto_maximo_super_atacado_vlr: 0,
-      desconto_maximo_varejo_prc: 0,
-      desconto_maximo_atacado_prc: 0,
-      desconto_maximo_super_atacado_prc: 0,
-      quantidade_minima_atacado: 0,
-      quantidade_minima_super_atacado: 0,
-      movimenta_fracionado: false,
-      nao_calcula_saldo_flex: false,
       valor_unitario_original: 7.35,
       desconto_maximo: 0,
       desconto_maximo_prc: 0,
       tipo_preco: 'V',
-      invalidades: null,
-      observacao: null
+      observacao: null,
     },
     {
       mostrar_foto: false,
       imagem: 'assets/icon/favicon.png',
-      frete_vlr: 0,
-      acrescimo_prc: 0,
-      acrescimo_vlr: 0,
-      desconto_prc: 0,
-      desconto_vlr: 0,
       total_liquido: 0,
       total_bruto: 0,
       valor_unitario: 13.5,
       quantidade: 0,
       descricao: ' BITS 7 PCS C/ ADAP MAG + POZIDRIV',
-      aplicacao: null,
       id: 698597,
-      id_erp: 2711,
       id_produto: 841035,
-      id_produto_erp: 51011703,
-      id_produto_grupo: 1969,
-      id_produto_grupo_erp: 63,
-      id_produto_sub_grupo: 9964,
-      id_produto_sub_grupo_erp: 2,
-      id_produto_fabricante: 26941,
-      id_produto_fabricante_erp: 1,
-      tipo_alteracao_preco: 1,
-      id_empresa: 170,
       pcusto: 0,
       pvenda_atacado: 0,
       pvenda_super_atacado: 0,
@@ -177,49 +106,22 @@ export class DataBaseProvider {
       sub_grupo: 'IMPORTACAO DE DADOS',
       grupo: 'IMPORTACAO DE DADOS',
       fabricante: 'IMPORTACAO DE DADOS',
-      desconto_maximo_varejo_vlr: 0,
-      desconto_maximo_atacado_vlr: 0,
-      desconto_maximo_super_atacado_vlr: 0,
-      desconto_maximo_varejo_prc: 0,
-      desconto_maximo_atacado_prc: 0,
-      desconto_maximo_super_atacado_prc: 0,
-      quantidade_minima_atacado: 0,
-      quantidade_minima_super_atacado: 0,
-      movimenta_fracionado: false,
-      nao_calcula_saldo_flex: false,
       valor_unitario_original: 13.5,
       desconto_maximo: 0,
       desconto_maximo_prc: 0,
       tipo_preco: 'V',
-      invalidades: null,
-      observacao: null
+      observacao: null,
     },
     {
       mostrar_foto: false,
       imagem: 'assets/icon/favicon.png',
-      frete_vlr: 0,
-      acrescimo_prc: 0,
-      acrescimo_vlr: 0,
-      desconto_prc: 0,
-      desconto_vlr: 0,
       total_liquido: 0,
       total_bruto: 0,
       valor_unitario: 15,
       quantidade: 0,
       descricao: ' BITS PHILLIPS 05 PCS CRV - 50 MM',
-      aplicacao: null,
       id: 698545,
-      id_erp: 2659,
       id_produto: 841022,
-      id_produto_erp: 51011574,
-      id_produto_grupo: 1969,
-      id_produto_grupo_erp: 63,
-      id_produto_sub_grupo: 9964,
-      id_produto_sub_grupo_erp: 2,
-      id_produto_fabricante: 26941,
-      id_produto_fabricante_erp: 1,
-      tipo_alteracao_preco: 1,
-      id_empresa: 170,
       pcusto: 0,
       pvenda_atacado: 0,
       pvenda_super_atacado: 0,
@@ -234,49 +136,22 @@ export class DataBaseProvider {
       sub_grupo: 'IMPORTACAO DE DADOS',
       grupo: 'IMPORTACAO DE DADOS',
       fabricante: 'IMPORTACAO DE DADOS',
-      desconto_maximo_varejo_vlr: 0,
-      desconto_maximo_atacado_vlr: 0,
-      desconto_maximo_super_atacado_vlr: 0,
-      desconto_maximo_varejo_prc: 0,
-      desconto_maximo_atacado_prc: 0,
-      desconto_maximo_super_atacado_prc: 0,
-      quantidade_minima_atacado: 0,
-      quantidade_minima_super_atacado: 0,
-      movimenta_fracionado: false,
-      nao_calcula_saldo_flex: false,
       valor_unitario_original: 15,
       desconto_maximo: 0,
       desconto_maximo_prc: 0,
       tipo_preco: 'V',
-      invalidades: null,
-      observacao: null
+      observacao: null,
     },
     {
       mostrar_foto: false,
       imagem: 'assets/icon/favicon.png',
-      frete_vlr: 0,
-      acrescimo_prc: 0,
-      acrescimo_vlr: 0,
-      desconto_prc: 0,
-      desconto_vlr: 0,
       total_liquido: 0,
       total_bruto: 0,
       valor_unitario: 11.3,
       quantidade: 0,
       descricao: ' CABO FLEXSIL 750 V 10,00 PRETO',
-      aplicacao: null,
       id: 700391,
-      id_erp: 4505,
       id_produto: 842614,
-      id_produto_erp: 51027728,
-      id_produto_grupo: 1969,
-      id_produto_grupo_erp: 63,
-      id_produto_sub_grupo: 9964,
-      id_produto_sub_grupo_erp: 2,
-      id_produto_fabricante: 26941,
-      id_produto_fabricante_erp: 1,
-      tipo_alteracao_preco: 1,
-      id_empresa: 170,
       pcusto: 0,
       pvenda_atacado: 0,
       pvenda_super_atacado: 0,
@@ -291,50 +166,23 @@ export class DataBaseProvider {
       sub_grupo: 'IMPORTACAO DE DADOS',
       grupo: 'IMPORTACAO DE DADOS',
       fabricante: 'IMPORTACAO DE DADOS',
-      desconto_maximo_varejo_vlr: 0,
-      desconto_maximo_atacado_vlr: 0,
-      desconto_maximo_super_atacado_vlr: 0,
-      desconto_maximo_varejo_prc: 0,
-      desconto_maximo_atacado_prc: 0,
-      desconto_maximo_super_atacado_prc: 0,
-      quantidade_minima_atacado: 0,
-      quantidade_minima_super_atacado: 0,
-      movimenta_fracionado: true,
-      nao_calcula_saldo_flex: false,
       valor_unitario_original: 11.3,
       desconto_maximo: 0,
       desconto_maximo_prc: 0,
       tipo_preco: 'V',
-      invalidades: null,
-      observacao: null
+      observacao: null,
     },
     {
       mostrar_foto: false,
       imagem: 'assets/icon/favicon.png',
-      frete_vlr: 0,
-      acrescimo_prc: 0,
-      acrescimo_vlr: 0,
-      desconto_prc: 0,
-      desconto_vlr: 0,
       total_liquido: 0,
       total_bruto: 0,
       valor_unitario: 178.4,
       quantidade: 0,
       descricao:
         ' DUCHA HIG.2010 C 31  STANDER VEDANTE GATILHO METAL "SACOLINHA"',
-      aplicacao: null,
       id: 698184,
-      id_erp: 2298,
       id_produto: 840077,
-      id_produto_erp: 51001858,
-      id_produto_grupo: 1969,
-      id_produto_grupo_erp: 63,
-      id_produto_sub_grupo: 9964,
-      id_produto_sub_grupo_erp: 2,
-      id_produto_fabricante: 26941,
-      id_produto_fabricante_erp: 1,
-      tipo_alteracao_preco: 1,
-      id_empresa: 170,
       pcusto: 0,
       pvenda_atacado: 0,
       pvenda_super_atacado: 0,
@@ -349,49 +197,22 @@ export class DataBaseProvider {
       sub_grupo: 'IMPORTACAO DE DADOS',
       grupo: 'IMPORTACAO DE DADOS',
       fabricante: 'IMPORTACAO DE DADOS',
-      desconto_maximo_varejo_vlr: 0,
-      desconto_maximo_atacado_vlr: 0,
-      desconto_maximo_super_atacado_vlr: 0,
-      desconto_maximo_varejo_prc: 0,
-      desconto_maximo_atacado_prc: 0,
-      desconto_maximo_super_atacado_prc: 0,
-      quantidade_minima_atacado: 0,
-      quantidade_minima_super_atacado: 0,
-      movimenta_fracionado: false,
-      nao_calcula_saldo_flex: false,
       valor_unitario_original: 178.4,
       desconto_maximo: 0,
       desconto_maximo_prc: 0,
       tipo_preco: 'V',
-      invalidades: null,
-      observacao: null
+      observacao: null,
     },
     {
       mostrar_foto: false,
       imagem: 'assets/icon/favicon.png',
-      frete_vlr: 0,
-      acrescimo_prc: 0,
-      acrescimo_vlr: 0,
-      desconto_prc: 0,
-      desconto_vlr: 0,
       total_liquido: 0,
       total_bruto: 0,
       valor_unitario: 0.69,
       quantidade: 0,
       descricao: ' FIO NYLON 1,8MM 5,0KG',
-      aplicacao: null,
       id: 698983,
-      id_erp: 3097,
       id_produto: 841298,
-      id_produto_erp: 51014407,
-      id_produto_grupo: 1969,
-      id_produto_grupo_erp: 63,
-      id_produto_sub_grupo: 9964,
-      id_produto_sub_grupo_erp: 2,
-      id_produto_fabricante: 26941,
-      id_produto_fabricante_erp: 1,
-      tipo_alteracao_preco: 1,
-      id_empresa: 170,
       pcusto: 0,
       pvenda_atacado: 0,
       pvenda_super_atacado: 0,
@@ -406,23 +227,12 @@ export class DataBaseProvider {
       sub_grupo: 'IMPORTACAO DE DADOS',
       grupo: 'IMPORTACAO DE DADOS',
       fabricante: 'IMPORTACAO DE DADOS',
-      desconto_maximo_varejo_vlr: 0,
-      desconto_maximo_atacado_vlr: 0,
-      desconto_maximo_super_atacado_vlr: 0,
-      desconto_maximo_varejo_prc: 0,
-      desconto_maximo_atacado_prc: 0,
-      desconto_maximo_super_atacado_prc: 0,
-      quantidade_minima_atacado: 0,
-      quantidade_minima_super_atacado: 0,
-      movimenta_fracionado: true,
-      nao_calcula_saldo_flex: false,
       valor_unitario_original: 0.69,
       desconto_maximo: 0,
       desconto_maximo_prc: 0,
       tipo_preco: 'V',
-      invalidades: null,
-      observacao: null
-    }
+      observacao: null,
+    },
   ];
   limit_consulta_produtos = 100;
   constructor(private sqlite: SQLite, private auth: AuthService) {}
@@ -458,21 +268,21 @@ export class DataBaseProvider {
     }
     const id: number = +pesquisa.trim();
     let sql =
-      'select produto_empresa.id, produto_empresa.id_erp, produto_empresa.id_produto, produto.id_erp id_produto_erp, id_produto_grupo, produto_grupo.id_erp id_produto_grupo_erp, id_produto_sub_grupo, produto_sub_grupo.id_erp id_produto_sub_grupo_erp, id_produto_fabricante, produto_fabricante.id_erp id_produto_fabricante_erp, produto.descricao, produto.referencia, produto.aplicacao, produto.ativo ativo_produto, produto_empresa.ativo ativo_produto_empresa, produto.codigo_original, produto.gtin, produto.movimenta_fracionado, produto.nao_calcula_saldo_flex, produto.tipo_alteracao_preco, produto.unidade, produto_empresa.pcusto, produto_empresa.pvenda_atacado, produto_empresa.pvenda_super_atacado, produto_empresa.pvenda_varejo, produto_empresa.saldo_total, produto_empresa.id_empresa, produto_sub_grupo.descricao sub_grupo, produto_grupo.descricao grupo, produto_fabricante.descricao fabricante, produto_empresa.desconto_maximo_varejo_prc, produto_empresa.desconto_maximo_atacado_prc, produto_empresa.desconto_maximo_super_atacado_prc, produto_empresa.quantidade_minima_atacado, produto_empresa.quantidade_minima_super_atacado, produto_empresa.desconto_maximo_varejo_vlr, produto_empresa.desconto_maximo_atacado_vlr, produto_empresa.desconto_maximo_super_atacado_vlr, produto_empresa.pcompra, produto_empresa.pfornecedor from produto_empresa join produto on produto.id = produto_empresa.id_produto join produto_sub_grupo on produto_sub_grupo.id = produto.id_produto_sub_grupo join produto_grupo on produto_grupo.id = produto_sub_grupo.id_produto_grupo join produto_fabricante on produto_fabricante.id = produto.id_produto_fabricante';
+      'select produto_empresa.id, produto_empresa.id, produto_empresa.id_produto, produto.id, id_produto_grupo, produto_grupo.id, id_produto_sub_grupo, produto_sub_grupo.id, id_produto_fabricante, produto_fabricante.id, produto.descricao, produto.referencia, produto.aplicacao, produto.ativo ativo_produto, produto_empresa.ativo ativo_produto_empresa, produto.codigo_original, produto.gtin, produto.movimenta_fracionado, produto.nao_calcula_saldo_flex, produto.tipo_alteracao_preco, produto.unidade, produto_empresa.pcusto, produto_empresa.pvenda_atacado, produto_empresa.pvenda_super_atacado, produto_empresa.pvenda_varejo, produto_empresa.saldo_total, produto_empresa.id_empresa, produto_sub_grupo.descricao sub_grupo, produto_grupo.descricao grupo, produto_fabricante.descricao fabricante, produto_empresa.desconto_maximo_varejo_prc, produto_empresa.desconto_maximo_atacado_prc, produto_empresa.desconto_maximo_super_atacado_prc, produto_empresa.quantidade_minima_atacado, produto_empresa.quantidade_minima_super_atacado, produto_empresa.desconto_maximo_varejo_vlr, produto_empresa.desconto_maximo_atacado_vlr, produto_empresa.desconto_maximo_super_atacado_vlr, produto_empresa.pcompra, produto_empresa.pfornecedor from produto_empresa join produto on produto.id = produto_empresa.id_produto join produto_sub_grupo on produto_sub_grupo.id = produto.id_produto_sub_grupo join produto_grupo on produto_grupo.id = produto_sub_grupo.id_produto_grupo join produto_fabricante on produto_fabricante.id = produto.id_produto_fabricante';
 
     //gambis, passando direto os ids dos produtos na consulta
-    if (pesquisa.startsWith('produto.id_erp in')) {
+    if (pesquisa.startsWith('produto.id in')) {
       sql += ` where ${pesquisa}`;
     } else if (filtro_pesquisa === 'geral') {
       if (id > 0) {
-        sql += ` where produto.id_erp = ${id} or produto.gtin like '${pesquisa}'`;
+        sql += ` where produto.id = ${id} or produto.gtin like '${pesquisa}'`;
       } else {
         pesquisa = pesquisa.toUpperCase();
         sql += ` where produto.descricao like '%${pesquisa}%' or produto.gtin like '%${pesquisa}%' or produto.referencia like '%${pesquisa}%' or produto.aplicacao like '%${pesquisa}%' or codigo_original like '%${pesquisa}%' or produto_sub_grupo.descricao like '%${pesquisa}%' or produto_grupo.descricao like '%${pesquisa}%'  or produto_fabricante.descricao like '%${pesquisa}%'`;
       }
     } else if (filtro_pesquisa === 'id') {
       if (id > 0) {
-        sql += ' where produto.id_erp = ' + id;
+        sql += ' where produto.id = ' + id;
       } else {
         //forço um retorno vazio caso n seja um id valido
         return Promise.resolve(retorno);
@@ -480,7 +290,7 @@ export class DataBaseProvider {
     } else if (filtro_pesquisa === 'gtin') {
       sql += ` where TRIM(produto.gtin) like '${pesquisa}'`;
     } else if (filtro_pesquisa === 'ids_produtos') {
-      sql += ` where produto.id_erp in (${pesquisa})`;
+      sql += ` where produto.id in (${pesquisa})`;
     }
     sql += ' order by produto.descricao limit ' + this.limit_consulta_produtos;
 
@@ -492,21 +302,8 @@ export class DataBaseProvider {
             const registro = data.rows.item(i);
             const newItem = new ViewProdutoEmpresa();
             newItem.descricao = registro.descricao;
-            newItem.aplicacao = registro.aplicacao;
             newItem.id = +registro.id;
-            newItem.id_erp = +registro.id_erp;
             newItem.id_produto = +registro.id_produto;
-            newItem.id_produto_erp = +registro.id_produto_erp;
-            newItem.id_produto_grupo = +registro.id_produto_grupo;
-            newItem.id_produto_grupo_erp = +registro.id_produto_grupo_erp;
-            newItem.id_produto_sub_grupo = +registro.id_produto_sub_grupo;
-            newItem.id_produto_sub_grupo_erp =
-              +registro.id_produto_sub_grupo_erp;
-            newItem.id_produto_fabricante = +registro.id_produto_fabricante;
-            newItem.id_produto_fabricante_erp =
-              +registro.id_produto_fabricante_erp;
-            newItem.tipo_alteracao_preco = +registro.tipo_alteracao_preco;
-            newItem.id_empresa = +registro.id_empresa;
             newItem.pcusto = registro.pcusto;
             newItem.pvenda_atacado = registro.pvenda_atacado;
             newItem.pvenda_super_atacado = registro.pvenda_super_atacado;
@@ -521,26 +318,6 @@ export class DataBaseProvider {
             newItem.sub_grupo = registro.sub_grupo;
             newItem.grupo = registro.grupo;
             newItem.fabricante = registro.fabricante;
-            newItem.desconto_maximo_varejo_vlr =
-              registro.desconto_maximo_varejo_vlr;
-            newItem.desconto_maximo_atacado_vlr =
-              registro.desconto_maximo_atacado_vlr;
-            newItem.desconto_maximo_super_atacado_vlr =
-              registro.desconto_maximo_super_atacado_vlr;
-            newItem.desconto_maximo_varejo_prc =
-              registro.desconto_maximo_varejo_prc;
-            newItem.desconto_maximo_atacado_prc =
-              registro.desconto_maximo_atacado_prc;
-            newItem.desconto_maximo_super_atacado_prc =
-              registro.desconto_maximo_super_atacado_prc;
-            newItem.quantidade_minima_atacado =
-              registro.quantidade_minima_atacado;
-            newItem.quantidade_minima_super_atacado =
-              registro.quantidade_minima_super_atacado;
-            newItem.movimenta_fracionado =
-              registro.movimenta_fracionado === 'true';
-            newItem.nao_calcula_saldo_flex =
-              registro.nao_calcula_saldo_flex === 'true';
 
             retorno.push(newItem);
           }
@@ -558,7 +335,7 @@ export class DataBaseProvider {
   public getEstoqueLocais(pesquisa: string) {
     const retorno: EstoqueLocais[] = [];
     const id: number = +pesquisa;
-    const sql = 'select id, id_erp, descricao from estoque_locais';
+    const sql = 'select id, descricao from estoque_locais';
 
     return this.dados
       .executeSql(sql, [])
@@ -568,7 +345,6 @@ export class DataBaseProvider {
             const registro = data.rows.item(i);
             const newItem = new EstoqueLocais();
             newItem.id = +registro.id;
-            newItem.id_erp = +registro.id_erp;
             newItem.id_empresa = +registro.id_empresa;
             newItem.descricao = registro.descricao;
 
@@ -633,22 +409,9 @@ export class DataBaseProvider {
       });
   }
 
-  public getVendas(
-    limit: number,
-    offset: number,
-    apenas_pendentes: boolean,
-    apenas_sincronizadas: boolean
-  ) {
+  public getVendas(limit: number, offset: number) {
     const retorno: OperacaoSaida[] = [];
     let sql = `select * from operacao_saida`;
-    if (apenas_pendentes || apenas_sincronizadas) {
-      sql += ' where ';
-      if (apenas_pendentes) {
-        sql += ' id_nuvem is null ';
-      } else if (apenas_sincronizadas) {
-        sql += ' id_nuvem is not null ';
-      }
-    }
     sql += ` order by data desc limit ${limit} offset ${offset}`;
     return this.dados
       .executeSql(sql, [])
@@ -660,11 +423,8 @@ export class DataBaseProvider {
             newItem.id = +registro.id;
             newItem.data = +registro.data;
             newItem.id_cliente = registro.id_cliente;
-            newItem.id_forma_pagamento = registro.id_forma_pagamento;
-            newItem.id_tipo_operacao = registro.id_tipo_operacao;
             newItem.json = registro.json;
             newItem.sincronizado_em = registro.sincronizado_em;
-            newItem.id_nuvem = registro.id_nuvem;
 
             retorno.push(newItem);
           }
@@ -694,7 +454,6 @@ export class DataBaseProvider {
             newItem.id = +registro.id;
             newItem.data = +registro.data;
             newItem.json = registro.json;
-            newItem.id_nuvem = registro.id_nuvem;
             newItem.estoque_locais = +registro.estoque_locais;
             newItem.sincronizado_em = registro.sincronizado_em;
 
@@ -745,8 +504,6 @@ export class DataBaseProvider {
             newItem.id = +registro.id;
             newItem.data = +registro.data;
             newItem.id_cliente = registro.id_cliente;
-            newItem.id_forma_pagamento = registro.id_forma_pagamento;
-            newItem.id_tipo_operacao = registro.id_tipo_operacao;
             newItem.json = registro.json;
             OperacaoSaidaUtil.PreecherDadosJson(newItem);
             return newItem;
@@ -787,10 +544,6 @@ export class DataBaseProvider {
         Util.TratarErro(e);
         return null;
       });
-  }
-
-  public getEmpresaLogada() {
-    return this.getEmpresa(this.auth.getDadosEmpresaLogada().id_empresa_nuvem);
   }
 
   public getEmpresa(id: number) {
@@ -872,110 +625,32 @@ export class DataBaseProvider {
       });
   }
 
-  public getProdutosEmPromocao(id_forma_pagamento: number) {
-    const id_empresa = this.auth.getDadosEmpresaLogada().id_empresa_nuvem;
-    const data_atual = new Date().getTime();
-    const retorno: ProdutoEmpresaPromocao[] = [];
-    let sql = `select id_produto_empresa, promocoes.id_erp id_promocao_erp, valor_promocional, sobrepor_tabela_preco from promocoes_itens join promocoes on promocoes.id = promocoes_itens.id_promocoes join promocoes_por_forma_pagamento on promocoes_por_forma_pagamento.id_promocoes = promocoes.id where promocoes.id_empresa = ${id_empresa} and ${data_atual} >= data_inicio_long and ${data_atual} <= data_fim_long `;
-
-    if (id_forma_pagamento) {
-      sql += ` and promocoes_por_forma_pagamento.id_forma_pagamento = ${id_forma_pagamento}`;
-    }
-
-    return this.dados
-      .executeSql(sql, [])
-      .then((data: any) => {
-        if (data.rows.length > 0) {
-          for (let i = 0; i < data.rows.length; i++) {
-            const registro = data.rows.item(i);
-            const newItem = new ProdutoEmpresaPromocao();
-            newItem.id = +registro.id_produto_empresa;
-            newItem.id_promocao_erp = +registro.id_promocao_erp;
-            newItem.valor_promocional = Util.GetValorArredondado(
-              registro.valor_promocional
-            );
-            newItem.sobrepor_tabela_preco = Util.AnyToBool(
-              registro.sobrepor_tabela_preco
-            );
-
-            retorno.push(newItem);
-          }
-          return retorno;
-        } else {
-          return retorno;
-        }
-      })
-      .catch((e) => {
-        Util.TratarErro(e);
-        return retorno;
-      });
-  }
-
   public async getProdutosComPrecoJaCalculado(
     filtro_pesquisa: string,
-    texto_pesquisado: string,
-    tipo_preco_produto?: number,
-    id_tabela_preco_erp?: number,
-    id_forma_pagamento?: number
+    texto_pesquisado: string
   ) {
     try {
-      const empresa = await this.getEmpresaLogada();
-
-      //consulto produtos em promocao
-      const emPromocao = await this.getProdutosEmPromocao(id_forma_pagamento);
-
-      //consulto tabela de preco se necessario
       const itensTabelaPreco = null; // await this.getItensTabelaPreco(
-      //   id_tabela_preco_erp
       // );
 
-      let registros = await this.getProdutosEmpresa(
+      const registros = await this.getProdutosEmpresa(
         filtro_pesquisa,
         texto_pesquisado
       );
 
       registros.forEach((r) => {
         r.quantidade = 0;
-        let id_promocao = null;
-        let valor_promocao = null;
-        let promocao_sobrepor_tabela = null;
-        let id_tabela_usar = id_tabela_preco_erp;
         let valor_tabela = null;
-
-        const promocao = emPromocao.find((c) => c.id === r.id);
-        if (promocao) {
-          id_promocao = promocao.id_promocao_erp;
-          valor_promocao = promocao.valor_promocional;
-          promocao_sobrepor_tabela = promocao.sobrepor_tabela_preco;
-        }
 
         const tabelaPreco = itensTabelaPreco.find(
           (c) => c.id_produto_empresa === r.id
         );
         if (tabelaPreco) {
           valor_tabela = tabelaPreco.valor;
-        } else {
-          id_tabela_usar = null;
         }
 
-        ProdutoUtil.CalcularPrecoETotalBruto(
-          r,
-          null,
-          tipo_preco_produto,
-          id_promocao,
-          valor_promocao,
-          promocao_sobrepor_tabela,
-          id_tabela_usar,
-          valor_tabela
-        );
+        ProdutoUtil.CalcularPrecoETotalBruto(r, null, valor_tabela);
       });
-      //com preco preenchido e saldo maior que zero caso controle
-      registros = registros.filter(
-        (c) =>
-          c.valor_unitario > 0 &&
-          (!empresa.consultar_apenas_produto_saldo_maior_zero ||
-            c.saldo_total > 0)
-      );
 
       return registros;
     } catch (e) {
@@ -989,12 +664,11 @@ export class DataBaseProvider {
 
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into balanco (id, id_colaborador, id_local_estoque, id_nuvem, data, data_sincronizacao, observacao) values (?, ?, ?, ?, ?, ?, ?)',
+        'insert into balanco (id, id_colaborador, id_local_estoque, data, data_sincronizacao, observacao) values (?, ?, ?, ?, ?, ?)',
         [
           registro.id,
           registro.id_colaborador,
           registro.id_local_estoque,
-          registro.id_nuvem,
           registro.data,
           registro.data_sincronizacao,
           registro.observacao,
@@ -1029,11 +703,11 @@ export class DataBaseProvider {
 
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into produto (id, descricao, id_erp, id_produto_sub_grupo, id_produto_fabricante, gtin, unidade, ativo, referencia, codigo_original, aplicacao, tipo_alteracao_preco, movimenta_fracionado, nao_calcula_saldo_flex) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'insert into produto (id, descricao, id, id_produto_sub_grupo, id_produto_fabricante, gtin, unidade, ativo, referencia, codigo_original, aplicacao, tipo_alteracao_preco, movimenta_fracionado, nao_calcula_saldo_flex) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           registro.id,
           registro.descricao,
-          registro.id_erp,
+          registro.id,
           registro.id_produto_sub_grupo,
           registro.id_produto_fabricante,
           registro.gtin,
@@ -1069,8 +743,8 @@ export class DataBaseProvider {
     const sqlStatements: any[] = [];
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into estoque_locais (id, id_erp, id_empresa, descricao) values (?, ?, ?, ?)',
-        [registro.id, registro.id_erp, registro.id_empresa, registro.descricao],
+        'insert into estoque_locais (id, id, id_empresa, descricao) values (?, ?, ?, ?)',
+        [registro.id, registro.id, registro.id_empresa, registro.descricao],
       ]);
     });
 
@@ -1082,7 +756,7 @@ export class DataBaseProvider {
 
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into produto_empresa (ativo, desconto_maximo_atacado_prc, desconto_maximo_atacado_vlr, desconto_maximo_super_atacado_prc, desconto_maximo_super_atacado_vlr, desconto_maximo_varejo_prc, desconto_maximo_varejo_vlr, id, id_empresa, id_erp, id_produto, pcompra, pcusto, pfornecedor, pvenda_atacado, pvenda_super_atacado, pvenda_varejo, quantidade_minima_atacado, quantidade_minima_super_atacado, saldo_total) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'insert into produto_empresa (ativo, desconto_maximo_atacado_prc, desconto_maximo_atacado_vlr, desconto_maximo_super_atacado_prc, desconto_maximo_super_atacado_vlr, desconto_maximo_varejo_prc, desconto_maximo_varejo_vlr, id, id_empresa, id, id_produto, pcompra, pcusto, pfornecedor, pvenda_atacado, pvenda_super_atacado, pvenda_varejo, quantidade_minima_atacado, quantidade_minima_super_atacado, saldo_total) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           registro.ativo,
           registro.desconto_maximo_atacado_prc,
@@ -1093,7 +767,7 @@ export class DataBaseProvider {
           registro.desconto_maximo_varejo_vlr,
           registro.id,
           registro.id_empresa,
-          registro.id_erp,
+          registro.id,
           registro.id_produto,
           registro.pcompra,
           registro.pcusto,
@@ -1129,8 +803,29 @@ export class DataBaseProvider {
       [
         venda.data,
         venda.id_cliente,
-        venda.id_forma_pagamento,
-        venda.id_tipo_operacao,
+        venda.json,
+      ],
+    ]);
+
+    return this.dados.sqlBatch(sqlStatements);
+  }
+
+  public salvarVendaProduto(venda: OperacaoSaida): Promise<any> {
+    const sqlStatements: any[] = [];
+
+    let comando = '';
+    if (venda.id > 0) {
+      comando =
+        'update operacao_saida set data = ?, json = ? where id = ' + venda.id;
+    } else {
+      comando = 'insert into operacao_saida (data, json) values (?, ?)';
+    }
+
+    sqlStatements.push([
+      comando,
+      [
+        venda.data,
+        venda.id_cliente,
         venda.json,
       ],
     ]);
@@ -1183,34 +878,6 @@ export class DataBaseProvider {
     return this.dados.sqlBatch(sqlStatements);
   }
 
-  public atualizarIdNuvemVenda(
-    id_venda: number,
-    id_nuvem: number,
-    sincronizado_em: string
-  ): Promise<any> {
-    const sqlStatements: any[] = [];
-    sqlStatements.push([
-      'update operacao_saida set id_nuvem = ?, sincronizado_em = ? where id = ?',
-      [id_nuvem, sincronizado_em, id_venda],
-    ]);
-
-    return this.dados.sqlBatch(sqlStatements);
-  }
-
-  public atualizarIdNuvemBalanco(
-    id_balanco: number,
-    id_nuvem: number,
-    sincronizado_em: string
-  ): Promise<any> {
-    const sqlStatements: any[] = [];
-    sqlStatements.push([
-      'update operacao_balanco set id_nuvem = ?, sincronizado_em = ? where id = ?',
-      [id_nuvem, sincronizado_em, id_balanco],
-    ]);
-
-    return this.dados.sqlBatch(sqlStatements);
-  }
-
   public setEmpresas(registros: Empresa[]): Promise<any> {
     const sqlStatements: any[] = [];
 
@@ -1256,7 +923,7 @@ export class DataBaseProvider {
 
   private getConfigDb() {
     return {
-      name: 'testeNossoERP2.db',
+      name: 'computaria.db',
       location: 'default',
     };
   }
@@ -1274,35 +941,35 @@ export class DataBaseProvider {
         ],
         [
           //produto
-          'CREATE TABLE IF NOT EXISTS produto ([id] [INTEGER] primary key NOT NULL,	[descricao] [nvarchar](120) NULL,	[id_erp] [INTEGER] NOT NULL,	[id_produto_sub_grupo] [INTEGER] NOT NULL,	[id_produto_fabricante] [INTEGER] NOT NULL,	[gtin] [nvarchar](14) NULL,	[unidade] [nvarchar](6) NOT NULL,	[ativo] [bit] NOT NULL,	[referencia] [nvarchar](20) NULL,	[codigo_original] [nvarchar](25) NULL,	[aplicacao] [nvarchar](250) NULL,	[tipo_alteracao_preco] [INTEGER] NOT NULL,	[movimenta_fracionado] [bit] NOT NULL,	[nao_calcula_saldo_flex] [bit] NOT NULL)',
+          'CREATE TABLE IF NOT EXISTS produto ([id] [INTEGER] primary key NOT NULL,	[descricao] [nvarchar](120) NULL,	[id] [INTEGER] NOT NULL,	[id_produto_sub_grupo] [INTEGER] NOT NULL,	[id_produto_fabricante] [INTEGER] NOT NULL,	[gtin] [nvarchar](14) NULL,	[unidade] [nvarchar](6) NOT NULL,	[ativo] [bit] NOT NULL,	[referencia] [nvarchar](20) NULL,	[codigo_original] [nvarchar](25) NULL,	[aplicacao] [nvarchar](250) NULL,	[tipo_alteracao_preco] [INTEGER] NOT NULL,	[movimenta_fracionado] [bit] NOT NULL,	[nao_calcula_saldo_flex] [bit] NOT NULL)',
         ],
         [
           //produto_empresa
-          'CREATE TABLE IF NOT EXISTS produto_empresa ([id] [INTEGER] primary key NOT NULL,	[id_erp] [INTEGER] NOT NULL,	[id_produto] [INTEGER] NOT NULL,	[id_empresa] [INTEGER] NOT NULL,	[pcusto] [float] NOT NULL,	[pvenda_varejo] [float] NOT NULL,	[pvenda_atacado] [float] NOT NULL,	[pvenda_super_atacado] [float] NOT NULL,	[saldo_total] [float] NOT NULL,	[ativo] [bit] NOT NULL,	[desconto_maximo_atacado_prc] [float] NOT NULL,	[desconto_maximo_atacado_vlr] [float] NOT NULL,	[desconto_maximo_super_atacado_prc] [float] NOT NULL,	[desconto_maximo_super_atacado_vlr] [float] NOT NULL,	[desconto_maximo_varejo_prc] [float] NOT NULL,	[desconto_maximo_varejo_vlr] [float] NOT NULL,	[quantidade_minima_atacado] [float] NOT NULL,	[quantidade_minima_super_atacado] [float] NOT NULL,	[pcompra] [float] NOT NULL,	[pfornecedor] [float] NOT NULL)',
+          'CREATE TABLE IF NOT EXISTS produto_empresa ([id] [INTEGER] primary key NOT NULL,	[id] [INTEGER] NOT NULL,	[id_produto] [INTEGER] NOT NULL,	[id_empresa] [INTEGER] NOT NULL,	[pcusto] [float] NOT NULL,	[pvenda_varejo] [float] NOT NULL,	[pvenda_atacado] [float] NOT NULL,	[pvenda_super_atacado] [float] NOT NULL,	[saldo_total] [float] NOT NULL,	[ativo] [bit] NOT NULL,	[desconto_maximo_atacado_prc] [float] NOT NULL,	[desconto_maximo_atacado_vlr] [float] NOT NULL,	[desconto_maximo_super_atacado_prc] [float] NOT NULL,	[desconto_maximo_super_atacado_vlr] [float] NOT NULL,	[desconto_maximo_varejo_prc] [float] NOT NULL,	[desconto_maximo_varejo_vlr] [float] NOT NULL,	[quantidade_minima_atacado] [float] NOT NULL,	[quantidade_minima_super_atacado] [float] NOT NULL,	[pcompra] [float] NOT NULL,	[pfornecedor] [float] NOT NULL)',
         ],
         [
           //produto_fabricante
-          'CREATE TABLE IF NOT EXISTS produto_fabricante ([id] [INTEGER] primary key NOT NULL, [descricao] [nvarchar](100) NULL,	[id_erp] [INTEGER] NOT NULL)',
+          'CREATE TABLE IF NOT EXISTS produto_fabricante ([id] [INTEGER] primary key NOT NULL, [descricao] [nvarchar](100) NULL,	[id] [INTEGER] NOT NULL)',
         ],
         [
           //produto_grupo
-          'CREATE TABLE IF NOT EXISTS produto_grupo ([id] [INTEGER] primary key NOT NULL,	[descricao] [nvarchar](100) NULL,	[id_erp] [INTEGER] NOT NULL)',
+          'CREATE TABLE IF NOT EXISTS produto_grupo ([id] [INTEGER] primary key NOT NULL,	[descricao] [nvarchar](100) NULL,	[id] [INTEGER] NOT NULL)',
         ],
         [
           //produto_sub_grupo
-          'CREATE TABLE IF NOT EXISTS produto_sub_grupo ([id] [INTEGER] [INTEGER] primary key NOT NULL,	[descricao] [nvarchar](100) NULL,	[id_erp] [INTEGER] NOT NULL,	[id_produto_grupo] [INTEGER] NOT NULL)',
+          'CREATE TABLE IF NOT EXISTS produto_sub_grupo ([id] [INTEGER] [INTEGER] primary key NOT NULL,	[descricao] [nvarchar](100) NULL,	[id] [INTEGER] NOT NULL,	[id_produto_grupo] [INTEGER] NOT NULL)',
         ],
         [
           //estoque_locais
-          'CREATE TABLE IF NOT EXISTS estoque_locais ([id] [INTEGER] primary key NOT NULL,	[id_erp] [INTEGER] NOT NULL,	[id_empresa] [INTEGER] NOT NULL,	[descricao] [nvarchar](100) NOT NULL)',
+          'CREATE TABLE IF NOT EXISTS estoque_locais ([id] [INTEGER] primary key NOT NULL,	[id] [INTEGER] NOT NULL,	[id_empresa] [INTEGER] NOT NULL,	[descricao] [nvarchar](100) NOT NULL)',
         ],
         [
           //operacao saida
-          'CREATE TABLE IF NOT EXISTS operacao_saida ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL,	[json] [text] NOT NULL, [id_cliente] [INTEGER], [id_tipo_operacao] [INTEGER], [id_forma_pagamento] [INTEGER], [id_nuvem] [INTEGER], [sincronizado_em] [text])',
+          'CREATE TABLE IF NOT EXISTS operacao_saida ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL,	[json] [text] NOT NULL, [id_cliente] [INTEGER], [id_tipo_operacao] [INTEGER], [id_forma_pagamento] [INTEGER], [sincronizado_em] [text])',
         ],
         [
           //operacao balanco
-          'CREATE TABLE IF NOT EXISTS operacao_balanco ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL,	[json] [text] NOT NULL, [id_nuvem] [INTEGER], [estoque_locais] [INTEGER], [sincronizado_em] [text])',
+          'CREATE TABLE IF NOT EXISTS operacao_balanco ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL,	[json] [text] NOT NULL, [estoque_locais] [INTEGER], [sincronizado_em] [text])',
         ],
         [
           //empresa
