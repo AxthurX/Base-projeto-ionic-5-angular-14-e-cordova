@@ -24,21 +24,14 @@ export class ProdutoUtil {
       if (TipoPreco === 1) {
         //Varejo
         registro.valor_unitario = registro.pvenda_varejo;
-        registro.desconto_maximo = registro.desconto_maximo_varejo_vlr;
-        registro.desconto_maximo_prc = registro.desconto_maximo_varejo_prc;
         registro.tipo_preco = 'V';
       } else if (TipoPreco === 2) {
         //Atacado
         registro.valor_unitario = registro.pvenda_atacado;
-        registro.desconto_maximo = registro.desconto_maximo_atacado_vlr;
-        registro.desconto_maximo_prc = registro.desconto_maximo_atacado_prc;
         registro.tipo_preco = 'A';
       } else if (TipoPreco === 3) {
         //Super atacado
         registro.valor_unitario = registro.pvenda_super_atacado;
-        registro.desconto_maximo = registro.desconto_maximo_super_atacado_vlr;
-        registro.desconto_maximo_prc =
-          registro.desconto_maximo_super_atacado_prc;
         registro.tipo_preco = 'S';
       } else if (TipoPreco === 6) {
         //Fornecedor
@@ -61,32 +54,14 @@ export class ProdutoUtil {
       } // Tipo de preço é de Venda == 5
       else {
         if (!id_promocao && !id_tabela_preco) {
-          if (
-            TipoPreco === 10 ||
-            (registro.pvenda_super_atacado > 0 &&
-              registro.quantidade_minima_super_atacado > 0 &&
-              registro.quantidade >= registro.quantidade_minima_super_atacado)
-          ) {
+          if (TipoPreco === 10 || registro.pvenda_super_atacado > 0) {
             registro.valor_unitario = registro.pvenda_super_atacado;
-            registro.desconto_maximo =
-              registro.desconto_maximo_super_atacado_vlr;
-            registro.desconto_maximo_prc =
-              registro.desconto_maximo_super_atacado_prc;
             registro.tipo_preco = 'S';
-          } else if (
-            TipoPreco === 9 ||
-            (registro.pvenda_atacado > 0 &&
-              registro.quantidade_minima_atacado > 0 &&
-              registro.quantidade >= registro.quantidade_minima_atacado)
-          ) {
+          } else if (TipoPreco === 9 || registro.pvenda_atacado > 0) {
             registro.valor_unitario = registro.pvenda_atacado;
-            registro.desconto_maximo = registro.desconto_maximo_atacado_vlr;
-            registro.desconto_maximo_prc = registro.desconto_maximo_atacado_prc;
             registro.tipo_preco = 'A';
           } else {
             registro.valor_unitario = registro.pvenda_varejo;
-            registro.desconto_maximo = registro.desconto_maximo_varejo_vlr;
-            registro.desconto_maximo_prc = registro.desconto_maximo_varejo_prc;
             registro.tipo_preco = 'V';
           }
         } else {
@@ -166,13 +141,6 @@ export class ProdutoUtil {
       }
 
       valor = Util.GetValorArredondado(valor);
-
-      produto.desconto_prc = valor;
-      produto.desconto_vlr = Util.GetValorArredondado(
-        produto.total_bruto * (valor / 100)
-      );
-
-      this.CalcularTotalLiquido(produto);
       return true;
     } catch {
       return false;
@@ -194,14 +162,6 @@ export class ProdutoUtil {
         Util.AlertInfo('O desconto não pode ser maior que o total bruto!');
         return false;
       }
-
-      produto.desconto_vlr = valor;
-      produto.desconto_prc = Util.CalculaPorcentagem(
-        valor,
-        produto.total_bruto
-      );
-
-      this.CalcularTotalLiquido(produto);
 
       return true;
     } catch (e) {
@@ -225,13 +185,6 @@ export class ProdutoUtil {
       }
 
       valor = Util.GetValorArredondado(valor);
-
-      produto.acrescimo_prc = valor;
-      produto.acrescimo_vlr = Util.GetValorArredondado(
-        produto.total_bruto * (valor / 100)
-      );
-
-      this.CalcularTotalLiquido(produto);
       return true;
     } catch {
       return false;
@@ -249,24 +202,10 @@ export class ProdutoUtil {
         valor = 0;
       }
 
-      produto.acrescimo_vlr = valor;
-      produto.acrescimo_prc = Util.CalculaPorcentagem(
-        valor,
-        produto.total_bruto
-      );
-
-      this.CalcularTotalLiquido(produto);
-
       return true;
     } catch (e) {
       console.error(e);
       return false;
     }
-  }
-
-  static CalcularTotalLiquido(produto: ViewProdutoEmpresa) {
-    produto.total_liquido = Util.GetValorArredondado(
-      produto.total_bruto - produto.desconto_vlr + produto.acrescimo_vlr
-    );
   }
 }

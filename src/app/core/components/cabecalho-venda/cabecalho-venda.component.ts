@@ -11,16 +11,8 @@ export class CabecalhoVendaComponent {
   @Input() objVenda: OperacaoSaidaJson;
   constructor() {}
 
-  GetTipoVenda(pedido: boolean) {
-    return OperacaoSaidaUtil.GetTipoVenda(pedido);
-  }
-
   GetClasse() {
-    return this.objVenda.id_nuvem
-      ? 'finalizado'
-      : this.objVenda.pedido
-      ? 'pedido'
-      : 'orcamento';
+    return 'Azul';
   }
 
   GetColor(pedido) {

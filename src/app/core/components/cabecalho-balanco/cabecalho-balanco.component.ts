@@ -11,11 +11,5 @@ export class CabecalhoBalancoComponent {
 
   constructor() {}
 
-  GetClasse() {
-    return this.objBalanco.id_nuvem
-      ? 'finalizado'
-      : this.objBalanco
-      ? 'balanco'
-      : 'balanco';
-  }
+  GetClasse() {}
 }

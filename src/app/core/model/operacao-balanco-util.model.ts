@@ -11,7 +11,6 @@ export class OperacaoBalancoUtil {
       balanco.dados_json.quantidade_produtos_lancados += p.quantidade;
     });
     balanco.dados_json.sincronizado_em = balanco.sincronizado_em;
-    balanco.dados_json.id_nuvem = balanco.id_nuvem;
   }
 
   static PreecherJson(balanco: OperacaoBalanco) {
@@ -19,7 +18,6 @@ export class OperacaoBalancoUtil {
   }
 
   static LimparBalanco(balanco: OperacaoBalancoJson) {
-    balanco.finalizado = false;
     this.LimparValores(balanco);
     balanco.produtos = [];
     balanco.estoque_locais = null;

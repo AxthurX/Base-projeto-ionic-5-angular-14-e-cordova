@@ -11,8 +11,8 @@
 </ion-header>
 
 <ion-content color="light">
-  <app-cabecalho-pesquisa-produto [tipo_preco_produto]="tipo_preco_produto" [texto_pesquisado]="texto_pesquisado"
-    [tela_consulta]="this" [nao_exibir_consultando]="true">
+  <app-cabecalho-pesquisa-produto [texto_pesquisado]="texto_pesquisado" [tela_consulta]="this"
+    [nao_exibir_consultando]="true">
   </app-cabecalho-pesquisa-produto>
   <p class="text-center" *ngIf="registros">
     {{registros.length}} produto(s) localizado(s)
@@ -47,7 +47,7 @@
           {{registro.quantidade_minima_super_atacado | number: '1.0-3'}}
         </h6>
         <h6 class="font-weight-bold text-dark mb-2 small" (click)="mostrarFoto(registro)">
-          <span class="text-secondary font-weight-normal">Cód: {{registro.id_produto_erp}}</span> |
+          <span class="text-secondary font-weight-normal">Cód: {{registro.id_produto}}</span> |
           <ion-badge *ngIf="registro.tipo_preco === 'P' || registro.tipo_preco === 'T'"
             [color]="getColor(registro.tipo_preco)">
             R$ {{registro.valor_unitario| number: '1.2-2'}}

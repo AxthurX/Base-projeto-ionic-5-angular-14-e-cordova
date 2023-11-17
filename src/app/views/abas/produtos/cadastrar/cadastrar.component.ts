@@ -4,6 +4,7 @@ import { OverlayService } from 'src/app/core/service/overlay.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
 import { Produto } from 'src/app/core/model/data-base/produto.model';
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import moment from 'moment';
 
 @Component({
   selector: 'app-cadastrar',
@@ -15,6 +16,7 @@ export class CadastrarComponent implements OnInit {
   produto: Produto;
   submitted: boolean;
   consultando: boolean = false;
+  dias_restantes: number;
   constructor(
     private overlay: OverlayService,
     private dados: DataBaseProvider,
@@ -93,7 +95,7 @@ export class CadastrarComponent implements OnInit {
       }
 
       const novoProduto = new Produto();
-      novoProduto.id = novoProduto.id_erp = menorId;
+      novoProduto.id = novoProduto.id = menorId;
       novoProduto.nome = this.produto.nome.toString().toUpperCase();
       novoProduto.data_fabricacao = this.produto.data_fabricacao;
       novoProduto.data_vencimento = this.produto.data_vencimento;
@@ -115,5 +117,11 @@ export class CadastrarComponent implements OnInit {
     } catch (e) {
       Util.TratarErroEFecharLoading(e, this.overlay);
     }
+  }
+
+  calcularDiasRestantes() {
+    const data_vencimento = moment(this.produto.data_vencimento, 'YYYY-MM-DD');
+    this.dias_restantes = data_vencimento.diff(moment(), 'days') + 1;
+    return this.dias_restantes;
   }
 }

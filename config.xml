@@ -3,7 +3,7 @@
     <name>Computaria</name>
     <description>Computaria</description>
     <author email="computaria@gmail.com" href="https://computaria.com.br/">Computaria</author>
-    <content original-src="index.html" src="http://172.31.240.1:8100" />
+    <content original-src="index.html" src="http://192.168.40.81:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

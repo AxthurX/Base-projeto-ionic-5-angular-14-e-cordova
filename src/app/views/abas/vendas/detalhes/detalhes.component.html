@@ -16,19 +16,14 @@
       <thead>
         <tr>
           <th style="font-size: 25px;" colspan="4" class="text-center">
-            <p class="alert alert-info">Comprovante do {{GetTipoVenda(objVenda.pedido)}}</p>
+            <p class="alert alert-info">Comprovante da venda</p>
           </th>
         </tr>
         <tr>
           <td class="text-right"><b>Cliente</b></td>
-          <td>{{objVenda.cliente.id_erp}} - {{objVenda.cliente.descricao}}</td>
+          <td>{{objVenda.cliente.id}} - {{objVenda.cliente.descricao}}</td>
           <td class="text-right"><b>Data</b></td>
           <td>{{objVenda.data | date:'dd/MM/yyyy HH:mm'}}</td>
-        </tr>
-        <tr>
-          <td class="text-right"><b>Tipo operação</b></td>
-          <td>{{objVenda.tipo_operacao.id_erp}} - {{objVenda.tipo_operacao.descricao}}</td>
-          <td class="text-right"><b>Forma pagamento</b></td>
         </tr>
       </thead>
     </table>
@@ -50,7 +45,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let registro of objVenda.produtos">
-          <td>{{registro.id_produto_erp}}</td>
+          <td>{{registro.id_produto}}</td>
           <td>{{registro.descricao}}</td>
           <td>{{registro.gtin}}</td>
           <td class="text-right">{{registro.valor_unitario | number: '1.2-2'}}</td>

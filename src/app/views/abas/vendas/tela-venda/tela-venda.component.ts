@@ -23,6 +23,107 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
   carregando: boolean;
   acao: string;
   recalculando_totais: boolean = false;
+  teste: OperacaoSaida = {
+    id: 1,
+    dados_json: {
+      excluido: false,
+      quantidade_produtos_lancados: 2,
+      total_bruto: 22.35,
+      total_liquido: 22.35,
+      produtos: [
+        {
+          mostrar_foto: false,
+          imagem: 'assets/icon/favicon.png',
+          total_liquido: 7.35,
+          total_bruto: 7.35,
+          valor_unitario: 7.35,
+          quantidade: 1,
+          descricao: ' BARRA ROSCADA UNC ZB 1/4" 1M - CISER',
+          id: 699033,
+          id_produto: 841573,
+          pcusto: 0,
+          pvenda_atacado: 0,
+          pvenda_super_atacado: 0,
+          pcompra: 3.82,
+          pfornecedor: 3.82,
+          saldo_total: 1,
+          pvenda_varejo: 7.35,
+          unidade: 'UN ',
+          codigo_original: null,
+          referencia: null,
+          gtin: '00000051017194',
+          sub_grupo: 'IMPORTACAO DE DADOS',
+          grupo: 'IMPORTACAO DE DADOS',
+          fabricante: 'IMPORTACAO DE DADOS',
+          valor_unitario_original: 7.35,
+          desconto_maximo: 0,
+          desconto_maximo_prc: 0,
+          tipo_preco: 'V',
+          observacao: null,
+        },
+        {
+          mostrar_foto: false,
+          imagem: 'assets/icon/favicon.png',
+          total_liquido: 15,
+          total_bruto: 15,
+          valor_unitario: 15,
+          quantidade: 1,
+          descricao: ' ADAPTADOR SOQUETE 14"X1/2"-2" - WORKER',
+          id: 698868,
+          id_produto: 841572,
+          pcusto: 0,
+          pvenda_atacado: 0,
+          pvenda_super_atacado: 0,
+          pcompra: 5.15,
+          pfornecedor: 5.15,
+          saldo_total: 1,
+          pvenda_varejo: 15,
+          unidade: 'UN ',
+          codigo_original: null,
+          referencia: null,
+          gtin: '7899811603363 ',
+          sub_grupo: 'IMPORTACAO DE DADOS',
+          grupo: 'IMPORTACAO DE DADOS',
+          fabricante: 'IMPORTACAO DE DADOS',
+          valor_unitario_original: 15,
+          desconto_maximo: 0,
+          desconto_maximo_prc: 0,
+          tipo_preco: 'V',
+          observacao: null,
+        },
+      ],
+      cliente: {
+        descricao: 'IGREJA PENTECOSTAL DEUS E AMOR',
+        id: 415200,
+      },
+      view_cliente: {
+        id: 415200,
+        razao: 'IGREJA PENTECOSTAL DEUS E AMOR',
+        cep: '76907834',
+        fantasia: 'IGREJA PENTECOSTAL DEUS E AMOR',
+        codigo_municipio: '1100122',
+        cpf_cnpj: '43208040000136',
+        logradouro: 'RUA MATO GROSSO',
+        numero: '3182',
+        telefone_principal: '06992689800',
+        telefone_whatsapp: null,
+        complemento: 'IGREJA',
+        bairro: 'PARQUE SAO PEDRO',
+        municipio: 'JI-PARANÁ',
+        sigla_uf: 'RO',
+        atividade: null,
+        limite_credito_disponivel: 0,
+        limite_credito: 0,
+        inscricao_estadual: 0,
+        indicador_ie: 9,
+      },
+      data: 1700247580222,
+      observacao: null,
+    },
+    sincronizado_em: new Date().toDateString(),
+    data: 1700247580222,
+    json: '{"excluido":false,"pedido":true,"total_desconto_suframa":0,"total_icms_st":0,"total_ipi":0,"quantidade_produtos_lancados":2,"total_bruto":22.35,"acrescimo_prc":0,"acrescimo_vlr":0,"desconto_prc":0,"desconto_vlr":0,"total_liquido":22.35,"produtos":[{"mostrar_foto":false,"imagem":"assets/icon/favicon.png","frete_vlr":0,"acrescimo_prc":0,"acrescimo_vlr":0,"desconto_prc":0,"desconto_vlr":0,"total_liquido":7.35,"total_bruto":7.35,"valor_unitario":7.35,"quantidade":1,"descricao":" BARRA ROSCADA UNC ZB 1/4\\" 1M - CISER","aplicacao":null,"id":699033,"id_produto":841573,"id_produto_grupo":1969,"id_produto_sub_grupo":9964,"id_produto_fabricante":26941,"id_empresa":170,"pcusto":0,"pvenda_atacado":0,"pvenda_super_atacado":0,"pcompra":3.82,"pfornecedor":3.82,"saldo_total":1,"pvenda_varejo":7.35,"unidade":"UN ","codigo_original":null,"referencia":null,"gtin":"00000051017194","sub_grupo":"IMPORTACAO DE DADOS","grupo":"IMPORTACAO DE DADOS","fabricante":"IMPORTACAO DE DADOS","desconto_maximo_varejo_vlr":0,"desconto_maximo_atacado_vlr":0,"desconto_maximo_super_atacado_vlr":0,"desconto_maximo_varejo_prc":0,"desconto_maximo_atacado_prc":0,"desconto_maximo_super_atacado_prc":0,"quantidade_minima_atacado":0,"quantidade_minima_super_atacado":0,"movimenta_fracionado":false,"nao_calcula_saldo_flex":false,"valor_unitario_original":7.35,"desconto_maximo":0,"desconto_maximo_prc":0,"tipo_preco":"V","icms_st":0,"ipi":0,"desconto_suframa":0,"invalidades":[]},{"mostrar_foto":false,"imagem":"assets/icon/favicon.png","frete_vlr":0,"acrescimo_prc":0,"acrescimo_vlr":0,"desconto_prc":0,"desconto_vlr":0,"total_liquido":15,"total_bruto":15,"valor_unitario":15,"quantidade":1,"descricao":" ADAPTADOR SOQUETE 14\\"X1/2\\"-2\\" - WORKER","aplicacao":null,"id":698868,"id_produto":841572,,"id_produto_grupo":1969,"id_produto_sub_grupo":9964,"id_produto_fabricante":26941,"tipo_alteracao_preco":1,"id_empresa":170,"pcusto":0,"pvenda_atacado":0,"pvenda_super_atacado":0,"pcompra":5.15,"pfornecedor":5.15,"saldo_total":1,"pvenda_varejo":15,"unidade":"UN ","codigo_original":null,"referencia":null,"gtin":"7899811603363 ","sub_grupo":"IMPORTACAO DE DADOS","grupo":"IMPORTACAO DE DADOS","fabricante":"IMPORTACAO DE DADOS","desconto_maximo_varejo_vlr":0,"desconto_maximo_atacado_vlr":0,"desconto_maximo_super_atacado_vlr":0,"desconto_maximo_varejo_prc":0,"desconto_maximo_atacado_prc":0,"desconto_maximo_super_atacado_prc":0,"quantidade_minima_atacado":0,"quantidade_minima_super_atacado":0,"movimenta_fracionado":false,"nao_calcula_saldo_flex":false,"valor_unitario_original":15,"desconto_maximo":0,"desconto_maximo_prc":0,"tipo_preco":"V","icms_st":0,"ipi":0,"desconto_suframa":0,"invalidades":[]}],"tipo_operacao":{"descricao":"VENDA DE MERCADORIA","id":1180},"forma_pagamento":{"id":2659,"id_empresa":136,"descricao":"A VISTA DINHEIRO","forma_pagamento_parcelamento_json":"[]","primeiro_vecto_dias":0,"dias_vencimento":0,"quantidade_maxima_parcelas":1,"quantidade_minima_parcelas_cobrar_juros":0,"quantidade_minima_parcelas_solicitar_autorizacao":0,"quantidade_minima_parcelas_exigir_entrada":1,"quantidade_maxima_parcelas_com_desconto":1,"comissao_prc_sobre_vendas":0,"desconto_maximo":0,"entrada_minima":0,"acrescimo_prc":0,"multa_boleto":null,"a_prazo":false,"parcelamento_fixo":false,"tarifa_financeira_vlr":null,"comissao_prc_sobre_servicos":0,"parcelamentos":[]},"cliente":{"descricao":"IGREJA PENTECOSTAL DEUS E AMOR","id":415200},"tipo_preco_produto":5,"view_cliente":{"id":415200,"razao":"IGREJA PENTECOSTAL DEUS E AMOR","cep":"76907834","fantasia":"IGREJA PENTECOSTAL DEUS E AMOR","codigo_municipio":"1100122","cpf_cnpj":"43208040000136","logradouro":"RUA MATO GROSSO","numero":"3182","telefone_principal":"06992689800","telefone_whatsapp":null,"complemento":"IGREJA","bairro":"PARQUE SAO PEDRO","municipio":"JI-PARANÁ","sigla_uf":"RO","atividade":null,"limite_credito_disponivel":0,"limite_credito":0,"inscricao_estadual":0,"indicador_ie":9},"id_forma_pagamento":2659}',
+  };
   private backbuttonSubscription: Subscription;
   constructor(
     public modal: ModalController,
@@ -55,16 +156,11 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
 
         if (this.acao === 'novo') {
           this.objVenda = new OperacaoSaida();
-        } else if (this.acao === 'copiando_do_erp') {
-          this.acao = 'copiando do erp';
-          this.overlay.showLoading('Copiando venda da nuvem...');
-          this.overlay.dismissLoadCtrl();
         } else {
           const venda = await this.dados.getVenda(id_venda);
           this.objVenda = venda;
           if (this.acao === 'copiando') {
             this.objVenda.id = 0;
-            this.objVenda.id_nuvem = null;
             this.objVenda.sincronizado_em = null;
           }
           this.CompletarPreenchimentoDaVendaAtual();
@@ -85,7 +181,7 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
   getByIdOrGtin(filtro: string, valor: string) {
     if (filtro === 'id') {
       return this.objVenda.dados_json.produtos.find(
-        (c) => c.id_produto_erp === +valor
+        (c) => c.id_produto === +valor
       );
     } else {
       return this.objVenda.dados_json.produtos.find((c) => c.gtin === valor);
@@ -95,16 +191,6 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
   //No recalculo, sempre aplico a regra da tributação pra garantir que qualquer alteração aplique tal regra
   async RecalcularTotais() {
     try {
-      if (
-        this.objVenda?.dados_json?.cliente?.id_erp > 0 &&
-        this.objVenda?.dados_json?.produtos?.length > 0
-      ) {
-        //ja limpo o q tiver preenchido pra evitar problema ao alterar cliente ou tipo de operação
-        this.objVenda.dados_json.produtos.forEach((produto) => {
-          produto.desconto_suframa = produto.ipi = produto.icms_st = 0;
-        });
-      }
-
       OperacaoSaidaUtil.RecalcularTotais(this.objVenda.dados_json);
     } catch (e) {}
   }
@@ -113,7 +199,7 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
     const retorno: ValueBaseModel[] = [];
     this.objVenda?.dados_json?.produtos?.forEach((p) => {
       retorno.push({
-        id: p.id_produto_erp,
+        id: p.id_produto,
         valor: p.quantidade,
         descricao: '',
       });
@@ -125,7 +211,7 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
   OnConsultou(produtos: ViewProdutoEmpresa[]) {
     produtos.forEach((p) => {
       const existente = this.objVenda.dados_json.produtos.find(
-        (c) => c.id_produto_erp === p.id_produto_erp
+        (c) => c.id_produto === p.id_produto
       );
       if (existente) {
         existente.quantidade += p.quantidade;
@@ -155,8 +241,6 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
   tratarAlteracaoQuantidade(registro: ViewProdutoEmpresa) {
     //primeiro forço a correto do total bruto, pode ficar negativo o liquido, mas no final pe corrigido
     OperacaoSaidaUtil.RecalcularTotais(this.objVenda.dados_json);
-    ProdutoUtil.AplicarDescontoPrc(registro, registro.desconto_prc);
-    ProdutoUtil.AplicarAcrescimoPrc(registro, registro.acrescimo_prc);
     this.RecalcularTotais();
   }
   //nao faço pergunta
@@ -186,109 +270,6 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
               },
               produto.observacao
             );
-          },
-        },
-        {
-          text: 'Aplicar desconto R$',
-          icon: 'trending-down',
-          handler: () => {
-            Util.EspecificarTexto(
-              'Informe o valor de desconto',
-              'R$',
-              (_valor) => {
-                const valor = parseFloat(_valor);
-                if (ProdutoUtil.AplicarDescontoVlr(produto, valor) === true) {
-                  this.RecalcularTotais();
-                }
-              },
-              '',
-              'text'
-            );
-          },
-        },
-        {
-          text: 'Aplicar desconto %',
-          icon: 'trending-down',
-          handler: () => {
-            Util.EspecificarTexto(
-              'Informe o % de desconto',
-              '%',
-              (_valor) => {
-                const valor = parseFloat(_valor);
-                if (ProdutoUtil.AplicarDescontoPrc(produto, valor) === true) {
-                  this.RecalcularTotais();
-                }
-              },
-              '',
-              'text'
-            );
-          },
-        },
-        {
-          text: 'Aplicar acréscimo R$',
-          icon: 'trending-up',
-          handler: () => {
-            Util.EspecificarTexto(
-              'Informe o valor de acréscimo',
-              'R$',
-              (_valor) => {
-                const valor = parseFloat(_valor);
-                if (ProdutoUtil.AplicarAcrescimoVlr(produto, valor) === true) {
-                  this.RecalcularTotais();
-                }
-              },
-              '',
-              'text'
-            );
-          },
-        },
-        {
-          text: 'Aplicar acréscimo %',
-          icon: 'trending-up',
-          handler: () => {
-            Util.EspecificarTexto(
-              'Informe o % de acréscimo',
-              '%',
-              (_valor) => {
-                const valor = parseFloat(_valor);
-                if (ProdutoUtil.AplicarAcrescimoPrc(produto, valor) === true) {
-                  this.RecalcularTotais();
-                }
-              },
-              '',
-              'text'
-            );
-          },
-        },
-        {
-          text: 'Alterar preço',
-          icon: 'money',
-          handler: () => {
-            if (produto.tipo_alteracao_preco !== 2) {
-              Util.EspecificarTexto(
-                'Informe o novo valor',
-                'R$',
-                (_valor) => {
-                  const valor = parseFloat(_valor);
-                  if (
-                    produto.tipo_alteracao_preco === 0 &&
-                    valor < produto.valor_unitario_original
-                  ) {
-                    Util.AlertInfo(
-                      `Este produto só permite alteração de preço acima de ${produto.valor_unitario_original}`
-                    );
-                  } else {
-                    produto.valor_unitario = Util.GetValorArredondado(valor);
-                    produto.alterou_valor_manualmente = true;
-                    this.RecalcularTotais();
-                  }
-                },
-                '',
-                'text'
-              );
-            } else {
-              Util.AlertInfo('Alteração de preço bloqueado para este produto!');
-            }
           },
         },
         {
@@ -326,145 +307,6 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
                 this.objVenda.dados_json.observacao = _valor;
               },
               this.objVenda.dados_json.observacao
-            );
-          },
-        },
-        {
-          text: 'Aplicar desconto R$',
-          icon: 'trending-down',
-          handler: () => {
-            Util.EspecificarTexto(
-              'Informe o valor de desconto',
-              'R$',
-              (_valor) => {
-                if (this.objVenda.dados_json.quantidade_produtos_lancados > 0) {
-                  const valor = parseFloat(_valor);
-
-                  if (valor > this.objVenda.dados_json.total_bruto) {
-                    Util.AlertInfo(
-                      'O desconto R$ não pode ser maior que o total bruto'
-                    );
-                  } else {
-                    const desconto_prc = Util.CalculaPorcentagem(
-                      valor,
-                      this.objVenda.dados_json.total_bruto
-                    );
-                    let total_desconto_aplicado = 0;
-                    this.objVenda.dados_json.produtos.forEach((produto) => {
-                      ProdutoUtil.AplicarDescontoPrc(produto, desconto_prc);
-                      total_desconto_aplicado += produto.desconto_vlr;
-                    });
-
-                    //verifico a diferença e aplico no ultimo item
-                    const diferenca = valor - total_desconto_aplicado;
-                    if (diferenca !== 0) {
-                      const ultimoProdutoLancado =
-                        this.objVenda.dados_json.produtos[
-                          this.objVenda.dados_json.produtos.length - 1
-                        ];
-                      ProdutoUtil.AplicarDescontoVlr(
-                        ultimoProdutoLancado,
-                        ultimoProdutoLancado.desconto_vlr - diferenca
-                      );
-                    }
-
-                    this.RecalcularTotais();
-                  }
-                }
-              },
-              '',
-              'text'
-            );
-          },
-        },
-        {
-          text: 'Aplicar desconto %',
-          icon: 'trending-down',
-          handler: () => {
-            Util.EspecificarTexto(
-              'Informe o % de desconto',
-              '%',
-              (_valor) => {
-                if (this.objVenda.dados_json.quantidade_produtos_lancados > 0) {
-                  const valor = parseFloat(_valor);
-
-                  if (valor > 100) {
-                    Util.AlertInfo('O desconto % não pode ser maior que 100%');
-                  } else {
-                    this.objVenda.dados_json.produtos.forEach((produto) => {
-                      ProdutoUtil.AplicarDescontoPrc(produto, valor);
-                    });
-
-                    this.RecalcularTotais();
-                  }
-                }
-              },
-              '',
-              'text'
-            );
-          },
-        },
-        {
-          text: 'Aplicar acréscimo R$',
-          icon: 'trending-up',
-          handler: () => {
-            Util.EspecificarTexto(
-              'Informe o valor de acréscimo',
-              'R$',
-              (_valor) => {
-                if (this.objVenda.dados_json.quantidade_produtos_lancados > 0) {
-                  const valor = parseFloat(_valor);
-
-                  const acrescimo_prc = Util.CalculaPorcentagem(
-                    valor,
-                    this.objVenda.dados_json.total_bruto
-                  );
-                  let total_aplicado = 0;
-                  this.objVenda.dados_json.produtos.forEach((produto) => {
-                    ProdutoUtil.AplicarAcrescimoPrc(produto, acrescimo_prc);
-                    total_aplicado += produto.acrescimo_vlr;
-                  });
-
-                  //verifico a diferença e aplico no ultimo item
-                  const diferenca = valor - total_aplicado;
-                  if (diferenca !== 0) {
-                    const ultimoProdutoLancado =
-                      this.objVenda.dados_json.produtos[
-                        this.objVenda.dados_json.produtos.length - 1
-                      ];
-                    ProdutoUtil.AplicarAcrescimoVlr(
-                      ultimoProdutoLancado,
-                      ultimoProdutoLancado.acrescimo_vlr - diferenca
-                    );
-                  }
-
-                  this.RecalcularTotais();
-                }
-              },
-              '',
-              'text'
-            );
-          },
-        },
-        {
-          text: 'Aplicar acréscimo %',
-          icon: 'trending-up',
-          handler: () => {
-            Util.EspecificarTexto(
-              'Informe o % de acréscimo',
-              '%',
-              (_valor) => {
-                if (this.objVenda.dados_json.quantidade_produtos_lancados > 0) {
-                  const valor = parseFloat(_valor);
-                  this.objVenda.dados_json.produtos.forEach((produto) => {
-                    ProdutoUtil.AplicarAcrescimoPrc(produto, valor);
-                  });
-
-                  this.RecalcularTotais();
-                }
-              },
-              '',
-              'text'
             );
           },
         },
@@ -507,28 +349,16 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
       registro.quantidade = 1;
     }
 
-    if (registro.movimenta_fracionado === false) {
-      //forço ficar como inteiro
-      registro.quantidade = +registro.quantidade;
-    }
-
     this.RecalcularTotais();
   }
 
   async SalvarVenda() {
     try {
-      this.objVenda.dados_json.pedido = false;
-      this.salvarSemValidar();
-    } catch (e) {
-      Util.AlertError(e);
-    }
-  }
-
-  async salvarSemValidar() {
-    try {
       this.objVenda.data = new Date().getTime();
-      OperacaoSaidaUtil.PreecherJson(this.objVenda);
-      await this.dados.salvarVenda(this.objVenda);
+      // OperacaoSaidaUtil.PreecherJson(this.objVenda);
+      // await this.dados.salvarVenda(this.objVenda);
+      OperacaoSaidaUtil.PreecherJson(this.teste);
+      await this.dados.salvarVenda(this.teste);
       this.overlay.notificarSucesso('Venda salva com sucesso!');
       this.router.navigate(['home/vendas']);
     } catch (err) {
