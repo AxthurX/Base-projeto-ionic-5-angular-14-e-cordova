@@ -263,9 +263,6 @@ export class ProdutosComponent implements OnInit, OnDestroy {
   async AbrirTelaCadastro(objProdutos?: Produto) {
     const modal = await this.modal.create({
       component: CadastrarComponent,
-      componentProps: {
-        // objProdutos,
-      },
     });
 
     await modal.present();

@@ -12,7 +12,6 @@ import { DetalhesComponent } from './detalhes/detalhes.component';
 import { IonContent } from '@ionic/angular';
 import { OverlayService } from 'src/app/core/service/overlay.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
-import { SincronizacaoService } from 'src/app/core/service/sincronizacao.service';
 
 @Component({
   selector: 'app-vendas',
@@ -22,27 +21,19 @@ import { SincronizacaoService } from 'src/app/core/service/sincronizacao.service
 export class VendasComponent implements OnInit {
   @ViewChild(IonContent) content: IonContent;
   nenhuma_venda_localizada: boolean = false;
-  abaSelecionada: string;
   consultando: boolean;
   sincronizando: boolean;
-  pendentes: OperacaoSaida[] = [];
-  sincronizados: OperacaoSaida[] = [];
-  offSet_pendentes: number = 0;
-  offSet_sincronizadas: number = 0;
-  limit: number = 3;
+  vendas: OperacaoSaida[] = [];
   constructor(
     private actionSheetController: ActionSheetController,
     private dados: DataBaseProvider,
     private overlay: OverlayService,
-    private sincSrv: SincronizacaoService,
     private modal: ModalController,
     private router: Router
   ) {
-    this.abaSelecionada = 'pendentes';
     this.consultando = false;
     this.sincronizando = false;
-    this.pendentes = [];
-    this.sincronizados = [];
+    this.vendas = [];
   }
 
   onForcarConsultarNovamente() {
@@ -51,10 +42,7 @@ export class VendasComponent implements OnInit {
   }
 
   limparConsultas() {
-    this.offSet_pendentes = 0;
-    this.offSet_sincronizadas = 0;
-    this.pendentes = [];
-    this.sincronizados = [];
+    this.vendas = [];
   }
 
   doRefresh(event) {
@@ -71,85 +59,40 @@ export class VendasComponent implements OnInit {
     setTimeout(() => {
       try {
         this.nenhuma_venda_localizada = false;
+        // this.dados
+        //   .getVendas(this.limit, offSet, apenas_vendas, apenas_sincronizadas)
+        //   .then((vendas) => {
+        //     if (vendas?.length > 0) {
+        //       vendas.forEach((v) => OperacaoSaidaUtil.PreecherDadosJson(v));
 
-        const apenas_pendentes = this.abaSelecionada === 'pendentes';
-        const apenas_sincronizadas = !apenas_pendentes;
-        const offSet = apenas_pendentes
-          ? this.offSet_pendentes
-          : this.offSet_sincronizadas;
+        //       vendas
+        //         .filter((c) => !c.id_nuvem)
+        //         .forEach((v) => {
+        //           this.vendas.push(v);
+        //         });
+        //       vendas
+        //         .filter((c) => c.id_nuvem)
+        //         .forEach((s) => {
+        //           this.sincronizados.push(s);
+        //         });
+        //     } else {
+        //       this.nenhuma_venda_localizada = true;
+        //     }
+        //     this.consultando = false;
 
-        this.dados
-          .getVendas(this.limit, offSet, apenas_pendentes, apenas_sincronizadas)
-          .then((vendas) => {
-            if (vendas?.length > 0) {
-              vendas.forEach((v) => OperacaoSaidaUtil.PreecherDadosJson(v));
-
-              vendas
-                .filter((c) => !c.id_nuvem)
-                .forEach((v) => {
-                  this.pendentes.push(v);
-                });
-              vendas
-                .filter((c) => c.id_nuvem)
-                .forEach((s) => {
-                  this.sincronizados.push(s);
-                });
-            } else {
-              this.nenhuma_venda_localizada = true;
-            }
-            this.consultando = false;
-
-            if (this.abaSelecionada === 'pendentes') {
-              this.offSet_pendentes += this.limit;
-            } else {
-              this.offSet_sincronizadas += this.limit;
-            }
-          })
-          .catch((err) => {
-            this.consultando = false;
-          });
+        //     if (this.abaSelecionada === 'vendas') {
+        //       this.offSet_vendas += this.limit;
+        //     } else {
+        //       this.offSet_sincronizadas += this.limit;
+        //     }
+        //   })
+        //   .catch((err) => {
+        //     this.consultando = false;
+        //   });
       } catch (e) {
         this.consultando = false;
       }
     }, 500);
-  }
-
-  async sincronizarTudo() {
-    try {
-      this.sincronizando = true;
-      const sincronizar = this.pendentes.filter(
-        (c) => !c.dados_json.status_manipulacao && !c.id_nuvem
-      );
-
-      const qtdOrcamentos = sincronizar.filter(
-        (c) => c.dados_json.pedido === false
-      ).length;
-      if (qtdOrcamentos > 0) {
-        const ret = await Util.ConfirmComRetorno(
-          `Você irá sincronizar ${qtdOrcamentos} orçamento(s)`
-        );
-        if (ret.isConfirmed === false) {
-          this.sincronizando = false;
-          return;
-        }
-      }
-
-      this.overlay.showLoading('Sincronizando vendas...');
-
-      if (sincronizar.length > 0) {
-        for (let i = 0; i < sincronizar.length; i++) {
-          await this.sincronizarPedido(sincronizar[i], i, true);
-        }
-        this.limparConsultas();
-        this.OnConsultar();
-      } else {
-        Util.AlertInfo('Nenhum PEDIDO pendente foi localizado');
-      }
-      this.overlay.dismissLoadCtrl();
-    } catch (e) {
-      Util.TratarErroEFecharLoading(e, this.overlay);
-    }
-    this.sincronizando = false;
   }
 
   async mostrarOpcoesVenda(venda: OperacaoSaida, index: number) {
@@ -188,24 +131,6 @@ export class VendasComponent implements OnInit {
           this.AbrirTelaVenda(venda);
         },
       });
-      buttons.push({
-        text: 'Sincronizar',
-        icon: 'sync',
-        handler: async () => {
-          if (!venda.dados_json.status_manipulacao) {
-            if (venda.dados_json.pedido === false) {
-              const ret = await Util.ConfirmComRetorno(
-                'Você está sincronizando uma venda como ORÇAMENTO'
-              );
-              if (ret.isConfirmed === false) {
-                return;
-              }
-            }
-
-            await this.sincronizarPedido(venda, index, false, true);
-          }
-        },
-      });
 
       buttons.push({
         text: 'Excluir',
@@ -219,7 +144,7 @@ export class VendasComponent implements OnInit {
                   this.overlay.notificarSucesso(
                     tipoVenda + ' excluído com sucesso!'
                   );
-                  this.pendentes.splice(index, 1);
+                  this.vendas.splice(index, 1);
                 })
                 .catch((e) => {
                   Util.TratarErroEFecharLoading(e, this.overlay);
@@ -244,79 +169,6 @@ export class VendasComponent implements OnInit {
       buttons,
     });
     await actionSheet.present();
-  }
-
-  sincronizarPedido(
-    venda: OperacaoSaida,
-    index: number,
-    nao_fazer_nada_apos_sincronizar?: boolean,
-    mostrar_overlay?: boolean
-  ) {
-    if (mostrar_overlay) {
-      this.overlay.showLoading('Sincronizando a venda...');
-    }
-    if (venda.dados_json.status_manipulacao) {
-      //ja ta fazendo alguma coisa (sincronizando ou ta excluido)
-      return;
-    }
-    venda.dados_json.status_manipulacao = 1;
-    try {
-      this.sincSrv.enviarOperacaoSaida(venda.dados_json).subscribe({
-        next: (r) => {
-          venda.dados_json.status_manipulacao = null;
-          if (r.success === true) {
-            venda.id_nuvem = r.retorno.id;
-            venda.sincronizado_em = r.retorno.sincronizado_em;
-            OperacaoSaidaUtil.PreecherDadosJson(venda);
-            this.dados
-              .atualizarIdNuvemVenda(
-                venda.id,
-                r.retorno.id,
-                r.retorno.sincronizado_em
-              )
-              .then(() => {
-                if (!nao_fazer_nada_apos_sincronizar) {
-                  this.overlay.notificarSucesso(
-                    'Venda sincronizada com sucesso!'
-                  );
-
-                  this.pendentes.splice(index, 1);
-                  this.sincronizados.unshift(venda);
-
-                  if (mostrar_overlay) {
-                    this.overlay.dismissLoadCtrl();
-                  }
-                }
-              })
-              .catch((e) => {
-                Util.TratarErro(e);
-                venda.dados_json.status_manipulacao = null;
-                if (mostrar_overlay) {
-                  this.overlay.dismissLoadCtrl();
-                }
-              });
-          } else {
-            this.overlay.notificarErro(r.message);
-            if (mostrar_overlay) {
-              this.overlay.dismissLoadCtrl();
-            }
-          }
-        },
-        error: (e) => {
-          Util.TratarErro(e);
-          venda.dados_json.status_manipulacao = null;
-          if (mostrar_overlay) {
-            this.overlay.dismissLoadCtrl();
-          }
-        },
-      });
-    } catch (e) {
-      Util.TratarErro(e);
-      venda.dados_json.status_manipulacao = null;
-      if (mostrar_overlay) {
-        this.overlay.dismissLoadCtrl();
-      }
-    }
   }
 
   AbrirTelaVenda(objVenda?: OperacaoSaida, copiando?: boolean) {

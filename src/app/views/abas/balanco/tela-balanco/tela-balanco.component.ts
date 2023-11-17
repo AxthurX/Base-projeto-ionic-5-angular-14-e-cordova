@@ -5,7 +5,6 @@ import { Util } from 'src/app/core/util.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, Subscription } from 'rxjs';
 import { Empresa } from 'src/app/core/model/data-base/empresa.model';
-import { ConsultaLocalEstoqueComponent } from '../../../modais/consulta-local-estoque/consulta-local-estoque.component';
 import { OperacaoBalanco } from '../../../../core/model/operacao-balanco.model';
 import { OperacaoBalancoUtil } from '../../../../core/model/operacao-balanco-util.model';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
@@ -28,7 +27,6 @@ export class TelaBalancoComponent
   @Input() copiando?: boolean;
   aba_selecionada: string;
   carregando: boolean;
-  empresa_logada: Empresa;
   acao: string;
   private backbuttonSubscription: Subscription;
   constructor(
@@ -63,30 +61,26 @@ export class TelaBalancoComponent
         this.acao = params.acao;
         const id_balanco = params.id_balanco;
 
-        this.dados.getEmpresaLogada().then((empresa) => {
-          this.empresa_logada = empresa;
-
-          if (this.acao === 'novo') {
-            this.objBalanco = new OperacaoBalanco();
-          } else {
-            this.dados
-              .getOperacaoBalanco(id_balanco)
-              .then((balanco) => {
-                this.objBalanco = balanco;
-                if (this.acao === 'copiando') {
-                  this.objBalanco.id = 0;
-                  this.objBalanco.id_nuvem = null;
-                  this.objBalanco.sincronizado_em = null;
-                }
-                OperacaoBalancoUtil.PreecherDadosJson(this.objBalanco);
-                this.carregando = false;
-              })
-              .catch((e) => {
-                Util.TratarErro(e);
-                this.carregando = false;
-              });
-          }
-        });
+        if (this.acao === 'novo') {
+          this.objBalanco = new OperacaoBalanco();
+        } else {
+          this.dados
+            .getOperacaoBalanco(id_balanco)
+            .then((balanco) => {
+              this.objBalanco = balanco;
+              if (this.acao === 'copiando') {
+                this.objBalanco.id = 0;
+                this.objBalanco.id_nuvem = null;
+                this.objBalanco.sincronizado_em = null;
+              }
+              OperacaoBalancoUtil.PreecherDadosJson(this.objBalanco);
+              this.carregando = false;
+            })
+            .catch((e) => {
+              Util.TratarErro(e);
+              this.carregando = false;
+            });
+        }
       });
     } catch (e) {
       Util.TratarErro(e);
@@ -102,40 +96,6 @@ export class TelaBalancoComponent
     } else {
       return this.objBalanco.dados_json.produtos.find((c) => c.gtin === valor);
     }
-  }
-
-  async OnSelecionarLocalEstoque(id?: number) {
-    const modal = await this.modal.create({
-      component: ConsultaLocalEstoqueComponent,
-      componentProps: {
-        em_lookup: true,
-        id,
-      },
-    });
-
-    modal.onDidDismiss().then((dataReturned) => {
-      if (
-        dataReturned &&
-        dataReturned.data &&
-        dataReturned.data.id !== this.objBalanco?.dados_json?.estoque_locais?.id
-      ) {
-        this.preecherLocalEstoque(dataReturned);
-      }
-    });
-
-    return await modal.present();
-  }
-
-  preecherLocalEstoque(dataReturned) {
-    this.objBalanco.dados_json.estoque_locais = {
-      descricao: dataReturned.data.descricao,
-      id: dataReturned.data.id,
-      id_erp: dataReturned.data.id_erp,
-    };
-  }
-
-  OnLimparLocalEstoque() {
-    this.objBalanco.dados_json.estoque_locais = null;
   }
 
   OnConsultou(produtos: ViewProdutoEmpresa[]) {
@@ -283,23 +243,7 @@ export class TelaBalancoComponent
   }
 
   async SalvarBalanco() {
-    if (
-      OperacaoBalancoUtil.Validar(
-        this.objBalanco.dados_json,
-        this.auth.getDadosEmpresaLogada()
-      ) === true
-    ) {
-      try {
-        if (
-          this.objBalanco.dados_json.estoque_locais &&
-          this.objBalanco.dados_json.produtos.length > 0
-        ) {
-          this.salvarSemValidar();
-        }
-      } catch (e) {
-        Util.AlertError(e);
-      }
-    }
+    this.salvarSemValidar();
   }
 
   salvarSemValidar() {

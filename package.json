@@ -44,6 +44,7 @@
     "chart.js": "^2.9.4",
     "cordova-zip-plugin": "^2.0.0",
     "firebase": "^10.6.0",
+    "moment": "^2.29.4",
     "ng2-charts": "^2.4.2",
     "ng2-google-charts": "^6.1.0",
     "ngx-mask": "^14.0.3",

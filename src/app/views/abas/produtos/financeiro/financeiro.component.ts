@@ -3,7 +3,6 @@ import { ModalController } from '@ionic/angular';
 import { fromEvent, Subscription } from 'rxjs';
 import { Produto } from 'src/app/core/model/data-base/produto.model';
 import { ViewCliente } from 'src/app/core/model/data-base/view-cliente.model';
-import { AuthService } from 'src/app/core/service/auth.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
 import { Util } from 'src/app/core/util.model';
 
@@ -22,11 +21,7 @@ export class FinanceiroComponent implements OnInit, OnDestroy {
   juros: number;
   abaSelecionada: string;
   private backbuttonSubscription: Subscription;
-  constructor(
-    private dados: DataBaseProvider,
-    public modal: ModalController,
-    auth: AuthService
-  ) {
+  constructor(private dados: DataBaseProvider, public modal: ModalController) {
     this.consultando = false;
     this.total_aberto = 0;
     this.abaSelecionada = 'contas';

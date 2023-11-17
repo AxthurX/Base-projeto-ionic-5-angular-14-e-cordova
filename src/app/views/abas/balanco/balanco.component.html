@@ -12,36 +12,13 @@
       refreshingSpinner="circles" refreshingText="Atualizando...">
     </ion-refresher-content>
   </ion-refresher>
-
-  <ion-segment mode="ios" [value]="abaSelecionada" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="pendentes">
-      <ion-label>Sinc.Pendente ({{ pendentes.length }})</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="sincronizados">
-      <ion-label>Sincronizados ({{ sincronizados.length }})</ion-label>
-    </ion-segment-button>
-  </ion-segment>
   <br />
 
   <app-consultando *ngIf="consultando; else exibirDados"></app-consultando>
 
   <ng-template #exibirDados>
-    <ng-container *ngIf="abaSelecionada === 'pendentes'">
-      <ion-progress-bar *ngIf="sincronizando === true" type="indeterminate"></ion-progress-bar>
-      <ion-button [disabled]="sincronizando === true" (click)="sincronizarTudo()" expand="block">
-        <ion-icon *ngIf="sincronizando === false" slot="start" name="sync-outline"></ion-icon>
-        <ion-spinner *ngIf="sincronizando === true" name="bubbles"></ion-spinner>
-        Sincronizar tudo
-      </ion-button>
-      <ion-progress-bar *ngIf="sincronizando === true" type="indeterminate">
-      </ion-progress-bar>
-      <app-cabecalho-balanco *ngFor="let objBalanco of pendentes; let i = index"
-        (click)="mostrarOpcoesBalanco(objBalanco, i)" [objBalanco]="objBalanco.dados_json">
-      </app-cabecalho-balanco>
-    </ng-container>
-
-    <ng-container *ngIf="abaSelecionada === 'sincronizados'">
-      <app-cabecalho-balanco *ngFor="let objBalanco of sincronizados; let i = index"
+    <ng-container>
+      <app-cabecalho-balanco *ngFor="let objBalanco of balancos; let i = index"
         (click)="mostrarOpcoesBalanco(objBalanco, i)" [objBalanco]="objBalanco.dados_json">
       </app-cabecalho-balanco>
     </ng-container>
