@@ -17,8 +17,6 @@ export class FinanceiroComponent implements OnInit, OnDestroy {
   produtos: Produto[] = [];
   consultando: boolean;
   total_aberto: number;
-  multa: number;
-  juros: number;
   abaSelecionada: string;
   private backbuttonSubscription: Subscription;
   constructor(private dados: DataBaseProvider, public modal: ModalController) {

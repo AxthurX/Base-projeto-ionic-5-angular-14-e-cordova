@@ -167,11 +167,6 @@ export class ProdutosComponent implements OnInit, OnDestroy {
     ProdutoUtil.CalcularPrecoETotalBruto(
       registro,
       null,
-      null,
-      null,
-      null,
-      null,
-      null,
     );
   }
 

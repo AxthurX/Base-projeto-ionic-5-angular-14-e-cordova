@@ -31,7 +31,6 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
   @Input() tela_vendas: TelaVendaComponent;
   @Input() tela_balanco: TelaBalancoComponent;
   @Input() modal: ModalController;
-  @Input() juros_aplicar?: number;
   @Output() OnConsultou: EventEmitter<ViewProdutoEmpresa[]> =
     new EventEmitter();
   registros: ViewProdutoEmpresa[];
@@ -156,12 +155,6 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
               ProdutoUtil.CalcularPrecoETotalBruto(
                 r,
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                this.juros_aplicar
               );
             });
 
@@ -194,7 +187,6 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
         filtro_pesquisa: this.filtro_pesquisa,
         texto_pesquisado: this.texto_pesquisado,
         cabecalho: this,
-        juros_aplicar: this.juros_aplicar,
       },
     });
 

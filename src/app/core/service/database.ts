@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Empresa } from '../model/data-base/empresa.model';
-import { ProdutoEmpresaPromocao } from '../model/data-base/produto-empresa-promocao.model';
 import { ProdutoEmpresa } from '../model/data-base/produto-empresa.model';
 import { Produto } from '../model/data-base/produto.model';
 import { Usuario } from '../model/data-base/usuario.model';
@@ -34,11 +33,8 @@ export class DataBaseProvider {
       id_produto: 841572,
       pcusto: 0,
       pvenda_atacado: 0,
-      pvenda_super_atacado: 0,
       pcompra: 5.15,
-      pfornecedor: 5.15,
       saldo_total: 1,
-      pvenda_varejo: 15,
       unidade: 'UN ',
       codigo_original: null,
       referencia: null,
@@ -47,9 +43,6 @@ export class DataBaseProvider {
       grupo: 'IMPORTACAO DE DADOS',
       fabricante: 'IMPORTACAO DE DADOS',
       valor_unitario_original: 15,
-      desconto_maximo: 0,
-      desconto_maximo_prc: 0,
-      tipo_preco: 'V',
       observacao: null,
     },
     {
@@ -64,11 +57,8 @@ export class DataBaseProvider {
       id_produto: 841573,
       pcusto: 0,
       pvenda_atacado: 0,
-      pvenda_super_atacado: 0,
       pcompra: 3.82,
-      pfornecedor: 3.82,
       saldo_total: 1,
-      pvenda_varejo: 7.35,
       unidade: 'UN ',
       codigo_original: null,
       referencia: null,
@@ -77,9 +67,6 @@ export class DataBaseProvider {
       grupo: 'IMPORTACAO DE DADOS',
       fabricante: 'IMPORTACAO DE DADOS',
       valor_unitario_original: 7.35,
-      desconto_maximo: 0,
-      desconto_maximo_prc: 0,
-      tipo_preco: 'V',
       observacao: null,
     },
     {
@@ -94,11 +81,8 @@ export class DataBaseProvider {
       id_produto: 841035,
       pcusto: 0,
       pvenda_atacado: 0,
-      pvenda_super_atacado: 0,
       pcompra: 4.2,
-      pfornecedor: 4.2,
       saldo_total: 4,
-      pvenda_varejo: 13.5,
       unidade: 'UN ',
       codigo_original: null,
       referencia: null,
@@ -107,9 +91,6 @@ export class DataBaseProvider {
       grupo: 'IMPORTACAO DE DADOS',
       fabricante: 'IMPORTACAO DE DADOS',
       valor_unitario_original: 13.5,
-      desconto_maximo: 0,
-      desconto_maximo_prc: 0,
-      tipo_preco: 'V',
       observacao: null,
     },
     {
@@ -124,11 +105,8 @@ export class DataBaseProvider {
       id_produto: 841022,
       pcusto: 0,
       pvenda_atacado: 0,
-      pvenda_super_atacado: 0,
       pcompra: 3.36,
-      pfornecedor: 3.36,
       saldo_total: 0,
-      pvenda_varejo: 15,
       unidade: 'UN ',
       codigo_original: null,
       referencia: null,
@@ -137,9 +115,6 @@ export class DataBaseProvider {
       grupo: 'IMPORTACAO DE DADOS',
       fabricante: 'IMPORTACAO DE DADOS',
       valor_unitario_original: 15,
-      desconto_maximo: 0,
-      desconto_maximo_prc: 0,
-      tipo_preco: 'V',
       observacao: null,
     },
     {
@@ -154,11 +129,8 @@ export class DataBaseProvider {
       id_produto: 842614,
       pcusto: 0,
       pvenda_atacado: 0,
-      pvenda_super_atacado: 0,
       pcompra: 5.5,
-      pfornecedor: 5.5,
       saldo_total: 306.5,
-      pvenda_varejo: 11.3,
       unidade: 'M  ',
       codigo_original: null,
       referencia: null,
@@ -167,9 +139,6 @@ export class DataBaseProvider {
       grupo: 'IMPORTACAO DE DADOS',
       fabricante: 'IMPORTACAO DE DADOS',
       valor_unitario_original: 11.3,
-      desconto_maximo: 0,
-      desconto_maximo_prc: 0,
-      tipo_preco: 'V',
       observacao: null,
     },
     {
@@ -185,11 +154,8 @@ export class DataBaseProvider {
       id_produto: 840077,
       pcusto: 0,
       pvenda_atacado: 0,
-      pvenda_super_atacado: 0,
       pcompra: 80.2,
-      pfornecedor: 80.2,
       saldo_total: 3,
-      pvenda_varejo: 178.4,
       unidade: 'UN ',
       codigo_original: null,
       referencia: null,
@@ -198,9 +164,6 @@ export class DataBaseProvider {
       grupo: 'IMPORTACAO DE DADOS',
       fabricante: 'IMPORTACAO DE DADOS',
       valor_unitario_original: 178.4,
-      desconto_maximo: 0,
-      desconto_maximo_prc: 0,
-      tipo_preco: 'V',
       observacao: null,
     },
     {
@@ -215,11 +178,8 @@ export class DataBaseProvider {
       id_produto: 841298,
       pcusto: 0,
       pvenda_atacado: 0,
-      pvenda_super_atacado: 0,
       pcompra: 0.28,
-      pfornecedor: 0.28,
       saldo_total: 813.02,
-      pvenda_varejo: 0.69,
       unidade: 'M  ',
       codigo_original: null,
       referencia: null,
@@ -228,9 +188,6 @@ export class DataBaseProvider {
       grupo: 'IMPORTACAO DE DADOS',
       fabricante: 'IMPORTACAO DE DADOS',
       valor_unitario_original: 0.69,
-      desconto_maximo: 0,
-      desconto_maximo_prc: 0,
-      tipo_preco: 'V',
       observacao: null,
     },
   ];
@@ -306,11 +263,8 @@ export class DataBaseProvider {
             newItem.id_produto = +registro.id_produto;
             newItem.pcusto = registro.pcusto;
             newItem.pvenda_atacado = registro.pvenda_atacado;
-            newItem.pvenda_super_atacado = registro.pvenda_super_atacado;
             newItem.pcompra = registro.pcompra;
-            newItem.pfornecedor = registro.pfornecedor;
             newItem.saldo_total = registro.saldo_total;
-            newItem.pvenda_varejo = registro.pvenda_varejo;
             newItem.unidade = registro.unidade;
             newItem.codigo_original = registro.codigo_original;
             newItem.referencia = registro.referencia;
@@ -345,7 +299,6 @@ export class DataBaseProvider {
             const registro = data.rows.item(i);
             const newItem = new EstoqueLocais();
             newItem.id = +registro.id;
-            newItem.id_empresa = +registro.id_empresa;
             newItem.descricao = registro.descricao;
 
             retorno.push(newItem);
@@ -557,31 +510,8 @@ export class DataBaseProvider {
             const registro = data.rows.item(i);
             retorno = new Empresa();
             retorno.id = +registro.id;
-            retorno.mensagem_bloqueio_venda_limite_credito =
-              registro.mensagem_bloqueio_venda_limite_credito;
-            retorno.desconto_porcentagem_maximo_permitido =
-              +registro.desconto_porcentagem_maximo_permitido;
-            retorno.bloquear_acesso_aos_custos_produto =
-              registro.bloquear_acesso_aos_custos_produto;
-            retorno.dias_tolerancia_cobrar_juros =
-              +registro.dias_tolerancia_cobrar_juros;
-            retorno.juros_mensal_contas_a_receber_em_atraso =
-              +registro.juros_mensal_contas_a_receber_em_atraso;
-            retorno.multa_contas_a_receber_em_atraso =
-              +registro.multa_contas_a_receber_em_atraso;
-            retorno.bloquear_pedidos_a_prazo_cliente_limite_excedido =
-              Util.AnyToBool(
-                registro.bloquear_pedidos_a_prazo_cliente_limite_excedido
-              );
             retorno.consultar_apenas_produto_saldo_maior_zero = Util.AnyToBool(
               registro.consultar_apenas_produto_saldo_maior_zero
-            );
-            retorno.confirmar_alteracao_preco_tela_vendas_ao_alterar_forma_pagamento =
-              Util.AnyToBool(
-                registro.confirmar_alteracao_preco_tela_vendas_ao_alterar_forma_pagamento
-              );
-            retorno.exibir_preco_atacado_consulta_produto = Util.AnyToBool(
-              registro.exibir_preco_atacado_consulta_produto
             );
             break;
           }
@@ -649,7 +579,7 @@ export class DataBaseProvider {
           valor_tabela = tabelaPreco.valor;
         }
 
-        ProdutoUtil.CalcularPrecoETotalBruto(r, null, valor_tabela);
+        ProdutoUtil.CalcularPrecoETotalBruto(r, null);
       });
 
       return registros;
@@ -684,11 +614,10 @@ export class DataBaseProvider {
 
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into balanco_item (id, id_balanco, id_produto_empresa, saldo_novo, observacao) values (?, ?, ?, ?, ?)',
+        'insert into balanco_item (id, id_balanco, saldo_novo, observacao) values (?, ?, ?, ?)',
         [
           registro.id,
           registro.id_balanco,
-          registro.id_produto_empresa,
           registro.saldo_novo,
           registro.observacao,
         ],
@@ -703,13 +632,10 @@ export class DataBaseProvider {
 
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into produto (id, descricao, id, id_produto_sub_grupo, id_produto_fabricante, gtin, unidade, ativo, referencia, codigo_original, aplicacao, tipo_alteracao_preco, movimenta_fracionado, nao_calcula_saldo_flex) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'insert into produto (id, descricao, gtin, unidade, ativo, referencia, codigo_original, aplicacao, tipo_alteracao_preco, movimenta_fracionado, nao_calcula_saldo_flex) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           registro.id,
           registro.descricao,
-          registro.id,
-          registro.id_produto_sub_grupo,
-          registro.id_produto_fabricante,
           registro.gtin,
           registro.unidade,
           registro.ativo,
@@ -743,8 +669,8 @@ export class DataBaseProvider {
     const sqlStatements: any[] = [];
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into estoque_locais (id, id, id_empresa, descricao) values (?, ?, ?, ?)',
-        [registro.id, registro.id, registro.id_empresa, registro.descricao],
+        'insert into estoque_locais (id, descricao) values (?, ?)',
+        [registro.id, registro.descricao],
       ]);
     });
 
@@ -756,27 +682,16 @@ export class DataBaseProvider {
 
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into produto_empresa (ativo, desconto_maximo_atacado_prc, desconto_maximo_atacado_vlr, desconto_maximo_super_atacado_prc, desconto_maximo_super_atacado_vlr, desconto_maximo_varejo_prc, desconto_maximo_varejo_vlr, id, id_empresa, id, id_produto, pcompra, pcusto, pfornecedor, pvenda_atacado, pvenda_super_atacado, pvenda_varejo, quantidade_minima_atacado, quantidade_minima_super_atacado, saldo_total) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'insert into produto_empresa (ativo, id, id_empresa, id_produto, pcompra, pcusto, pvenda_atacado, pvenda_varejo, saldo_total) values (?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           registro.ativo,
-          registro.desconto_maximo_atacado_prc,
-          registro.desconto_maximo_atacado_vlr,
-          registro.desconto_maximo_super_atacado_prc,
-          registro.desconto_maximo_super_atacado_vlr,
-          registro.desconto_maximo_varejo_prc,
-          registro.desconto_maximo_varejo_vlr,
           registro.id,
           registro.id_empresa,
-          registro.id,
           registro.id_produto,
           registro.pcompra,
           registro.pcusto,
-          registro.pfornecedor,
           registro.pvenda_atacado,
-          registro.pvenda_super_atacado,
           registro.pvenda_varejo,
-          registro.quantidade_minima_atacado,
-          registro.quantidade_minima_super_atacado,
           registro.saldo_total,
         ],
       ]);
@@ -791,21 +706,14 @@ export class DataBaseProvider {
     let comando = '';
     if (venda.id > 0) {
       comando =
-        'update operacao_saida set data = ?, id_cliente = ?, id_forma_pagamento = ?, id_tipo_operacao = ?, json = ? where id = ' +
+        'update operacao_saida set data = ?, id_cliente = ?, json = ? where id = ' +
         venda.id;
     } else {
       comando =
-        'insert into operacao_saida (data, id_cliente, id_forma_pagamento, id_tipo_operacao, json) values (?, ?, ?, ?, ?)';
+        'insert into operacao_saida (data, id_cliente, json) values (?, ?, ?)';
     }
 
-    sqlStatements.push([
-      comando,
-      [
-        venda.data,
-        venda.id_cliente,
-        venda.json,
-      ],
-    ]);
+    sqlStatements.push([comando, [venda.data, venda.id_cliente, venda.json]]);
 
     return this.dados.sqlBatch(sqlStatements);
   }
@@ -821,14 +729,7 @@ export class DataBaseProvider {
       comando = 'insert into operacao_saida (data, json) values (?, ?)';
     }
 
-    sqlStatements.push([
-      comando,
-      [
-        venda.data,
-        venda.id_cliente,
-        venda.json,
-      ],
-    ]);
+    sqlStatements.push([comando, [venda.data, venda.id_cliente, venda.json]]);
 
     return this.dados.sqlBatch(sqlStatements);
   }
@@ -883,19 +784,11 @@ export class DataBaseProvider {
 
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into empresa (id, desconto_porcentagem_maximo_permitido, bloquear_acesso_aos_custos_produto, dias_tolerancia_cobrar_juros, juros_mensal_contas_a_receber_em_atraso, multa_contas_a_receber_em_atraso, bloquear_pedidos_a_prazo_cliente_limite_excedido, mensagem_bloqueio_venda_limite_credito, consultar_apenas_produto_saldo_maior_zero, confirmar_alteracao_preco_tela_vendas_ao_alterar_forma_pagamento, exibir_preco_atacado_consulta_produto) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'insert into empresa (id, desconto_porcentagem_maximo_permitido, bloquear_acesso_aos_custos_produto, multa_contas_a_receber_em_atraso, bloquear_pedidos_a_prazo_cliente_limite_excedido, mensagem_bloqueio_venda_limite_credito, consultar_apenas_produto_saldo_maior_zero, exibir_preco_atacado_consulta_produto) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           registro.id,
           registro.desconto_porcentagem_maximo_permitido,
-          registro.bloquear_acesso_aos_custos_produto,
-          registro.dias_tolerancia_cobrar_juros,
-          registro.juros_mensal_contas_a_receber_em_atraso,
-          registro.multa_contas_a_receber_em_atraso,
-          registro.bloquear_pedidos_a_prazo_cliente_limite_excedido,
-          registro.mensagem_bloqueio_venda_limite_credito,
           registro.consultar_apenas_produto_saldo_maior_zero,
-          registro.confirmar_alteracao_preco_tela_vendas_ao_alterar_forma_pagamento,
-          registro.exibir_preco_atacado_consulta_produto,
         ],
       ]);
     });
@@ -965,7 +858,7 @@ export class DataBaseProvider {
         ],
         [
           //operacao saida
-          'CREATE TABLE IF NOT EXISTS operacao_saida ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL,	[json] [text] NOT NULL, [id_cliente] [INTEGER], [id_tipo_operacao] [INTEGER], [id_forma_pagamento] [INTEGER], [sincronizado_em] [text])',
+          'CREATE TABLE IF NOT EXISTS operacao_saida ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL,	[json] [text] NOT NULL, [id_cliente] [INTEGER], [sincronizado_em] [text])',
         ],
         [
           //operacao balanco
@@ -973,7 +866,7 @@ export class DataBaseProvider {
         ],
         [
           //empresa
-          'CREATE TABLE IF NOT EXISTS empresa ([id] [INTEGER] primary key, [desconto_porcentagem_maximo_permitido] [INTEGER] NOT NULL, [bloquear_acesso_aos_custos_produto] [bit], [dias_tolerancia_cobrar_juros] [INTEGER], [juros_mensal_contas_a_receber_em_atraso] [float], [multa_contas_a_receber_em_atraso] [float])',
+          'CREATE TABLE IF NOT EXISTS empresa ([id] [INTEGER] primary key, [desconto_porcentagem_maximo_permitido] [INTEGER] NOT NULL, [bloquear_acesso_aos_custos_produto] [bit], [multa_contas_a_receber_em_atraso] [float])',
         ],
         [
           //usuario
@@ -997,12 +890,6 @@ export class DataBaseProvider {
               'ALTER TABLE empresa ADD COLUMN [bloquear_pedidos_a_prazo_cliente_limite_excedido] [bit] NOT NULL default 0',
               'ALTER TABLE empresa ADD COLUMN [consultar_apenas_produto_saldo_maior_zero] [bit] NOT NULL default 0',
               'ALTER TABLE empresa ADD COLUMN [mensagem_bloqueio_venda_limite_credito] [nvarchar](500)',
-            ],
-          },
-          {
-            numero_versao: 2,
-            scripts: [
-              'ALTER TABLE empresa ADD COLUMN [confirmar_alteracao_preco_tela_vendas_ao_alterar_forma_pagamento] [bit] NOT NULL default 0',
             ],
           },
           {

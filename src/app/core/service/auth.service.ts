@@ -190,12 +190,8 @@ export class DadosEmpresa {
   id_usuario: number;
   id_banco_dados: number;
   id_banco_gerenciador: number;
-  desconto_porcentagem_maximo_permitido_empresa: number;
   desconto_porcentagem_maximo_permitido_usuario: number;
   bloquear_acesso_aos_custos_produto_usuario: boolean;
-  multa_contas_a_receber_em_atraso?: number;
-  juros_mensal_contas_a_receber_em_atraso?: number;
-  dias_tolerancia_cobrar_juros?: number;
   logradouro: string;
   numero: string;
   municipio: string;
@@ -204,13 +200,7 @@ export class DadosEmpresa {
 }
 
 export class UsuarioGrupoPermissoesMobile {
-  bi: boolean = false;
   balanco: boolean = false;
   vendas: boolean = false;
-  etiqueta: boolean = false;
-  liberacoes: boolean = false;
-  tirar_fotos: boolean = false;
   clientes: boolean = false;
-  agenda: boolean = false;
-  controle_visitas: boolean = false;
 }

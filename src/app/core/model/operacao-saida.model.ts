@@ -22,7 +22,6 @@ export class OperacaoSaidaJson {
   excluido: boolean;
   data_exclusao?: number;
   data: number;
-  //vai servir pra cadastradar o cliente quando sincronizar a venda (se necessario)
   view_cliente: ViewCliente;
   cliente: ValueBaseModel;
   quantidade_produtos_lancados: number;

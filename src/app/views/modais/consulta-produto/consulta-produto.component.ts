@@ -22,7 +22,6 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
   path_imagens_produtos: string;
   consultando: boolean;
   apenas_consulta: boolean;
-  juros_aplicar?: number;
   private backbuttonSubscription: Subscription;
   constructor(
     public modal: ModalController,
@@ -78,9 +77,6 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
         // await this.dbProvider.getProdutosComPrecoJaCalculado(
         //   filtro_pesquisa,
         //   texto_pesquisado,
-
-        //   this.tipo_preco_produto,
-        //   this.id_forma_pagamento
         // );
 
         if (this.registros.length === 0) {
@@ -90,12 +86,6 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
         this.registros.forEach((produto) => {
           if (this.cabecalho_parente?.permitir_quantidade_zero === true) {
             produto.quantidade = null;
-          }
-          if (this.juros_aplicar > 0) {
-            ProdutoUtil.AplicarAcrescimoNoValorUnitario(
-              produto,
-              this.juros_aplicar
-            );
           }
 
           //this.carregarImagemProduto(produto);
@@ -177,12 +167,6 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
     ProdutoUtil.CalcularPrecoETotalBruto(
       registro,
       null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      this.juros_aplicar
     );
   }
 

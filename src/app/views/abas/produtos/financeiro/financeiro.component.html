@@ -63,10 +63,6 @@
             <small class="text-danger">Multa ({{multa | number: '1.0-2'}}%)</small>
             <small class="text-danger">R$ {{conta.valor_multa | number: '1.2-2'}}</small>
           </div>
-          <div *ngIf="conta.valor_juros > 0" class="d-flex justify-content-between mb-1">
-            <small class="text-danger">Juros ({{juros | number: '1.0-2'}}%)</small>
-            <small class="text-danger">R$ {{conta.valor_juros | number: '1.2-2'}}</small>
-          </div>
           <div class="d-flex justify-content-between mb-1 negrito">
             <small class="negrito">Valor total</small>
             <small class="negrito">R$ {{conta.valor_total | number: '1.2-2'}}</small>

@@ -16,14 +16,6 @@
   </app-cabecalho-pesquisa-produto>
   <p class="text-center" *ngIf="registros">
     {{registros.length}} produto(s) localizado(s)
-    <ng-container *ngIf="tem_produto_em_promocao">
-      <br />
-      <ion-badge color="success">Produtos em promoção</ion-badge>
-    </ng-container>
-    <ng-container *ngIf="tem_produto_preco_tabelado">
-      <br />
-      <ion-badge color="tertiary">Produtos com preço tabelado</ion-badge>
-    </ng-container>
   </p>
   <app-consultando *ngIf="consultando"></app-consultando>
   <div class="card" *ngIf="!consultando">
@@ -33,28 +25,15 @@
       </div>
       <div class="shop-cart-right">
         <h6 style="font-size: 10px !important;" class="font-weight-bold text-dark mb-2 small"
-          *ngIf="registro.quantidade_minima_atacado > 0" (click)="mostrarFoto(registro)">
+          (click)="mostrarFoto(registro)">
           <span class="text-secondary font-weight-normal">P.Atacado:</span>
           R$ {{registro.pvenda_atacado | number: '1.2-2'}}
-          <span class="text-secondary font-weight-normal">Qtd.Mín:</span>
-          {{registro.quantidade_minima_atacado | number: '1.0-3'}}
-        </h6>
-        <h6 style="font-size: 10px !important;" class="font-weight-bold text-dark mb-2 small"
-          *ngIf="registro.quantidade_minima_super_atacado > 0" (click)="mostrarFoto(registro)">
-          <span class="text-secondary font-weight-normal">P.S.Atacado:</span>
-          R$ {{registro.pvenda_super_atacado | number: '1.2-2'}}
-          <span class="text-secondary font-weight-normal">Qtd.Mín:</span>
-          {{registro.quantidade_minima_super_atacado | number: '1.0-3'}}
         </h6>
         <h6 class="font-weight-bold text-dark mb-2 small" (click)="mostrarFoto(registro)">
           <span class="text-secondary font-weight-normal">Cód: {{registro.id_produto}}</span> |
-          <ion-badge *ngIf="registro.tipo_preco === 'P' || registro.tipo_preco === 'T'"
-            [color]="getColor(registro.tipo_preco)">
+          <ion-badge color="success">
             R$ {{registro.valor_unitario| number: '1.2-2'}}
           </ion-badge>
-          <span *ngIf="registro.tipo_preco !== 'P' && registro.tipo_preco !== 'T'">
-            R$ {{registro.valor_unitario | number: '1.2-2'}}
-          </span>
           x{{registro.quantidade | number: '1.0-3'}} = R$ {{registro.valor_unitario | number: '1.2-2'}}
           <ion-icon size="large" class="float-right" color="success" name="checkmark-done-circle-outline"
             *ngIf="registro.quantidade > 0 || (cabecalho_parente?.permitir_quantidade_zero === true && registro.quantidade == 0)">

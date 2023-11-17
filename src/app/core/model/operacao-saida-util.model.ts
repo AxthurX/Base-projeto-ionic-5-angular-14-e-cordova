@@ -28,10 +28,7 @@ export class OperacaoSaidaUtil {
   }
 
   //Ja manda bala em tudo q é preciso
-  static RecalcularTotais(
-    venda: OperacaoSaidaJson,
-    recalcular_desconto_acrescimento?: boolean
-  ) {
+  static RecalcularTotais(venda: OperacaoSaidaJson) {
     this.LimparValores(venda);
 
     if (venda.produtos && venda.produtos.length > 0) {

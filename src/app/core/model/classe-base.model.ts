@@ -1,4 +1,3 @@
-import { environment } from 'src/environments/environment';
 import { Util } from '../util.model';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../service/auth.service';

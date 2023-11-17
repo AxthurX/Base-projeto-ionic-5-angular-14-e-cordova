@@ -64,14 +64,6 @@
           <td>{{objVenda.quantidade_produtos_lancados | number: '1.0-3'}}</td>
           <td class="text-right"><b>Tot.Bruto</b></td>
           <td>R$ {{objVenda.total_bruto | number: '1.2-2'}}</td>
-          <ng-container *ngIf="objVenda.desconto_vlr > 0">
-            <td class="text-right"><b>Descontos</b></td>
-            <td>R$ {{objVenda.desconto_vlr | number: '1.2-2'}}</td>
-          </ng-container>
-          <ng-container *ngIf="objVenda.acrescimo_vlr > 0">
-            <td class="text-right"><b>Acréscimos</b></td>
-            <td>R$ {{objVenda.acrescimo_vlr | number: '1.2-2'}}</td>
-          </ng-container>
           <td class="text-right"><b>Tot.Líquido</b></td>
           <td>R$ {{objVenda.total_liquido | number: '1.2-2'}}</td>
         </tr>

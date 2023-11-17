@@ -1,8 +1,6 @@
 export class Produto {
   id: number;
   data: number;
-  id_produto_sub_grupo: number;
-  id_produto_fabricante: number;
   tipo_alteracao_preco: number;
   descricao: string;
   gtin: string;
