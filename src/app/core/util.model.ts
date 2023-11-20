@@ -76,6 +76,7 @@ export class Util {
 
   static TratarErroEFecharLoading(e, overlay: OverlayService) {
     Util.AlertErrorPadrao();
+    console.error(e);
     overlay.dismissLoadCtrl();
   }
 

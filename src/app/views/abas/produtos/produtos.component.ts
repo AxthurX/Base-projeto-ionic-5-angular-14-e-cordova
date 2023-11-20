@@ -164,10 +164,7 @@ export class ProdutosComponent implements OnInit, OnDestroy {
   }
 
   CalcularPrecoETotalBruto(registro: ViewProdutoEmpresa) {
-    ProdutoUtil.CalcularPrecoETotalBruto(
-      registro,
-      null,
-    );
+    ProdutoUtil.CalcularPrecoETotalBruto(registro, null);
   }
 
   aplicar() {

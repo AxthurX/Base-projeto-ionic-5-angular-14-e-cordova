@@ -55,7 +55,7 @@ export class CadastrarComponent implements OnInit {
   setFocusDocumento() {
     try {
       setTimeout(() => {
-        document.getElementById('cpf_cnpj').focus();
+        document.getElementById('').focus();
       }, 500);
     } catch (e) {
       console.error('setFocusDocumento', e);
@@ -83,33 +83,20 @@ export class CadastrarComponent implements OnInit {
   async onSalvar() {
     this.submitted = true;
     try {
-      this.overlay.showLoading('Cadastrando cliente...');
-      let menorId = await this.dados.getMenorIdTabela('cliente');
-      if (!menorId) {
-        menorId = -1;
-      } else {
-        menorId = --menorId;
-        if (menorId >= 0) {
-          menorId = -1;
-        }
-      }
+      this.overlay.showLoading('Cadastrando produto...');
 
-      const novoProduto = new Produto();
-      novoProduto.id = novoProduto.id = menorId;
+      let novoProduto = new Produto();
+      novoProduto = this.produto;
+      novoProduto.id = novoProduto.id = 1;
       novoProduto.nome = this.produto.nome.toString().toUpperCase();
-      novoProduto.data_fabricacao = this.produto.data_fabricacao;
-      novoProduto.data_vencimento = this.produto.data_vencimento;
-      novoProduto.qtde_produto = this.produto.qtde_produto;
-      novoProduto.valor_unitario = this.produto.valor_unitario;
-      novoProduto.valor_total = this.produto.valor_total;
-      novoProduto.produto_perecivel = this.produto.produto_perecivel;
 
       this.dados
-        .salvarProduto(novoProduto)
+        .setProdutos([novoProduto])
         .then((result) => {
           this.overlay.dismissLoadCtrl();
           this.overlay.notificarSucesso('Produto salvo com sucesso!');
           this.modal.dismiss(novoProduto);
+          console.log(result);
         })
         .catch((e) => {
           Util.TratarErroEFecharLoading(e, this.overlay);

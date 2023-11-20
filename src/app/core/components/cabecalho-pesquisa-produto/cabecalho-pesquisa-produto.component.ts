@@ -192,17 +192,4 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
 
     return await modal.present();
   }
-
-  async showTelaConsultaO() {
-    const modal = await this.modal.create({
-      component: ConsultaProdutoComponent,
-      componentProps: {
-        filtro_pesquisa: this.filtro_pesquisa,
-        texto_pesquisado: this.texto_pesquisado,
-        cabecalho: this,
-      },
-    });
-
-    return await modal.present();
-  }
 }
