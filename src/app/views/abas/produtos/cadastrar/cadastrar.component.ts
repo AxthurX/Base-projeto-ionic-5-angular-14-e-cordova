@@ -87,8 +87,13 @@ export class CadastrarComponent implements OnInit {
 
       let novoProduto = new Produto();
       novoProduto = this.produto;
-      novoProduto.id = novoProduto.id = 1;
-      novoProduto.nome = this.produto.nome.toString().toUpperCase();
+      novoProduto.descricao = novoProduto.nome = this.produto.nome
+        .toString()
+        .toUpperCase();
+      novoProduto.data = new Date().getTime();
+      novoProduto.codigo_original = novoProduto.gtin = '';
+      novoProduto.ativo = true;
+      console.log(novoProduto);
 
       this.dados
         .setProdutos([novoProduto])

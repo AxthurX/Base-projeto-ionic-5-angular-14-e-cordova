@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, Platform } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,6 +14,7 @@ import { File } from '@ionic-native/file/ngx';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppVersion } from '@awesome-cordova-plugins/app-version/ngx';
+import { DataBaseProvider } from './core/service/database';
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,5 +43,17 @@ import { AppVersion } from '@awesome-cordova-plugins/app-version/ngx';
   exports: [HttpClientModule],
 })
 export class AppModule {
-  constructor() {}
+  constructor(platform: Platform, private dbProvider: DataBaseProvider) {
+    platform.ready().then(() => {
+      //Criando o banco de dados
+      dbProvider
+        .createDatabase()
+        .then(() => {
+          console.log('createDatabase ok');
+        })
+        .catch((e) => {
+          console.error('createDatabase erro', e);
+        });
+    });
+  }
 }

@@ -3,7 +3,6 @@ import { ActionSheetController, ModalController } from '@ionic/angular';
 import { ViewProdutoEmpresa } from 'src/app/core/model/data-base/view-produto-empresa.model';
 import { OperacaoSaidaUtil } from 'src/app/core/model/operacao-saida-util.model';
 import { OperacaoSaida } from 'src/app/core/model/operacao-saida.model';
-import { ProdutoUtil } from 'src/app/core/model/produto-util.model';
 import { Util } from 'src/app/core/util.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, Subscription } from 'rxjs';

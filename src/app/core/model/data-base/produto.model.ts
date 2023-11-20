@@ -1,14 +1,11 @@
 export class Produto {
   id: number;
   data: number;
-  tipo_alteracao_preco: number;
   descricao: string;
   gtin: string;
   unidade: string;
-  aplicacao: string;
   codigo_original: string;
   ativo: boolean;
-  referencia: boolean;
   nome: string;
   data_fabricacao: string;
   data_vencimento: string;
