@@ -632,17 +632,21 @@ export class DataBaseProvider {
 
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into produto (id, descricao, gtin, unidade, ativo, referencia, codigo_original, aplicacao, tipo_alteracao_preco) values (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'insert into produto (id, data, descricao, gtin, codigo_original, ativo, nome, data_fabricacao, data_vencimento, qtde_produto, valor_unitario, valor_total, produto_perecivel) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           registro.id,
+          registro.data,
           registro.descricao,
           registro.gtin,
-          registro.unidade,
-          registro.ativo,
-          registro.referencia,
           registro.codigo_original,
-          registro.aplicacao,
-          registro.tipo_alteracao_preco,
+          registro.ativo,
+          registro.nome,
+          registro.data_fabricacao,
+          registro.data_vencimento,
+          registro.qtde_produto,
+          registro.valor_unitario,
+          registro.valor_total,
+          registro.produto_perecivel,
         ],
       ]);
     });
@@ -826,7 +830,7 @@ export class DataBaseProvider {
       .sqlBatch([
         [
           //produto
-          'CREATE TABLE IF NOT EXISTS produto ([id] [INTEGER] primary key NOT NULL,	[descricao] [nvarchar](120) NULL, [gtin] [nvarchar](14) NULL,	[unidade] [nvarchar](6) NOT NULL,	[ativo] [bit] NOT NULL,	[referencia] [nvarchar](20) NULL,	[codigo_original] [nvarchar](25) NULL,	[aplicacao] [nvarchar](250) NULL,	[tipo_alteracao_preco] [INTEGER] NOT NULL)',
+          'CREATE TABLE IF NOT EXISTS produto ([id] [INTEGER] primary key NOT NULL, [data] [INTEGER] NULL, [descricao] [nvarchar](120) NULL, [gtin] [nvarchar](14) NULL, [codigo_original] [nvarchar](25) NULL, [ativo] [bit] NOT NULL, [nome] [text] NOT NULL, [data_fabricacao] [INTEGER] NOT NULL, [data_vencimento] [INTEGER] NOT NULL, [qtde_produto] [INTEGER] NOT NULL, [valor_unitario] [INTEGER] NOT NULL, [valor_total] [INTEGER] NOT NULL, [produto_perecivel] [bit] NULL)',
         ],
         [
           //produto_empresa
