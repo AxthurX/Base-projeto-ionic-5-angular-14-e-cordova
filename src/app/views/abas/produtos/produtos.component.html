@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content color="light">
-  <app-cabecalho-pesquisa-produto [texto_pesquisado]="texto_pesquisado" [nao_exibir_consultando]="true">
+  <app-cabecalho-pesquisa-produto [texto_pesquisado]="texto_pesquisado" [nao_exibir_consultando]="true" [modal]="modal">
   </app-cabecalho-pesquisa-produto>
   <p class="text-center" *ngIf="registros">
     {{registros.length}} produto(s) localizado(s)
@@ -25,8 +25,6 @@
       <div class="shop-cart-right">
         <h6 style="font-size: 10px !important;" class="font-weight-bold text-dark mb-2 small"
           (click)="mostrarFoto(registro)">
-          <span class="text-secondary font-weight-normal">P.Atacado:</span>
-          R$ {{registro.pvenda_atacado | number: '1.2-2'}}
         </h6>
         <h6 style="font-size: 10px !important;" class="font-weight-bold text-dark mb-2 small"
           (click)="mostrarFoto(registro)">

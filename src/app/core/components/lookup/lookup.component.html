@@ -3,10 +3,12 @@
     <div class="media">
       <div class="media-body">
         <span class="mb-2 text-dark font-weight-bold">{{icone}} {{titulo}}:
-          <span *ngIf="!value || !value.descricao" class="text-secondary sem-margem">&nbsp;&nbsp;&nbsp;[Não
-            selecionado]</span>
-          <span *ngIf="value && value.descricao" class="text-secondary sem-margem">&nbsp;&nbsp;&nbsp;
-            {{value.descricao}}</span>
+          <span *ngIf="!value || !value.descricao" class="text-secondary sem-margem">
+            &nbsp;&nbsp;&nbsp;[Não selecionado]
+          </span>
+          <span *ngIf="value && value.descricao" class="text-secondary sem-margem">
+            &nbsp;&nbsp;&nbsp;{{value.descricao}}
+          </span>
         </span>
         <p class="mb-0 small">
           <ion-grid>

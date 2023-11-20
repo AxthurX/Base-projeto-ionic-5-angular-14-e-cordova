@@ -632,7 +632,7 @@ export class DataBaseProvider {
 
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into produto (id, descricao, gtin, unidade, ativo, referencia, codigo_original, aplicacao, tipo_alteracao_preco, movimenta_fracionado, nao_calcula_saldo_flex) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'insert into produto (id, descricao, gtin, unidade, ativo, referencia, codigo_original, aplicacao, tipo_alteracao_preco) values (?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           registro.id,
           registro.descricao,
@@ -643,8 +643,6 @@ export class DataBaseProvider {
           registro.codigo_original,
           registro.aplicacao,
           registro.tipo_alteracao_preco,
-          registro.movimenta_fracionado,
-          registro.nao_calcula_saldo_flex,
         ],
       ]);
     });
@@ -682,7 +680,7 @@ export class DataBaseProvider {
 
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into produto_empresa (ativo, id, id_empresa, id_produto, pcompra, pcusto, pvenda_atacado, pvenda_varejo, saldo_total) values (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'insert into produto_empresa (ativo, id, id_empresa, id_produto, pcompra, pcusto, saldo_total) values (?, ?, ?, ?, ?, ?, ?)',
         [
           registro.ativo,
           registro.id,
@@ -690,8 +688,6 @@ export class DataBaseProvider {
           registro.id_produto,
           registro.pcompra,
           registro.pcusto,
-          registro.pvenda_atacado,
-          registro.pvenda_varejo,
           registro.saldo_total,
         ],
       ]);
@@ -784,7 +780,7 @@ export class DataBaseProvider {
 
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into empresa (id, desconto_porcentagem_maximo_permitido, bloquear_acesso_aos_custos_produto, multa_contas_a_receber_em_atraso, bloquear_pedidos_a_prazo_cliente_limite_excedido, mensagem_bloqueio_venda_limite_credito, consultar_apenas_produto_saldo_maior_zero, exibir_preco_atacado_consulta_produto) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'insert into empresa (id, desconto_porcentagem_maximo_permitido, consultar_apenas_produto_saldo_maior_zero) values (?, ?, ?)',
         [
           registro.id,
           registro.desconto_porcentagem_maximo_permitido,
@@ -801,7 +797,7 @@ export class DataBaseProvider {
 
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into usuario (id, desconto_porcentagem_maximo_permitido, bloquear_acesso_aos_custos_produto ,id_colaborador) values (?, ?, ?, ?)',
+        'insert into usuario (id, desconto_porcentagem_maximo_permitido, id_colaborador, bloquear_acesso_aos_custos_produto) values (?, ?, ?, ?)',
         [
           registro.id,
           registro.desconto_porcentagem_maximo_permitido,
@@ -829,32 +825,16 @@ export class DataBaseProvider {
     this.dados
       .sqlBatch([
         [
-          //municipio
-          'CREATE TABLE IF NOT EXISTS municipio ([id] [INTEGER] primary key NOT NULL, [descricao] [nvarchar](60) NOT NULL,	[codigo] [nvarchar](7) NOT NULL,	[id_uf] [INTEGER] NOT NULL,	[zona_franca] [bit] NOT NULL,	[percentual] [float] NOT NULL,	[dias_feriados_municipais] [INTEGER] NOT NULL)',
-        ],
-        [
           //produto
-          'CREATE TABLE IF NOT EXISTS produto ([id] [INTEGER] primary key NOT NULL,	[descricao] [nvarchar](120) NULL,	[id] [INTEGER] NOT NULL,	[id_produto_sub_grupo] [INTEGER] NOT NULL,	[id_produto_fabricante] [INTEGER] NOT NULL,	[gtin] [nvarchar](14) NULL,	[unidade] [nvarchar](6) NOT NULL,	[ativo] [bit] NOT NULL,	[referencia] [nvarchar](20) NULL,	[codigo_original] [nvarchar](25) NULL,	[aplicacao] [nvarchar](250) NULL,	[tipo_alteracao_preco] [INTEGER] NOT NULL,	[movimenta_fracionado] [bit] NOT NULL,	[nao_calcula_saldo_flex] [bit] NOT NULL)',
+          'CREATE TABLE IF NOT EXISTS produto ([id] [INTEGER] primary key NOT NULL,	[descricao] [nvarchar](120) NULL, [gtin] [nvarchar](14) NULL,	[unidade] [nvarchar](6) NOT NULL,	[ativo] [bit] NOT NULL,	[referencia] [nvarchar](20) NULL,	[codigo_original] [nvarchar](25) NULL,	[aplicacao] [nvarchar](250) NULL,	[tipo_alteracao_preco] [INTEGER] NOT NULL)',
         ],
         [
           //produto_empresa
-          'CREATE TABLE IF NOT EXISTS produto_empresa ([id] [INTEGER] primary key NOT NULL,	[id] [INTEGER] NOT NULL,	[id_produto] [INTEGER] NOT NULL,	[id_empresa] [INTEGER] NOT NULL,	[pcusto] [float] NOT NULL,	[pvenda_varejo] [float] NOT NULL,	[pvenda_atacado] [float] NOT NULL,	[pvenda_super_atacado] [float] NOT NULL,	[saldo_total] [float] NOT NULL,	[ativo] [bit] NOT NULL,	[desconto_maximo_atacado_prc] [float] NOT NULL,	[desconto_maximo_atacado_vlr] [float] NOT NULL,	[desconto_maximo_super_atacado_prc] [float] NOT NULL,	[desconto_maximo_super_atacado_vlr] [float] NOT NULL,	[desconto_maximo_varejo_prc] [float] NOT NULL,	[desconto_maximo_varejo_vlr] [float] NOT NULL,	[quantidade_minima_atacado] [float] NOT NULL,	[quantidade_minima_super_atacado] [float] NOT NULL,	[pcompra] [float] NOT NULL,	[pfornecedor] [float] NOT NULL)',
-        ],
-        [
-          //produto_fabricante
-          'CREATE TABLE IF NOT EXISTS produto_fabricante ([id] [INTEGER] primary key NOT NULL, [descricao] [nvarchar](100) NULL,	[id] [INTEGER] NOT NULL)',
-        ],
-        [
-          //produto_grupo
-          'CREATE TABLE IF NOT EXISTS produto_grupo ([id] [INTEGER] primary key NOT NULL,	[descricao] [nvarchar](100) NULL,	[id] [INTEGER] NOT NULL)',
-        ],
-        [
-          //produto_sub_grupo
-          'CREATE TABLE IF NOT EXISTS produto_sub_grupo ([id] [INTEGER] [INTEGER] primary key NOT NULL,	[descricao] [nvarchar](100) NULL,	[id] [INTEGER] NOT NULL,	[id_produto_grupo] [INTEGER] NOT NULL)',
+          'CREATE TABLE IF NOT EXISTS produto_empresa ([id] [INTEGER] primary key NOT NULL, [id_produto] [INTEGER] NOT NULL,	[id_empresa] [INTEGER] NOT NULL, [pcusto] [float] NOT NULL,	[pvenda_varejo] [float] NOT NULL,	[pvenda_atacado] [float] NOT NULL,	[saldo_total] [float] NOT NULL,	[ativo] [bit] NOT NULL,	[pcompra] [float] NOT NULL)',
         ],
         [
           //estoque_locais
-          'CREATE TABLE IF NOT EXISTS estoque_locais ([id] [INTEGER] primary key NOT NULL,	[id] [INTEGER] NOT NULL,	[id_empresa] [INTEGER] NOT NULL,	[descricao] [nvarchar](100) NOT NULL)',
+          'CREATE TABLE IF NOT EXISTS estoque_locais ([id] [INTEGER] primary key NOT NULL,	[descricao] [nvarchar](100) NOT NULL)',
         ],
         [
           //operacao saida
@@ -863,10 +843,6 @@ export class DataBaseProvider {
         [
           //operacao balanco
           'CREATE TABLE IF NOT EXISTS operacao_balanco ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL,	[json] [text] NOT NULL, [estoque_locais] [INTEGER], [sincronizado_em] [text])',
-        ],
-        [
-          //empresa
-          'CREATE TABLE IF NOT EXISTS empresa ([id] [INTEGER] primary key, [desconto_porcentagem_maximo_permitido] [INTEGER] NOT NULL, [bloquear_acesso_aos_custos_produto] [bit], [multa_contas_a_receber_em_atraso] [float])',
         ],
         [
           //usuario
@@ -881,39 +857,10 @@ export class DataBaseProvider {
         console.log('Tabelas criadas, consultando atualizações');
 
         const atualizacoes: AtualizacoesModel[] = [];
-        atualizacoes.push(
-          {
-            numero_versao: 1,
-            scripts: [
-              'ALTER TABLE cliente ADD COLUMN [limite_credito_disponivel] [float] NOT NULL default 0',
-              'ALTER TABLE cliente ADD COLUMN [limite_credito] [float] NOT NULL default 0',
-              'ALTER TABLE empresa ADD COLUMN [bloquear_pedidos_a_prazo_cliente_limite_excedido] [bit] NOT NULL default 0',
-              'ALTER TABLE empresa ADD COLUMN [consultar_apenas_produto_saldo_maior_zero] [bit] NOT NULL default 0',
-              'ALTER TABLE empresa ADD COLUMN [mensagem_bloqueio_venda_limite_credito] [nvarchar](500)',
-            ],
-          },
-          {
-            numero_versao: 3,
-            scripts: [
-              'ALTER TABLE cliente ADD COLUMN [indicador_ie] [INTEGER] NOT NULL default 9',
-              'ALTER TABLE cliente ADD COLUMN [inscricao_estadual] [nvarchar](500)',
-            ],
-          },
-          {
-            numero_versao: 4,
-            scripts: [
-              'ALTER TABLE empresa ADD COLUMN [exibir_preco_atacado_consulta_produto] [bit] NOT NULL default 0',
-            ],
-          },
-          {
-            numero_versao: 5,
-            scripts: [
-              'ALTER TABLE cliente_contas_receber ADD COLUMN [data_operacao_long] [INTEGER] NULL',
-              'ALTER TABLE cliente_contas_receber ADD COLUMN [valor_operacao] [float] NULL',
-              'ALTER TABLE cliente ADD COLUMN [status] [INTEGER] NULL',
-            ],
-          }
-        );
+        atualizacoes.push({
+          numero_versao: 1,
+          scripts: [],
+        });
 
         let versaoAtual = await this.getNumeroVersaoBanco();
 

@@ -100,9 +100,6 @@ export class AuthService {
 
   getPermissoesUsuario(): UsuarioGrupoPermissoesMobile {
     const dadosEmpresa = this.getDadosEmpresaLogada();
-    if (dadosEmpresa && dadosEmpresa.permissoes_mobile_json?.length > 0) {
-      return JSON.parse(dadosEmpresa.permissoes_mobile_json);
-    }
     return new UsuarioGrupoPermissoesMobile();
   }
 
@@ -130,10 +127,6 @@ export class AuthService {
     return `${this.getPathBase()}/bancos_dados/${
       this.getDadosEmpresaLogada().id_banco_gerenciador
     }/relatorios`;
-  }
-
-  getUrlAPI() {
-    return `${this.getDadosEmpresaLogada().url_api}/api`;
   }
 
   private getPathBase() {
@@ -168,30 +161,20 @@ export class DadosColaborador {
   email: string;
   id_usuario: number;
   id_colaborador: number;
-  desconto_porcentagem_maximo_permitido: number;
-  bloquear_acesso_aos_custos_produto: number;
-  total_saldo_flex: number;
   foto_perfil?: string;
 }
 
 export class DadosEmpresa {
   razao: string;
-  url_api: string;
-  url_zip_imagens: string;
-  versao_gratis: boolean;
   fantasia: string;
   cpf_cnpj: string;
   cpf_cnpj_formatado: string;
   nome_colaborador: string;
   email: string;
-  guid_instalacao: string;
-  permissoes_mobile_json: string;
   id_colaborador: number;
   id_usuario: number;
   id_banco_dados: number;
   id_banco_gerenciador: number;
-  desconto_porcentagem_maximo_permitido_usuario: number;
-  bloquear_acesso_aos_custos_produto_usuario: boolean;
   logradouro: string;
   numero: string;
   municipio: string;

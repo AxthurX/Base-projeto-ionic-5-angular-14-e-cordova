@@ -24,7 +24,7 @@
     </div>
 
     <app-cabecalho-pesquisa-produto [nao_exibir_consultando]="true" [tela_balanco]="this"
-      (OnConsultou)="OnConsultou($event)" #cabecalho [permitir_quantidade_zero]="true" [modal]="modal">
+      (OnConsultou)="OnConsultou($event)" [permitir_quantidade_zero]="true" [modal]="modal" #cabecalho>
     </app-cabecalho-pesquisa-produto>
 
     <p class="text-center" *ngIf="objBalanco.dados_json.produtos">

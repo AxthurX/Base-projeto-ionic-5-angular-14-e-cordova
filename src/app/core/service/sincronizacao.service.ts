@@ -23,14 +23,7 @@ export class SincronizacaoService {
     };
 
     objEnviar.produtos.forEach((c) => {
-      c.imagem =
-        c.descricao =
-        c.grupo =
-        c.fabricante =
-        c.sub_grupo =
-        c.aplicacao =
-          '';
-      c.invalidades = [];
+      c.imagem = c.descricao = c.grupo = c.fabricante = c.sub_grupo = '';
     });
     const json_envio = JSON.stringify(objEnviar);
     return this.http.post<RetornoAPIGenerico>(`${''}/Envios`, {
@@ -50,19 +43,11 @@ export class SincronizacaoService {
     };
 
     objEnviar.produtos.forEach((c) => {
-      c.imagem =
-        c.descricao =
-        c.grupo =
-        c.fabricante =
-        c.sub_grupo =
-        c.aplicacao =
-          '';
-      c.invalidades = [];
+      c.imagem = c.descricao = c.grupo = c.fabricante = c.sub_grupo = '';
     });
     objEnviar.id_estoque_locais = objEnviar.estoque_locais?.id;
     const json_envio = JSON.stringify(objEnviar);
     return this.http.post<RetornoAPIGenerico>(`${''}/Envios`, {
-      id_empresa: dadosEmpresa.id_empresa_nuvem,
       id_colaborador: dadosEmpresa.id_colaborador,
       json_envio,
       tipo_sincronizacao: 1,

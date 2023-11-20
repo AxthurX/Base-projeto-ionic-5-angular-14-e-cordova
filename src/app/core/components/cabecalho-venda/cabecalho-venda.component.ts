@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { OperacaoSaidaUtil } from '../../model/operacao-saida-util.model';
 import { OperacaoSaidaJson } from '../../model/operacao-saida.model';
 
 @Component({
