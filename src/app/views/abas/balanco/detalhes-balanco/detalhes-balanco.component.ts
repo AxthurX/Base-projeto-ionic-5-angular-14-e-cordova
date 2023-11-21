@@ -13,6 +13,7 @@ import { ClasseBase } from 'src/app/core/model/classe-base.model';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { OverlayService } from '../../../../core/service/overlay.service';
+
 @Component({
   selector: 'app-detalhes-balanco',
   templateUrl: './detalhes-balanco.component.html',

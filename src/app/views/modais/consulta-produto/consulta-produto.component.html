@@ -28,8 +28,8 @@
           (click)="mostrarFoto(registro)">
         </h6>
         <h6 class="font-weight-bold text-dark mb-2 small" (click)="mostrarFoto(registro)">
-          <span class="text-secondary font-weight-normal">Cód: {{registro.id_produto}}</span> |
-          <ion-badge color="success">
+          <span class="text-secondary font-weight-normal">Cód: {{registro.id}}</span> |
+          <ion-badge color="primary">
             R$ {{registro.valor_unitario| number: '1.2-2'}}
           </ion-badge>
           x{{registro.quantidade | number: '1.0-3'}} = R$ {{registro.valor_unitario | number: '1.2-2'}}
@@ -41,7 +41,7 @@
           {{registro.descricao}}
         </div>
         <div class="small text-gray-500 d-flex align-items-center justify-content-between">
-          <small class="text-secondary">Saldo geral: {{registro.saldo_total | number: '1.0-3'}}</small>
+          <small class="text-secondary">Valor Total: {{registro.valor_total | number: '1.0-3'}}</small>
           <div class="input-group shop-cart-value">
             <span class="input-group-btn">
               <button (click)="diminuirQuantidade(registro)" class="btn btn-sm" type="button">-</button>

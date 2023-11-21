@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ConsultaProdutoComponent } from 'src/app/views/modais/consulta-produto/consulta-produto.component';
-import { ViewProdutoEmpresa } from '../../model/data-base/view-produto-empresa.model';
+import { ViewProduto } from '../../model/data-base/view-produto.model';
 import { Util } from '../../util.model';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 import { TelaVendaComponent } from 'src/app/views/abas/vendas/tela-venda/tela-venda.component';
@@ -31,9 +31,8 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
   @Input() tela_vendas: TelaVendaComponent;
   @Input() tela_balanco: TelaBalancoComponent;
   @Input() modal: ModalController;
-  @Output() OnConsultou: EventEmitter<ViewProdutoEmpresa[]> =
-    new EventEmitter();
-  registros: ViewProdutoEmpresa[];
+  @Output() OnConsultou: EventEmitter<ViewProduto[]> = new EventEmitter();
+  registros: ViewProduto[];
   filtro_pesquisa: string;
   type: string;
   consultando: boolean;
@@ -141,7 +140,7 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
           }
 
           this.consultando = true;
-          const registros = await this.dados.getProdutosComPrecoJaCalculado(
+          const registros = await this.dados.getProdutos(
             this.filtro_pesquisa,
             this.texto_pesquisado
           );
@@ -152,10 +151,7 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
           } else {
             registros.forEach((r) => {
               r.quantidade = 1;
-              ProdutoUtil.CalcularPrecoETotalBruto(
-                r,
-                null,
-              );
+              ProdutoUtil.CalcularPrecoETotalBruto(r, null);
             });
 
             this.OnConsultou.emit(registros);
@@ -176,7 +172,7 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
     }
   }
 
-  ConsultouProdutos(produtos: ViewProdutoEmpresa[]) {
+  ConsultouProdutos(produtos: ViewProduto[]) {
     this.OnConsultou.emit(produtos);
   }
 

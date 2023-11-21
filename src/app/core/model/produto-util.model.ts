@@ -1,9 +1,9 @@
 import { Util } from '../util.model';
-import { ViewProdutoEmpresa } from './data-base/view-produto-empresa.model';
+import { ViewProduto } from './data-base/view-produto.model';
 
 export class ProdutoUtil {
   static CalcularPrecoETotalBruto(
-    registro: ViewProdutoEmpresa,
+    registro: ViewProduto,
     bloquear_custos: boolean
   ) {
     //se o preço ja foi calculado como promoçoa ou tabelado.. ou entao foi alterado manualmente, não preciso mais calcular
@@ -21,13 +21,13 @@ export class ProdutoUtil {
     }
 
     //calculo o total bruto
-    registro.total_bruto = bloquear_custos
-      ? Util.GetValorArredondado(registro.quantidade * registro.pcusto)
-      : Util.GetValorArredondado(registro.quantidade * registro.valor_unitario);
+    registro.total_bruto = Util.GetValorArredondado(
+      registro.quantidade * registro.valor_unitario
+    );
   }
 
   static AplicarAcrescimoNoValorUnitario(
-    registro: ViewProdutoEmpresa,
+    registro: ViewProduto,
     acrescimo_prc: number
   ) {
     if (!registro.valor_unitario_original) {
@@ -68,10 +68,7 @@ export class ProdutoUtil {
     }
   }
 
-  static AplicarDescontoVlr(
-    produto: ViewProdutoEmpresa,
-    valor: number
-  ): boolean {
+  static AplicarDescontoVlr(produto: ViewProduto, valor: number): boolean {
     try {
       valor = Util.GetValorArredondado(valor);
 
@@ -91,10 +88,7 @@ export class ProdutoUtil {
     }
   }
 
-  static AplicarAcrescimoPrc(
-    produto: ViewProdutoEmpresa,
-    valor: number
-  ): boolean {
+  static AplicarAcrescimoPrc(valor: number): boolean {
     try {
       if (valor < 0) {
         valor = 0;
@@ -112,10 +106,7 @@ export class ProdutoUtil {
     }
   }
 
-  static AplicarAcrescimoVlr(
-    produto: ViewProdutoEmpresa,
-    valor: number
-  ): boolean {
+  static AplicarAcrescimoVlr(valor: number): boolean {
     try {
       valor = Util.GetValorArredondado(valor);
 

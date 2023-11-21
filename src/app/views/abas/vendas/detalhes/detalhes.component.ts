@@ -1,3 +1,6 @@
+import { OperacaoSaidaJson } from 'src/app/core/model/operacao-saida.model';
+import { ModalController, NavParams } from '@ionic/angular';
+import { Util } from 'src/app/core/util.model';
 import {
   Component,
   HostListener,
@@ -5,14 +8,11 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
-import { OperacaoSaidaJson } from 'src/app/core/model/operacao-saida.model';
-import { Util } from 'src/app/core/util.model';
-import { OperacaoSaidaUtil } from 'src/app/core/model/operacao-saida-util.model';
 import {
   PDFGenerator,
   PDFGeneratorOptions,
 } from '@awesome-cordova-plugins/pdf-generator/ngx';
+
 @Component({
   selector: 'app-detalhes',
   templateUrl: './detalhes.component.html',

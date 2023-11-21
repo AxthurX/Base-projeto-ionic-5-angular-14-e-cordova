@@ -1,10 +1,9 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActionSheetController, ModalController } from '@ionic/angular';
-import { ViewProdutoEmpresa } from 'src/app/core/model/data-base/view-produto-empresa.model';
+import { ViewProduto } from 'src/app/core/model/data-base/view-produto.model';
 import { Util } from 'src/app/core/util.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, Subscription } from 'rxjs';
-import { Empresa } from 'src/app/core/model/data-base/empresa.model';
 import { OperacaoBalanco } from '../../../../core/model/operacao-balanco.model';
 import { OperacaoBalancoUtil } from '../../../../core/model/operacao-balanco-util.model';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
@@ -90,17 +89,17 @@ export class TelaBalancoComponent
   getByIdOrGtin(filtro: string, valor: string) {
     if (filtro === 'id') {
       return this.objBalanco.dados_json.produtos.find(
-        (c) => c.id_produto === +valor
+        (c) => c.id === +valor
       );
     } else {
       return this.objBalanco.dados_json.produtos.find((c) => c.gtin === valor);
     }
   }
 
-  OnConsultou(produtos: ViewProdutoEmpresa[]) {
+  OnConsultou(produtos: ViewProduto[]) {
     produtos.forEach((p) => {
       const existente = this.objBalanco.dados_json.produtos.find(
-        (c) => c.id_produto === p.id_produto
+        (c) => c.id === p.id
       );
       if (existente) {
         existente.quantidade += p.quantidade;
@@ -111,7 +110,7 @@ export class TelaBalancoComponent
   }
 
   ajustarQuantidade(
-    registro: ViewProdutoEmpresa,
+    registro: ViewProduto,
     i: number,
     incremento: number
   ) {
@@ -136,7 +135,7 @@ export class TelaBalancoComponent
     }
   }
 
-  async mostrarOpcoesProduto(produto: ViewProdutoEmpresa, index: number) {
+  async mostrarOpcoesProduto(produto: ViewProduto, index: number) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Produto: ' + produto.descricao,
       mode: 'ios',
@@ -227,7 +226,7 @@ export class TelaBalancoComponent
     await actionSheet.present();
   }
 
-  alterouQuantidadeManualmente(registro: ViewProdutoEmpresa, novoValor) {
+  alterouQuantidadeManualmente(registro: ViewProduto, novoValor) {
     registro.quantidade = novoValor;
     if (registro.quantidade && registro.quantidade < 0) {
       registro.quantidade = 1;
@@ -265,7 +264,7 @@ export class TelaBalancoComponent
     });
   }
 
-  limparObservacaoItem(produto: ViewProdutoEmpresa) {
+  limparObservacaoItem(produto: ViewProduto) {
     Util.Confirm('Limpar observação', () => {
       produto.observacao = '';
     });

@@ -1,4 +1,4 @@
-import { ViewProdutoEmpresa } from './data-base/view-produto-empresa.model';
+import { ViewProduto } from './data-base/view-produto.model';
 import { ValueBaseModel } from './value-base.model';
 import { OperacaoBalancoUtil } from './operacao-balanco-util.model';
 
@@ -15,7 +15,7 @@ export class OperacaoBalanco {
 }
 
 export class OperacaoBalancoJson {
-  produtos: ViewProdutoEmpresa[];
+  produtos: ViewProduto[];
   data_exclusao?: number;
   data: number;
   id_estoque_locais?: number;

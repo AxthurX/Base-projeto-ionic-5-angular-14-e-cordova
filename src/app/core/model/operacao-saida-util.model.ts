@@ -1,4 +1,3 @@
-import { DadosEmpresa } from '../service/auth.service';
 import { Util } from '../util.model';
 import { OperacaoSaida, OperacaoSaidaJson } from './operacao-saida.model';
 
@@ -55,7 +54,6 @@ export class OperacaoSaidaUtil {
 
   static Validar(
     venda: OperacaoSaidaJson,
-    dados_empresa: DadosEmpresa
   ): boolean {
     if (!venda.cliente) {
       Util.AlertWarning('Selecione um cliente');
