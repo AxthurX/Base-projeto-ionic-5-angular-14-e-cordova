@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Produto } from '../model/data-base/produto.model';
-import { Usuario } from '../model/data-base/usuario.model';
 import { ViewProduto } from '../model/data-base/view-produto.model';
 import { OperacaoSaidaUtil } from '../model/operacao-saida-util.model';
 import { OperacaoSaida } from '../model/operacao-saida.model';
 import { Util } from '../util.model';
-import { AuthService } from './auth.service';
 import { EstoqueLocais } from '../model/data-base/estoque-locais.model';
 import { Balanco } from '../model/data-base/balanco.model';
 import { OperacaoBalanco } from '../model/operacao-balanco.model';
@@ -16,8 +14,7 @@ import { OperacaoBalanco } from '../model/operacao-balanco.model';
 })
 export class DataBaseProvider {
   dados: SQLiteObject;
-  limit_consulta_produtos = 100;
-  constructor(private sqlite: SQLite, private auth: AuthService) {}
+  constructor(private sqlite: SQLite) {}
 
   public dropDB() {
     return this.sqlite.deleteDatabase(this.getConfigDb());
@@ -73,7 +70,6 @@ export class DataBaseProvider {
     } else if (filtro_pesquisa === 'ids_produtos') {
       sql += ` where produto.id in (${pesquisa})`;
     }
-    sql += ' order by produto.descricao limit ' + this.limit_consulta_produtos;
 
     return this.dados
       .executeSql(sql, [])
@@ -82,11 +78,21 @@ export class DataBaseProvider {
           for (let i = 0; i < data.rows.length; i++) {
             const registro = data.rows.item(i);
             const newItem = new ViewProduto();
-            newItem.descricao = registro.descricao;
             newItem.id = +registro.id;
+            newItem.data = registro.data;
+            newItem.descricao = registro.descricao;
+            newItem.gtin = registro.gtin;
             newItem.unidade = registro.unidade;
             newItem.codigo_original = registro.codigo_original;
-            newItem.gtin = registro.gtin;
+            newItem.ativo = registro.ativo;
+            newItem.nome = registro.nome;
+            newItem.data_fabricacao = registro.data_fabricacao;
+            newItem.data_vencimento = registro.data_vencimento;
+            newItem.quantidade = registro.quantidade;
+            newItem.valor_unitario = registro.valor_unitario;
+            newItem.valor_total = registro.valor_total;
+            newItem.imagem = registro.imagem;
+            newItem.descricao = registro.descricao;
 
             retorno.push(newItem);
           }
@@ -177,10 +183,10 @@ export class DataBaseProvider {
       });
   }
 
-  public getVendas(limit: number, offset: number) {
+  public getVendas() {
     const retorno: OperacaoSaida[] = [];
     let sql = `select * from operacao_saida`;
-    sql += ` order by data desc limit ${limit} offset ${offset}`;
+    sql += ` order by data desc`;
     return this.dados
       .executeSql(sql, [])
       .then((data: any) => {
@@ -314,36 +320,6 @@ export class DataBaseProvider {
       });
   }
 
-  public getUsuario(id_colaborador: number) {
-    let retorno: Usuario = null;
-    const sql =
-      'select * from usuario where id_colaborador = ' + id_colaborador;
-
-    return this.dados
-      .executeSql(sql, [])
-      .then((data: any) => {
-        if (data.rows.length > 0) {
-          for (let i = 0; i < data.rows.length; i++) {
-            const registro = data.rows.item(i);
-            retorno = new Usuario();
-            retorno.id = +registro.id;
-            retorno.id_colaborador = +registro.id_colaborador;
-            retorno.desconto_porcentagem_maximo_permitido =
-              +registro.desconto_porcentagem_maximo_permitido;
-            retorno.bloquear_acesso_aos_custos_produto =
-              registro.bloquear_acesso_aos_custos_produto;
-            break;
-          }
-        }
-        return retorno;
-      })
-      .catch((e) => {
-        Util.TratarErro(e);
-
-        return retorno;
-      });
-  }
-
   public setBalanco(registros: Balanco[]): Promise<any> {
     const sqlStatements: any[] = [];
 
@@ -434,22 +410,6 @@ export class DataBaseProvider {
     return this.dados.sqlBatch(sqlStatements);
   }
 
-  public salvarVendaProduto(venda: OperacaoSaida): Promise<any> {
-    const sqlStatements: any[] = [];
-
-    let comando = '';
-    if (venda.id > 0) {
-      comando =
-        'update operacao_saida set data = ?, json = ? where id = ' + venda.id;
-    } else {
-      comando = 'insert into operacao_saida (data, json) values (?, ?)';
-    }
-
-    sqlStatements.push([comando, [venda.data, venda.id_cliente, venda.json]]);
-
-    return this.dados.sqlBatch(sqlStatements);
-  }
-
   public salvarBalanco(balanco: OperacaoBalanco): Promise<any> {
     const sqlStatements: any[] = [];
 
@@ -477,24 +437,6 @@ export class DataBaseProvider {
     const sqlStatements: any[] = [];
     const comando = 'delete from operacao_balanco where id = ?';
     sqlStatements.push([comando, [id]]);
-    return this.dados.sqlBatch(sqlStatements);
-  }
-
-  public setUsuarios(registros: Usuario[]): Promise<any> {
-    const sqlStatements: any[] = [];
-
-    registros.forEach((registro) => {
-      sqlStatements.push([
-        'insert into usuario (id, desconto_porcentagem_maximo_permitido, id_colaborador, bloquear_acesso_aos_custos_produto) values (?, ?, ?, ?)',
-        [
-          registro.id,
-          registro.desconto_porcentagem_maximo_permitido,
-          registro.id_colaborador,
-          registro.bloquear_acesso_aos_custos_produto,
-        ],
-      ]);
-    });
-
     return this.dados.sqlBatch(sqlStatements);
   }
 

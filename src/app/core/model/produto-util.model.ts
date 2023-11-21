@@ -88,7 +88,7 @@ export class ProdutoUtil {
     }
   }
 
-  static AplicarAcrescimoPrc(produto: ViewProduto, valor: number): boolean {
+  static AplicarAcrescimoPrc(valor: number): boolean {
     try {
       if (valor < 0) {
         valor = 0;
@@ -106,7 +106,7 @@ export class ProdutoUtil {
     }
   }
 
-  static AplicarAcrescimoVlr(produto: ViewProduto, valor: number): boolean {
+  static AplicarAcrescimoVlr(valor: number): boolean {
     try {
       valor = Util.GetValorArredondado(valor);
 

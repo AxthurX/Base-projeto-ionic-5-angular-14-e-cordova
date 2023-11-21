@@ -86,8 +86,6 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
           if (this.cabecalho_parente?.permitir_quantidade_zero === true) {
             produto.quantidade = null;
           }
-
-          //this.carregarImagemProduto(produto);
         });
 
         const produtosJaAdicionados =
@@ -188,14 +186,6 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
       return this.registros[index];
     } catch {
       return null;
-    }
-  }
-
-  getColor(tipo_preco) {
-    if (tipo_preco === 'P') {
-      return 'success';
-    } else if (tipo_preco === 'T') {
-      return 'tertiary';
     }
   }
 }

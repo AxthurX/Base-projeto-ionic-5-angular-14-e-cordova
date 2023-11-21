@@ -11,6 +11,7 @@ import { DetalhesComponent } from './detalhes/detalhes.component';
 import { IonContent } from '@ionic/angular';
 import { OverlayService } from 'src/app/core/service/overlay.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
+import { OperacaoSaidaUtil } from 'src/app/core/model/operacao-saida-util.model';
 
 @Component({
   selector: 'app-vendas',
@@ -58,36 +59,23 @@ export class VendasComponent implements OnInit {
     setTimeout(() => {
       try {
         this.nenhuma_venda_localizada = false;
-        // this.dados
-        //   .getVendas(this.limit, offSet, apenas_vendas, apenas_sincronizadas)
-        //   .then((vendas) => {
-        //     if (vendas?.length > 0) {
-        //       vendas.forEach((v) => OperacaoSaidaUtil.PreecherDadosJson(v));
+        this.dados
+          .getVendas()
+          .then((vendas) => {
+            if (vendas?.length > 0) {
+              vendas.forEach((v) => OperacaoSaidaUtil.PreecherDadosJson(v));
 
-        //       vendas
-        //         .filter((c) => !c.id_nuvem)
-        //         .forEach((v) => {
-        //           this.vendas.push(v);
-        //         });
-        //       vendas
-        //         .filter((c) => c.id_nuvem)
-        //         .forEach((s) => {
-        //           this.sincronizados.push(s);
-        //         });
-        //     } else {
-        //       this.nenhuma_venda_localizada = true;
-        //     }
-        //     this.consultando = false;
-
-        //     if (this.abaSelecionada === 'vendas') {
-        //       this.offSet_vendas += this.limit;
-        //     } else {
-        //       this.offSet_sincronizadas += this.limit;
-        //     }
-        //   })
-        //   .catch((err) => {
-        //     this.consultando = false;
-        //   });
+              vendas.forEach((v) => {
+                this.vendas.push(v);
+              });
+            } else {
+              this.nenhuma_venda_localizada = true;
+            }
+            this.consultando = false;
+          })
+          .catch((err) => {
+            this.consultando = false;
+          });
       } catch (e) {
         this.consultando = false;
       }

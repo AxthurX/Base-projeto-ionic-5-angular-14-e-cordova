@@ -13,9 +13,6 @@ export class ViewCliente {
   municipio: string;
   codigo_municipio: string;
   sigla_uf: string;
-  atividade: string;
-  limite_credito_disponivel: number;
-  limite_credito: number;
   status?: number;
   inscricao_estadual?: number;
   indicador_ie?: number;
