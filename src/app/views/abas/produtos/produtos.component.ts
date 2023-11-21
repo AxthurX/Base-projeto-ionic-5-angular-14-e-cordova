@@ -10,13 +10,15 @@ import { OverlayService } from 'src/app/core/service/overlay.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
 import { Produto } from 'src/app/core/model/data-base/produto.model';
 import { CadastrarComponent } from './cadastrar/cadastrar.component';
+import { ClasseBase } from 'src/app/core/model/classe-base.model';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-produtos',
   templateUrl: './produtos.component.html',
   styleUrls: ['./produtos.component.scss'],
 })
-export class ProdutosComponent implements OnInit, OnDestroy {
+export class ProdutosComponent extends ClasseBase implements OnInit, OnDestroy {
   @ViewChild('pesquisa') pesquisa;
   cabecalho_parente: CabecalhoPesquisaProdutoComponent;
   registros: ViewProduto[] = [];
@@ -30,8 +32,10 @@ export class ProdutosComponent implements OnInit, OnDestroy {
     private overlay: OverlayService,
     private dbProvider: DataBaseProvider,
     private navParams: NavParams,
-    private file: File
+    private file: File,
+    auth: AuthService
   ) {
+    super(auth);
     this.consultando = false;
     this.apenas_consulta = false;
     this.path_imagens_produtos = Util.GetPathImagens(file);

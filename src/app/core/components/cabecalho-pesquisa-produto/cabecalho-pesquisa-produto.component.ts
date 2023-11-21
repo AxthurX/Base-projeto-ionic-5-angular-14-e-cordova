@@ -16,6 +16,7 @@ import { ProdutoUtil } from '../../model/produto-util.model';
 import { TelaBalancoComponent } from '../../../views/abas/balanco/tela-balanco/tela-balanco.component';
 import { OverlayService } from '../../service/overlay.service';
 import { DataBaseProvider } from '../../service/database';
+import { PreferenciasService } from '../../service/preferencias.service';
 
 @Component({
   selector: 'app-cabecalho-pesquisa-produto',
@@ -37,6 +38,7 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
   type: string;
   consultando: boolean;
   constructor(
+    private prefSrv: PreferenciasService,
     private overlay: OverlayService,
     private barcodeScanner: BarcodeScanner,
     private dados: DataBaseProvider
@@ -48,6 +50,7 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.filtro_pesquisa = this.prefSrv.getPreferenciaProduto();
     this.checkType();
     setTimeout(() => {
       this.pesquisa.setFocus();

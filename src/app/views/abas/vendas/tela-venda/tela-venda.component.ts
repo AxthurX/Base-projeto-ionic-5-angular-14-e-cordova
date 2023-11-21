@@ -9,13 +9,18 @@ import { fromEvent, Subscription } from 'rxjs';
 import { ValueBaseModel } from 'src/app/core/model/value-base.model';
 import { OverlayService } from 'src/app/core/service/overlay.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
+import { ClasseBase } from 'src/app/core/model/classe-base.model';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-tela-venda',
   templateUrl: './tela-venda.component.html',
   styleUrls: ['./tela-venda.component.scss'],
 })
-export class TelaVendaComponent implements OnInit, OnDestroy {
+export class TelaVendaComponent
+  extends ClasseBase
+  implements OnInit, OnDestroy
+{
   @ViewChild('btnVoltar') btnVoltar;
   @Input() objVenda: OperacaoSaida;
   @Input() copiando?: boolean;
@@ -29,8 +34,10 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
     private actionSheetController: ActionSheetController,
     private dados: DataBaseProvider,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    auth: AuthService
   ) {
+    super(auth);
     this.acao = '';
     this.carregando = false;
     this.objVenda = new OperacaoSaida();
@@ -78,9 +85,7 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
 
   getByIdOrGtin(filtro: string, valor: string) {
     if (filtro === 'id') {
-      return this.objVenda.dados_json.produtos.find(
-        (c) => c.id === +valor
-      );
+      return this.objVenda.dados_json.produtos.find((c) => c.id === +valor);
     } else {
       return this.objVenda.dados_json.produtos.find((c) => c.gtin === valor);
     }
@@ -119,11 +124,7 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
     });
   }
 
-  ajustarQuantidade(
-    registro: ViewProduto,
-    i: number,
-    incremento: number
-  ) {
+  ajustarQuantidade(registro: ViewProduto, i: number, incremento: number) {
     if (!registro.quantidade) {
       registro.quantidade = 0;
     }

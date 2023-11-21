@@ -13,13 +13,6 @@
     <p>{{produtos.length}} conta(s) em aberto</p>
     <h1>R$ {{total_aberto | number: '1.2-2'}}</h1>
 
-    <ng-container *ngIf="cliente.limite_credito > 0">
-      <p>Limite de crédito</p>
-      <h5><b>Total:</b> R$ {{cliente.limite_credito | number: '1.2-2'}} <br /><b>Disponível:</b> R$
-        {{cliente.limite_credito_disponivel | number: '1.2-2'}}</h5>
-    </ng-container>
-
-
     <ion-segment mode="ios" [value]="abaSelecionada" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="produtos" *ngIf="produtos.length > 0">
         <ion-label>produtos em aberto</ion-label>
