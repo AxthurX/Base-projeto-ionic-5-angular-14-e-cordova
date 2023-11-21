@@ -5,13 +5,15 @@ import { DataBaseProvider } from 'src/app/core/service/database';
 import { Produto } from 'src/app/core/model/data-base/produto.model';
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import moment from 'moment';
+import { ClasseBase } from 'src/app/core/model/classe-base.model';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-cadastrar',
   templateUrl: './cadastrar.component.html',
   styleUrls: ['./cadastrar.component.scss'],
 })
-export class CadastrarComponent implements OnInit {
+export class CadastrarComponent extends ClasseBase implements OnInit {
   @ViewChild('btnVoltar') btnVoltar;
   produto: Produto;
   submitted: boolean;
@@ -20,8 +22,10 @@ export class CadastrarComponent implements OnInit {
   constructor(
     private overlay: OverlayService,
     private dados: DataBaseProvider,
-    private modal: ModalController
+    private modal: ModalController,
+    auth: AuthService
   ) {
+    super(auth);
     this.submitted = false;
     this.consultando = false;
     this.produto = new Produto();

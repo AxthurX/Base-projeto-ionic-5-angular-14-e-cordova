@@ -8,7 +8,7 @@ export class ClasseBase {
   tentando_salvar: boolean = false;
   $monitoramento_manutencao: Subscription;
   $monitoramento_token: Subscription;
-  constructor(public auth: AuthService, public id_tela: number) {}
+  constructor(public auth: AuthService) {}
 
   habilitarMonitoramentos() {
     this.auth.saiuDoApp$.subscribe({

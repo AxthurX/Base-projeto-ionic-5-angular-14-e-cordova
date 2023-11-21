@@ -12,7 +12,6 @@ import {
   PDFGenerator,
   PDFGeneratorOptions,
 } from '@awesome-cordova-plugins/pdf-generator/ngx';
-
 @Component({
   selector: 'app-detalhes',
   templateUrl: './detalhes.component.html',
