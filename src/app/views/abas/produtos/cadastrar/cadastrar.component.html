@@ -63,7 +63,7 @@
             style="-webkit-transform-origin-x: center;">
             <ion-text>
               <b>Dias restantes para vencer: </b></ion-text>
-              <b>{{dias_restantes}}</b>
+            <b>{{dias_restantes}}</b>
           </ion-label>
         </ion-item>
 
@@ -75,8 +75,8 @@
               <span class="input-group-btn align-self-center">
                 <button (click)="ajustarQuantidade(produto, -1)" class="btn btn-sm" type="button">-</button>
               </span>
-              <input (ngModelChange)="alterouQuantidadeManualmente(produto, $event)" [(ngModel)]="produto.qtde_produto"
-                name="qtde_produto" type="number"
+              <input (ngModelChange)="alterouQuantidadeManualmente(produto, $event)" [(ngModel)]="produto.quantidade"
+                name="quantidade" type="number"
                 class="form-control borda-numero border-form-control form-control-sm input-number align-self-center" />
               <span class="input-group-btn align-self-center">
                 <button (click)="ajustarQuantidade(produto, 1)" class="btn btn-sm" type="button">+</button>

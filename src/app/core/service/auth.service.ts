@@ -8,16 +8,12 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  keyEmpresa: string = 'computaria:empresa';
-  keyColaborador: string = 'computaria:colaborador';
   keyToken: string = 'computaria:token';
   keyGuidInstalacao: string = 'computaria:guid_instalacao';
   public salvouVenda$ = new Subject();
   public salvouBalanco$ = new Subject();
   public saiuDoApp$ = new Subject();
   public appIsOnline$: Observable<boolean>;
-  _empresaLogada: DadosEmpresa;
-  _colaboradorLogado: DadosColaborador;
   constructor(private router: Router) {
     this.initConnectivityMonitoring();
   }
@@ -30,22 +26,6 @@ export class AuthService {
       }
       return resolve(false);
     });
-  }
-
-  get EmpresaLogada(): DadosEmpresa {
-    if (!this._empresaLogada) {
-      this._empresaLogada = this.getDadosEmpresaLogada();
-    }
-
-    return this._empresaLogada;
-  }
-
-  get ColaboradorLogada(): DadosColaborador {
-    if (!this._colaboradorLogado) {
-      this._colaboradorLogado = this.getDadosColaboradorLogado();
-    }
-
-    return this._colaboradorLogado;
   }
 
   initConnectivityMonitoring() {
@@ -68,39 +48,9 @@ export class AuthService {
     this.salvouBalanco$.next('');
   }
 
-  setDadosEmpresaEToken(
-    empresa: DadosEmpresa,
-    colaborador: DadosColaborador,
-    token: string,
-    guid_instalacao: string
-  ) {
-    this.setDadosEmpresa(empresa);
-    this.setDadosColaborador(colaborador);
+  setDadosEmpresaEToken(token: string, guid_instalacao: string) {
     localStorage.setItem(this.keyToken, token);
     localStorage.setItem(this.keyGuidInstalacao, guid_instalacao);
-  }
-
-  setDadosEmpresa(empresa: DadosEmpresa) {
-    this._empresaLogada = empresa;
-    localStorage.setItem(this.keyEmpresa, JSON.stringify(empresa));
-  }
-
-  setDadosColaborador(colaborador: DadosColaborador) {
-    this._colaboradorLogado = colaborador;
-    localStorage.setItem(this.keyColaborador, JSON.stringify(colaborador));
-  }
-
-  getDadosEmpresaLogada(): DadosEmpresa {
-    return JSON.parse(localStorage.getItem(this.keyEmpresa));
-  }
-
-  getDadosColaboradorLogado(): DadosColaborador {
-    return JSON.parse(localStorage.getItem(this.keyColaborador));
-  }
-
-  getPermissoesUsuario(): UsuarioGrupoPermissoesMobile {
-    const dadosEmpresa = this.getDadosEmpresaLogada();
-    return new UsuarioGrupoPermissoesMobile();
   }
 
   getToken(): string {
@@ -112,8 +62,6 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem(this.keyEmpresa);
-    localStorage.removeItem(this.keyColaborador);
     localStorage.removeItem(this.keyToken);
     this.router.navigateByUrl('/login');
     this.saiuDoApp$.next();
@@ -121,16 +69,6 @@ export class AuthService {
 
   goToHome() {
     this.router.navigateByUrl('/home');
-  }
-
-  public getPathRelatorios() {
-    return `${this.getPathBase()}/bancos_dados/${
-      this.getDadosEmpresaLogada().id_banco_gerenciador
-    }/relatorios`;
-  }
-
-  private getPathBase() {
-    return 'aplicativos/gerencial';
   }
 }
 
@@ -151,39 +89,5 @@ export class RetornoInstalacao extends RetornoAPIModel<LoginResponse> {}
 export class LoginResponse {
   token: string;
   guid_instalacao: string;
-  dados_empresa: DadosEmpresa;
-  dados_colaborador: DadosColaborador;
   id: number;
-}
-
-export class DadosColaborador {
-  nome: string;
-  email: string;
-  id_usuario: number;
-  id_colaborador: number;
-  foto_perfil?: string;
-}
-
-export class DadosEmpresa {
-  razao: string;
-  fantasia: string;
-  cpf_cnpj: string;
-  cpf_cnpj_formatado: string;
-  nome_colaborador: string;
-  email: string;
-  id_colaborador: number;
-  id_usuario: number;
-  id_banco_dados: number;
-  id_banco_gerenciador: number;
-  logradouro: string;
-  numero: string;
-  municipio: string;
-  uf: string;
-  telefone: string;
-}
-
-export class UsuarioGrupoPermissoesMobile {
-  balanco: boolean = false;
-  vendas: boolean = false;
-  clientes: boolean = false;
 }

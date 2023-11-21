@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActionSheetController, ModalController } from '@ionic/angular';
-import { ViewProdutoEmpresa } from 'src/app/core/model/data-base/view-produto-empresa.model';
+import { ViewProduto } from 'src/app/core/model/data-base/view-produto.model';
 import { OperacaoSaidaUtil } from 'src/app/core/model/operacao-saida-util.model';
 import { OperacaoSaida } from 'src/app/core/model/operacao-saida.model';
 import { Util } from 'src/app/core/util.model';
@@ -22,95 +22,6 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
   carregando: boolean;
   acao: string;
   recalculando_totais: boolean = false;
-  teste: OperacaoSaida = {
-    id: 1,
-    dados_json: {
-      excluido: false,
-      quantidade_produtos_lancados: 2,
-      total_bruto: 22.35,
-      total_liquido: 22.35,
-      produtos: [
-        {
-          mostrar_foto: false,
-          imagem: 'assets/icon/favicon.png',
-          total_liquido: 7.35,
-          total_bruto: 7.35,
-          valor_unitario: 7.35,
-          quantidade: 1,
-          descricao: ' BARRA ROSCADA UNC ZB 1/4" 1M - CISER',
-          id: 699033,
-          id_produto: 841573,
-          pcusto: 0,
-          pvenda_atacado: 0,
-          pcompra: 3.82,
-          saldo_total: 1,
-          unidade: 'UN ',
-          codigo_original: null,
-          referencia: null,
-          gtin: '00000051017194',
-          sub_grupo: 'IMPORTACAO DE DADOS',
-          grupo: 'IMPORTACAO DE DADOS',
-          fabricante: 'IMPORTACAO DE DADOS',
-          valor_unitario_original: 7.35,
-          observacao: null,
-        },
-        {
-          mostrar_foto: false,
-          imagem: 'assets/icon/favicon.png',
-          total_liquido: 15,
-          total_bruto: 15,
-          valor_unitario: 15,
-          quantidade: 1,
-          descricao: ' ADAPTADOR SOQUETE 14"X1/2"-2" - WORKER',
-          id: 698868,
-          id_produto: 841572,
-          pcusto: 0,
-          pvenda_atacado: 0,
-          pcompra: 5.15,
-          saldo_total: 1,
-          unidade: 'UN ',
-          codigo_original: null,
-          referencia: null,
-          gtin: '7899811603363 ',
-          sub_grupo: 'IMPORTACAO DE DADOS',
-          grupo: 'IMPORTACAO DE DADOS',
-          fabricante: 'IMPORTACAO DE DADOS',
-          valor_unitario_original: 15,
-          observacao: null,
-        },
-      ],
-      cliente: {
-        descricao: 'IGREJA PENTECOSTAL DEUS E AMOR',
-        id: 415200,
-      },
-      view_cliente: {
-        id: 415200,
-        razao: 'IGREJA PENTECOSTAL DEUS E AMOR',
-        cep: '76907834',
-        fantasia: 'IGREJA PENTECOSTAL DEUS E AMOR',
-        codigo_municipio: '1100122',
-        cpf_cnpj: '43208040000136',
-        logradouro: 'RUA MATO GROSSO',
-        numero: '3182',
-        telefone_principal: '06992689800',
-        telefone_whatsapp: null,
-        complemento: 'IGREJA',
-        bairro: 'PARQUE SAO PEDRO',
-        municipio: 'JI-PARANÁ',
-        sigla_uf: 'RO',
-        atividade: null,
-        limite_credito_disponivel: 0,
-        limite_credito: 0,
-        inscricao_estadual: 0,
-        indicador_ie: 9,
-      },
-      data: 1700247580222,
-      observacao: null,
-    },
-    sincronizado_em: new Date().toDateString(),
-    data: 1700247580222,
-    json: '{"excluido":false,"pedido":true,"total_desconto_suframa":0,"total_icms_st":0,"total_ipi":0,"quantidade_produtos_lancados":2,"total_bruto":22.35,"acrescimo_prc":0,"acrescimo_vlr":0,"desconto_prc":0,"desconto_vlr":0,"total_liquido":22.35,"produtos":[{"mostrar_foto":false,"imagem":"assets/icon/favicon.png","frete_vlr":0,"acrescimo_prc":0,"acrescimo_vlr":0,"desconto_prc":0,"desconto_vlr":0,"total_liquido":7.35,"total_bruto":7.35,"valor_unitario":7.35,"quantidade":1,"descricao":" BARRA ROSCADA UNC ZB 1/4\\" 1M - CISER","aplicacao":null,"id":699033,"id_produto":841573,"id_produto_grupo":1969,"id_produto_sub_grupo":9964,"id_produto_fabricante":26941,"id_empresa":170,"pcusto":0,"pvenda_atacado":0,"pvenda_super_atacado":0,"pcompra":3.82,"pfornecedor":3.82,"saldo_total":1,"pvenda_varejo":7.35,"unidade":"UN ","codigo_original":null,"referencia":null,"gtin":"00000051017194","sub_grupo":"IMPORTACAO DE DADOS","grupo":"IMPORTACAO DE DADOS","fabricante":"IMPORTACAO DE DADOS","desconto_maximo_varejo_vlr":0,"desconto_maximo_atacado_vlr":0,"desconto_maximo_super_atacado_vlr":0,"desconto_maximo_varejo_prc":0,"desconto_maximo_atacado_prc":0,"desconto_maximo_super_atacado_prc":0,"quantidade_minima_atacado":0,"quantidade_minima_super_atacado":0,"movimenta_fracionado":false,"nao_calcula_saldo_flex":false,"valor_unitario_original":7.35,"desconto_maximo":0,"desconto_maximo_prc":0,"tipo_preco":"V","icms_st":0,"ipi":0,"desconto_suframa":0,"invalidades":[]},{"mostrar_foto":false,"imagem":"assets/icon/favicon.png","frete_vlr":0,"acrescimo_prc":0,"acrescimo_vlr":0,"desconto_prc":0,"desconto_vlr":0,"total_liquido":15,"total_bruto":15,"valor_unitario":15,"quantidade":1,"descricao":" ADAPTADOR SOQUETE 14\\"X1/2\\"-2\\" - WORKER","aplicacao":null,"id":698868,"id_produto":841572,,"id_produto_grupo":1969,"id_produto_sub_grupo":9964,"id_produto_fabricante":26941,"tipo_alteracao_preco":1,"id_empresa":170,"pcusto":0,"pvenda_atacado":0,"pvenda_super_atacado":0,"pcompra":5.15,"pfornecedor":5.15,"saldo_total":1,"pvenda_varejo":15,"unidade":"UN ","codigo_original":null,"referencia":null,"gtin":"7899811603363 ","sub_grupo":"IMPORTACAO DE DADOS","grupo":"IMPORTACAO DE DADOS","fabricante":"IMPORTACAO DE DADOS","desconto_maximo_varejo_vlr":0,"desconto_maximo_atacado_vlr":0,"desconto_maximo_super_atacado_vlr":0,"desconto_maximo_varejo_prc":0,"desconto_maximo_atacado_prc":0,"desconto_maximo_super_atacado_prc":0,"quantidade_minima_atacado":0,"quantidade_minima_super_atacado":0,"movimenta_fracionado":false,"nao_calcula_saldo_flex":false,"valor_unitario_original":15,"desconto_maximo":0,"desconto_maximo_prc":0,"tipo_preco":"V","icms_st":0,"ipi":0,"desconto_suframa":0,"invalidades":[]}],"primeiro_vecto_dias":0,"dias_vencimento":0,"quantidade_maxima_parcelas":1,"quantidade_minima_parcelas_solicitar_autorizacao":0,"quantidade_minima_parcelas_exigir_entrada":1,"quantidade_maxima_parcelas_com_desconto":1,"comissao_prc_sobre_vendas":0,"desconto_maximo":0,"entrada_minima":0,"acrescimo_prc":0,"multa_boleto":null,"a_prazo":false,"parcelamento_fixo":false,"tarifa_financeira_vlr":null,"comissao_prc_sobre_servicos":0,"parcelamentos":[]},"cliente":{"descricao":"IGREJA PENTECOSTAL DEUS E AMOR","id":415200},"tipo_preco_produto":5,"view_cliente":{"id":415200,"razao":"IGREJA PENTECOSTAL DEUS E AMOR","cep":"76907834","fantasia":"IGREJA PENTECOSTAL DEUS E AMOR","codigo_municipio":"1100122","cpf_cnpj":"43208040000136","logradouro":"RUA MATO GROSSO","numero":"3182","telefone_principal":"06992689800","telefone_whatsapp":null,"complemento":"IGREJA","bairro":"PARQUE SAO PEDRO","municipio":"JI-PARANÁ","sigla_uf":"RO","atividade":null,"limite_credito_disponivel":0,"limite_credito":0,"inscricao_estadual":0,"indicador_ie":9}}',
-  };
   private backbuttonSubscription: Subscription;
   constructor(
     public modal: ModalController,
@@ -168,7 +79,7 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
   getByIdOrGtin(filtro: string, valor: string) {
     if (filtro === 'id') {
       return this.objVenda.dados_json.produtos.find(
-        (c) => c.id_produto === +valor
+        (c) => c.id === +valor
       );
     } else {
       return this.objVenda.dados_json.produtos.find((c) => c.gtin === valor);
@@ -186,7 +97,7 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
     const retorno: ValueBaseModel[] = [];
     this.objVenda?.dados_json?.produtos?.forEach((p) => {
       retorno.push({
-        id: p.id_produto,
+        id: p.id,
         valor: p.quantidade,
         descricao: '',
       });
@@ -195,10 +106,10 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
     return retorno;
   }
 
-  OnConsultou(produtos: ViewProdutoEmpresa[]) {
+  OnConsultou(produtos: ViewProduto[]) {
     produtos.forEach((p) => {
       const existente = this.objVenda.dados_json.produtos.find(
-        (c) => c.id_produto === p.id_produto
+        (c) => c.id === p.id
       );
       if (existente) {
         existente.quantidade += p.quantidade;
@@ -209,7 +120,7 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
   }
 
   ajustarQuantidade(
-    registro: ViewProdutoEmpresa,
+    registro: ViewProduto,
     i: number,
     incremento: number
   ) {
@@ -225,7 +136,7 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
     this.tratarAlteracaoQuantidade(registro);
   }
 
-  tratarAlteracaoQuantidade(registro: ViewProdutoEmpresa) {
+  tratarAlteracaoQuantidade(registro: ViewProduto) {
     //primeiro forço a correto do total bruto, pode ficar negativo o liquido, mas no final pe corrigido
     OperacaoSaidaUtil.RecalcularTotais(this.objVenda.dados_json);
     this.RecalcularTotais();
@@ -240,7 +151,7 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
     }
   }
 
-  async mostrarOpcoesProduto(produto: ViewProdutoEmpresa, index: number) {
+  async mostrarOpcoesProduto(produto: ViewProduto, index: number) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Produto: ' + produto.descricao,
       mode: 'ios',
@@ -330,7 +241,7 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
     await actionSheet.present();
   }
 
-  alterouQuantidadeManualmente(registro: ViewProdutoEmpresa, novoValor) {
+  alterouQuantidadeManualmente(registro: ViewProduto, novoValor) {
     registro.quantidade = novoValor;
     if (registro.quantidade && registro.quantidade < 0) {
       registro.quantidade = 1;
@@ -342,10 +253,8 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
   async SalvarVenda() {
     try {
       this.objVenda.data = new Date().getTime();
-      // OperacaoSaidaUtil.PreecherJson(this.objVenda);
-      // await this.dados.salvarVenda(this.objVenda);
-      OperacaoSaidaUtil.PreecherJson(this.teste);
-      await this.dados.salvarVenda(this.teste);
+      OperacaoSaidaUtil.PreecherJson(this.objVenda);
+      await this.dados.salvarVenda(this.objVenda);
       this.overlay.notificarSucesso('Venda salva com sucesso!');
       this.router.navigate(['home/vendas']);
     } catch (err) {
@@ -360,7 +269,7 @@ export class TelaVendaComponent implements OnInit, OnDestroy {
     });
   }
 
-  limparObservacaoItem(produto: ViewProdutoEmpresa) {
+  limparObservacaoItem(produto: ViewProduto) {
     Util.Confirm('Limpar observação', () => {
       produto.observacao = '';
     });

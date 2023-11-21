@@ -9,7 +9,7 @@ export class Produto {
   nome: string;
   data_fabricacao: string;
   data_vencimento: string;
-  qtde_produto: number;
+  quantidade: number;
   valor_unitario: number;
   valor_total: number;
   produto_perecivel: boolean;

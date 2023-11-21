@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
-import { ViewProdutoEmpresa } from 'src/app/core/model/data-base/view-produto-empresa.model';
+import { ViewProduto } from 'src/app/core/model/data-base/view-produto.model';
 import { Util } from 'src/app/core/util.model';
 import { ProdutoUtil } from 'src/app/core/model/produto-util.model';
 import { File } from '@ionic-native/file/ngx';
@@ -17,7 +17,7 @@ import { DataBaseProvider } from 'src/app/core/service/database';
 export class ConsultaProdutoComponent implements OnInit, OnDestroy {
   @ViewChild('pesquisa') pesquisa;
   cabecalho_parente: CabecalhoPesquisaProdutoComponent;
-  registros: ViewProdutoEmpresa[] = [];
+  registros: ViewProduto[] = [];
   texto_pesquisado: string;
   path_imagens_produtos: string;
   consultando: boolean;
@@ -73,11 +73,10 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
         this.consultando = true;
         this.registros = [];
 
-        this.registros = this.dbProvider.teste;
-        // await this.dbProvider.getProdutosComPrecoJaCalculado(
-        //   filtro_pesquisa,
-        //   texto_pesquisado,
-        // );
+        this.registros = await this.dbProvider.getProdutos(
+          filtro_pesquisa,
+          texto_pesquisado
+        );
 
         if (this.registros.length === 0) {
           this.overlay.showToast('Nenhum resultado encontrado', 'light');
@@ -96,9 +95,7 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
 
         if (produtosJaAdicionados?.length > 0) {
           produtosJaAdicionados.forEach((lancada) => {
-            const pConsulta = this.registros.find(
-              (c) => c.id_produto === lancada.id
-            );
+            const pConsulta = this.registros.find((c) => c.id === lancada.id);
             if (pConsulta) {
               if (pConsulta.quantidade_adicionada > 0) {
                 pConsulta.quantidade_adicionada += lancada.valor;
@@ -121,17 +118,17 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
     }
   }
 
-  async carregarImagemProduto(produto: ViewProdutoEmpresa) {
+  async carregarImagemProduto(produto: ViewProduto) {
     try {
       const base = await this.file.readAsDataURL(
         this.path_imagens_produtos,
-        `${produto.id_produto}_1.png`
+        `${produto.id}_1.png`
       );
       produto.imagem = base;
     } catch {}
   }
 
-  aumentarQuantidade(registro: ViewProdutoEmpresa) {
+  aumentarQuantidade(registro: ViewProduto) {
     if (!registro.quantidade) {
       registro.quantidade = 0;
     }
@@ -139,20 +136,20 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
     this.CalcularPrecoETotalBruto(registro);
   }
 
-  onAlterouQuantidadeManualmente(registro: ViewProdutoEmpresa) {
+  onAlterouQuantidadeManualmente(registro: ViewProduto) {
     if (registro.quantidade > 0) {
       this.CalcularPrecoETotalBruto(registro);
     }
   }
 
-  mostrarFoto(registro: ViewProdutoEmpresa) {
+  mostrarFoto(registro: ViewProduto) {
     registro.mostrar_foto = !registro.mostrar_foto;
     if (registro.mostrar_foto) {
       this.carregarImagemProduto(registro);
     }
   }
 
-  diminuirQuantidade(registro: ViewProdutoEmpresa) {
+  diminuirQuantidade(registro: ViewProduto) {
     if (!registro.quantidade) {
       registro.quantidade = 0;
     }
@@ -163,11 +160,8 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
     }
   }
 
-  CalcularPrecoETotalBruto(registro: ViewProdutoEmpresa) {
-    ProdutoUtil.CalcularPrecoETotalBruto(
-      registro,
-      null,
-    );
+  CalcularPrecoETotalBruto(registro: ViewProduto) {
+    ProdutoUtil.CalcularPrecoETotalBruto(registro, null);
   }
 
   aplicar() {
@@ -189,7 +183,7 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
     }
   }
 
-  getFoto(index: number): ViewProdutoEmpresa {
+  getFoto(index: number): ViewProduto {
     try {
       return this.registros[index];
     } catch {
