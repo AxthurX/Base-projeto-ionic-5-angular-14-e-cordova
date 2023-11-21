@@ -1,5 +1,5 @@
 import { ViewCliente } from './data-base/view-cliente.model';
-import { ViewProdutoEmpresa } from './data-base/view-produto-empresa.model';
+import { ViewProduto } from './data-base/view-produto.model';
 import { OperacaoSaidaUtil } from './operacao-saida-util.model';
 import { ValueBaseModel } from './value-base.model';
 
@@ -18,7 +18,7 @@ export class OperacaoSaida {
 export class OperacaoSaidaJson {
   total_liquido: number;
   total_bruto: number;
-  produtos: ViewProdutoEmpresa[];
+  produtos: ViewProduto[];
   excluido: boolean;
   data_exclusao?: number;
   data: number;

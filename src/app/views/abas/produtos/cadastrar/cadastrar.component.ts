@@ -63,20 +63,20 @@ export class CadastrarComponent implements OnInit {
   }
 
   ajustarQuantidade(registro: Produto, incremento: number) {
-    if (!registro.qtde_produto) {
-      registro.qtde_produto = 0;
+    if (!registro.quantidade) {
+      registro.quantidade = 0;
     }
-    registro.qtde_produto += incremento;
-    if (registro.qtde_produto <= -1) {
-      registro.qtde_produto = null;
+    registro.quantidade += incremento;
+    if (registro.quantidade <= -1) {
+      registro.quantidade = null;
       return;
     }
   }
 
   alterouQuantidadeManualmente(registro: Produto, novoValor) {
-    registro.qtde_produto = novoValor;
-    if (registro.qtde_produto && registro.qtde_produto < 0) {
-      registro.qtde_produto = 1;
+    registro.quantidade = novoValor;
+    if (registro.quantidade && registro.quantidade < 0) {
+      registro.quantidade = 1;
     }
   }
 

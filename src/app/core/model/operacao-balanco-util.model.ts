@@ -1,4 +1,3 @@
-import { DadosEmpresa } from '../service/auth.service';
 import { Util } from '../util.model';
 import { OperacaoBalanco, OperacaoBalancoJson } from './operacao-balanco.model';
 
@@ -44,7 +43,6 @@ export class OperacaoBalancoUtil {
 
   static Validar(
     balanco: OperacaoBalancoJson,
-    dados_empresa: DadosEmpresa
   ): boolean {
     if (!balanco.estoque_locais) {
       Util.AlertWarning('Selecione um Local de estoque');

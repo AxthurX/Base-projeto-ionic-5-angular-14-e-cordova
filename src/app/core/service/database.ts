@@ -1,18 +1,14 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
-import { Empresa } from '../model/data-base/empresa.model';
-import { ProdutoEmpresa } from '../model/data-base/produto-empresa.model';
 import { Produto } from '../model/data-base/produto.model';
 import { Usuario } from '../model/data-base/usuario.model';
-import { ViewProdutoEmpresa } from '../model/data-base/view-produto-empresa.model';
+import { ViewProduto } from '../model/data-base/view-produto.model';
 import { OperacaoSaidaUtil } from '../model/operacao-saida-util.model';
 import { OperacaoSaida } from '../model/operacao-saida.model';
-import { ProdutoUtil } from '../model/produto-util.model';
 import { Util } from '../util.model';
 import { AuthService } from './auth.service';
 import { EstoqueLocais } from '../model/data-base/estoque-locais.model';
 import { Balanco } from '../model/data-base/balanco.model';
-import { BalancoItem } from '../model/data-base/balanco-item.model';
 import { OperacaoBalanco } from '../model/operacao-balanco.model';
 
 @Injectable({
@@ -20,177 +16,6 @@ import { OperacaoBalanco } from '../model/operacao-balanco.model';
 })
 export class DataBaseProvider {
   dados: SQLiteObject;
-  teste: ViewProdutoEmpresa[] = [
-    {
-      mostrar_foto: false,
-      imagem: 'assets/icon/favicon.png',
-      total_liquido: 0,
-      total_bruto: 0,
-      valor_unitario: 15,
-      quantidade: 0,
-      descricao: ' ADAPTADOR SOQUETE 14"X1/2"-2" - WORKER',
-      id: 698868,
-      id_produto: 841572,
-      pcusto: 0,
-      pvenda_atacado: 0,
-      pcompra: 5.15,
-      saldo_total: 1,
-      unidade: 'UN ',
-      codigo_original: null,
-      referencia: null,
-      gtin: '7899811603363 ',
-      sub_grupo: 'IMPORTACAO DE DADOS',
-      grupo: 'IMPORTACAO DE DADOS',
-      fabricante: 'IMPORTACAO DE DADOS',
-      valor_unitario_original: 15,
-      observacao: null,
-    },
-    {
-      mostrar_foto: false,
-      imagem: 'assets/icon/favicon.png',
-      total_liquido: 0,
-      total_bruto: 0,
-      valor_unitario: 7.35,
-      quantidade: 0,
-      descricao: ' BARRA ROSCADA UNC ZB 1/4" 1M - CISER',
-      id: 699033,
-      id_produto: 841573,
-      pcusto: 0,
-      pvenda_atacado: 0,
-      pcompra: 3.82,
-      saldo_total: 1,
-      unidade: 'UN ',
-      codigo_original: null,
-      referencia: null,
-      gtin: '00000051017194',
-      sub_grupo: 'IMPORTACAO DE DADOS',
-      grupo: 'IMPORTACAO DE DADOS',
-      fabricante: 'IMPORTACAO DE DADOS',
-      valor_unitario_original: 7.35,
-      observacao: null,
-    },
-    {
-      mostrar_foto: false,
-      imagem: 'assets/icon/favicon.png',
-      total_liquido: 0,
-      total_bruto: 0,
-      valor_unitario: 13.5,
-      quantidade: 0,
-      descricao: ' BITS 7 PCS C/ ADAP MAG + POZIDRIV',
-      id: 698597,
-      id_produto: 841035,
-      pcusto: 0,
-      pvenda_atacado: 0,
-      pcompra: 4.2,
-      saldo_total: 4,
-      unidade: 'UN ',
-      codigo_original: null,
-      referencia: null,
-      gtin: '7899095459069 ',
-      sub_grupo: 'IMPORTACAO DE DADOS',
-      grupo: 'IMPORTACAO DE DADOS',
-      fabricante: 'IMPORTACAO DE DADOS',
-      valor_unitario_original: 13.5,
-      observacao: null,
-    },
-    {
-      mostrar_foto: false,
-      imagem: 'assets/icon/favicon.png',
-      total_liquido: 0,
-      total_bruto: 0,
-      valor_unitario: 15,
-      quantidade: 0,
-      descricao: ' BITS PHILLIPS 05 PCS CRV - 50 MM',
-      id: 698545,
-      id_produto: 841022,
-      pcusto: 0,
-      pvenda_atacado: 0,
-      pcompra: 3.36,
-      saldo_total: 0,
-      unidade: 'UN ',
-      codigo_original: null,
-      referencia: null,
-      gtin: '7899095409606 ',
-      sub_grupo: 'IMPORTACAO DE DADOS',
-      grupo: 'IMPORTACAO DE DADOS',
-      fabricante: 'IMPORTACAO DE DADOS',
-      valor_unitario_original: 15,
-      observacao: null,
-    },
-    {
-      mostrar_foto: false,
-      imagem: 'assets/icon/favicon.png',
-      total_liquido: 0,
-      total_bruto: 0,
-      valor_unitario: 11.3,
-      quantidade: 0,
-      descricao: ' CABO FLEXSIL 750 V 10,00 PRETO',
-      id: 700391,
-      id_produto: 842614,
-      pcusto: 0,
-      pvenda_atacado: 0,
-      pcompra: 5.5,
-      saldo_total: 306.5,
-      unidade: 'M  ',
-      codigo_original: null,
-      referencia: null,
-      gtin: '7897381636248 ',
-      sub_grupo: 'IMPORTACAO DE DADOS',
-      grupo: 'IMPORTACAO DE DADOS',
-      fabricante: 'IMPORTACAO DE DADOS',
-      valor_unitario_original: 11.3,
-      observacao: null,
-    },
-    {
-      mostrar_foto: false,
-      imagem: 'assets/icon/favicon.png',
-      total_liquido: 0,
-      total_bruto: 0,
-      valor_unitario: 178.4,
-      quantidade: 0,
-      descricao:
-        ' DUCHA HIG.2010 C 31  STANDER VEDANTE GATILHO METAL "SACOLINHA"',
-      id: 698184,
-      id_produto: 840077,
-      pcusto: 0,
-      pvenda_atacado: 0,
-      pcompra: 80.2,
-      saldo_total: 3,
-      unidade: 'UN ',
-      codigo_original: null,
-      referencia: null,
-      gtin: '7898532095587 ',
-      sub_grupo: 'IMPORTACAO DE DADOS',
-      grupo: 'IMPORTACAO DE DADOS',
-      fabricante: 'IMPORTACAO DE DADOS',
-      valor_unitario_original: 178.4,
-      observacao: null,
-    },
-    {
-      mostrar_foto: false,
-      imagem: 'assets/icon/favicon.png',
-      total_liquido: 0,
-      total_bruto: 0,
-      valor_unitario: 0.69,
-      quantidade: 0,
-      descricao: ' FIO NYLON 1,8MM 5,0KG',
-      id: 698983,
-      id_produto: 841298,
-      pcusto: 0,
-      pvenda_atacado: 0,
-      pcompra: 0.28,
-      saldo_total: 813.02,
-      unidade: 'M  ',
-      codigo_original: null,
-      referencia: null,
-      gtin: '7891117058304 ',
-      sub_grupo: 'IMPORTACAO DE DADOS',
-      grupo: 'IMPORTACAO DE DADOS',
-      fabricante: 'IMPORTACAO DE DADOS',
-      valor_unitario_original: 0.69,
-      observacao: null,
-    },
-  ];
   limit_consulta_produtos = 100;
   constructor(private sqlite: SQLite, private auth: AuthService) {}
 
@@ -218,14 +43,13 @@ export class DataBaseProvider {
       .catch((e) => console.log(e));
   }
 
-  public getProdutosEmpresa(filtro_pesquisa: string, pesquisa: string) {
-    const retorno: ViewProdutoEmpresa[] = [];
+  public getProdutos(filtro_pesquisa: string, pesquisa: string) {
+    const retorno: ViewProduto[] = [];
     if (!pesquisa) {
       pesquisa = '';
     }
     const id: number = +pesquisa.trim();
-    let sql =
-      'select produto_empresa.id, produto_empresa.id, produto_empresa.id_produto, produto.id, id_produto_grupo, produto_grupo.id, id_produto_sub_grupo, produto_sub_grupo.id, id_produto_fabricante, produto_fabricante.id, produto.descricao, produto.referencia, produto.aplicacao, produto.ativo ativo_produto, produto_empresa.ativo ativo_produto_empresa, produto.codigo_original, produto.gtin, produto.movimenta_fracionado, produto.nao_calcula_saldo_flex, produto.tipo_alteracao_preco, produto.unidade, produto_empresa.pcusto, produto_empresa.pvenda_atacado, produto_empresa.pvenda_super_atacado, produto_empresa.pvenda_varejo, produto_empresa.saldo_total, produto_empresa.id_empresa, produto_sub_grupo.descricao sub_grupo, produto_grupo.descricao grupo, produto_fabricante.descricao fabricante, produto_empresa.desconto_maximo_varejo_prc, produto_empresa.desconto_maximo_atacado_prc, produto_empresa.desconto_maximo_super_atacado_prc, produto_empresa.quantidade_minima_atacado, produto_empresa.quantidade_minima_super_atacado, produto_empresa.desconto_maximo_varejo_vlr, produto_empresa.desconto_maximo_atacado_vlr, produto_empresa.desconto_maximo_super_atacado_vlr, produto_empresa.pcompra, produto_empresa.pfornecedor from produto_empresa join produto on produto.id = produto_empresa.id_produto join produto_sub_grupo on produto_sub_grupo.id = produto.id_produto_sub_grupo join produto_grupo on produto_grupo.id = produto_sub_grupo.id_produto_grupo join produto_fabricante on produto_fabricante.id = produto.id_produto_fabricante';
+    let sql = 'select * from produto';
 
     //gambis, passando direto os ids dos produtos na consulta
     if (pesquisa.startsWith('produto.id in')) {
@@ -257,21 +81,12 @@ export class DataBaseProvider {
         if (data.rows.length > 0) {
           for (let i = 0; i < data.rows.length; i++) {
             const registro = data.rows.item(i);
-            const newItem = new ViewProdutoEmpresa();
+            const newItem = new ViewProduto();
             newItem.descricao = registro.descricao;
             newItem.id = +registro.id;
-            newItem.id_produto = +registro.id_produto;
-            newItem.pcusto = registro.pcusto;
-            newItem.pvenda_atacado = registro.pvenda_atacado;
-            newItem.pcompra = registro.pcompra;
-            newItem.saldo_total = registro.saldo_total;
             newItem.unidade = registro.unidade;
             newItem.codigo_original = registro.codigo_original;
-            newItem.referencia = registro.referencia;
             newItem.gtin = registro.gtin;
-            newItem.sub_grupo = registro.sub_grupo;
-            newItem.grupo = registro.grupo;
-            newItem.fabricante = registro.fabricante;
 
             retorno.push(newItem);
           }
@@ -499,32 +314,6 @@ export class DataBaseProvider {
       });
   }
 
-  public getEmpresa(id: number) {
-    let retorno: Empresa = null;
-    const sql = 'select * from empresa where id = ' + id;
-    return this.dados
-      .executeSql(sql, [])
-      .then((data: any) => {
-        if (data.rows.length > 0) {
-          for (let i = 0; i < data.rows.length; i++) {
-            const registro = data.rows.item(i);
-            retorno = new Empresa();
-            retorno.id = +registro.id;
-            retorno.consultar_apenas_produto_saldo_maior_zero = Util.AnyToBool(
-              registro.consultar_apenas_produto_saldo_maior_zero
-            );
-            break;
-          }
-        }
-        return retorno;
-      })
-      .catch((e) => {
-        Util.TratarErro(e);
-
-        return retorno;
-      });
-  }
-
   public getUsuario(id_colaborador: number) {
     let retorno: Usuario = null;
     const sql =
@@ -555,40 +344,6 @@ export class DataBaseProvider {
       });
   }
 
-  public async getProdutosComPrecoJaCalculado(
-    filtro_pesquisa: string,
-    texto_pesquisado: string
-  ) {
-    try {
-      const itensTabelaPreco = null; // await this.getItensTabelaPreco(
-      // );
-
-      const registros = await this.getProdutosEmpresa(
-        filtro_pesquisa,
-        texto_pesquisado
-      );
-
-      registros.forEach((r) => {
-        r.quantidade = 0;
-        let valor_tabela = null;
-
-        const tabelaPreco = itensTabelaPreco.find(
-          (c) => c.id_produto_empresa === r.id
-        );
-        if (tabelaPreco) {
-          valor_tabela = tabelaPreco.valor;
-        }
-
-        ProdutoUtil.CalcularPrecoETotalBruto(r, null);
-      });
-
-      return registros;
-    } catch (e) {
-      console.error('getProdutosComPrecoJaCalculado', e);
-      throw e;
-    }
-  }
-
   public setBalanco(registros: Balanco[]): Promise<any> {
     const sqlStatements: any[] = [];
 
@@ -609,30 +364,12 @@ export class DataBaseProvider {
     return this.dados.sqlBatch(sqlStatements);
   }
 
-  public setBalancoItem(registros: BalancoItem[]): Promise<any> {
-    const sqlStatements: any[] = [];
-
-    registros.forEach((registro) => {
-      sqlStatements.push([
-        'insert into balanco_item (id, id_balanco, saldo_novo, observacao) values (?, ?, ?, ?)',
-        [
-          registro.id,
-          registro.id_balanco,
-          registro.saldo_novo,
-          registro.observacao,
-        ],
-      ]);
-    });
-
-    return this.dados.sqlBatch(sqlStatements);
-  }
-
   public setProdutos(registros: Produto[]): Promise<any> {
     const sqlStatements: any[] = [];
 
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into produto (id, data, descricao, gtin, codigo_original, ativo, nome, data_fabricacao, data_vencimento, qtde_produto, valor_unitario, valor_total, produto_perecivel) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'insert into produto (id, data, descricao, gtin, codigo_original, ativo, nome, data_fabricacao, data_vencimento, quantidade, valor_unitario, valor_total, produto_perecivel) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           registro.id,
           registro.data,
@@ -643,7 +380,7 @@ export class DataBaseProvider {
           registro.nome,
           registro.data_fabricacao,
           registro.data_vencimento,
-          registro.qtde_produto,
+          registro.quantidade,
           registro.valor_unitario,
           registro.valor_total,
           registro.produto_perecivel,
@@ -673,27 +410,6 @@ export class DataBaseProvider {
       sqlStatements.push([
         'insert into estoque_locais (id, descricao) values (?, ?)',
         [registro.id, registro.descricao],
-      ]);
-    });
-
-    return this.dados.sqlBatch(sqlStatements);
-  }
-
-  public setProdutosEmpresa(registros: ProdutoEmpresa[]): Promise<any> {
-    const sqlStatements: any[] = [];
-
-    registros.forEach((registro) => {
-      sqlStatements.push([
-        'insert into produto_empresa (ativo, id, id_empresa, id_produto, pcompra, pcusto, saldo_total) values (?, ?, ?, ?, ?, ?, ?)',
-        [
-          registro.ativo,
-          registro.id,
-          registro.id_empresa,
-          registro.id_produto,
-          registro.pcompra,
-          registro.pcusto,
-          registro.saldo_total,
-        ],
       ]);
     });
 
@@ -750,21 +466,6 @@ export class DataBaseProvider {
     return this.dados.sqlBatch(sqlStatements);
   }
 
-  public salvarProduto(produto: Produto): Promise<any> {
-    const sqlStatements: any[] = [];
-
-    let comando = '';
-    if (produto.id > 0) {
-      comando = 'update produto set data = ? where id = ' + produto.id;
-    } else {
-      comando = 'insert into produto (data) values (?, ?)';
-    }
-
-    sqlStatements.push([comando, [produto.data]]);
-
-    return this.dados.sqlBatch(sqlStatements);
-  }
-
   public excluirVenda(id: number): Promise<any> {
     const sqlStatements: any[] = [];
     const comando = 'delete from operacao_saida where id = ?';
@@ -776,23 +477,6 @@ export class DataBaseProvider {
     const sqlStatements: any[] = [];
     const comando = 'delete from operacao_balanco where id = ?';
     sqlStatements.push([comando, [id]]);
-    return this.dados.sqlBatch(sqlStatements);
-  }
-
-  public setEmpresas(registros: Empresa[]): Promise<any> {
-    const sqlStatements: any[] = [];
-
-    registros.forEach((registro) => {
-      sqlStatements.push([
-        'insert into empresa (id, desconto_porcentagem_maximo_permitido, consultar_apenas_produto_saldo_maior_zero) values (?, ?, ?)',
-        [
-          registro.id,
-          registro.desconto_porcentagem_maximo_permitido,
-          registro.consultar_apenas_produto_saldo_maior_zero,
-        ],
-      ]);
-    });
-
     return this.dados.sqlBatch(sqlStatements);
   }
 
@@ -830,11 +514,7 @@ export class DataBaseProvider {
       .sqlBatch([
         [
           //produto
-          'CREATE TABLE IF NOT EXISTS produto ([id] [INTEGER] primary key NOT NULL, [data] [INTEGER] NULL, [descricao] [nvarchar](120) NULL, [gtin] [nvarchar](14) NULL, [codigo_original] [nvarchar](25) NULL, [ativo] [bit] NOT NULL, [nome] [text] NOT NULL, [data_fabricacao] [INTEGER] NOT NULL, [data_vencimento] [INTEGER] NOT NULL, [qtde_produto] [INTEGER] NOT NULL, [valor_unitario] [INTEGER] NOT NULL, [valor_total] [INTEGER] NOT NULL, [produto_perecivel] [bit] NULL)',
-        ],
-        [
-          //produto_empresa
-          'CREATE TABLE IF NOT EXISTS produto_empresa ([id] [INTEGER] primary key NOT NULL, [id_produto] [INTEGER] NOT NULL,	[id_empresa] [INTEGER] NOT NULL, [pcusto] [float] NOT NULL,	[pvenda_varejo] [float] NOT NULL,	[pvenda_atacado] [float] NOT NULL,	[saldo_total] [float] NOT NULL,	[ativo] [bit] NOT NULL,	[pcompra] [float] NOT NULL)',
+          'CREATE TABLE IF NOT EXISTS produto ([id] [INTEGER] primary key NOT NULL, [data] [INTEGER] NULL, [descricao] [nvarchar](120) NULL, [gtin] [nvarchar](14) NULL, [codigo_original] [nvarchar](25) NULL, [ativo] [bit] NOT NULL, [nome] [text] NOT NULL, [data_fabricacao] [INTEGER] NOT NULL, [data_vencimento] [INTEGER] NOT NULL, [quantidade] [INTEGER] NOT NULL, [valor_unitario] [INTEGER] NOT NULL, [valor_total] [INTEGER] NOT NULL, [produto_perecivel] [bit] NULL)',
         ],
         [
           //estoque_locais
@@ -845,7 +525,7 @@ export class DataBaseProvider {
           'CREATE TABLE IF NOT EXISTS operacao_saida ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL,	[json] [text] NOT NULL, [id_cliente] [INTEGER], [sincronizado_em] [text])',
         ],
         [
-          //operacao balanco
+          //balanco
           'CREATE TABLE IF NOT EXISTS operacao_balanco ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL,	[json] [text] NOT NULL, [estoque_locais] [INTEGER], [sincronizado_em] [text])',
         ],
         [

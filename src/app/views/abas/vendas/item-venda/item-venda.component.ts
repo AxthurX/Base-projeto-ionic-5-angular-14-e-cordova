@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ViewProdutoEmpresa } from 'src/app/core/model/data-base/view-produto-empresa.model';
+import { ViewProduto } from 'src/app/core/model/data-base/view-produto.model';
 
 @Component({
   selector: 'app-item-venda',
@@ -7,7 +7,7 @@ import { ViewProdutoEmpresa } from 'src/app/core/model/data-base/view-produto-em
   styleUrls: ['./item-venda.component.scss'],
 })
 export class ItemVendaComponent {
-  @Input() registro: ViewProdutoEmpresa;
+  @Input() registro: ViewProduto;
   @Input() readonly: boolean = false;
   @Output() OnMostrarOpcoesProduto: EventEmitter<any> = new EventEmitter();
   @Output() OnLimparObservacaoItem: EventEmitter<any> = new EventEmitter();
