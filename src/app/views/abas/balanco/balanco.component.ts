@@ -31,7 +31,7 @@ export class BalancoComponent extends ClasseBase implements OnInit {
     private router: Router,
     auth: AuthService
   ) {
-    super(auth, environment.id_tela_balanco);
+    super(auth);
     this.consultando = false;
     this.balancos = [];
     this.auth.salvouBalanco$.subscribe((c) => {

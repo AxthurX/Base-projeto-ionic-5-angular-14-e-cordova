@@ -33,7 +33,7 @@ export class DetalhesBalancoComponent
     private overlay: OverlayService,
     auth: AuthService
   ) {
-    super(auth, environment.id_tela_balanco);
+    super(auth);
     this.gerando = false;
   }
 

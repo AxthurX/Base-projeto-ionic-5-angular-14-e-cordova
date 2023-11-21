@@ -37,7 +37,7 @@ export class TelaBalancoComponent
     private router: Router,
     auth: AuthService
   ) {
-    super(auth, environment.id_tela_balanco);
+    super(auth);
     this.aba_selecionada = 'detalhes';
     this.acao = '';
     this.carregando = false;

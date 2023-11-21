@@ -12,27 +12,29 @@ import { IonContent } from '@ionic/angular';
 import { OverlayService } from 'src/app/core/service/overlay.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
 import { OperacaoSaidaUtil } from 'src/app/core/model/operacao-saida-util.model';
+import { AuthService } from 'src/app/core/service/auth.service';
+import { ClasseBase } from 'src/app/core/model/classe-base.model';
 
 @Component({
   selector: 'app-vendas',
   templateUrl: './vendas.component.html',
   styleUrls: ['./vendas.component.scss'],
 })
-export class VendasComponent implements OnInit {
+export class VendasComponent extends ClasseBase implements OnInit {
   @ViewChild(IonContent) content: IonContent;
   nenhuma_venda_localizada: boolean = false;
   consultando: boolean;
-  sincronizando: boolean;
   vendas: OperacaoSaida[] = [];
   constructor(
     private actionSheetController: ActionSheetController,
     private dados: DataBaseProvider,
     private overlay: OverlayService,
     private modal: ModalController,
-    private router: Router
+    private router: Router,
+    auth: AuthService
   ) {
+    super(auth);
     this.consultando = false;
-    this.sincronizando = false;
     this.vendas = [];
   }
 
