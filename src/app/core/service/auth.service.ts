@@ -48,17 +48,8 @@ export class AuthService {
     this.salvouBalanco$.next('');
   }
 
-  setDadosEmpresaEToken(token: string, guid_instalacao: string) {
-    localStorage.setItem(this.keyToken, token);
-    localStorage.setItem(this.keyGuidInstalacao, guid_instalacao);
-  }
-
   getToken(): string {
     return localStorage.getItem(this.keyToken);
-  }
-
-  getGuideInstalacao(): string {
-    return localStorage.getItem(this.keyGuidInstalacao);
   }
 
   logout() {

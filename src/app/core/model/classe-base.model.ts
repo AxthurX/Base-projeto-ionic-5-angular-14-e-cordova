@@ -15,8 +15,6 @@ export class ClasseBase {
       next: (r) => this.limparTela(),
       error: (e) => console.error('saiuDoApp', e),
     });
-
-    const guid = this.auth.getGuideInstalacao();
   }
 
   informarManutencao(

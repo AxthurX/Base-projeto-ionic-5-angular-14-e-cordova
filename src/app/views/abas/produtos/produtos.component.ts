@@ -166,7 +166,7 @@ export class ProdutosComponent extends ClasseBase implements OnInit, OnDestroy {
   }
 
   CalcularPrecoETotalBruto(registro: ViewProduto) {
-    ProdutoUtil.CalcularPrecoETotalBruto(registro, null);
+    ProdutoUtil.CalcularPrecoETotalBruto(registro);
   }
 
   aplicar() {

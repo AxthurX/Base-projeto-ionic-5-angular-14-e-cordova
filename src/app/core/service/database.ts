@@ -34,7 +34,6 @@ export class DataBaseProvider {
       .create(this.getConfigDb())
       .then((db: SQLiteObject) => {
         this.dados = db;
-        // Criando as tabelas
         this.createTables();
       })
       .catch((e) => console.log(e));
@@ -48,7 +47,6 @@ export class DataBaseProvider {
     const id: number = +pesquisa.trim();
     let sql = 'select * from produto';
 
-    //gambis, passando direto os ids dos produtos na consulta
     if (pesquisa.startsWith('produto.id in')) {
       sql += ` where ${pesquisa}`;
     } else if (filtro_pesquisa === 'geral') {
@@ -56,13 +54,12 @@ export class DataBaseProvider {
         sql += ` where produto.id = ${id} or produto.gtin like '${pesquisa}'`;
       } else {
         pesquisa = pesquisa.toUpperCase();
-        sql += ` where produto.descricao like '%${pesquisa}%' or produto.gtin like '%${pesquisa}%' or produto.referencia like '%${pesquisa}%' or produto.aplicacao like '%${pesquisa}%' or codigo_original like '%${pesquisa}%' or produto_sub_grupo.descricao like '%${pesquisa}%' or produto_grupo.descricao like '%${pesquisa}%'  or produto_fabricante.descricao like '%${pesquisa}%'`;
+        sql += ` where produto.descricao like '%${pesquisa}%' or produto.gtin like '%${pesquisa}%' or codigo_original like '%${pesquisa}%'`;
       }
     } else if (filtro_pesquisa === 'id') {
       if (id > 0) {
         sql += ' where produto.id = ' + id;
       } else {
-        //forço um retorno vazio caso n seja um id valido
         return Promise.resolve(retorno);
       }
     } else if (filtro_pesquisa === 'gtin') {
@@ -109,7 +106,6 @@ export class DataBaseProvider {
 
   public getEstoqueLocais(pesquisa: string) {
     const retorno: EstoqueLocais[] = [];
-    const id: number = +pesquisa;
     const sql = 'select id, descricao from estoque_locais';
 
     return this.dados
@@ -131,54 +127,6 @@ export class DataBaseProvider {
       })
       .catch((e) => {
         Util.TratarErro(e);
-        return retorno;
-      });
-  }
-
-  public getMenorIdTabela(tabela: string) {
-    const retorno = 0;
-    const sql = `select min(id) id from ${tabela}`;
-
-    return this.dados
-      .executeSql(sql, [])
-      .then((data: any) => {
-        if (data.rows.length > 0) {
-          for (let i = 0; i < data.rows.length; i++) {
-            const registro = data.rows.item(i);
-            return +registro.id;
-          }
-          return retorno;
-        } else {
-          return retorno;
-        }
-      })
-      .catch((e) => {
-        Util.TratarErro(e);
-
-        return retorno;
-      });
-  }
-
-  public getQuantidadeRegistros(tabela: string) {
-    const retorno = 0;
-    const sql = `select count(id) quantidade from ${tabela}`;
-
-    return this.dados
-      .executeSql(sql, [])
-      .then((data: any) => {
-        if (data.rows.length > 0) {
-          for (let i = 0; i < data.rows.length; i++) {
-            const registro = data.rows.item(i);
-            return +registro.quantidade;
-          }
-          return retorno;
-        } else {
-          return retorno;
-        }
-      })
-      .catch((e) => {
-        Util.TratarErro(e);
-
         return retorno;
       });
   }
@@ -245,26 +193,6 @@ export class DataBaseProvider {
       });
   }
 
-  public getNumeroVersaoBanco() {
-    const retorno: number = 0;
-    const sql = 'select max(numero_versao) numero_versao from versao_banco';
-
-    return this.dados
-      .executeSql(sql, [])
-      .then((data: any) => {
-        if (data.rows.length > 0) {
-          return +data.rows.item(0).numero_versao;
-        } else {
-          return retorno;
-        }
-      })
-      .catch((e) => {
-        Util.TratarErro(e);
-
-        return retorno;
-      });
-  }
-
   public getVenda(id: number) {
     const sql = 'select * from operacao_saida where id = ' + id;
 
@@ -293,7 +221,7 @@ export class DataBaseProvider {
       });
   }
 
-  public getOperacaoBalanco(id: number) {
+  public getBalanco(id: number) {
     const sql = 'select * from operacao_balanco where id = ' + id;
 
     return this.dados
@@ -367,19 +295,6 @@ export class DataBaseProvider {
     return this.dados.sqlBatch(sqlStatements);
   }
 
-  public setAtualizacao(registros: AtualizacoesModel[]): Promise<any> {
-    const sqlStatements: any[] = [];
-
-    registros.forEach((registro) => {
-      sqlStatements.push([
-        'insert into versao_banco (numero_versao) values (?)',
-        [registro.numero_versao],
-      ]);
-    });
-
-    return this.dados.sqlBatch(sqlStatements);
-  }
-
   public setEstoqueLocais(registros: EstoqueLocais[]): Promise<any> {
     const sqlStatements: any[] = [];
     registros.forEach((registro) => {
@@ -447,11 +362,7 @@ export class DataBaseProvider {
     };
   }
 
-  /**
-   * Criando as tabelas no banco de dados
-   */
   private createTables() {
-    // Criando as tabelas
     this.dados
       .sqlBatch([
         [
@@ -481,47 +392,6 @@ export class DataBaseProvider {
       ])
       .then(async () => {
         console.log('Tabelas criadas, consultando atualizações');
-
-        const atualizacoes: AtualizacoesModel[] = [];
-        atualizacoes.push({
-          numero_versao: 1,
-          scripts: [],
-        });
-
-        let versaoAtual = await this.getNumeroVersaoBanco();
-
-        if (!versaoAtual) {
-          versaoAtual = 0;
-        }
-
-        const atualizacoesExecutar = atualizacoes.filter(
-          (c) => c.numero_versao > versaoAtual
-        );
-
-        if (atualizacoesExecutar.length > 0) {
-          const scripts = [];
-          atualizacoesExecutar.forEach((versao) => {
-            versao.scripts.forEach((script) => {
-              scripts.push([script]);
-            });
-          });
-          this.dados
-            .sqlBatch(scripts)
-            .then(() => {
-              this.setAtualizacao(atualizacoesExecutar)
-                .then(() => {
-                  console.log('Atualizações realizada com sucesso!');
-                })
-                .catch((e) => {
-                  Util.logarErro(e);
-                  Util.Notificacao('Executar registrar numero versao', 'error');
-                });
-            })
-            .catch((e) => {
-              Util.logarErro(e);
-              Util.Notificacao('Executar atualizações', 'error');
-            });
-        }
       })
       .catch((e) => {
         Util.logarErro(e);

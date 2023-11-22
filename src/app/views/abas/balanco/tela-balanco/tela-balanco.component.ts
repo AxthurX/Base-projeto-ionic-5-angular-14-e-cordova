@@ -64,7 +64,7 @@ export class TelaBalancoComponent
           this.objBalanco = new OperacaoBalanco();
         } else {
           this.dados
-            .getOperacaoBalanco(id_balanco)
+            .getBalanco(id_balanco)
             .then((balanco) => {
               this.objBalanco = balanco;
               if (this.acao === 'copiando') {
