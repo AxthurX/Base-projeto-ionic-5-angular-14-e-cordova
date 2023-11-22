@@ -43,7 +43,7 @@
           {{registro.descricao}}
         </div>
         <div class="small text-gray-500 d-flex align-items-center justify-content-between">
-          <small class="text-secondary">Saldo geral: {{registro.saldo_total | number: '1.0-3'}}</small>
+          <small class="text-secondary">Valor Total: {{registro.valor_total | number: '1.0-3'}}</small>
           <div class="input-group shop-cart-value">
             <span class="input-group-btn">
               <button (click)="diminuirQuantidade(registro)" class="btn btn-sm" type="button">-</button>

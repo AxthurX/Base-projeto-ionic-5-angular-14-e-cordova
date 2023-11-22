@@ -8,7 +8,6 @@ import { fromEvent, Subscription } from 'rxjs';
 import { CabecalhoPesquisaProdutoComponent } from 'src/app/core/components/cabecalho-pesquisa-produto/cabecalho-pesquisa-produto.component';
 import { OverlayService } from 'src/app/core/service/overlay.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
-import { Produto } from 'src/app/core/model/data-base/produto.model';
 import { CadastrarComponent } from './cadastrar/cadastrar.component';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
 import { AuthService } from 'src/app/core/service/auth.service';
@@ -92,7 +91,6 @@ export class ProdutosComponent extends ClasseBase implements OnInit, OnDestroy {
           if (this.cabecalho_parente?.permitir_quantidade_zero === true) {
             produto.quantidade = null;
           }
-          //this.carregarImagemProduto(produto);
         });
 
         const produtosJaAdicionados =
@@ -196,15 +194,7 @@ export class ProdutosComponent extends ClasseBase implements OnInit, OnDestroy {
     }
   }
 
-  getColor(tipo_preco) {
-    if (tipo_preco === 'P') {
-      return 'success';
-    } else if (tipo_preco === 'T') {
-      return 'tertiary';
-    }
-  }
-
-  async AbrirTelaCadastro(objProdutos?: Produto) {
+  async AbrirTelaCadastro() {
     const modal = await this.modal.create({
       component: CadastrarComponent,
     });
