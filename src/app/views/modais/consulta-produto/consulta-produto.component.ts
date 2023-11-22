@@ -29,7 +29,6 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
       descricao: 'TESTE',
       gtin: '212121',
       unidade: '12',
-      codigo_original: '21',
       ativo: true,
       nome: 'TESTE',
       observacao: 'TESTE',
@@ -39,8 +38,6 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
       valor_unitario: 1,
       valor_total: 2,
       total_bruto: 1,
-      total_liquido: 3,
-      saldo_total: 4,
       produto_perecivel: true,
       mostrar_foto: false,
       valor_unitario_original: 2,
@@ -98,11 +95,12 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
         this.consultando = true;
         this.registros = [];
 
-        this.registros = this.teste;
-        // this.registros = await this.dbProvider.getProdutos(
-        //   filtro_pesquisa,
-        //   texto_pesquisado
-        // );
+        this.registros = await this.dbProvider.getProdutos(
+          filtro_pesquisa,
+          texto_pesquisado
+        );
+
+        this.registros.push(...this.teste);
 
         if (this.registros.length === 0) {
           this.overlay.showToast('Nenhum resultado encontrado', 'light');

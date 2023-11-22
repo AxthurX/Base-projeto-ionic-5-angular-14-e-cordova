@@ -4,7 +4,6 @@ export class ViewProduto {
   descricao: string;
   gtin: string;
   unidade: string;
-  codigo_original: string;
   ativo: boolean;
   nome: string;
   observacao: string;
@@ -14,8 +13,6 @@ export class ViewProduto {
   valor_unitario: number;
   valor_total: number;
   total_bruto: number;
-  total_liquido: number;
-  saldo_total: number;
   produto_perecivel: boolean;
   mostrar_foto: boolean = false;
   valor_unitario_original?: number;
@@ -23,7 +20,6 @@ export class ViewProduto {
   //campos auxiliar para a venda
   quantidade_adicionada?: number;
   alterou_valor_manualmente?: boolean;
-  valor_liquido?: number;
   constructor() {
     this.quantidade = this.valor_unitario = 0;
   }

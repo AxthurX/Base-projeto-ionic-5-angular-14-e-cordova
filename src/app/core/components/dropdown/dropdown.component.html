@@ -35,9 +35,8 @@
             <ion-grid *ngIf="modal">
               <ion-row>
                 <ion-col size="3" class="input-group">
-                  <input (keyup.enter)="onBuscarPorId($event)" *ngIf="value" [value]="value.id"
-                    style="height: 25px;" type="number"
-                    class="form-control border-form-control form-control-sm input-number" />
+                  <input (keyup.enter)="onBuscarPorId($event)" *ngIf="value" [value]="value.id" style="height: 25px;"
+                    type="number" class="form-control border-form-control form-control-sm input-number" />
                   <input (keyup.enter)="onBuscarPorId($event)" *ngIf="!value" style="height: 25px;" type="number"
                     class="form-control border-form-control form-control-sm input-number" />
                 </ion-col>

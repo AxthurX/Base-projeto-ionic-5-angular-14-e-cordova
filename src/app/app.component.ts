@@ -15,8 +15,8 @@ export class AppComponent {
   public tema: string;
   constructor(
     protected color: ColorSchemeService,
-    private appVersion: AppVersion,
     protected menuCtrl: MenuController,
+    private appVersion: AppVersion,
     private statusBar: StatusBar,
     private platform: Platform,
     protected rota: Router

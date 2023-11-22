@@ -1,6 +1,7 @@
 export class Produto {
   id: number;
   data: number;
+  detalhar: boolean;
   descricao: string;
   gtin: string;
   unidade: string;

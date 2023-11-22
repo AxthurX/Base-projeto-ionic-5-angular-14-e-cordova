@@ -4,11 +4,11 @@
   </div>
   <div class="shop-cart-right">
     <div (click)="mostrarOpcoesProduto()">
-      <h6 class="font-weight-bold text-dark mb-2 small">
+      <h6 class="font-weight-bold text-dark mb-1 small">
         <span class="text-secondary font-weight-normal">
           Cód: {{registro.id}}
         </span> |
-        <ion-badge color="success">
+        <ion-badge color="success" style="vertical-align: bottom;">
           R$ {{registro.valor_unitario | number: '1.2-2'}}
         </ion-badge>
       </h6>
@@ -36,7 +36,7 @@
         </span>
       </div>
       <h6>
-        Líq.: <b>R${{registro.total_liquido | number: '1.2-2'}}</b>
+        Líq.: <b>R${{registro.total_bruto | number: '1.2-2'}}</b>
       </h6>
     </div>
   </div>

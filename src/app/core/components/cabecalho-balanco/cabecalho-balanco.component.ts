@@ -8,7 +8,6 @@ import { OperacaoBalancoJson } from '../../model/operacao-balanco.model';
 })
 export class CabecalhoBalancoComponent {
   @Input() objBalanco: OperacaoBalancoJson;
-
   constructor() {}
 
   GetClasse() {}

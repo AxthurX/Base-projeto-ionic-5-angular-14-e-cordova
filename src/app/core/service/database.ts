@@ -5,7 +5,6 @@ import { ViewProduto } from '../model/data-base/view-produto.model';
 import { OperacaoSaidaUtil } from '../model/operacao-saida-util.model';
 import { OperacaoSaida } from '../model/operacao-saida.model';
 import { Util } from '../util.model';
-import { EstoqueLocais } from '../model/data-base/estoque-locais.model';
 import { Balanco } from '../model/data-base/balanco.model';
 import { OperacaoBalanco } from '../model/operacao-balanco.model';
 
@@ -54,7 +53,7 @@ export class DataBaseProvider {
         sql += ` where produto.id = ${id} or produto.gtin like '${pesquisa}'`;
       } else {
         pesquisa = pesquisa.toUpperCase();
-        sql += ` where produto.descricao like '%${pesquisa}%' or produto.gtin like '%${pesquisa}%' or codigo_original like '%${pesquisa}%'`;
+        sql += ` where produto.descricao like '%${pesquisa}%' or produto.gtin like '%${pesquisa}%'`;
       }
     } else if (filtro_pesquisa === 'id') {
       if (id > 0) {
@@ -80,7 +79,6 @@ export class DataBaseProvider {
             newItem.descricao = registro.descricao;
             newItem.gtin = registro.gtin;
             newItem.unidade = registro.unidade;
-            newItem.codigo_original = registro.codigo_original;
             newItem.ativo = registro.ativo;
             newItem.nome = registro.nome;
             newItem.data_fabricacao = registro.data_fabricacao;
@@ -89,33 +87,6 @@ export class DataBaseProvider {
             newItem.valor_unitario = registro.valor_unitario;
             newItem.valor_total = registro.valor_total;
             newItem.imagem = registro.imagem;
-            newItem.descricao = registro.descricao;
-
-            retorno.push(newItem);
-          }
-          return retorno;
-        } else {
-          return retorno;
-        }
-      })
-      .catch((e) => {
-        Util.TratarErro(e);
-        return retorno;
-      });
-  }
-
-  public getEstoqueLocais(pesquisa: string) {
-    const retorno: EstoqueLocais[] = [];
-    const sql = 'select id, descricao from estoque_locais';
-
-    return this.dados
-      .executeSql(sql, [])
-      .then((data: any) => {
-        if (data.rows.length > 0) {
-          for (let i = 0; i < data.rows.length; i++) {
-            const registro = data.rows.item(i);
-            const newItem = new EstoqueLocais();
-            newItem.id = +registro.id;
             newItem.descricao = registro.descricao;
 
             retorno.push(newItem);
@@ -144,7 +115,6 @@ export class DataBaseProvider {
             const newItem = new OperacaoSaida();
             newItem.id = +registro.id;
             newItem.data = +registro.data;
-            newItem.id_cliente = registro.id_cliente;
             newItem.json = registro.json;
             newItem.sincronizado_em = registro.sincronizado_em;
 
@@ -176,7 +146,6 @@ export class DataBaseProvider {
             newItem.id = +registro.id;
             newItem.data = +registro.data;
             newItem.json = registro.json;
-            newItem.estoque_locais = +registro.estoque_locais;
             newItem.sincronizado_em = registro.sincronizado_em;
 
             retorno.push(newItem);
@@ -205,7 +174,6 @@ export class DataBaseProvider {
             const newItem = new OperacaoSaida();
             newItem.id = +registro.id;
             newItem.data = +registro.data;
-            newItem.id_cliente = registro.id_cliente;
             newItem.json = registro.json;
             OperacaoSaidaUtil.PreecherDadosJson(newItem);
             return newItem;
@@ -233,7 +201,6 @@ export class DataBaseProvider {
             const newItem = new OperacaoBalanco();
             newItem.id = +registro.id;
             newItem.data = +registro.data;
-            newItem.estoque_locais = +registro.estoque_locais;
             newItem.json = registro.json;
             return newItem;
           }
@@ -273,13 +240,12 @@ export class DataBaseProvider {
 
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into produto (id, data, descricao, gtin, codigo_original, ativo, nome, data_fabricacao, data_vencimento, quantidade, valor_unitario, valor_total, produto_perecivel) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'insert into produto (id, data, descricao, gtin, ativo, nome, data_fabricacao, data_vencimento, quantidade, valor_unitario, valor_total, produto_perecivel) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           registro.id,
           registro.data,
           registro.descricao,
           registro.gtin,
-          registro.codigo_original,
           registro.ativo,
           registro.nome,
           registro.data_fabricacao,
@@ -295,32 +261,18 @@ export class DataBaseProvider {
     return this.dados.sqlBatch(sqlStatements);
   }
 
-  public setEstoqueLocais(registros: EstoqueLocais[]): Promise<any> {
-    const sqlStatements: any[] = [];
-    registros.forEach((registro) => {
-      sqlStatements.push([
-        'insert into estoque_locais (id, descricao) values (?, ?)',
-        [registro.id, registro.descricao],
-      ]);
-    });
-
-    return this.dados.sqlBatch(sqlStatements);
-  }
-
   public salvarVenda(venda: OperacaoSaida): Promise<any> {
     const sqlStatements: any[] = [];
 
     let comando = '';
     if (venda.id > 0) {
       comando =
-        'update operacao_saida set data = ?, id_cliente = ?, json = ? where id = ' +
-        venda.id;
+        'update operacao_saida set data = ?, json = ? where id = ' + venda.id;
     } else {
-      comando =
-        'insert into operacao_saida (data, id_cliente, json) values (?, ?, ?)';
+      comando = 'insert into operacao_saida (data, json) values (?, ?)';
     }
 
-    sqlStatements.push([comando, [venda.data, venda.id_cliente, venda.json]]);
+    sqlStatements.push([comando, [venda.data, venda.json]]);
 
     return this.dados.sqlBatch(sqlStatements);
   }
@@ -367,23 +319,15 @@ export class DataBaseProvider {
       .sqlBatch([
         [
           //produto
-          'CREATE TABLE IF NOT EXISTS produto ([id] [INTEGER] primary key NOT NULL, [data] [INTEGER] NULL, [descricao] [nvarchar](120) NULL, [gtin] [nvarchar](14) NULL, [codigo_original] [nvarchar](25) NULL, [ativo] [bit] NOT NULL, [nome] [text] NOT NULL, [data_fabricacao] [INTEGER] NOT NULL, [data_vencimento] [INTEGER] NOT NULL, [quantidade] [INTEGER] NOT NULL, [valor_unitario] [INTEGER] NOT NULL, [valor_total] [INTEGER] NOT NULL, [produto_perecivel] [bit] NULL)',
-        ],
-        [
-          //estoque_locais
-          'CREATE TABLE IF NOT EXISTS estoque_locais ([id] [INTEGER] primary key NOT NULL,	[descricao] [nvarchar](100) NOT NULL)',
+          'CREATE TABLE IF NOT EXISTS produto ([id] [INTEGER] primary key NOT NULL, [data] [INTEGER] NULL, [descricao] [nvarchar](120) NULL, [gtin] [nvarchar](14) NULL, [ativo] [bit] NOT NULL, [nome] [text] NOT NULL, [data_fabricacao] [INTEGER] NOT NULL, [data_vencimento] [INTEGER] NOT NULL, [quantidade] [INTEGER] NOT NULL, [valor_unitario] [INTEGER] NOT NULL, [valor_total] [INTEGER] NOT NULL, [produto_perecivel] [bit] NULL)',
         ],
         [
           //operacao saida
-          'CREATE TABLE IF NOT EXISTS operacao_saida ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL,	[json] [text] NOT NULL, [id_cliente] [INTEGER], [sincronizado_em] [text])',
+          'CREATE TABLE IF NOT EXISTS operacao_saida ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL,	[json] [text] NOT NULL, [sincronizado_em] [text])',
         ],
         [
           //balanco
-          'CREATE TABLE IF NOT EXISTS operacao_balanco ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL,	[json] [text] NOT NULL, [estoque_locais] [INTEGER], [sincronizado_em] [text])',
-        ],
-        [
-          //usuario
-          'CREATE TABLE IF NOT EXISTS usuario ([id] [INTEGER] primary key, [desconto_porcentagem_maximo_permitido] [float] NOT NULL, [bloquear_acesso_aos_custos_produto] [bit], [id_colaborador] [INTEGER] NOT NULL)',
+          'CREATE TABLE IF NOT EXISTS operacao_balanco ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL,	[json] [text] NOT NULL, [sincronizado_em] [text])',
         ],
         [
           //versao do banco para controlar o scripts de atualização
