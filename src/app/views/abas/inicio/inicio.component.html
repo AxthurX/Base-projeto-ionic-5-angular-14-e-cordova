@@ -1,9 +1,9 @@
 <ion-header class="osahan-nav">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <app-btn-voltar #btnVoltar></app-btn-voltar>
+      <ion-menu-button menu="main-manu"></ion-menu-button>
     </ion-buttons>
-    <ion-title> Inicio </ion-title>
+    <ion-title class="text-center" style="color: #fff !important;">Início</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -26,9 +26,12 @@
           <ion-label>Produtos</ion-label>
         </div>
       </div>
-      <!-- <ion-badge (click)="limparAplicativo()" color="danger">
+
+      <!--
+        <ion-badge (click)="limparAplicativo()" color="danger">
         <ion-icon name="trash-outline"></ion-icon> Limpar aplicativo
-      </ion-badge> -->
+      </ion-badge>
+    -->
     </div>
   </div>
 </ion-content>

@@ -10,7 +10,6 @@ import { Util } from 'src/app/core/util.model';
 import { PDFGenerator, PDFGeneratorOptions } from '@awesome-cordova-plugins/pdf-generator/ngx';
 import { OperacaoBalancoJson } from '../../../../core/model/operacao-balanco.model';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
-import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { OverlayService } from '../../../../core/service/overlay.service';
 

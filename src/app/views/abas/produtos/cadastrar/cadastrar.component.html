@@ -18,9 +18,6 @@
           <ion-label color="primary" position="stacked" class="mb-1 align-self-center">
             <b>Nome</b>
             <ion-text color="danger">*</ion-text>
-            <ion-text class="pulse" color="danger" *ngIf="submitted && !produto.nome">
-              <b>Campo obrigatório</b>
-            </ion-text>
           </ion-label>
           <input class="native-input sc-ion-input-md rounded-4 align-self-center text-center" [(ngModel)]="produto.nome"
             name="nome" type="text" maxlength="60" required />
@@ -34,8 +31,9 @@
           <ion-datetime-button datetime="data_fabricacao"></ion-datetime-button>
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
-              <ion-datetime [(ngModel)]="produto.data_fabricacao" name="data_fabricacao" presentation="date"
-                id="data_fabricacao" max="2100" cancel-tex="Cancelar" done-text="Ok">
+              <ion-datetime [(ngModel)]="produto.data_fabricacao" (ngModelChange)="GetDiasRestantes(produto)"
+                displayFormat="MMM DD, h:mm A" name="data_fabricacao" presentation="date" id="data_fabricacao"
+                max="2100" cancel-tex="Cancelar" done-text="Ok">
               </ion-datetime>
             </ng-template>
           </ion-modal>
@@ -50,9 +48,9 @@
           <ion-datetime-button datetime="data_vencimento"></ion-datetime-button>
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
-              <ion-datetime [(ngModel)]="produto.data_vencimento" (click)="calcularDiasRestantes()"
-                name="data_vencimento" presentation="date" id="data_vencimento" max="2100" cancel-tex="Cancelar"
-                done-text="Ok">
+              <ion-datetime [(ngModel)]="produto.data_vencimento" (click)="GetDiasRestantes(produto)"
+                displayFormat="MMM DD, h:mm A" name="data_vencimento" presentation="date" id="data_vencimento"
+                max="2100" cancel-tex="Cancelar" done-text="Ok">
               </ion-datetime>
             </ng-template>
           </ion-modal>

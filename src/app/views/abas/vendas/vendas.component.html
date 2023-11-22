@@ -25,9 +25,10 @@
         [objVenda]="objVenda.dados_json">
       </app-cabecalho-venda>
     </ng-container>
-    <!-- <h5 *ngIf="nenhuma_venda_localizada" style="margin-top: 5px;" class="text-center alert alert-warning">
+    <h5 *ngIf="nenhuma_venda_localizada" style="margin-top: 5px;"
+      class="text-center font-weight-bold alert alert-warning small">
       Nenhuma venda localizada
-    </h5> -->
+    </h5>
   </ng-template>
 
   <br />
@@ -35,7 +36,7 @@
   <br />
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="success" (click)="AbrirTelaVenda()">
+    <ion-fab-button color="primary" (click)="AbrirTelaVenda()">
       <ion-icon name="add-circle"></ion-icon>
     </ion-fab-button>
   </ion-fab>

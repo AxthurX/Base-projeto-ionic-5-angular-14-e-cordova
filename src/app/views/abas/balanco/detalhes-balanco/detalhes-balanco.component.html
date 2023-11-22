@@ -24,11 +24,6 @@
           <td>{{ objBalanco.data | date : "dd/MM/yyyy HH:mm" }}</td>
         </tr>
         <tr>
-          <td class="text-right"><b>Local de estoque</b></td>
-          <td>
-            {{ objBalanco.estoque_locais.id }} -
-            {{ objBalanco.estoque_locais.descricao }}
-          </td>
           <td class="text-right"><b>Qtde de produtos</b></td>
           <td>
             {{ objBalanco.produtos.length }}

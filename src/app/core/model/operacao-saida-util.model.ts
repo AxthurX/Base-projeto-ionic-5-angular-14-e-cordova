@@ -44,7 +44,6 @@ export class OperacaoSaidaUtil {
 
         venda.quantidade_produtos_lancados += quantidade;
         venda.total_bruto += produto.total_bruto;
-        venda.total_liquido += produto.total_liquido;
         venda.total_bruto = Util.GetValorArredondado(venda.total_bruto);
       });
 
@@ -55,10 +54,6 @@ export class OperacaoSaidaUtil {
   static Validar(
     venda: OperacaoSaidaJson,
   ): boolean {
-    if (!venda.cliente) {
-      Util.AlertWarning('Selecione um cliente');
-      return false;
-    }
     if (venda.produtos.length === 0) {
       Util.AlertWarning('Adicione um ou mais produtos na venda');
       return false;
@@ -70,13 +65,7 @@ export class OperacaoSaidaUtil {
       Util.AlertWarning('Existem produtos com quantidade inválida');
       return false;
     }
-    if (
-      venda.produtos.filter((c) => !c.total_liquido || c.total_liquido === 0)
-        .length > 0
-    ) {
-      Util.AlertWarning('Existem produtos com total líquido inválido');
-      return false;
-    }
+
     if (!venda.total_liquido || venda.total_liquido === 0) {
       Util.AlertWarning('O total líquido da venda está inválido');
       return false;

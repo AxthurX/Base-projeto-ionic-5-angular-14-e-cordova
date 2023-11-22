@@ -154,7 +154,7 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
           } else {
             registros.forEach((r) => {
               r.quantidade = 1;
-              ProdutoUtil.CalcularPrecoETotalBruto(r, null);
+              ProdutoUtil.CalcularPrecoETotalBruto(r);
             });
 
             this.OnConsultou.emit(registros);

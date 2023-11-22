@@ -22,6 +22,28 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
   path_imagens_produtos: string;
   consultando: boolean;
   apenas_consulta: boolean;
+  teste: ViewProduto[] = [
+    {
+      id: 1,
+      data: new Date().getTime(),
+      descricao: 'TESTE',
+      gtin: '212121',
+      unidade: '12',
+      ativo: true,
+      nome: 'TESTE',
+      observacao: 'TESTE',
+      data_fabricacao: new Date().toISOString(),
+      data_vencimento: new Date().toISOString(),
+      quantidade: 1,
+      valor_unitario: 1,
+      valor_total: 2,
+      total_bruto: 1,
+      produto_perecivel: true,
+      mostrar_foto: false,
+      valor_unitario_original: 2,
+      imagem: null
+    },
+  ];
   private backbuttonSubscription: Subscription;
   constructor(
     public modal: ModalController,
@@ -77,6 +99,8 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
           filtro_pesquisa,
           texto_pesquisado
         );
+
+        this.registros.push(...this.teste);
 
         if (this.registros.length === 0) {
           this.overlay.showToast('Nenhum resultado encontrado', 'light');
@@ -159,7 +183,7 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
   }
 
   CalcularPrecoETotalBruto(registro: ViewProduto) {
-    ProdutoUtil.CalcularPrecoETotalBruto(registro, null);
+    ProdutoUtil.CalcularPrecoETotalBruto(registro);
   }
 
   aplicar() {

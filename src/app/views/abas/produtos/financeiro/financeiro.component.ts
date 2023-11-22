@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { fromEvent, Subscription } from 'rxjs';
 import { Produto } from 'src/app/core/model/data-base/produto.model';
-import { ViewCliente } from 'src/app/core/model/data-base/view-cliente.model';
 import { Util } from 'src/app/core/util.model';
 
 @Component({
@@ -12,7 +11,6 @@ import { Util } from 'src/app/core/util.model';
 })
 export class FinanceiroComponent implements OnInit, OnDestroy {
   @ViewChild('btnVoltar') btnVoltar;
-  cliente: ViewCliente;
   produtos: Produto[] = [];
   consultando: boolean;
   total_aberto: number;
@@ -44,9 +42,5 @@ export class FinanceiroComponent implements OnInit, OnDestroy {
       Util.TratarErro(e);
       this.consultando = false;
     }
-  }
-
-  getNomeCliente() {
-    return this.cliente.fantasia ? this.cliente.fantasia : this.cliente.razao;
   }
 }

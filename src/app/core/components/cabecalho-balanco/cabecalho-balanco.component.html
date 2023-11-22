@@ -1,16 +1,6 @@
 <div class="card mb-2 {{ GetClasse() }}">
   <div class="p-1">
-    <div *ngIf="objBalanco.estoque_locais" class="d-flex justify-content-between mb-2">
-      <div class="text-secondary">
-        <span style="font-size: 12px">Local estoque</span> <br />
-        <b>
-          {{ objBalanco.estoque_locais.id }} -
-          {{ objBalanco.estoque_locais.descricao }}
-        </b>
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-between mb-2">
+   <div class="d-flex justify-content-between mb-2">
       <div class="d-flex justify-content-between mb-2">
         <div class="text-secondary">
           <span style="font-size: 12px">Data do balanço</span> <br />

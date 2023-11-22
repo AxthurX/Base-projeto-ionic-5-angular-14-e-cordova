@@ -48,17 +48,8 @@ export class AuthService {
     this.salvouBalanco$.next('');
   }
 
-  setDadosEmpresaEToken(token: string, guid_instalacao: string) {
-    localStorage.setItem(this.keyToken, token);
-    localStorage.setItem(this.keyGuidInstalacao, guid_instalacao);
-  }
-
   getToken(): string {
     return localStorage.getItem(this.keyToken);
-  }
-
-  getGuideInstalacao(): string {
-    return localStorage.getItem(this.keyGuidInstalacao);
   }
 
   logout() {
@@ -74,20 +65,12 @@ export class AuthService {
 
 export class NotificacaoToken {
   excluir_token: boolean;
-  enviar_vendas: boolean;
-}
-
-export class DadosManutencaoApp {
-  tela_balanco: boolean;
-  tela_consulta_preco: boolean;
-  tela_importacao: boolean;
-  tela_venda: boolean;
 }
 
 export class RetornoInstalacao extends RetornoAPIModel<LoginResponse> {}
 
 export class LoginResponse {
+  id: number;
   token: string;
   guid_instalacao: string;
-  id: number;
 }

@@ -57,9 +57,7 @@ export class DropDownComponent implements OnInit, OnDestroy {
     });
 
     this.onPesquisar('');
-    this.selecionado = this.registros.find(
-      (a) => a?.id === this.value?.id
-    );
+    this.selecionado = this.registros.find((a) => a?.id === this.value?.id);
   }
 
   onClicou() {

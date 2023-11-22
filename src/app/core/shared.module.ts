@@ -7,7 +7,6 @@ import { CabecalhoPesquisaProdutoComponent } from './components/cabecalho-pesqui
 import { CabecalhoVendaComponent } from './components/cabecalho-venda/cabecalho-venda.component';
 import { LookupComponent } from './components/lookup/lookup.component';
 import { TxtPesquisarComponent } from './components/txt-pesquisar.component';
-import { ConsultaLocalEstoqueComponent } from '../views/modais/consulta-local-estoque/consulta-local-estoque.component';
 import { ImgComponent } from './components/img.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { ConsultaProdutoComponent } from '../views/modais/consulta-produto/consulta-produto.component';
@@ -24,7 +23,6 @@ import { CabecalhoBalancoComponent } from './components/cabecalho-balanco/cabeca
     LookupComponent,
     TxtPesquisarComponent,
     ImgComponent,
-    ConsultaLocalEstoqueComponent,
     ConsultaProdutoComponent,
     ConsultandoComponent,
     DropDownComponent,
@@ -49,7 +47,6 @@ import { CabecalhoBalancoComponent } from './components/cabecalho-balanco/cabeca
     LookupComponent,
     TxtPesquisarComponent,
     ImgComponent,
-    ConsultaLocalEstoqueComponent,
     ConsultandoComponent,
     DropDownComponent,
   ],

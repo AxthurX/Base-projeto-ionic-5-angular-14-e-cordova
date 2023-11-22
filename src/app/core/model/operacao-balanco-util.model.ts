@@ -19,7 +19,6 @@ export class OperacaoBalancoUtil {
   static LimparBalanco(balanco: OperacaoBalancoJson) {
     this.LimparValores(balanco);
     balanco.produtos = [];
-    balanco.estoque_locais = null;
   }
 
   static LimparValores(balanco: OperacaoBalancoJson) {
@@ -41,13 +40,7 @@ export class OperacaoBalancoUtil {
     }
   }
 
-  static Validar(
-    balanco: OperacaoBalancoJson,
-  ): boolean {
-    if (!balanco.estoque_locais) {
-      Util.AlertWarning('Selecione um Local de estoque');
-      return false;
-    }
+  static Validar(balanco: OperacaoBalancoJson): boolean {
     if (balanco.produtos.length === 0) {
       Util.AlertWarning('Adicione um ou mais produtos no balanço');
       return false;
