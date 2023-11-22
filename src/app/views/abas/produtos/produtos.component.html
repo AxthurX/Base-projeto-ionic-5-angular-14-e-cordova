@@ -79,11 +79,6 @@
   <br />
 </ion-content>
 <ion-footer class="border-0">
-  <ion-button *ngIf="!apenas_consulta" (click)="aplicar()" expand="block">
-    Aplicar quantidades selecionadas
-    <ion-icon name="checkmark-done-outline"></ion-icon>
-  </ion-button>
-
   <ion-button color="warning" *ngIf="apenas_consulta" (click)="aplicar()" expand="block">
     Fechar consulta
     <ion-icon name="cube-outline"></ion-icon>
