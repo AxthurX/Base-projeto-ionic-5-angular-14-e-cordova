@@ -1,6 +1,14 @@
 <div class="card mb-2 {{GetClasse()}}">
   <div class="p-2">
     <div class="d-flex justify-content-between mb-2">
+      <div class="text-secondary"><span style="font-size: 12px;">Quantidade produtos</span> <br />
+        <b>{{objVenda.produtos.length}}</b>
+      </div>
+      <div class="text-secondary"><span style="font-size: 12px;">Total bruto</span> <br />
+        <b>R$ {{objVenda.total_bruto | number: '1.2-2'}}</b>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between mb-2">
       <div class="text-secondary"><span style="font-size: 12px;">Data do Venda</span> <br />
         <b>{{objVenda.data | date:'dd/MM/yyyy HH:mm'}}</b>
       </div>

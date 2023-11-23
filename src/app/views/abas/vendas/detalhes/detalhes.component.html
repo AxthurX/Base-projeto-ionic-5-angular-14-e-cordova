@@ -15,7 +15,7 @@
       <thead>
         <tr>
           <th style="font-size: 25px;" colspan="4" class="text-center">
-            <p class="alert alert-info">Comprovante da venda</p>
+            <p class="alert alert-info">Venda</p>
           </th>
         </tr>
         <tr>
@@ -44,10 +44,9 @@
         <tr *ngFor="let registro of objVenda.produtos">
           <td>{{registro.id}}</td>
           <td>{{registro.descricao}}</td>
-          <td>{{registro.gtin}}</td>
+          <td>{{registro.valor_total}}</td>
           <td class="text-right">{{registro.valor_unitario | number: '1.2-2'}}</td>
           <td class="text-right">{{registro.quantidade | number: '1.0-3'}}</td>
-          <td class="text-right">{{registro.total_liquido | number: '1.2-2'}}</td>
         </tr>
       </tbody>
     </table>

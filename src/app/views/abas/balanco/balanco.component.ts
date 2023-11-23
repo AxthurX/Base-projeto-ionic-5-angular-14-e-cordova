@@ -6,11 +6,8 @@ import {
   ModalController,
 } from '@ionic/angular';
 import { Util } from 'src/app/core/util.model';
-import { OperacaoBalanco } from '../../../core/model/operacao-balanco.model';
-import { OperacaoBalancoUtil } from '../../../core/model/operacao-balanco-util.model';
 import { DetalhesBalancoComponent } from './detalhes-balanco/detalhes-balanco.component';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
-import { environment } from 'src/environments/environment';
 import { DataBaseProvider } from 'src/app/core/service/database';
 import { OverlayService } from 'src/app/core/service/overlay.service';
 import { AuthService } from '../../../core/service/auth.service';
@@ -22,7 +19,7 @@ import { AuthService } from '../../../core/service/auth.service';
 })
 export class BalancoComponent extends ClasseBase implements OnInit {
   consultando: boolean;
-  balancos: OperacaoBalanco[];
+  balancos: any[];
   constructor(
     private actionSheetController: ActionSheetController,
     private dados: DataBaseProvider,
@@ -58,25 +55,25 @@ export class BalancoComponent extends ClasseBase implements OnInit {
   async OnConsultar() {
     try {
       this.consultando = true;
-      this.dados
-        .getBalancos()
-        .then((balanco) => {
-          balanco.forEach((v) => OperacaoBalancoUtil.PreecherDadosJson(v));
+      // this.dados
+      //   .getBalancos()
+      //   .then((balanco) => {
+      //     balanco.forEach((v) => OperacaoBalancoUtil.PreecherDadosJson(v));
 
-          this.balancos = balanco;
-          this.consultando = false;
-        })
-        .catch((err) => {
-          this.consultando = false;
-          Util.TratarErro(err);
-        });
+      //     this.balancos = balanco;
+      //     this.consultando = false;
+      //   })
+      //   .catch((err) => {
+      //     this.consultando = false;
+      //     Util.TratarErro(err);
+      //   });
     } catch (e) {
       this.consultando = false;
       Util.TratarErro(e);
     }
   }
 
-  async mostrarOpcoesBalanco(balanco: OperacaoBalanco, index: number) {
+  async mostrarOpcoesBalanco(balanco: any, index: number) {
     const buttons: ActionSheetButton[] = [];
     buttons.push({
       text: 'Copiar',
@@ -101,37 +98,6 @@ export class BalancoComponent extends ClasseBase implements OnInit {
       },
     });
 
-    //nao ta sincronizado
-    buttons.push({
-      text: 'Reabrir',
-      icon: 'pencil',
-      handler: () => {
-        this.AbrirTelaBalanco(balanco);
-      },
-    });
-
-    buttons.push({
-      text: 'Cancelar',
-      icon: 'trash',
-      handler: () => {
-        Util.Confirm('Excluindo balanço', async () => {
-          try {
-            this.dados
-              .excluirBalanco(balanco.id)
-              .then(() => {
-                this.overlay.notificarSucesso('Balanço excluído com sucesso!');
-                this.balancos.splice(index, 1);
-              })
-              .catch((e) => {
-                Util.TratarErroEFecharLoading(e, this.overlay);
-              });
-          } catch (e) {
-            Util.TratarErroEFecharLoading(e, this.overlay);
-          }
-        });
-      },
-    });
-
     buttons.push({
       text: 'Voltar',
       icon: 'close',
@@ -146,16 +112,11 @@ export class BalancoComponent extends ClasseBase implements OnInit {
     await actionSheet.present();
   }
 
-  AbrirTelaBalanco(objBalanco?: OperacaoBalanco, copiando?: boolean) {
+  AbrirTelaBalanco(objBalanco?: any, copiando?: boolean) {
     let id_balanco: number = null;
-    let acao = 'novo';
+   const acao = 'novo';
     if (objBalanco) {
       id_balanco = objBalanco.id;
-      if (copiando === true) {
-        acao = 'copiando';
-      } else {
-        acao = 'editando';
-      }
     }
 
     this.router.navigate(['home/balanco/tela-balanco', { id_balanco, acao }]);

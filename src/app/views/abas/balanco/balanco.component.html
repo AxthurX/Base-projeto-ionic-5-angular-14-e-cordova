@@ -19,11 +19,8 @@
     <h6 class="text-center">
       <ion-badge color="primary">Consultar estoque dos produtos</ion-badge>
     </h6>
-    <ng-container>
-      <app-cabecalho-balanco *ngFor="let objBalanco of balancos; let i = index"
-        (click)="mostrarOpcoesBalanco(objBalanco, i)" [objBalanco]="objBalanco.dados_json">
-      </app-cabecalho-balanco>
-    </ng-container>
+    <ion-button>Emitir relatorio de entrada</ion-button>
+    <ion-button>Emitir relatorio de saida</ion-button>
   </ng-template>
 
   <br />
