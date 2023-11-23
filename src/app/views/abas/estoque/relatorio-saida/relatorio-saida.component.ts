@@ -13,11 +13,11 @@ import { AuthService } from 'src/app/core/service/auth.service';
 import { OverlayService } from '../../../../core/service/overlay.service';
 
 @Component({
-  selector: 'app-detalhes-balanco',
-  templateUrl: './detalhes-balanco.component.html',
-  styleUrls: ['./detalhes-balanco.component.scss'],
+  selector: 'app-relatorio-saida',
+  templateUrl: './relatorio-saida.component.html',
+  styleUrls: ['./relatorio-saida.component.scss'],
 })
-export class DetalhesBalancoComponent
+export class RelatorioSaidaComponent
   extends ClasseBase
   implements OnInit, OnDestroy
 {
@@ -68,7 +68,7 @@ export class DetalhesBalancoComponent
         const options: PDFGeneratorOptions = {
           documentSize: 'A4',
           type: 'share',
-          fileName: 'Balanco.pdf',
+          fileName: 'relatorio-saida.pdf',
         };
         this.pdf
           .fromData(
