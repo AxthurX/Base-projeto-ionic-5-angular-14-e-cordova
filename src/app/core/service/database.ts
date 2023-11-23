@@ -5,8 +5,6 @@ import { ViewProduto } from '../model/data-base/view-produto.model';
 import { OperacaoSaidaUtil } from '../model/operacao-saida-util.model';
 import { OperacaoSaida } from '../model/operacao-saida.model';
 import { Util } from '../util.model';
-import { Balanco } from '../model/data-base/balanco.model';
-import { OperacaoBalanco } from '../model/operacao-balanco.model';
 
 @Injectable({
   providedIn: 'root',
@@ -132,36 +130,6 @@ export class DataBaseProvider {
       });
   }
 
-  public getBalancos() {
-    const retorno: OperacaoBalanco[] = [];
-    const sql = 'select * from operacao_balanco order by data desc limit 300';
-
-    return this.dados
-      .executeSql(sql, [])
-      .then((data: any) => {
-        if (data.rows.length > 0) {
-          for (let i = 0; i < data.rows.length; i++) {
-            const registro = data.rows.item(i);
-            const newItem = new OperacaoBalanco();
-            newItem.id = +registro.id;
-            newItem.data = +registro.data;
-            newItem.json = registro.json;
-            newItem.sincronizado_em = registro.sincronizado_em;
-
-            retorno.push(newItem);
-          }
-          return retorno;
-        } else {
-          return retorno;
-        }
-      })
-      .catch((e) => {
-        Util.TratarErro(e);
-
-        return retorno;
-      });
-  }
-
   public getVenda(id: number) {
     const sql = 'select * from operacao_saida where id = ' + id;
 
@@ -187,52 +155,6 @@ export class DataBaseProvider {
         Util.TratarErro(e);
         return null;
       });
-  }
-
-  public getBalanco(id: number) {
-    const sql = 'select * from operacao_balanco where id = ' + id;
-
-    return this.dados
-      .executeSql(sql, [])
-      .then((data: any) => {
-        if (data.rows.length > 0) {
-          for (let i = 0; i < data.rows.length; i++) {
-            const registro = data.rows.item(i);
-            const newItem = new OperacaoBalanco();
-            newItem.id = +registro.id;
-            newItem.data = +registro.data;
-            newItem.json = registro.json;
-            return newItem;
-          }
-          return null;
-        } else {
-          return null;
-        }
-      })
-      .catch((e) => {
-        Util.TratarErro(e);
-        return null;
-      });
-  }
-
-  public setBalanco(registros: Balanco[]): Promise<any> {
-    const sqlStatements: any[] = [];
-
-    registros.forEach((registro) => {
-      sqlStatements.push([
-        'insert into balanco (id, id_colaborador, id_local_estoque, data, data_sincronizacao, observacao) values (?, ?, ?, ?, ?, ?)',
-        [
-          registro.id,
-          registro.id_colaborador,
-          registro.id_local_estoque,
-          registro.data,
-          registro.data_sincronizacao,
-          registro.observacao,
-        ],
-      ]);
-    });
-
-    return this.dados.sqlBatch(sqlStatements);
   }
 
   public setProdutos(registros: Produto[]): Promise<any> {
@@ -277,32 +199,9 @@ export class DataBaseProvider {
     return this.dados.sqlBatch(sqlStatements);
   }
 
-  public salvarBalanco(balanco: OperacaoBalanco): Promise<any> {
-    const sqlStatements: any[] = [];
-
-    let comando = '';
-    if (balanco.id > 0) {
-      comando =
-        'update produto set data = ?, json = ? where id = ' + balanco.id;
-    } else {
-      comando = 'insert into produto (data, json) values (?, ?)';
-    }
-
-    sqlStatements.push([comando, [balanco.data, balanco.json]]);
-
-    return this.dados.sqlBatch(sqlStatements);
-  }
-
   public excluirVenda(id: number): Promise<any> {
     const sqlStatements: any[] = [];
     const comando = 'delete from operacao_saida where id = ?';
-    sqlStatements.push([comando, [id]]);
-    return this.dados.sqlBatch(sqlStatements);
-  }
-
-  public excluirBalanco(id: number): Promise<any> {
-    const sqlStatements: any[] = [];
-    const comando = 'delete from operacao_balanco where id = ?';
     sqlStatements.push([comando, [id]]);
     return this.dados.sqlBatch(sqlStatements);
   }
@@ -324,10 +223,6 @@ export class DataBaseProvider {
         [
           //operacao saida
           'CREATE TABLE IF NOT EXISTS operacao_saida ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL,	[json] [text] NOT NULL, [sincronizado_em] [text])',
-        ],
-        [
-          //balanco
-          'CREATE TABLE IF NOT EXISTS operacao_balanco ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL,	[json] [text] NOT NULL, [sincronizado_em] [text])',
         ],
         [
           //versao do banco para controlar o scripts de atualização

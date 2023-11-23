@@ -12,13 +12,11 @@ import { NgxMaskModule } from 'ngx-mask';
 import { ConsultaProdutoComponent } from '../views/modais/consulta-produto/consulta-produto.component';
 import { ConsultandoComponent } from './components/consultando/consultando.component';
 import { DropDownComponent } from './components/dropdown/dropdown.component';
-import { CabecalhoBalancoComponent } from './components/cabecalho-balanco/cabecalho-balanco.component';
 
 @NgModule({
   declarations: [
     BtnVoltarComponent,
     CabecalhoPesquisaProdutoComponent,
-    CabecalhoBalancoComponent,
     CabecalhoVendaComponent,
     LookupComponent,
     TxtPesquisarComponent,
@@ -41,7 +39,6 @@ import { CabecalhoBalancoComponent } from './components/cabecalho-balanco/cabeca
     FormsModule,
     BtnVoltarComponent,
     CabecalhoPesquisaProdutoComponent,
-    CabecalhoBalancoComponent,
     ConsultaProdutoComponent,
     CabecalhoVendaComponent,
     LookupComponent,
