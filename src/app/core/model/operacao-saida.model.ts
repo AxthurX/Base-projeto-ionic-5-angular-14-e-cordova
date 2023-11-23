@@ -5,7 +5,6 @@ export class OperacaoSaida {
   id: number;
   data: number;
   json: string;
-  sincronizado_em: string;
   dados_json: OperacaoSaidaJson;
   constructor() {
     this.dados_json = new OperacaoSaidaJson();
@@ -20,8 +19,6 @@ export class OperacaoSaidaJson {
   data_exclusao?: number;
   data: number;
   quantidade_produtos_lancados: number;
-  status_manipulacao?: number;
-  sincronizado_em?: string;
   observacao: string;
   constructor() {
     OperacaoSaidaUtil.LimparVenda(this);

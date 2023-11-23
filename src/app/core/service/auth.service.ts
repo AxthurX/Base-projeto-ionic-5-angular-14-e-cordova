@@ -44,10 +44,6 @@ export class AuthService {
     this.salvouVenda$.next('');
   }
 
-  informarSalvouBalanco() {
-    this.salvouBalanco$.next('');
-  }
-
   getToken(): string {
     return localStorage.getItem(this.keyToken);
   }

@@ -13,7 +13,6 @@ import { Util } from '../../util.model';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 import { TelaVendaComponent } from 'src/app/views/abas/vendas/tela-venda/tela-venda.component';
 import { ProdutoUtil } from '../../model/produto-util.model';
-import { TelaBalancoComponent } from '../../../views/abas/balanco/tela-balanco/tela-balanco.component';
 import { OverlayService } from '../../service/overlay.service';
 import { DataBaseProvider } from '../../service/database';
 import { PreferenciasService } from '../../service/preferencias.service';
@@ -30,7 +29,6 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
   @Input() nao_exibir_consultando: boolean;
   @Input() permitir_quantidade_zero: boolean;
   @Input() tela_vendas: TelaVendaComponent;
-  @Input() tela_balanco: TelaBalancoComponent;
   @Input() modal: ModalController;
   @Output() OnConsultou: EventEmitter<ViewProduto[]> = new EventEmitter();
   registros: ViewProduto[];
@@ -66,26 +64,6 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
     }
   }
 
-  lerQrCode() {
-    try {
-      this.barcodeScanner
-        .scan()
-        .then((barcodeData) => {
-          this.texto_pesquisado = barcodeData.text;
-          if (this.texto_pesquisado) {
-            this.filtro_pesquisa = 'gtin';
-            this.onPesquisar();
-          }
-        })
-        .catch((e) => {
-          Util.logarErro(e);
-          this.overlay.notificarAlerta('Ação cancelada');
-        });
-    } catch (e) {
-      Util.TratarErro(e);
-    }
-  }
-
   segmentChangedFiltro(event) {
     this.filtro_pesquisa = event.detail.value;
     this.checkType();
@@ -109,31 +87,16 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
         if (
           //se for uma pesquisa direto, nao chamo a tela de consulta
           !this.tela_consulta &&
-          ((id > 0 && this.filtro_pesquisa === 'id') ||
-            this.filtro_pesquisa === 'gtin')
+          id > 0 &&
+          this.filtro_pesquisa === 'id'
         ) {
           if (this.tela_vendas) {
-            const existente = this.tela_vendas.getByIdOrGtin(
+            const existente = this.tela_vendas.getById(
               this.filtro_pesquisa,
               this.texto_pesquisado
             );
             if (existente) {
               this.tela_vendas.ajustarQuantidade(existente, 0, 1);
-              this.overlay.showToast(
-                `Quantidade alterada para ${existente.quantidade}`,
-                'light'
-              );
-              return;
-            }
-          }
-
-          if (this.tela_balanco) {
-            const existente = this.tela_balanco.getByIdOrGtin(
-              this.filtro_pesquisa,
-              this.texto_pesquisado
-            );
-            if (existente) {
-              this.tela_balanco.ajustarQuantidade(existente, 0, 1);
               this.overlay.showToast(
                 `Quantidade alterada para ${existente.quantidade}`,
                 'light'

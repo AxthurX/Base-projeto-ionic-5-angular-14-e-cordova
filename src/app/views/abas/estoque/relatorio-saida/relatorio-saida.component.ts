@@ -8,22 +8,21 @@ import {
 import { ModalController, NavParams } from '@ionic/angular';
 import { Util } from 'src/app/core/util.model';
 import { PDFGenerator, PDFGeneratorOptions } from '@awesome-cordova-plugins/pdf-generator/ngx';
-import { OperacaoBalancoJson } from '../../../../core/model/operacao-balanco.model';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { OverlayService } from '../../../../core/service/overlay.service';
 
 @Component({
-  selector: 'app-detalhes-balanco',
-  templateUrl: './detalhes-balanco.component.html',
-  styleUrls: ['./detalhes-balanco.component.scss'],
+  selector: 'app-relatorio-saida',
+  templateUrl: './relatorio-saida.component.html',
+  styleUrls: ['./relatorio-saida.component.scss'],
 })
-export class DetalhesBalancoComponent
+export class RelatorioSaidaComponent
   extends ClasseBase
   implements OnInit, OnDestroy
 {
   @ViewChild('imprimir') imprimir;
-  objBalanco: OperacaoBalancoJson;
+  objBalanco: any;
   gerando: boolean;
   constructor(
     private nav: NavParams,
@@ -69,7 +68,7 @@ export class DetalhesBalancoComponent
         const options: PDFGeneratorOptions = {
           documentSize: 'A4',
           type: 'share',
-          fileName: 'Balanco.pdf',
+          fileName: 'relatorio-saida.pdf',
         };
         this.pdf
           .fromData(

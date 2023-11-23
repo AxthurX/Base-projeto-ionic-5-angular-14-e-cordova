@@ -1,6 +1,14 @@
 <div class="card mb-2 {{GetClasse()}}">
   <div class="p-2">
     <div class="d-flex justify-content-between mb-2">
+      <div class="text-secondary"><span style="font-size: 12px;">Quantidade produtos</span> <br />
+        <b>{{objVenda.produtos.length}}</b>
+      </div>
+      <div class="text-secondary"><span style="font-size: 12px;">Total bruto</span> <br />
+        <b>R$ {{objVenda.total_bruto | number: '1.2-2'}}</b>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between mb-2">
       <div class="text-secondary"><span style="font-size: 12px;">Data do Venda</span> <br />
         <b>{{objVenda.data | date:'dd/MM/yyyy HH:mm'}}</b>
       </div>
@@ -14,13 +22,5 @@
         <ion-badge color="warning">R$ {{objVenda.total_liquido | number: '1.2-2'}}</ion-badge>
       </h6>
     </div>
-    <ng-container *ngIf="objVenda.status_manipulacao === 1">
-      <p class="text-center">Sincronizando com o servidor online...</p>
-      <ion-progress-bar color="primary" type="indeterminate"></ion-progress-bar>
-    </ng-container>
-    <ng-container *ngIf="objVenda.status_manipulacao === 2">
-      <p class="text-center">Excluindo...</p>
-      <ion-progress-bar color="danger" type="indeterminate"></ion-progress-bar>
-    </ng-container>
   </div>
 </div>

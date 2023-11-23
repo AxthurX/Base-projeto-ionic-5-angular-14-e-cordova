@@ -4,10 +4,10 @@ import { OverlayService } from 'src/app/core/service/overlay.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
 import { Produto } from 'src/app/core/model/data-base/produto.model';
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import moment from 'moment';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { Router } from '@angular/router';
+import moment from 'moment';
 
 @Component({
   selector: 'app-cadastrar',
@@ -130,7 +130,6 @@ export class CadastrarComponent extends ClasseBase implements OnInit {
         .toString()
         .toUpperCase();
       novoProduto.data = new Date().getTime();
-      novoProduto.codigo_original = novoProduto.gtin = '';
       novoProduto.ativo = true;
       this.dados
         .setProdutos([novoProduto])

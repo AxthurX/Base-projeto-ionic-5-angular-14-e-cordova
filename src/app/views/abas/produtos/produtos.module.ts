@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ProdutosComponent } from './produtos.component';
 import { CadastrarComponent } from './cadastrar/cadastrar.component';
 import { FinanceiroComponent } from './financeiro/financeiro.component';

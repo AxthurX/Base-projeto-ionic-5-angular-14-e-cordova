@@ -2,8 +2,6 @@ export class ViewProduto {
   id: number;
   data: number;
   descricao: string;
-  gtin: string;
-  unidade: string;
   ativo: boolean;
   nome: string;
   observacao: string;
@@ -16,6 +14,8 @@ export class ViewProduto {
   produto_perecivel: boolean;
   mostrar_foto: boolean = false;
   valor_unitario_original?: number;
+  valor_original?: number;
+  quantidade_original?: number;
   imagem: string = 'assets/icon/favicon.png';
   //campos auxiliar para a venda
   quantidade_adicionada?: number;
