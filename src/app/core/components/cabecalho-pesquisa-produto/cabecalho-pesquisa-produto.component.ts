@@ -64,26 +64,6 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
     }
   }
 
-  lerQrCode() {
-    try {
-      this.barcodeScanner
-        .scan()
-        .then((barcodeData) => {
-          this.texto_pesquisado = barcodeData.text;
-          if (this.texto_pesquisado) {
-            this.filtro_pesquisa = 'gtin';
-            this.onPesquisar();
-          }
-        })
-        .catch((e) => {
-          Util.logarErro(e);
-          this.overlay.notificarAlerta('Ação cancelada');
-        });
-    } catch (e) {
-      Util.TratarErro(e);
-    }
-  }
-
   segmentChangedFiltro(event) {
     this.filtro_pesquisa = event.detail.value;
     this.checkType();
@@ -107,11 +87,11 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
         if (
           //se for uma pesquisa direto, nao chamo a tela de consulta
           !this.tela_consulta &&
-          ((id > 0 && this.filtro_pesquisa === 'id') ||
-            this.filtro_pesquisa === 'gtin')
+          id > 0 &&
+          this.filtro_pesquisa === 'id'
         ) {
           if (this.tela_vendas) {
-            const existente = this.tela_vendas.getByIdOrGtin(
+            const existente = this.tela_vendas.getById(
               this.filtro_pesquisa,
               this.texto_pesquisado
             );

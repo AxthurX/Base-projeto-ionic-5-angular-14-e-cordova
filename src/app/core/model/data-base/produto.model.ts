@@ -3,9 +3,6 @@ export class Produto {
   data: number;
   detalhar: boolean;
   descricao: string;
-  gtin: string;
-  unidade: string;
-  codigo_original: string;
   ativo: boolean;
   nome: string;
   data_fabricacao: string;

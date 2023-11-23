@@ -130,7 +130,6 @@ export class CadastrarComponent extends ClasseBase implements OnInit {
         .toString()
         .toUpperCase();
       novoProduto.data = new Date().getTime();
-      novoProduto.codigo_original = novoProduto.gtin = '';
       novoProduto.ativo = true;
       this.dados
         .setProdutos([novoProduto])

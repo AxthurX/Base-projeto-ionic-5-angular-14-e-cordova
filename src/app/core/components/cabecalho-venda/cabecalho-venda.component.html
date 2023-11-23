@@ -22,13 +22,5 @@
         <ion-badge color="warning">R$ {{objVenda.total_liquido | number: '1.2-2'}}</ion-badge>
       </h6>
     </div>
-    <ng-container *ngIf="objVenda.status_manipulacao === 1">
-      <p class="text-center">Sincronizando com o servidor online...</p>
-      <ion-progress-bar color="primary" type="indeterminate"></ion-progress-bar>
-    </ng-container>
-    <ng-container *ngIf="objVenda.status_manipulacao === 2">
-      <p class="text-center">Excluindo...</p>
-      <ion-progress-bar color="danger" type="indeterminate"></ion-progress-bar>
-    </ng-container>
   </div>
 </div>

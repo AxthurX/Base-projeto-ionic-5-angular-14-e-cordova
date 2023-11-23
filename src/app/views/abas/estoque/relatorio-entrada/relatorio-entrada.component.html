@@ -51,7 +51,6 @@
         <tr *ngFor="let registro of objBalanco.produtos">
           <td>{{ registro.id }}</td>
           <td>{{ registro.descricao }}</td>
-          <td>{{ registro.gtin }}</td>
           <td class="text-right">
             {{ registro.valor_unitario | number : "1.2-2" }}
           </td>

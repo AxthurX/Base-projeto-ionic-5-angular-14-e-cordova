@@ -5,7 +5,6 @@ export class OperacaoSaidaUtil {
   static PreecherDadosJson(venda: OperacaoSaida) {
     venda.dados_json = JSON.parse(venda.json);
     venda.dados_json.data = venda.data;
-    venda.dados_json.sincronizado_em = venda.sincronizado_em;
   }
 
   static PreecherJson(venda: OperacaoSaida) {

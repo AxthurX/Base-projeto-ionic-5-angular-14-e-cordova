@@ -66,7 +66,6 @@ export class TelaVendaComponent
           this.objVenda = venda;
           if (this.acao === 'copiando') {
             this.objVenda.id = 0;
-            this.objVenda.sincronizado_em = null;
           }
           this.CompletarPreenchimentoDaVendaAtual();
         }
@@ -83,11 +82,9 @@ export class TelaVendaComponent
     this.RecalcularTotais();
   }
 
-  getByIdOrGtin(filtro: string, valor: string) {
+  getById(filtro: string, valor: string) {
     if (filtro === 'id') {
       return this.objVenda.dados_json.produtos.find((c) => c.id === +valor);
-    } else {
-      return this.objVenda.dados_json.produtos.find((c) => c.gtin === valor);
     }
   }
 

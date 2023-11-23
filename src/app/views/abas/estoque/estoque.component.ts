@@ -1,14 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import {
   ActionSheetButton,
   ActionSheetController,
   ModalController,
 } from '@ionic/angular';
-import { Util } from 'src/app/core/util.model';
+import { Component, OnInit } from '@angular/core';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
-import { DataBaseProvider } from 'src/app/core/service/database';
-import { OverlayService } from 'src/app/core/service/overlay.service';
 import { AuthService } from '../../../core/service/auth.service';
 import { RelatorioEntradaComponent } from './relatorio-entrada/relatorio-entrada.component';
 import { RelatorioSaidaComponent } from './relatorio-saida/relatorio-saida.component';
@@ -23,7 +19,6 @@ export class EstoqueComponent extends ClasseBase implements OnInit {
   constructor(
     private actionSheetController: ActionSheetController,
     private modal: ModalController,
-    private router: Router,
     auth: AuthService
   ) {
     super(auth);
@@ -65,7 +60,7 @@ export class EstoqueComponent extends ClasseBase implements OnInit {
     });
 
     const actionSheet = await this.actionSheetController.create({
-      header: 'Opções do controle estoque',
+      header: 'Opções do controle de estoque',
       mode: 'ios',
       buttons,
     });

@@ -5,12 +5,12 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
-import { Util } from 'src/app/core/util.model';
 import {
   PDFGenerator,
   PDFGeneratorOptions,
 } from '@awesome-cordova-plugins/pdf-generator/ngx';
+import { ModalController, NavParams } from '@ionic/angular';
+import { Util } from 'src/app/core/util.model';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { OverlayService } from '../../../../core/service/overlay.service';
