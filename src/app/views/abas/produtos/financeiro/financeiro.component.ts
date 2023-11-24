@@ -14,16 +14,10 @@ export class FinanceiroComponent implements OnInit, OnDestroy {
   produtos: Produto[] = [];
   consultando: boolean;
   total_aberto: number;
-  abaSelecionada: string;
   private backbuttonSubscription: Subscription;
   constructor(public modal: ModalController) {
     this.consultando = false;
     this.total_aberto = 0;
-    this.abaSelecionada = 'contas';
-  }
-
-  segmentChanged(ev: any) {
-    this.abaSelecionada = ev.detail.value;
   }
 
   ngOnDestroy() {
