@@ -249,5 +249,8 @@
     <allow-navigation href="http://0.0.0.0:8100" sessionid="99750cae" />
     <allow-navigation href="http://172.30.48.1:8100" sessionid="b05fc095" />
     <allow-navigation href="http://172.29.192.1:8101" sessionid="c41e420c" />
+    <allow-navigation href="http://172.20.240.1:8100" sessionid="5196567f" />
+    <allow-navigation href="http://192.168.40.183:8100" sessionid="f67b2202" />
+    <allow-navigation href="http://172.20.240.1:8100" sessionid="e3112a67" />
     <allow-navigation href="http://172.20.240.1:8100" sessionid="e3112a67" />
 </widget>
