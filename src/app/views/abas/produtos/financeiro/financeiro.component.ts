@@ -102,7 +102,6 @@ export class FinanceiroComponent
           })
           .catch((e) => {
             this.overlay.dismissLoadCtrl();
-            Util.TratarErro(e);
             this.gerando = false;
           });
       } catch (e) {

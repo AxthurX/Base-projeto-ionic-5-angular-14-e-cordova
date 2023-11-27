@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
 import { AuthService } from '../../../core/service/auth.service';
 import { RelatorioEntradaComponent } from './relatorio-entrada/relatorio-entrada.component';
-import { RelatorioSaidaComponent } from './relatorio-saida/relatorio-saida.component';
 
 @Component({
   selector: 'app-estoque',
@@ -35,18 +34,6 @@ export class EstoqueComponent extends ClasseBase implements OnInit {
       handler: async () => {
         const modal = await this.modal.create({
           component: RelatorioEntradaComponent,
-        });
-
-        await modal.present();
-      },
-    });
-
-    buttons.push({
-      text: 'Relatorio de saida',
-      icon: 'arrow-redo-circle-outline',
-      handler: async () => {
-        const modal = await this.modal.create({
-          component: RelatorioSaidaComponent,
         });
 
         await modal.present();

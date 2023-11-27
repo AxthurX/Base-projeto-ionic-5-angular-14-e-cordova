@@ -132,7 +132,7 @@ export class CadastrarComponent extends ClasseBase implements OnInit {
       novoProduto.data = new Date().getTime();
       novoProduto.ativo = true;
       novoProduto.quantidade_cadastrada = novoProduto.quantidade_original = this.produto.quantidade;
-      novoProduto.valor_total_original = this.produto.valor_total;
+      novoProduto.valor_total_cadastrado = novoProduto.valor_total_original = this.produto.valor_total;
       novoProduto.valor_unitario_original = this.produto.valor_unitario;
       this.dados
         .setProdutos([novoProduto])

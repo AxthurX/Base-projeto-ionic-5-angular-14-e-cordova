@@ -254,9 +254,15 @@ export class TelaVendaComponent
     try {
       this.objVenda.data = new Date().getTime();
       try {
+        if (this.objVenda.dados_json.produtos.length === 0) {
+          Util.AlertWarning('Adicione um ou mais produtos na venda');
+          this.overlay.dismissLoadCtrl();
+          return;
+        }
+
         await this.objVenda.dados_json.produtos.forEach((c) => {
-          const nova_qtde =  c.quantidade_original - c.quantidade;
-          const nova_total =  c.valor_total_original - c.valor_total;
+          const nova_qtde = c.quantidade_original - c.quantidade;
+          const nova_total = c.valor_total_original - c.valor_total;
           c.quantidade_original = nova_qtde;
           c.valor_total_original = nova_total;
           this.dados.salvarProduto(c);
