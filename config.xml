@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="br.com.computaria" version="1.0.55" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="br.com.computaria" version="1.5.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Computaria</name>
     <description>Computaria</description>
     <author email="computaria@gmail.com" href="https://computaria.com.br/">Computaria</author>
-    <content original-src="index.html" src="http://172.20.240.1:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
