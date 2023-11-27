@@ -28,25 +28,24 @@
     <table class="table" *ngIf="objVenda.produtos">
       <thead>
         <tr class="alert alert-info">
-          <th style="font-size: 20px;" colspan="6" class="text-center">{{objVenda.produtos.length}} item(ns) lançado(s)
+          <th style="font-size: 20px;" colspan="6" class="text-center">{{objVenda.produtos.length}} produtos lançados
           </th>
         </tr>
         <tr class="alert alert-info">
           <th>Id</th>
-          <th>Descrição</th>
-          <th>Vlr.Total</th>
-          <th class="text-right">Vlr.Uni</th>
+          <th>Nome</th>
+          <th>Vlr.Uni</th>
           <th class="text-right">Qtde</th>
-          <th class="text-right">Líquido</th>
+          <th class="text-right">Vlr.Total</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let registro of objVenda.produtos">
           <td>{{registro.id}}</td>
-          <td>{{registro.descricao}}</td>
-          <td>{{registro.valor_total}}</td>
+          <td>{{registro.nome}}</td>
           <td class="text-right">{{registro.valor_unitario | number: '1.2-2'}}</td>
           <td class="text-right">{{registro.quantidade | number: '1.0-3'}}</td>
+          <td>{{registro.valor_total}}</td>
         </tr>
       </tbody>
     </table>

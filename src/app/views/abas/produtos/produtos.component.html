@@ -11,8 +11,8 @@
 </ion-header>
 
 <ion-content color="light">
-  <app-cabecalho-pesquisa-produto [texto_pesquisado]="texto_pesquisado" [nao_exibir_consultando]="true" [modal]="modal">
-  </app-cabecalho-pesquisa-produto >
+  <app-cabecalho-pesquisa-produto [texto_pesquisado]="texto_pesquisado" [nao_exibir_consultando]="true" [modal]="modal" [apenas_consulta]="true">
+  </app-cabecalho-pesquisa-produto>
   <p class="text-center" *ngIf="registros">
     {{registros.length}} produto(s) localizado(s)
   </p>

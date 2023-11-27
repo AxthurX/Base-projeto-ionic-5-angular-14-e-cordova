@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content color="light">
-  <app-cabecalho-pesquisa-produto [texto_pesquisado]="texto_pesquisado" [tela_consulta]="this" [modal]="modal"
+  <app-cabecalho-pesquisa-produto [texto_pesquisado]="texto_pesquisado" [tela_consulta]="this" [modal]="modal" [apenas_consulta]="true"
     [nao_exibir_consultando]="true">
   </app-cabecalho-pesquisa-produto>
   <p class="text-center" *ngIf="registros">
@@ -70,8 +70,8 @@
           </h6>
         </div>
         <div class="small text-gray-500 d-flex align-items-center justify-content-between">
-          <small class="text-dark">Valor Total: {{registro.valor_total | number: '1.2-2'}}</small>
-          <div class="input-group shop-cart-value">
+          <small class="text-dark">Valor Total: {{registro.valor_total_original | number: '1.2-2'}}</small>
+          <div class="input-group shop-cart-value" *ngIf="!apenas_consulta">
             <span class="input-group-btn">
               <button (click)="diminuirQuantidade(registro)" class="btn btn-sm" type="button">-</button>
             </span>

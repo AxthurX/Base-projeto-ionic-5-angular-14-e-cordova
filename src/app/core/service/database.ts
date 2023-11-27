@@ -170,7 +170,7 @@ export class DataBaseProvider {
           registro.valor_total_original,
           registro.valor_unitario_original,
           registro.quantidade_cadastrada,
-          registro.valor_total_cadastrado
+          registro.valor_total_cadastrado,
         ],
       ]);
     });
@@ -200,12 +200,17 @@ export class DataBaseProvider {
     let comando = '';
     if (produto.id > 0) {
       comando =
-        'update produto set data = ?, quantidade_original = ?, valor_total_original = ? where id = ' + produto.id;
+        'update produto set data = ?, quantidade_original = ?, valor_total_original = ? where id = ' +
+        produto.id;
     } else {
-      comando = 'insert into produto (data, quantidade_original, valor_total_original) values (?, ?, ?)';
+      comando =
+        'insert into produto (data, quantidade_original, valor_total_original) values (?, ?, ?)';
     }
 
-    sqlStatements.push([comando, [produto.data, produto.quantidade_original, produto.valor_total_original]]);
+    sqlStatements.push([
+      comando,
+      [produto.data, produto.quantidade_original, produto.valor_total_original],
+    ]);
 
     return this.dados.sqlBatch(sqlStatements);
   }
@@ -245,7 +250,7 @@ export class DataBaseProvider {
         ],
       ])
       .then(async () => {
-        console.log('Tabelas criadas, consultando atualizações');
+        console.log('Tabelas criadas');
       })
       .catch((e) => {
         Util.logarErro(e);

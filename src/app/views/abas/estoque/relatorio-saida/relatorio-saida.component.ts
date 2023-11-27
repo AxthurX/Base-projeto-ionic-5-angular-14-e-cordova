@@ -5,12 +5,18 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { Util } from 'src/app/core/util.model';
-import { PDFGenerator, PDFGeneratorOptions } from '@awesome-cordova-plugins/pdf-generator/ngx';
+import {
+  PDFGenerator,
+  PDFGeneratorOptions,
+} from '@awesome-cordova-plugins/pdf-generator/ngx';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { OverlayService } from '../../../../core/service/overlay.service';
+import { DataBaseProvider } from 'src/app/core/service/database';
+import { ActivatedRoute } from '@angular/router';
+import { OperacaoSaida } from 'src/app/core/model/operacao-saida.model';
 
 @Component({
   selector: 'app-relatorio-saida',
@@ -22,13 +28,14 @@ export class RelatorioSaidaComponent
   implements OnInit, OnDestroy
 {
   @ViewChild('imprimir') imprimir;
-  objRelatorio: any;
+  objRelatorio: OperacaoSaida;
   gerando: boolean;
   constructor(
-    private nav: NavParams,
-    private modal: ModalController,
     private pdf: PDFGenerator,
+    private route: ActivatedRoute,
+    private modal: ModalController,
     private overlay: OverlayService,
+    private dados: DataBaseProvider,
     auth: AuthService
   ) {
     super(auth);
@@ -42,6 +49,13 @@ export class RelatorioSaidaComponent
 
   ngOnInit() {
     try {
+      this.route.params.subscribe(async (params) => {
+        const id_venda = params.id_venda;
+        this.dados.getVenda(id_venda).then((c) => {
+          this.objRelatorio = c;
+        });
+      });
+
       const modalState = {
         modal: true,
         desc: 'fake state for our modal',
@@ -71,7 +85,7 @@ export class RelatorioSaidaComponent
         };
         this.pdf
           .fromData(
-           `<html>
+            `<html>
               <head>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
               </head>

@@ -26,7 +26,6 @@ export class OperacaoSaidaUtil {
   static RecalcularTotais(venda: OperacaoSaidaJson) {
     this.LimparValores(venda);
 
-    console.log(venda);
     if (venda.produtos && venda.produtos.length > 0) {
       venda.produtos.forEach((produto) => {
         //a quantidade pode ta nula quando o cara apagar direto na tela, entao assumo que é zero
@@ -40,8 +39,6 @@ export class OperacaoSaidaUtil {
         );
 
         venda.quantidade_produtos_lancados += quantidade;
-        console.log(venda.valor_total);
-        console.log(produto.valor_total);
         venda.valor_total += produto.valor_total;
         venda.valor_total = Util.GetValorArredondado(venda.valor_total);
       });

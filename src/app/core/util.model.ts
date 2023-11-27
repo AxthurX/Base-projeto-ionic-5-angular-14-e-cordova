@@ -169,24 +169,6 @@ export class Util {
     console.error(e);
   }
 
-  static CalculaPorcentagem(
-    valor_informado: number,
-    valor_total: number
-  ): number {
-    return this.GetValorArredondado((valor_informado * 100) / valor_total);
-  }
-
-  static CalculaValorSobrePorcentagem(
-    valor_informado: number,
-    porcentagem: number,
-    casas_decimais: number = 2
-  ): number {
-    return this.GetValorArredondado(
-      valor_informado * (porcentagem / 100),
-      casas_decimais
-    );
-  }
-
   static GetValorArredondado(
     valor: number,
     casas_decimais: number = 2
