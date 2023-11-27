@@ -167,12 +167,18 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
 
   aplicar() {
     if (this.cabecalho_parente) {
+      if (this.apenas_consulta) {
+        this.modal.dismiss();
+        return;
+      }
+
       const aplicar = this.registros.filter(
         (c) =>
           c.quantidade > 0 ||
           // eslint-disable-next-line eqeqeq
           (this.cabecalho_parente.permitir_quantidade_zero && c.quantidade == 0)
       );
+
       if (aplicar.length === 0) {
         this.overlay.showToast('Nenhuma quantidade foi informada', 'warning');
       } else {

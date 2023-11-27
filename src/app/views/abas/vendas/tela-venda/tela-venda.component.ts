@@ -259,7 +259,6 @@ export class TelaVendaComponent
           const nova_total =  c.valor_total_original - c.valor_total;
           c.quantidade_original = nova_qtde;
           c.valor_total_original = nova_total;
-          console.log(c.valor_total_original, c.quantidade_original);
           this.dados.salvarProduto(c);
         });
       } catch (e) {
