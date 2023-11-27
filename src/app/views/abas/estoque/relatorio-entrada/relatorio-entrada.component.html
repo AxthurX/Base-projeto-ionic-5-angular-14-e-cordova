@@ -10,17 +10,16 @@
   <div #imprimir id="imprimir">
     <table class="table" *ngIf="objRelatorio.length">
       <thead>
-        <tr>
-          <th style="font-size: 25px" colspan="4" class="text-center">
-            <p class="alert alert-info">Relatorio de entrada</p>
+        <tr class="alert alert-info">
+          <th style="font-size: 20px;" colspan="6" class="text-center">
+            Relatorio de entrada
           </th>
         </tr>
       </thead>
       <tbody *ngFor="let obj of objRelatorio" class="pb-4">
         <tr>
-          <td>Produto: <b>{{obj.nome}}</b></td>
           <td>Cód: <b>{{obj.id}}</b></td>
-          <td></td>
+          <td>Produto: <b>{{obj.nome}}</b></td>
         </tr>
         <tr>
           <td><b>Data vencimento</b></td>
@@ -32,11 +31,11 @@
         </tr>
         <tr>
           <td><b>Qtde de produtos</b></td>
-          <td>{{ obj.quantidade }}</td>
+          <td>{{ obj.quantidade_cadastrada }}</td>
         </tr>
         <tr>
           <td><b>Valor Total</b></td>
-          <td>{{ obj.valor_total | number: '1.2-2'}}</td>
+          <td>{{ obj.valor_total_cadastrado | number: '1.2-2'}}</td>
         </tr>
         <br />
       </tbody>

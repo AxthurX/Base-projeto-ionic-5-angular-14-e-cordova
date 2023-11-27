@@ -2,7 +2,7 @@
 <ion-header class="osahan-nav">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <app-btn-voltar #btnVoltar (OnVoltou)="aplicar()" [fechar_modal]="true"></app-btn-voltar>
+      <app-btn-voltar #btnVoltar [fechar_modal]="true"></app-btn-voltar>
     </ion-buttons>
     <ion-title>
       Consulta de produtos
@@ -12,7 +12,7 @@
 
 <ion-content color="light">
   <app-cabecalho-pesquisa-produto [texto_pesquisado]="texto_pesquisado" [nao_exibir_consultando]="true" [modal]="modal">
-  </app-cabecalho-pesquisa-produto>
+  </app-cabecalho-pesquisa-produto >
   <p class="text-center" *ngIf="registros">
     {{registros.length}} produto(s) localizado(s)
   </p>
@@ -78,9 +78,3 @@
   </ion-fab>
   <br />
 </ion-content>
-<ion-footer class="border-0">
-  <ion-button color="warning" *ngIf="apenas_consulta" (click)="aplicar()" expand="block">
-    Fechar consulta
-    <ion-icon name="cube-outline"></ion-icon>
-  </ion-button>
-</ion-footer>

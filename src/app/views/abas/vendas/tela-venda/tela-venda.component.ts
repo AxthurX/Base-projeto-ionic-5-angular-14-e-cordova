@@ -119,6 +119,8 @@ export class TelaVendaComponent
         this.objVenda.dados_json.produtos.unshift(p);
       }
     });
+
+    OperacaoSaidaUtil.RecalcularTotais(this.objVenda.dados_json);
   }
 
   ajustarQuantidade(registro: ViewProduto, i: number, incremento: number) {
@@ -251,6 +253,18 @@ export class TelaVendaComponent
   async SalvarVenda() {
     try {
       this.objVenda.data = new Date().getTime();
+      try {
+        await this.objVenda.dados_json.produtos.forEach((c) => {
+          const nova_qtde =  c.quantidade_original - c.quantidade;
+          const nova_total =  c.valor_total_original - c.valor_total;
+          c.quantidade_original = nova_qtde;
+          c.valor_total_original = nova_total;
+          console.log(c.valor_total_original, c.quantidade_original);
+          this.dados.salvarProduto(c);
+        });
+      } catch (e) {
+        console.error(e);
+      }
       OperacaoSaidaUtil.PreecherJson(this.objVenda);
       await this.dados.salvarVenda(this.objVenda);
       this.overlay.notificarSucesso('Venda salva com sucesso!');

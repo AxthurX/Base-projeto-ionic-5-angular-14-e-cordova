@@ -3,7 +3,7 @@
     <name>Computaria</name>
     <description>Computaria</description>
     <author email="computaria@gmail.com" href="https://computaria.com.br/">Computaria</author>
-    <content original-src="index.html" src="http://172.29.192.1:8101" />
+    <content original-src="index.html" src="http://172.20.240.1:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -249,4 +249,5 @@
     <allow-navigation href="http://0.0.0.0:8100" sessionid="99750cae" />
     <allow-navigation href="http://172.30.48.1:8100" sessionid="b05fc095" />
     <allow-navigation href="http://172.29.192.1:8101" sessionid="c41e420c" />
+    <allow-navigation href="http://172.20.240.1:8100" sessionid="5196567f" />
 </widget>

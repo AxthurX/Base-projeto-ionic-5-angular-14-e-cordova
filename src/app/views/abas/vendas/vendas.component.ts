@@ -118,6 +118,14 @@ export class VendasComponent extends ClasseBase implements OnInit {
     });
 
     buttons.push({
+      text: 'Relatorio de saída',
+      icon: 'pencil',
+      handler: () => {
+        this.AbrirTelaRelatorioSaida(venda);
+      },
+    });
+
+    buttons.push({
       text: 'Excluir',
       icon: 'trash',
       handler: () => {
@@ -166,5 +174,14 @@ export class VendasComponent extends ClasseBase implements OnInit {
     }
 
     this.router.navigate(['home/vendas/tela-venda', { id_venda, acao }]);
+  }
+
+  AbrirTelaRelatorioSaida(objVenda?: OperacaoSaida) {
+    let id_venda: number = null;
+    if (objVenda) {
+      id_venda = objVenda.id;
+    }
+
+    this.router.navigate(['home/estoque/relatorio-saida', { id_venda }]);
   }
 }

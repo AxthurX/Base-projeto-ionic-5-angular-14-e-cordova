@@ -24,7 +24,6 @@ export class ProdutosComponent extends ClasseBase implements OnInit, OnDestroy {
   texto_pesquisado: string;
   path_imagens_produtos: string;
   consultando: boolean;
-  apenas_consulta: boolean;
   private backbuttonSubscription: Subscription;
   constructor(
     public modal: ModalController,
@@ -36,7 +35,6 @@ export class ProdutosComponent extends ClasseBase implements OnInit, OnDestroy {
   ) {
     super(auth);
     this.consultando = false;
-    this.apenas_consulta = false;
     this.path_imagens_produtos = Util.GetPathImagens(file);
   }
 
@@ -46,14 +44,9 @@ export class ProdutosComponent extends ClasseBase implements OnInit, OnDestroy {
 
   async ngOnInit() {
     const event = fromEvent(document, 'backbutton');
-    this.backbuttonSubscription = event.subscribe(async () => {
-      try {
-        this.aplicar();
-      } catch {}
-    });
+    this.backbuttonSubscription = event.subscribe(async () => {});
 
     try {
-      this.apenas_consulta = this.navParams.data.apenas_consulta;
       this.texto_pesquisado = this.navParams.data.texto_pesquisado;
       this.cabecalho_parente = this.navParams.data.cabecalho;
       if (this.texto_pesquisado || this.navParams.data.filtro_pesquisa) {
@@ -165,25 +158,6 @@ export class ProdutosComponent extends ClasseBase implements OnInit, OnDestroy {
 
   CalcularPrecoETotalBruto(registro: ViewProduto) {
     ProdutoUtil.CalcularPrecoETotalBruto(registro);
-  }
-
-  aplicar() {
-    if (this.cabecalho_parente) {
-      const aplicar = this.registros.filter(
-        (c) =>
-          c.quantidade > 0 ||
-          // eslint-disable-next-line eqeqeq
-          (this.cabecalho_parente.permitir_quantidade_zero && c.quantidade == 0)
-      );
-      if (aplicar.length === 0) {
-        this.overlay.showToast('Nenhuma quantidade foi informada', 'warning');
-      } else {
-        this.modal.dismiss();
-        this.cabecalho_parente.ConsultouProdutos(aplicar);
-      }
-    } else {
-      this.modal.dismiss();
-    }
   }
 
   getFoto(index: number): ViewProduto {

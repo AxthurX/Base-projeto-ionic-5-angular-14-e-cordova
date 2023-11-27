@@ -1,21 +1,21 @@
 <div class="d-flex p-3 shop-cart-item bg-white mb-2">
-  <div *ngIf="readonly === false" class="shop-cart-left">
+<!--   <div *ngIf="readonly === false" class="shop-cart-left">
     <app-img [base64]="registro.imagem"></app-img>
-  </div>
+  </div> -->
   <div class="shop-cart-right">
     <div (click)="mostrarOpcoesProduto()">
       <h6 class="font-weight-bold text-dark mb-1 small">
         <span class="text-secondary font-weight-normal">
           Cód: {{registro.id}}
         </span> |
-        <ion-badge color="success" style="vertical-align: bottom;">
+        <ion-badge color="tertiary" style="vertical-align: bottom;">
           R$ {{registro.valor_unitario | number: '1.2-2'}}
         </ion-badge>
       </h6>
       <div class="mb-2">
         {{registro.descricao}}
         <br />
-        <small style="font-size: 11px;"> Bruto: <b>R${{registro.total_bruto | number: '1.2-2'}}</b></small>
+        <small style="font-size: 11px;"> Valor Total: <b>R${{registro.valor_total | number: '1.2-2'}}</b></small>
       </div>
     </div>
     <p *ngIf="registro.observacao" class="justify-content-between py-3 px-3 border-top text-dark">
@@ -36,7 +36,7 @@
         </span>
       </div>
       <h6>
-        Líq.: <b>R${{registro.total_bruto | number: '1.2-2'}}</b>
+        Valor Total.: <b>R${{registro.valor_total | number: '1.2-2'}}</b>
       </h6>
     </div>
   </div>

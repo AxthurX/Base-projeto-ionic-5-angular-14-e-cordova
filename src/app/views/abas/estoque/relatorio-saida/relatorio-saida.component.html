@@ -8,62 +8,44 @@
 </ion-header>
 <ion-content class="ion-padding order-list-page" color="light">
   <div #imprimir id="imprimir">
-    <table class="table">
-      <thead>
-        <tr>
-          <th style="font-size: 25px" colspan="4" class="text-center">
-            <p class="alert alert-info">Detalhes do balanço</p>
-          </th>
-        </tr>
-        <tr>
-          <td class="text-right"><b>Saldo novo</b></td>
-          <td>
-            {{ objBalanco.quantidade_produtos_lancados | number : "1.0-3" }}
-          </td>
-          <td class="text-right"><b>Data</b></td>
-          <td>{{ objBalanco.data | date : "dd/MM/yyyy HH:mm" }}</td>
-        </tr>
-        <tr>
-          <td class="text-right"><b>Qtde de produtos</b></td>
-          <td>
-            {{ objBalanco.produtos.length }}
-          </td>
-        </tr>
-      </thead>
-    </table>
-    <br />
-    <table class="table" *ngIf="objBalanco.produtos">
+    <table class="table" *ngIf="objRelatorio.length">
       <thead>
         <tr class="alert alert-info">
-          <th style="font-size: 20px" colspan="6" class="text-center">
-            {{ objBalanco.produtos.length }} item(ns) lançado(s)
+          <th style="font-size: 20px;" colspan="6" class="text-center">
+            Relatorio de entrada
           </th>
         </tr>
-        <tr class="alert alert-info">
-          <th>Id</th>
-          <th>Descrição</th>
-          <th>Cód.Barras</th>
-          <th class="text-right">Vlr.Uni</th>
-          <th class="text-right">Saldo novo</th>
-        </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let registro of objBalanco.produtos">
-          <td>{{ registro.id }}</td>
-          <td>{{ registro.descricao }}</td>
-          <td class="text-right">
-            {{ registro.valor_unitario | number : "1.2-2" }}
-          </td>
-          <td class="text-right">
-            {{ registro.quantidade | number : "1.0-3" }}
-          </td>
+      <tbody *ngFor="let obj of objRelatorio" class="pb-4">
+        <tr>
+          <td>Cód: <b>{{obj.id}}</b></td>
+          <td>Produto: <b>{{obj.nome}}</b></td>
         </tr>
+        <tr>
+          <td><b>Data vencimento</b></td>
+          <td>{{ obj.data_vencimento | date : "dd/MM/yyyy HH:mm" }}</td>
+        </tr>
+        <tr>
+          <td><b>Data Fabricação</b></td>
+          <td>{{ obj.data_fabricacao | date : "dd/MM/yyyy HH:mm" }}</td>
+        </tr>
+        <tr>
+          <td><b>Qtde de produtos</b></td>
+          <td>{{ obj.quantidade_cadastrada }}</td>
+        </tr>
+        <tr>
+          <td><b>Valor Total</b></td>
+          <td>{{ obj.valor_total_cadastrado | number: '1.2-2'}}</td>
+        </tr>
+        <br />
       </tbody>
     </table>
-    <p *ngIf="objBalanco.observacao">
-      <b>Observação:</b> {{ objBalanco.observacao }}
-    </p>
   </div>
+
+  <h5 *ngIf="objRelatorio.length === 0" style="margin-top: 5px;"
+    class="text-center font-weight-bold alert alert-warning small">
+    Nenhum produto localizado
+  </h5>
 </ion-content>
 
 <ion-footer class="border-0">

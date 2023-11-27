@@ -10,15 +10,16 @@ export class ViewProduto {
   quantidade: number;
   valor_unitario: number;
   valor_total: number;
-  total_bruto: number;
   produto_perecivel: boolean;
   mostrar_foto: boolean = false;
-  valor_unitario_original?: number;
-  valor_original?: number;
-  quantidade_original?: number;
   imagem: string = 'assets/icon/favicon.png';
   //campos auxiliar para a venda
+  valor_total_original?: number;
+  valor_total_cadastrado?: number;
+  valor_unitario_original?: number;
+  quantidade_original?: number;
   quantidade_adicionada?: number;
+  quantidade_cadastrada?: number;
   alterou_valor_manualmente?: boolean;
   constructor() {
     this.quantidade = this.valor_unitario = 0;
