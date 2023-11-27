@@ -19,6 +19,14 @@ import { RelatorioSaidaComponent } from './relatorio-saida/relatorio-saida.compo
         path: '',
         component: EstoqueComponent,
       },
+      {
+        path: 'relatorio-saida',
+        component: RelatorioSaidaComponent
+      },
+      {
+        path: 'relatorio-entrada',
+        component: RelatorioEntradaComponent
+      }
     ]),
   ],
   providers: [PDFGenerator],

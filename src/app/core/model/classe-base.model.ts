@@ -4,7 +4,6 @@ import { AuthService } from '../service/auth.service';
 
 export class ClasseBase {
   carregando: boolean = false;
-  utilizando_versao_gratis: boolean = true;
   tentando_salvar: boolean = false;
   $monitoramento_manutencao: Subscription;
   $monitoramento_token: Subscription;

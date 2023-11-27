@@ -100,9 +100,12 @@
             <b>Valor total</b>
             <ion-text color="danger">*</ion-text>
           </ion-label>
-          <input class="native-input sc-ion-input-md rounded-4 align-self-center text-center" type="text"
-            [(ngModel)]="produto.valor_total" name="valor_total" mask="separator.2" [thousandSeparator]="'.'"
-            [decimalMarker]="','" prefix="R$ " [dropSpecialCharacters]="true" maxlength="60" />
+          <ion-label position="stacked" class="align-self-center text-center mb-1"
+            style="-webkit-transform-origin-x: center;">
+            <ion-text>
+              <b>R$ {{ GetValorTotal() | number: '1.2-2'}}</b>
+            </ion-text>
+          </ion-label>
         </ion-item>
 
         <ion-item class="py-1 align-items-center">

@@ -14,6 +14,8 @@ import { Util } from 'src/app/core/util.model';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { OverlayService } from '../../../../core/service/overlay.service';
+import { DataBaseProvider } from 'src/app/core/service/database';
+import { ViewProduto } from 'src/app/core/model/data-base/view-produto.model';
 
 @Component({
   selector: 'app-relatorio-entrada',
@@ -25,13 +27,14 @@ export class RelatorioEntradaComponent
   implements OnInit, OnDestroy
 {
   @ViewChild('imprimir') imprimir;
-  objBalanco: any;
+  objRelatorio: ViewProduto[] = [];
   gerando: boolean;
   constructor(
     private nav: NavParams,
     private modal: ModalController,
     private pdf: PDFGenerator,
     private overlay: OverlayService,
+    private dados: DataBaseProvider,
     auth: AuthService
   ) {
     super(auth);
@@ -45,13 +48,17 @@ export class RelatorioEntradaComponent
 
   ngOnInit() {
     try {
-      this.objBalanco = this.nav.data.balanco.dados_json;
+      this.dados.getProdutos('', '').then((c) => {
+        this.objRelatorio = c;
+      });
       const modalState = {
         modal: true,
         desc: 'fake state for our modal',
       };
       history.pushState(modalState, null);
-      this.downloadPdf();
+      if (this.objRelatorio.length > 1) {
+        this.downloadPdf();
+      }
     } catch (e) {
       Util.TratarErro(e);
     }

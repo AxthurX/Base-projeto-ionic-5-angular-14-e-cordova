@@ -37,7 +37,7 @@
       Salvar Venda
     </span>
     <span class="float-right">
-      <strong>R$ {{objVenda.dados_json.total_liquido | number: '1.2-2'}}</strong>
+      <strong>R$ {{objVenda.dados_json.valor_total | number: '1.2-2'}}</strong>
     </span>
   </button>
   <ion-progress-bar *ngIf="recalculando_totais" type="indeterminate"></ion-progress-bar>

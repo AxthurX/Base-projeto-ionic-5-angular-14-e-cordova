@@ -83,6 +83,9 @@ export class ConsultaProdutoComponent implements OnInit, OnDestroy {
         }
 
         this.registros.forEach((produto) => {
+          //zerando a quantidade dos produtos e usando a quantidade_original
+          produto.quantidade = 0;
+          produto.valor_total = 0;
           if (this.cabecalho_parente?.permitir_quantidade_zero === true) {
             produto.quantidade = null;
           }

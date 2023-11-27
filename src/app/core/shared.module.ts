@@ -11,7 +11,6 @@ import { ImgComponent } from './components/img.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { ConsultaProdutoComponent } from '../views/modais/consulta-produto/consulta-produto.component';
 import { ConsultandoComponent } from './components/consultando/consultando.component';
-import { DropDownComponent } from './components/dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +22,6 @@ import { DropDownComponent } from './components/dropdown/dropdown.component';
     ImgComponent,
     ConsultaProdutoComponent,
     ConsultandoComponent,
-    DropDownComponent,
   ],
   imports: [
     CommonModule,
@@ -45,7 +43,6 @@ import { DropDownComponent } from './components/dropdown/dropdown.component';
     TxtPesquisarComponent,
     ImgComponent,
     ConsultandoComponent,
-    DropDownComponent,
   ],
   providers: [NavParams],
 })

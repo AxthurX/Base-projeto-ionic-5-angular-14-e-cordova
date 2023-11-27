@@ -12,8 +12,7 @@ export class OperacaoSaida {
 }
 
 export class OperacaoSaidaJson {
-  total_liquido: number;
-  total_bruto: number;
+  valor_total: number;
   produtos: ViewProduto[];
   excluido: boolean;
   data_exclusao?: number;

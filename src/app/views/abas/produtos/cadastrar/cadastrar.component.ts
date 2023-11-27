@@ -131,6 +131,9 @@ export class CadastrarComponent extends ClasseBase implements OnInit {
         .toUpperCase();
       novoProduto.data = new Date().getTime();
       novoProduto.ativo = true;
+      novoProduto.quantidade_cadastrada = novoProduto.quantidade_original = this.produto.quantidade;
+      novoProduto.valor_total_original = this.produto.valor_total;
+      novoProduto.valor_unitario_original = this.produto.valor_unitario;
       this.dados
         .setProdutos([novoProduto])
         .then(() => {
@@ -148,7 +151,19 @@ export class CadastrarComponent extends ClasseBase implements OnInit {
   }
 
   GetDiasRestantes(produto) {
-    return (this.dias_restantes =
-      moment(produto.data_vencimento, 'YYYY-MM-DD').diff(moment(), 'days') + 1);
+    if (this.produto.data_vencimento !== null) {
+      return (this.dias_restantes =
+        moment(produto.data_vencimento, 'YYYY-MM-DD').diff(
+          moment(produto.data_fabricacao, 'YYYY-MM-DD'),
+          'days'
+        ) + 1);
+    }
+  }
+
+  GetValorTotal() {
+    return (
+      (this.produto.valor_total =
+        this.produto.valor_unitario * this.produto.quantidade) ?? 0
+    );
   }
 }

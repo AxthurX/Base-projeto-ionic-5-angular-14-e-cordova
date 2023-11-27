@@ -32,11 +32,19 @@
           <ion-badge color="primary" style="vertical-align: bottom;">
             R$ {{registro.valor_unitario | number: '1.2-2'}}
           </ion-badge>
-          x{{registro.quantidade | number: '1.0-3'}} = R$ {{registro.total_bruto | number: '1.2-2'}}
+          x{{registro.quantidade | number: '1.0-3'}} = R$ {{registro.valor_total | number: '1.2-2'}}
           <ion-icon size="large" class="float-right" color="success" name="checkmark-done-circle-outline"
             *ngIf="registro.quantidade > 0 || (cabecalho_parente?.permitir_quantidade_zero === true && registro.quantidade == 0)">
           </ion-icon>
         </h6>
+
+        <div class="small text-gray-500 d-flex align-items-center justify-content-between">
+          <h6 class="font-weight-bold text-dark mb-2 small" (click)="mostrarFoto(registro)">
+            Qtde. produto
+            {{registro.quantidade_original}}
+          </h6>
+        </div>
+
         <div class="small text-gray-500 d-flex align-items-center justify-content-between">
           <div class="mb-2" (click)="mostrarFoto(registro)">
             <h6 class="font-weight-bold text-dark mb-0 p-1 small">
@@ -62,7 +70,7 @@
           </h6>
         </div>
         <div class="small text-gray-500 d-flex align-items-center justify-content-between">
-          <small class="text-dark">Valor Total: {{registro.valor_total | number: '1.0-3'}}</small>
+          <small class="text-dark">Valor Total: {{registro.valor_total | number: '1.2-2'}}</small>
           <div class="input-group shop-cart-value">
             <span class="input-group-btn">
               <button (click)="diminuirQuantidade(registro)" class="btn btn-sm" type="button">-</button>

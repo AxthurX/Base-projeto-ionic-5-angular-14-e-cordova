@@ -17,8 +17,16 @@ export class ProdutoUtil {
       );
     }
 
+    if (registro.quantidade > registro.quantidade_original) {
+      Util.AlertWarning(
+        'Na sua venda não é possível adicionar mais produtos do que tem em estoque!'
+      );
+      registro.quantidade--;
+      return;
+    }
+
     //calculo o total bruto
-    registro.total_bruto = Util.GetValorArredondado(
+    registro.valor_total = Util.GetValorArredondado(
       registro.quantidade * registro.valor_unitario
     );
   }
