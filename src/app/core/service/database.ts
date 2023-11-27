@@ -73,6 +73,11 @@ export class DataBaseProvider {
             newItem.valor_total = registro.valor_total;
             newItem.imagem = registro.imagem;
             newItem.descricao = registro.descricao;
+            newItem.quantidade_original = registro.quantidade_original;
+            newItem.valor_total_original = registro.valor_total_original;
+            newItem.valor_unitario_original = registro.valor_unitario_original;
+            newItem.quantidade_cadastrada = registro.quantidade_cadastrada;
+            newItem.valor_total_cadastrado = registro.valor_total_cadastrado;
 
             retorno.push(newItem);
           }
@@ -148,7 +153,7 @@ export class DataBaseProvider {
 
     registros.forEach((registro) => {
       sqlStatements.push([
-        'insert into produto (id, data, descricao, ativo, nome, data_fabricacao, data_vencimento, quantidade, valor_unitario, valor_total, produto_perecivel) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'insert into produto (id, data, descricao, ativo, nome, data_fabricacao, data_vencimento, quantidade, valor_unitario, valor_total, produto_perecivel, quantidade_original, valor_total_original, valor_unitario_original, quantidade_cadastrada, valor_total_cadastrado) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           registro.id,
           registro.data,
@@ -161,6 +166,11 @@ export class DataBaseProvider {
           registro.valor_unitario,
           registro.valor_total,
           registro.produto_perecivel,
+          registro.quantidade_original,
+          registro.valor_total_original,
+          registro.valor_unitario_original,
+          registro.quantidade_cadastrada,
+          registro.valor_total_cadastrado
         ],
       ]);
     });
@@ -184,6 +194,22 @@ export class DataBaseProvider {
     return this.dados.sqlBatch(sqlStatements);
   }
 
+  public salvarProduto(produto: ViewProduto): Promise<any> {
+    const sqlStatements: any[] = [];
+
+    let comando = '';
+    if (produto.id > 0) {
+      comando =
+        'update produto set data = ?, quantidade_original = ?, valor_total_original = ? where id = ' + produto.id;
+    } else {
+      comando = 'insert into produto (data, quantidade_original, valor_total_original) values (?, ?, ?)';
+    }
+
+    sqlStatements.push([comando, [produto.data, produto.quantidade_original, produto.valor_total_original]]);
+
+    return this.dados.sqlBatch(sqlStatements);
+  }
+
   public excluirVenda(id: number): Promise<any> {
     const sqlStatements: any[] = [];
     const comando = 'delete from operacao_saida where id = ?';
@@ -203,7 +229,7 @@ export class DataBaseProvider {
       .sqlBatch([
         [
           //produto
-          'CREATE TABLE IF NOT EXISTS produto ([id] [INTEGER] primary key NOT NULL, [data] [INTEGER] NULL, [descricao] [nvarchar](120) NULL, [ativo] [bit] NOT NULL, [nome] [text] NOT NULL, [data_fabricacao] [INTEGER] NOT NULL, [data_vencimento] [INTEGER] NOT NULL, [quantidade] [INTEGER] NOT NULL, [valor_unitario] [INTEGER] NOT NULL, [valor_total] [INTEGER] NOT NULL, [produto_perecivel] [bit] NULL)',
+          'CREATE TABLE IF NOT EXISTS produto ([id] [INTEGER] primary key NOT NULL, [data] [INTEGER] NULL, [descricao] [nvarchar](120) NULL, [ativo] [bit] NOT NULL, [nome] [text] NOT NULL, [data_fabricacao] [INTEGER] NOT NULL, [data_vencimento] [INTEGER] NOT NULL, [quantidade] [INTEGER] NOT NULL, [valor_unitario] [INTEGER] NOT NULL, [valor_total] [INTEGER] NOT NULL, [produto_perecivel] [bit] NULL, [quantidade_original] [INTEGER] [NULL], [valor_total_original] [INTEGER] [NULL], [valor_unitario_original] [INTEGER] [NULL], [quantidade_cadastrada] [INTEGER] [NULL], [valor_total_cadastrado] [INTEGER] [NULL])',
         ],
         [
           //operacao saida

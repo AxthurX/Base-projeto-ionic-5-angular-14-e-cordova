@@ -22,7 +22,7 @@ export class RelatorioSaidaComponent
   implements OnInit, OnDestroy
 {
   @ViewChild('imprimir') imprimir;
-  objBalanco: any;
+  objRelatorio: any;
   gerando: boolean;
   constructor(
     private nav: NavParams,
@@ -42,7 +42,6 @@ export class RelatorioSaidaComponent
 
   ngOnInit() {
     try {
-      this.objBalanco = this.nav.data.balanco.dados_json;
       const modalState = {
         modal: true,
         desc: 'fake state for our modal',

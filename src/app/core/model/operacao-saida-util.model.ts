@@ -19,16 +19,14 @@ export class OperacaoSaidaUtil {
   }
 
   static LimparValores(venda: OperacaoSaidaJson) {
-    venda.total_liquido =
-      venda.total_bruto =
-      venda.quantidade_produtos_lancados =
-        0;
+    venda.valor_total = venda.quantidade_produtos_lancados = 0;
   }
 
   //Ja manda bala em tudo q é preciso
   static RecalcularTotais(venda: OperacaoSaidaJson) {
     this.LimparValores(venda);
 
+    console.log(venda);
     if (venda.produtos && venda.produtos.length > 0) {
       venda.produtos.forEach((produto) => {
         //a quantidade pode ta nula quando o cara apagar direto na tela, entao assumo que é zero
@@ -37,22 +35,20 @@ export class OperacaoSaidaUtil {
           quantidade = produto.quantidade;
         }
 
-        produto.total_bruto = Util.GetValorArredondado(
+        produto.valor_total = Util.GetValorArredondado(
           quantidade * produto.valor_unitario
         );
 
         venda.quantidade_produtos_lancados += quantidade;
-        venda.total_bruto += produto.total_bruto;
-        venda.total_bruto = Util.GetValorArredondado(venda.total_bruto);
+        console.log(venda.valor_total);
+        console.log(produto.valor_total);
+        venda.valor_total += produto.valor_total;
+        venda.valor_total = Util.GetValorArredondado(venda.valor_total);
       });
-
-      venda.total_liquido = Util.GetValorArredondado(venda.total_liquido);
     }
   }
 
-  static Validar(
-    venda: OperacaoSaidaJson,
-  ): boolean {
+  static Validar(venda: OperacaoSaidaJson): boolean {
     if (venda.produtos.length === 0) {
       Util.AlertWarning('Adicione um ou mais produtos na venda');
       return false;
@@ -65,8 +61,8 @@ export class OperacaoSaidaUtil {
       return false;
     }
 
-    if (!venda.total_liquido || venda.total_liquido === 0) {
-      Util.AlertWarning('O total líquido da venda está inválido');
+    if (!venda.valor_total || venda.valor_total === 0) {
+      Util.AlertWarning('O Valor Total da venda está inválido');
       return false;
     }
 
