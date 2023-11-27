@@ -25,6 +25,7 @@ import { PreferenciasService } from '../../service/preferencias.service';
 export class CabecalhoPesquisaProdutoComponent implements OnInit {
   @ViewChild('pesquisa') pesquisa;
   @Input() texto_pesquisado: string;
+  @Input() apenas_consulta: boolean;
   @Input() tela_consulta: ConsultaProdutoComponent;
   @Input() nao_exibir_consultando: boolean;
   @Input() permitir_quantidade_zero: boolean;
@@ -149,6 +150,7 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
         filtro_pesquisa: this.filtro_pesquisa,
         texto_pesquisado: this.texto_pesquisado,
         cabecalho: this,
+        apenas_consulta: this.apenas_consulta
       },
     });
 

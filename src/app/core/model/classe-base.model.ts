@@ -6,7 +6,6 @@ export class ClasseBase {
   carregando: boolean = false;
   tentando_salvar: boolean = false;
   $monitoramento_manutencao: Subscription;
-  $monitoramento_token: Subscription;
   constructor(public auth: AuthService) {}
 
   habilitarMonitoramentos() {
@@ -14,21 +13,6 @@ export class ClasseBase {
       next: (r) => this.limparTela(),
       error: (e) => console.error('saiuDoApp', e),
     });
-  }
-
-  informarManutencao(
-    mostrar: boolean = true,
-    ir_tela_inicial: boolean = false
-  ) {
-    if (mostrar) {
-      Util.AlertWarning(
-        'Esta tela está em manutenção, por favor tente novamente mais tarde!'
-      );
-    }
-
-    if (ir_tela_inicial) {
-      this.auth.goToHome();
-    }
   }
 
   OnDestroy(): void {
