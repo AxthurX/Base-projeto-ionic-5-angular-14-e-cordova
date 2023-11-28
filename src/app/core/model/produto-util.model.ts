@@ -25,7 +25,7 @@ export class ProdutoUtil {
       return;
     }
 
-    //calculo o total bruto
+    //calculo o valor total
     registro.valor_total = Util.GetValorArredondado(
       registro.quantidade * registro.valor_unitario
     );

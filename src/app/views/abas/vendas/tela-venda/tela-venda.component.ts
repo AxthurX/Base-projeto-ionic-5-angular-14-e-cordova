@@ -137,7 +137,7 @@ export class TelaVendaComponent
   }
 
   tratarAlteracaoQuantidade(registro: ViewProduto) {
-    //primeiro forço a correto do total bruto, pode ficar negativo o liquido, mas no final pe corrigido
+    //primeiro forço a correto do valor total, pode ficar negativo o liquido, mas no final pe corrigido
     OperacaoSaidaUtil.RecalcularTotais(this.objVenda.dados_json);
     this.RecalcularTotais();
   }
