@@ -4,6 +4,9 @@ import { AppVersion } from '@awesome-cordova-plugins/app-version/ngx';
 import { MenuController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Util } from './core/util.model';
+import { OverlayService } from './core/service/overlay.service';
+import { DataBaseProvider } from './core/service/database';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +22,9 @@ export class AppComponent {
     private appVersion: AppVersion,
     private statusBar: StatusBar,
     private platform: Platform,
-    protected rota: Router
+    protected rota: Router,
+    private dbProvider: DataBaseProvider,
+    private overlay: OverlayService
   ) {
     this.initializeApp();
     this.color.load();
@@ -48,5 +53,33 @@ export class AppComponent {
       this.color.update('light');
       this.color.temaEscuro = false;
     }
+  }
+
+  limparAplicativo() {
+    Util.Confirm(
+      'Isto irá excluir o banco de dados local, você perderá todas informações cadastradas. Esta ação não poderá ser desfeita, confirma?',
+      () => {
+        Util.EspecificarTexto(
+          'Digite "LIMPAR"',
+          '',
+          (digitou) => {
+            if (digitou && digitou.toString() === 'LIMPAR') {
+              this.dbProvider
+                .dropDB()
+                .then(() => {
+                  this.dbProvider.createDatabase();
+                })
+                .catch((e) => {
+                  Util.TratarErro(e);
+                });
+            } else {
+              this.overlay.showToast('Ação cancelada', 'warning');
+            }
+          },
+          '',
+          'text'
+        );
+      }
+    );
   }
 }

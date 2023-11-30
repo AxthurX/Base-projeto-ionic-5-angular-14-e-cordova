@@ -55,7 +55,7 @@ export class RelatorioEntradaComponent
         desc: 'fake state for our modal',
       };
       history.pushState(modalState, null);
-      if (this.objRelatorio.length > 1) {
+      if (this.objRelatorio.length > 0) {
         this.downloadPdf();
       }
     } catch (e) {

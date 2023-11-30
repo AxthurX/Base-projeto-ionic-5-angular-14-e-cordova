@@ -3,46 +3,38 @@
     <ion-buttons slot="start">
       <app-btn-voltar [fechar_modal]="true"></app-btn-voltar>
     </ion-buttons>
-    <ion-title>Relatorio de entrada</ion-title>
+    <ion-title>Relatório de saída</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding order-list-page" color="light">
   <div #imprimir id="imprimir">
-    <table class="table" *ngIf="objRelatorio.length">
+    <table class="table" *ngIf="objRelatorio">
       <thead>
         <tr class="alert alert-info">
           <th style="font-size: 20px;" colspan="6" class="text-center">
-            Relatorio de entrada
+            Relatório de saída
           </th>
         </tr>
       </thead>
-      <tbody *ngFor="let obj of objRelatorio" class="pb-4">
+      <tbody *ngFor="let obj of objRelatorio?.dados_json?.produtos" class="pb-4">
         <tr>
           <td>Cód: <b>{{obj.id}}</b></td>
-          <td>Produto: <b>{{obj.nome}}</b></td>
-        </tr>
-        <tr>
-          <td><b>Data vencimento</b></td>
-          <td>{{ obj.data_vencimento | date : "dd/MM/yyyy HH:mm" }}</td>
-        </tr>
-        <tr>
-          <td><b>Data Fabricação</b></td>
-          <td>{{ obj.data_fabricacao | date : "dd/MM/yyyy HH:mm" }}</td>
+          <td>Produto: <b>{{obj?.nome}}</b></td>
         </tr>
         <tr>
           <td><b>Qtde de produtos</b></td>
-          <td>{{ obj.quantidade_cadastrada }}</td>
+          <td>{{obj?.quantidade_original | number: '1.0-3'}}</td>
         </tr>
         <tr>
           <td><b>Valor Total</b></td>
-          <td>{{ obj.valor_total_cadastrado | number: '1.2-2'}}</td>
+          <td>{{obj?.valor_total_original | number: '1.2-2'}}</td>
         </tr>
         <br />
       </tbody>
     </table>
   </div>
 
-  <h5 *ngIf="objRelatorio.length === 0" style="margin-top: 5px;"
+  <h5 *ngIf="objRelatorio?.dados_json?.produtos?.length === 0" style="margin-top: 5px;"
     class="text-center font-weight-bold alert alert-warning small">
     Nenhum produto localizado
   </h5>

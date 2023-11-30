@@ -46,8 +46,6 @@ export class OperacaoSaidaUtil {
         } else {
           quantidade = produto.quantidade;
         }
-        // if (produto.quantidade) {
-        // }
 
         produto.valor_total = Util.GetValorArredondado(
           quantidade * produto.valor_unitario

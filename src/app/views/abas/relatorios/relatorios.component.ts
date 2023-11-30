@@ -9,11 +9,11 @@ import { AuthService } from '../../../core/service/auth.service';
 import { RelatorioEntradaComponent } from './relatorio-entrada/relatorio-entrada.component';
 
 @Component({
-  selector: 'app-estoque',
-  templateUrl: './estoque.component.html',
-  styleUrls: ['./estoque.component.scss'],
+  selector: 'app-relatorios',
+  templateUrl: './relatorios.component.html',
+  styleUrls: ['./relatorios.component.scss'],
 })
-export class EstoqueComponent extends ClasseBase implements OnInit {
+export class RelatoriosComponent extends ClasseBase implements OnInit {
   consultando: boolean;
   constructor(
     private actionSheetController: ActionSheetController,
@@ -29,7 +29,7 @@ export class EstoqueComponent extends ClasseBase implements OnInit {
   async mostrarOpcoes() {
     const buttons: ActionSheetButton[] = [];
     buttons.push({
-      text: 'Relatorio de entrada',
+      text: 'Relatório de entrada',
       icon: 'arrow-undo-circle-outline',
       handler: async () => {
         const modal = await this.modal.create({

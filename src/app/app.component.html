@@ -17,10 +17,10 @@
               Venda
             </ion-label>
           </ion-item>
-          <ion-item [routerLink]="['/home/estoques']">
+          <ion-item [routerLink]="['/home/relatorios']">
             <ion-icon slot="start" name="cash-outline"></ion-icon>
             <ion-label>
-              Estoques
+              Relatórios
             </ion-label>
           </ion-item>
           <ion-item [routerLink]="['/home/produtos']">
@@ -35,6 +35,14 @@
     </ion-content>
 
     <ion-footer class="card p-1" style="background: transparent;">
+      <div class="media mb-1 p-1">
+        <div class="media-body">
+          <ion-badge (click)="limparAplicativo()" color="danger">
+            <ion-icon name="trash-outline"></ion-icon> Limpar aplicativo
+          </ion-badge>
+        </div>
+      </div>
+
       <div class="media">
         <div class="media-body">
           <div class="d-flex justify-content-between">

@@ -88,7 +88,6 @@ export class TelaVendaComponent
     }
   }
 
-  //No recalculo, sempre aplico a regra da tributação pra garantir que qualquer alteração aplique tal regra
   async RecalcularTotais() {
     try {
       OperacaoSaidaUtil.RecalcularTotais(this.objVenda.dados_json);
@@ -141,6 +140,7 @@ export class TelaVendaComponent
     OperacaoSaidaUtil.RecalcularTotais(this.objVenda.dados_json);
     this.RecalcularTotais();
   }
+
   //nao faço pergunta
   removerItemNaTora(i: number, mostrar_alerta: boolean = true) {
     this.objVenda.dados_json.produtos.splice(i, 1);
@@ -276,12 +276,6 @@ export class TelaVendaComponent
       Util.logarErro(err);
       Util.AlertErrorPadrao();
     }
-  }
-
-  limparObservacaoVenda() {
-    Util.Confirm('Limpar observação', () => {
-      this.objVenda.dados_json.observacao = '';
-    });
   }
 
   limparObservacaoItem(produto: ViewProduto) {

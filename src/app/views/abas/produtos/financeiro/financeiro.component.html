@@ -16,27 +16,33 @@
           </th>
         </tr>
       </thead>
-      <tbody *ngFor="let obj of objRelatorio.dados_json.produtos" class="pb-4">
+      <tbody *ngFor="let obj of objRelatorio" class="pb-4">
         <tr>
-          <td><b>Total de valor de vendas</b></td>
-          <td>{{ this.objRelatorio.dados_json.valor_total | number: '1.2-2' }}</td>
-          <td>Cód: <b>{{obj.id}}</b></td>
-          <td>Produto: <b>{{obj.nome}}</b></td>
+          <td><b>Cód da Venda</b></td>
+          <td>{{ obj.id }}</td>
+          <td><b>Total de valor da venda</b></td>
+          <td>{{ obj.dados_json.valor_total | number: '1.2-2' }}</td>
+          <td><b>Produtos</b></td>
+          <td>{{ obj.dados_json.produtos }}</td>
+        </tr>
+        <tr *ngFor="let produto of obj.dados_json.produtos">
+          <td>Cód: <b>{{produto.id}}</b></td>
+          <td>Nome: <b>{{produto.nome}}</b></td>
           <td><b>Valor Total</b></td>
-          <td>{{ obj.valor_total_original | number: '1.2-2' }}</td>
-          <td><b>Qtde de produtos</b></td>
-          <td>{{ obj.valor_total_cadastrado | number: '1.2-2' }}</td>
-          <td><b>Valor Total</b></td>
-          <td>{{ obj.valor_total_original | number: '1.2-2'}}</td>
+          <td>{{ produto.valor_total_original | number: '1.2-2' }}</td>
+          <td><b>Valor inicial de estoque</b></td>
+          <td>{{ produto.valor_total_cadastrado | number: '1.2-2' }}</td>
+          <td><b>Valor Estoque após a venda</b></td>
+          <td>{{ produto.valor_total_original | number: '1.2-2'}}</td>
         </tr>
         <br />
       </tbody>
     </table>
   </div>
 
-  <h5 *ngIf="objRelatorio.dados_json.produtos.length === 0" style="margin-top: 5px;"
+  <h5 *ngIf="objRelatorio.length === 0" style="margin-top: 5px;"
     class="text-center font-weight-bold alert alert-warning small">
-    Nenhum produto localizado
+    Nenhuma venda localizada
   </h5>
 </ion-content>
 

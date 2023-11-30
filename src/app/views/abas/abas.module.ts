@@ -28,9 +28,9 @@ import { SharedModule } from '../../core/shared.module';
               import('./vendas/vendas.module').then((m) => m.VendasModule),
           },
           {
-            path: 'estoques',
+            path: 'relatorios',
             loadChildren: () =>
-              import('./estoque/estoque.module').then((m) => m.EstoqueModule),
+              import('./relatorios/relatorios.module').then((m) => m.RelatoriosModule),
           },
           {
             path: 'produtos',

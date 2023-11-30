@@ -60,16 +60,6 @@ export class CadastrarComponent extends ClasseBase implements OnInit {
     }
   }
 
-  setFocusDocumento() {
-    try {
-      setTimeout(() => {
-        document.getElementById('').focus();
-      }, 500);
-    } catch (e) {
-      console.error('setFocusDocumento', e);
-    }
-  }
-
   ajustarQuantidade(registro: Produto, incremento: number) {
     if (!registro.quantidade) {
       registro.quantidade = 0;
@@ -131,8 +121,10 @@ export class CadastrarComponent extends ClasseBase implements OnInit {
         .toUpperCase();
       novoProduto.data = new Date().getTime();
       novoProduto.ativo = true;
-      novoProduto.quantidade_cadastrada = novoProduto.quantidade_original = this.produto.quantidade;
-      novoProduto.valor_total_cadastrado = novoProduto.valor_total_original = this.produto.valor_total;
+      novoProduto.quantidade_cadastrada = novoProduto.quantidade_original =
+        this.produto.quantidade;
+      novoProduto.valor_total_cadastrado = novoProduto.valor_total_original =
+        this.produto.valor_total;
       novoProduto.valor_unitario_original = this.produto.valor_unitario;
       this.dados
         .setProdutos([novoProduto])

@@ -118,7 +118,7 @@ export class VendasComponent extends ClasseBase implements OnInit {
     });
 
     buttons.push({
-      text: 'Relatorio de saída',
+      text: 'Relatório de saída',
       icon: 'document-text',
       handler: () => {
         this.AbrirTelaRelatorioSaida(venda);
@@ -182,6 +182,6 @@ export class VendasComponent extends ClasseBase implements OnInit {
       id_venda = objVenda.id;
     }
 
-    this.router.navigate(['home/estoques/relatorio-saida', { id_venda }]);
+    this.router.navigate(['home/relatorios/relatorio-saida', { id_venda }]);
   }
 }

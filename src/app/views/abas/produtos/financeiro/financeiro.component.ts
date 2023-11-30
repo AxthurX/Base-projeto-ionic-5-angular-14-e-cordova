@@ -28,7 +28,7 @@ export class FinanceiroComponent
   implements OnInit, OnDestroy
 {
   @ViewChild('imprimir') imprimir;
-  objRelatorio: OperacaoSaida;
+  objRelatorio: OperacaoSaida[] = [];
   gerando: boolean;
   constructor(
     private pdf: PDFGenerator,
@@ -51,7 +51,7 @@ export class FinanceiroComponent
     try {
       this.route.params.subscribe(async (params) => {
         const id_venda = params.id_venda;
-        this.dados.getVenda(id_venda).then((c) => {
+        this.dados.getVendas().then((c) => {
           this.objRelatorio = c;
         });
       });
@@ -61,7 +61,9 @@ export class FinanceiroComponent
         desc: 'fake state for our modal',
       };
       history.pushState(modalState, null);
-      this.downloadPdf();
+      if (this.objRelatorio) {
+        this.downloadPdf();
+      }
     } catch (e) {
       Util.TratarErro(e);
     }
@@ -81,7 +83,7 @@ export class FinanceiroComponent
         const options: PDFGeneratorOptions = {
           documentSize: 'A4',
           type: 'share',
-          fileName: 'relatorio-saida.pdf',
+          fileName: 'financeiro pdf',
         };
         this.pdf
           .fromData(
