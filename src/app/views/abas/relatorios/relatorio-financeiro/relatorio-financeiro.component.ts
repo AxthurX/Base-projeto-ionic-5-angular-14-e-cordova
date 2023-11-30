@@ -19,11 +19,11 @@ import { OverlayService } from 'src/app/core/service/overlay.service';
 import { Util } from 'src/app/core/util.model';
 
 @Component({
-  selector: 'app-financeiro',
-  templateUrl: './financeiro.component.html',
-  styleUrls: ['./financeiro.component.scss'],
+  selector: 'app-relatorio-financeiro',
+  templateUrl: './relatorio-financeiro.component.html',
+  styleUrls: ['./relatorio-financeiro.component.scss'],
 })
-export class FinanceiroComponent
+export class RelatorioFinanceiroComponent
   extends ClasseBase
   implements OnInit, OnDestroy
 {
