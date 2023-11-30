@@ -13,7 +13,6 @@ import {
 } from '@awesome-cordova-plugins/pdf-generator/ngx';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
 import { AuthService } from 'src/app/core/service/auth.service';
-import { OverlayService } from '../../../../core/service/overlay.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
 import { ActivatedRoute } from '@angular/router';
 import { OperacaoSaida } from 'src/app/core/model/operacao-saida.model';
@@ -34,7 +33,6 @@ export class RelatorioSaidaComponent
     private pdf: PDFGenerator,
     private route: ActivatedRoute,
     private modal: ModalController,
-    private overlay: OverlayService,
     private dados: DataBaseProvider,
     auth: AuthService
   ) {
@@ -96,17 +94,13 @@ export class RelatorioSaidaComponent
             options
           )
           .then(() => {
-            this.overlay.dismissLoadCtrl();
             this.gerando = false;
             this.modal.dismiss();
           })
           .catch((e) => {
-            this.overlay.dismissLoadCtrl();
-            Util.TratarErro(e);
             this.gerando = false;
           });
       } catch (e) {
-        Util.TratarErro(e);
         this.gerando = false;
       }
     }, 500);

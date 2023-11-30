@@ -30,9 +30,24 @@ export class OperacaoSaidaUtil {
       venda.produtos.forEach((produto) => {
         //a quantidade pode ta nula quando o cara apagar direto na tela, entao assumo que é zero
         let quantidade = 0;
-        if (produto.quantidade) {
+
+        if (produto.quantidade > produto.quantidade_original) {
+          if (produto.quantidade === 0) {
+            Util.AlertWarning(
+              'Nenhum produto em estoque!'
+            );
+          } else {
+            Util.AlertWarning(
+              'Na sua venda não é possível adicionar mais produtos do que tem em estoque!'
+            );
+          }
+          produto.quantidade--;
+          return;
+        } else {
           quantidade = produto.quantidade;
         }
+        // if (produto.quantidade) {
+        // }
 
         produto.valor_total = Util.GetValorArredondado(
           quantidade * produto.valor_unitario

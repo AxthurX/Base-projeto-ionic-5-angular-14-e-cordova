@@ -92,6 +92,47 @@ export class DataBaseProvider {
       });
   }
 
+  public getProduto(id: number) {
+    const sql = 'select * from produto where id = ' + id;
+
+    return this.dados
+      .executeSql(sql, [])
+      .then((data: any) => {
+        if (data.rows.length > 0) {
+          for (let i = 0; i < data.rows.length; i++) {
+            const registro = data.rows.item(i);
+            const newItem = new ViewProduto();
+            newItem.id = +registro.id;
+            newItem.data = registro.data;
+            newItem.descricao = registro.descricao;
+            newItem.ativo = registro.ativo;
+            newItem.nome = registro.nome;
+            newItem.data_fabricacao = registro.data_fabricacao;
+            newItem.data_vencimento = registro.data_vencimento;
+            newItem.quantidade = registro.quantidade;
+            newItem.valor_unitario = registro.valor_unitario;
+            newItem.valor_total = registro.valor_total;
+            newItem.imagem = registro.imagem;
+            newItem.descricao = registro.descricao;
+            newItem.quantidade_original = registro.quantidade_original;
+            newItem.valor_total_original = registro.valor_total_original;
+            newItem.valor_unitario_original = registro.valor_unitario_original;
+            newItem.quantidade_cadastrada = registro.quantidade_cadastrada;
+            newItem.valor_total_cadastrado = registro.valor_total_cadastrado;
+
+            return newItem;
+          }
+          return null;
+        } else {
+          return null;
+        }
+      })
+      .catch((e) => {
+        Util.TratarErro(e);
+        return null;
+      });
+  }
+
   public getVendas() {
     const retorno: OperacaoSaida[] = [];
     let sql = `select * from operacao_saida`;

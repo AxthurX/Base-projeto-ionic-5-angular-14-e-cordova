@@ -253,13 +253,13 @@ export class TelaVendaComponent
   async SalvarVenda() {
     try {
       this.objVenda.data = new Date().getTime();
-      try {
-        if (this.objVenda.dados_json.produtos.length === 0) {
-          Util.AlertWarning('Adicione um ou mais produtos na venda');
-          this.overlay.dismissLoadCtrl();
-          return;
-        }
+      if (this.objVenda.dados_json.produtos.length === 0) {
+        Util.AlertWarning('Adicione um ou mais produtos na venda');
+        this.overlay.dismissLoadCtrl();
+        return;
+      }
 
+      try {
         await this.objVenda.dados_json.produtos.forEach((c) => {
           const nova_qtde = c.quantidade_original - c.quantidade;
           const nova_total = c.valor_total_original - c.valor_total;
@@ -267,9 +267,7 @@ export class TelaVendaComponent
           c.valor_total_original = nova_total;
           this.dados.salvarProduto(c);
         });
-      } catch (e) {
-        console.error(e);
-      }
+      } catch (e) {}
       OperacaoSaidaUtil.PreecherJson(this.objVenda);
       await this.dados.salvarVenda(this.objVenda);
       this.overlay.notificarSucesso('Venda salva com sucesso!');

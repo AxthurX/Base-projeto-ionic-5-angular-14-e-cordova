@@ -9,7 +9,7 @@ import {
   PDFGenerator,
   PDFGeneratorOptions,
 } from '@awesome-cordova-plugins/pdf-generator/ngx';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { Util } from 'src/app/core/util.model';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
 import { AuthService } from 'src/app/core/service/auth.service';
@@ -30,7 +30,6 @@ export class RelatorioEntradaComponent
   objRelatorio: ViewProduto[] = [];
   gerando: boolean;
   constructor(
-    private nav: NavParams,
     private modal: ModalController,
     private pdf: PDFGenerator,
     private overlay: OverlayService,

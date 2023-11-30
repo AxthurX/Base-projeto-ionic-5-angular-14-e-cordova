@@ -19,15 +19,15 @@
       <tbody *ngFor="let obj of objRelatorio?.dados_json?.produtos" class="pb-4">
         <tr>
           <td>Cód: <b>{{obj.id}}</b></td>
-          <td>Produto: <b>{{obj.nome}}</b></td>
+          <td>Produto: <b>{{obj?.nome}}</b></td>
         </tr>
         <tr>
           <td><b>Qtde de produtos</b></td>
-          <td>{{ obj.quantidade_original ?? 0 }}</td>
+          <td>{{obj?.quantidade_original | number: '1.0-3'}}</td>
         </tr>
         <tr>
           <td><b>Valor Total</b></td>
-          <td>{{ obj?.valor_total_original ?? 0 | number: '1.2-2'}}</td>
+          <td>{{obj?.valor_total_original | number: '1.2-2'}}</td>
         </tr>
         <br />
       </tbody>
