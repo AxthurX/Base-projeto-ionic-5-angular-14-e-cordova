@@ -12,7 +12,7 @@ import { RelatorioFinanceiroComponent } from './relatorio-financeiro/relatorio-f
     RelatoriosComponent,
     RelatorioEntradaComponent,
     RelatorioSaidaComponent,
-    RelatorioFinanceiroComponent
+    RelatorioFinanceiroComponent,
   ],
   imports: [
     SharedModule,
@@ -23,16 +23,16 @@ import { RelatorioFinanceiroComponent } from './relatorio-financeiro/relatorio-f
       },
       {
         path: 'relatorio-saida',
-        component: RelatorioSaidaComponent
+        component: RelatorioSaidaComponent,
       },
       {
         path: 'relatorio-entrada',
-        component: RelatorioEntradaComponent
+        component: RelatorioEntradaComponent,
       },
       {
         path: 'relatorio-financeiro',
-        component: RelatorioFinanceiroComponent
-      }
+        component: RelatorioFinanceiroComponent,
+      },
     ]),
   ],
   providers: [PDFGenerator],

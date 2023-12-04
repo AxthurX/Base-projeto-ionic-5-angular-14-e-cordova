@@ -31,7 +31,7 @@
           <ion-datetime-button datetime="data_fabricacao"></ion-datetime-button>
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
-              <ion-datetime [(ngModel)]="produto.data_fabricacao" (ngModelChange)="GetDiasRestantes(produto)"
+              <ion-datetime [(ngModel)]="produto.data_fabricacao" (ngModelChange)="GetDiasRestantes()"
                 displayFormat="MMM DD, h:mm A" name="data_fabricacao" presentation="date" id="data_fabricacao"
                 max="2100" cancel-tex="Cancelar" done-text="Ok">
               </ion-datetime>
@@ -48,7 +48,7 @@
           <ion-datetime-button datetime="data_vencimento"></ion-datetime-button>
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
-              <ion-datetime [(ngModel)]="produto.data_vencimento" (click)="GetDiasRestantes(produto)"
+              <ion-datetime [(ngModel)]="produto.data_vencimento" (click)="GetDiasRestantes()"
                 displayFormat="MMM DD, h:mm A" name="data_vencimento" presentation="date" id="data_vencimento"
                 max="2100" cancel-tex="Cancelar" done-text="Ok">
               </ion-datetime>
@@ -90,8 +90,8 @@
             <ion-text color="danger">*</ion-text>
           </ion-label>
           <input class="native-input sc-ion-input-md rounded-4 align-self-center text-center" type="text"
-            [(ngModel)]="produto.valor_unitario" name="valor_unitario" mask="separator.2" [thousandSeparator]="'.'"
-            [decimalMarker]="','" prefix="R$ " [dropSpecialCharacters]="true" maxlength="60" />
+            [(ngModel)]="produto.valor_unitario" name="valor_unitario" [options]="mask" currencyMask="mask"
+            maxlength="60" />
         </ion-item>
 
         <ion-item class="py-1 align-items-center">

@@ -59,7 +59,9 @@ export class RelatorioSaidaComponent
         desc: 'fake state for our modal',
       };
       history.pushState(modalState, null);
-      this.downloadPdf();
+      if (this.objRelatorio) {
+        this.downloadPdf();
+      }
     } catch (e) {
       Util.TratarErro(e);
     }
@@ -97,7 +99,7 @@ export class RelatorioSaidaComponent
             this.gerando = false;
             this.modal.dismiss();
           })
-          .catch((e) => {
+          .catch(() => {
             this.gerando = false;
           });
       } catch (e) {

@@ -1,10 +1,9 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { ViewProduto } from 'src/app/core/model/data-base/view-produto.model';
 import { Util } from 'src/app/core/util.model';
 import { ProdutoUtil } from 'src/app/core/model/produto-util.model';
 import { File } from '@ionic-native/file/ngx';
-import { fromEvent, Subscription } from 'rxjs';
 import { CabecalhoPesquisaProdutoComponent } from 'src/app/core/components/cabecalho-pesquisa-produto/cabecalho-pesquisa-produto.component';
 import { OverlayService } from 'src/app/core/service/overlay.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
@@ -17,14 +16,13 @@ import { AuthService } from 'src/app/core/service/auth.service';
   templateUrl: './produtos.component.html',
   styleUrls: ['./produtos.component.scss'],
 })
-export class ProdutosComponent extends ClasseBase implements OnInit, OnDestroy {
+export class ProdutosComponent extends ClasseBase implements OnInit {
   @ViewChild('pesquisa') pesquisa;
   cabecalho_parente: CabecalhoPesquisaProdutoComponent;
   registros: ViewProduto[] = [];
   texto_pesquisado: string;
   path_imagens_produtos: string;
   consultando: boolean;
-  private backbuttonSubscription: Subscription;
   constructor(
     public modal: ModalController,
     private overlay: OverlayService,
@@ -38,14 +36,7 @@ export class ProdutosComponent extends ClasseBase implements OnInit, OnDestroy {
     this.path_imagens_produtos = Util.GetPathImagens(file);
   }
 
-  ngOnDestroy() {
-    this.backbuttonSubscription.unsubscribe();
-  }
-
   async ngOnInit() {
-    const event = fromEvent(document, 'backbutton');
-    this.backbuttonSubscription = event.subscribe(async () => {});
-
     try {
       this.texto_pesquisado = this.navParams.data.texto_pesquisado;
       this.cabecalho_parente = this.navParams.data.cabecalho;

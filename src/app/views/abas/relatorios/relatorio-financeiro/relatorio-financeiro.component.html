@@ -8,32 +8,30 @@
 </ion-header>
 <ion-content class="ion-padding order-list-page" color="light">
   <div #imprimir id="imprimir">
-    <table class="table" *ngIf="objRelatorio">
+    <table class="table" *ngIf="objRelatorio.length !== 0">
       <thead>
         <tr class="alert alert-info">
           <th style="font-size: 20px;" colspan="6" class="text-center">
             Financeiro
           </th>
         </tr>
-      </thead>
-      <tbody *ngFor="let obj of objRelatorio" class="pb-4">
-        <tr>
-          <td><b>Cód da Venda</b></td>
-          <td>{{ obj.id }}</td>
-          <td><b>Total de valor da venda</b></td>
-          <td>{{ obj.dados_json.valor_total | number: '1.2-2' }}</td>
-          <td><b>Produtos</b></td>
-          <td>{{ obj.dados_json.produtos }}</td>
+        <tr class="alert alert-info">
+          <th>Cód produto</th>
+          <th>Nome</th>
+          <th>Total Vlr.Venda</th>
+          <th>Total Vlr.Estoque</th>
+          <th>Vlr. inicial estoque</th>
+          <th>Vlr. estoque após venda</th>
         </tr>
-        <tr *ngFor="let produto of obj.dados_json.produtos">
-          <td>Cód: <b>{{produto.id}}</b></td>
-          <td>Nome: <b>{{produto.nome}}</b></td>
-          <td><b>Valor Total</b></td>
-          <td>{{ produto.valor_total_original | number: '1.2-2' }}</td>
-          <td><b>Valor inicial de estoque</b></td>
+      </thead>
+      <tbody *ngFor="let obj of objRelatorio; let i = index" class="pb-4">
+        <tr *ngFor="let produto of obj.produtos">
+          <td>{{produto.id}}</td>
+          <td>{{produto.nome}}</td>
+          <td>{{ produto.valor_total | number: '1.2-2' }}</td>
+          <td>{{ produto.valor_unitario * produto.quantidade_original | number: '1.2-2' }}</td>
           <td>{{ produto.valor_total_cadastrado | number: '1.2-2' }}</td>
-          <td><b>Valor Estoque após a venda</b></td>
-          <td>{{ produto.valor_total_original | number: '1.2-2'}}</td>
+          <td>{{ produto.valor_total_original | number: '1.2-2' }}</td>
         </tr>
         <br />
       </tbody>

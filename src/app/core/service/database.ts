@@ -282,10 +282,6 @@ export class DataBaseProvider {
           'CREATE TABLE IF NOT EXISTS operacao_saida ([id] [INTEGER] primary key AUTOINCREMENT, [data] [INTEGER] NOT NULL, [json] [text] NOT NULL)',
         ],
         [
-          //controle estoque
-          'CREATE TABLE IF NOT EXISTS controle_estoque ([id] [INTEGER] primary key AUTOINCREMENT, [id_produto] NOT NULL, [quantidade] NOT NULL, [valor_total] NOT NULL)',
-        ],
-        [
           //versao do banco para controlar o scripts de atualização
           'CREATE TABLE IF NOT EXISTS versao_banco ([id] [INTEGER] primary key AUTOINCREMENT, [numero_versao] [INTEGER] NOT NULL)',
         ],

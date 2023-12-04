@@ -8,6 +8,7 @@ import { ClasseBase } from 'src/app/core/model/classe-base.model';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { Router } from '@angular/router';
 import moment from 'moment';
+import { CurrencyMaskConfig } from 'ng2-currency-mask';
 
 @Component({
   selector: 'app-cadastrar',
@@ -20,6 +21,15 @@ export class CadastrarComponent extends ClasseBase implements OnInit {
   submitted: boolean;
   consultando: boolean = false;
   dias_restantes: number;
+  mask: CurrencyMaskConfig = {
+    align: 'right',
+    allowNegative: true,
+    decimal: ',',
+    precision: 2,
+    prefix: 'R$ ',
+    suffix: '',
+    thousands: '.',
+  };
   constructor(
     private overlay: OverlayService,
     private dados: DataBaseProvider,
@@ -69,6 +79,8 @@ export class CadastrarComponent extends ClasseBase implements OnInit {
       registro.quantidade = null;
       return;
     }
+
+    this.GetDiasRestantes();
   }
 
   alterouQuantidadeManualmente(registro: Produto, novoValor) {
@@ -100,12 +112,6 @@ export class CadastrarComponent extends ClasseBase implements OnInit {
 
       if (!this.produto.quantidade) {
         Util.AlertWarning('Por favor, informe uma quantidade para o produto.');
-        this.overlay.dismissLoadCtrl();
-        return;
-      }
-
-      if (!this.produto.valor_total) {
-        Util.AlertWarning('Por favor, informe o valor total do produto.');
         this.overlay.dismissLoadCtrl();
         return;
       }
@@ -142,11 +148,11 @@ export class CadastrarComponent extends ClasseBase implements OnInit {
     }
   }
 
-  GetDiasRestantes(produto) {
+  GetDiasRestantes() {
     if (this.produto.data_vencimento !== null) {
       return (this.dias_restantes =
-        moment(produto.data_vencimento, 'YYYY-MM-DD').diff(
-          moment(produto.data_fabricacao, 'YYYY-MM-DD'),
+        moment(this.produto.data_vencimento, 'YYYY-MM-DD').diff(
+          moment(this.produto.data_fabricacao, 'YYYY-MM-DD'),
           'days'
         ) + 1);
     }

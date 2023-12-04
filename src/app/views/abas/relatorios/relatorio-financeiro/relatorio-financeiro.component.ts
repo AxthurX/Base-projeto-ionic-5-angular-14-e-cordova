@@ -12,7 +12,7 @@ import {
 } from '@awesome-cordova-plugins/pdf-generator/ngx';
 import { ModalController } from '@ionic/angular';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
-import { OperacaoSaida } from 'src/app/core/model/operacao-saida.model';
+import { OperacaoSaidaJson } from 'src/app/core/model/operacao-saida.model';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
 import { OverlayService } from 'src/app/core/service/overlay.service';
@@ -28,7 +28,7 @@ export class RelatorioFinanceiroComponent
   implements OnInit, OnDestroy
 {
   @ViewChild('imprimir') imprimir;
-  objRelatorio: OperacaoSaida[] = [];
+  objRelatorio: OperacaoSaidaJson[] = [];
   gerando: boolean;
   constructor(
     private pdf: PDFGenerator,
@@ -49,19 +49,24 @@ export class RelatorioFinanceiroComponent
 
   ngOnInit() {
     try {
-      this.route.params.subscribe(async (params) => {
-        const id_venda = params.id_venda;
-        this.dados.getVendas().then((c) => {
-          this.objRelatorio = c;
+      this.route.params.subscribe(async () => {
+        this.dados.getVendas().then((venda) => {
+          venda.forEach((item) => {
+            const json = JSON.parse(item.json);
+            if (!this.objRelatorio.includes(json)) {
+              this.objRelatorio.push(json);
+            }
+          });
         });
       });
+      console.log(this.objRelatorio);
 
       const modalState = {
         modal: true,
         desc: 'fake state for our modal',
       };
       history.pushState(modalState, null);
-      if (this.objRelatorio) {
+      if (this.objRelatorio.length > 0) {
         this.downloadPdf();
       }
     } catch (e) {

@@ -3,7 +3,7 @@ import {
   ActionSheetController,
   ModalController,
 } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ClasseBase } from 'src/app/core/model/classe-base.model';
 import { AuthService } from '../../../core/service/auth.service';
 import { RelatorioEntradaComponent } from './relatorio-entrada/relatorio-entrada.component';
@@ -14,7 +14,7 @@ import { RelatorioFinanceiroComponent } from './relatorio-financeiro/relatorio-f
   templateUrl: './relatorios.component.html',
   styleUrls: ['./relatorios.component.scss'],
 })
-export class RelatoriosComponent extends ClasseBase implements OnInit {
+export class RelatoriosComponent extends ClasseBase {
   consultando: boolean;
   constructor(
     private actionSheetController: ActionSheetController,
@@ -24,8 +24,6 @@ export class RelatoriosComponent extends ClasseBase implements OnInit {
     super(auth);
     this.consultando = false;
   }
-
-  async ngOnInit() {}
 
   async mostrarOpcoes() {
     const buttons: ActionSheetButton[] = [];
@@ -43,7 +41,7 @@ export class RelatoriosComponent extends ClasseBase implements OnInit {
 
     buttons.push({
       text: 'Relatório de financeiro',
-      icon: 'arrow-undo-circle-outline',
+      icon: 'arrow-redo-circle-outline',
       handler: async () => {
         const modal = await this.modal.create({
           component: RelatorioFinanceiroComponent,

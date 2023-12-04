@@ -255,4 +255,5 @@
     <allow-navigation href="http://172.20.240.1:8100" sessionid="e3112a67" />
     <allow-navigation href="http://172.30.192.1:8101" sessionid="9c6a8f78" />
     <allow-navigation href="http://192.168.40.81:8101" sessionid="ae66a614" />
+    <allow-navigation href="http://172.17.0.1:8101" sessionid="1fa89e92" />
 </widget>
