@@ -38,12 +38,4 @@ export class ItemVendaComponent {
       this.OnAlterouQuantidadeManualmente?.next(novoValor);
     }
   }
-
-  getColor(tipo_preco) {
-    if (tipo_preco === 'P') {
-      return 'success';
-    } else if (tipo_preco === 'T') {
-      return 'tertiary';
-    }
-  }
 }

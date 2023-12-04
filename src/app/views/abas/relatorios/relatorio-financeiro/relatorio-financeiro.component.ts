@@ -59,7 +59,6 @@ export class RelatorioFinanceiroComponent
           });
         });
       });
-      console.log(this.objRelatorio);
 
       const modalState = {
         modal: true,

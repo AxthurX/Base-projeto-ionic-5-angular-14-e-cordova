@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ColorSchemeService } from 'src/app/core/color-scheme.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Util } from 'src/app/core/util.model';
 
 @Component({
   selector: 'app-inicio',
@@ -40,9 +39,5 @@ export class InicioComponent implements OnInit {
 
   goTo(rota) {
     this.rota.navigate([rota]);
-  }
-
-  emBreve() {
-    Util.Notificacao('Este módulo ainda está em desenvolvimento', 'info');
   }
 }

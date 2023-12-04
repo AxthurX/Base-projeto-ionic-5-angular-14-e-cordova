@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { RetornoAPIModel } from '../model/retorno-api.model';
 import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -26,8 +25,6 @@ export class AuthService {
     this.router.navigateByUrl('/home');
   }
 }
-
-export class RetornoInstalacao extends RetornoAPIModel<LoginResponse> {}
 
 export class LoginResponse {
   id: number;

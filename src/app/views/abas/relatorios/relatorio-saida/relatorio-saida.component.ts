@@ -15,7 +15,7 @@ import { ClasseBase } from 'src/app/core/model/classe-base.model';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { DataBaseProvider } from 'src/app/core/service/database';
 import { ActivatedRoute } from '@angular/router';
-import { OperacaoSaida, OperacaoSaidaJson } from 'src/app/core/model/operacao-saida.model';
+import { OperacaoSaidaJson } from 'src/app/core/model/operacao-saida.model';
 
 @Component({
   selector: 'app-relatorio-saida',
@@ -52,8 +52,6 @@ export class RelatorioSaidaComponent
         this.dados.getVenda(id_venda).then((c) => {
           const json = JSON.parse(c?.json);
           this.objRelatorio = json;
-          console.log(this.objRelatorio);
-          console.log(json);
         });
       });
 

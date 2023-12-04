@@ -151,14 +151,6 @@ export class ProdutosComponent extends ClasseBase implements OnInit {
     ProdutoUtil.CalcularPrecoETotalBruto(registro);
   }
 
-  getFoto(index: number): ViewProduto {
-    try {
-      return this.registros[index];
-    } catch {
-      return null;
-    }
-  }
-
   async AbrirTelaCadastro() {
     const modal = await this.modal.create({
       component: CadastrarComponent,
