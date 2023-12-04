@@ -28,7 +28,7 @@
         <tr *ngFor="let produto of obj.produtos">
           <td>{{produto.id}}</td>
           <td>{{produto.nome}}</td>
-          <td>{{ produto.valor_total | number: '1.2-2' }}</td>
+          <td>{{ obj.valor_total | number: '1.2-2' }}</td>
           <td>{{ produto.valor_unitario * produto.quantidade_original | number: '1.2-2' }}</td>
           <td>{{ produto.valor_total_cadastrado | number: '1.2-2' }}</td>
           <td>{{ produto.valor_total_original | number: '1.2-2' }}</td>

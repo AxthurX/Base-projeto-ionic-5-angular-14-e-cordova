@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content color="light">
-  <app-cabecalho-pesquisa-produto [texto_pesquisado]="texto_pesquisado" [tela_consulta]="this" [modal]="modal"
+  <app-cabecalho-pesquisa-produto [texto_pesquisado]="texto_pesquisado" [tela_consulta]="this" [modal]="modal" [exibir_filtro_pesquisa]="true"
     [apenas_consulta]="true" [nao_exibir_consultando]="true">
   </app-cabecalho-pesquisa-produto>
   <p class="text-center" *ngIf="registros">
@@ -20,9 +20,6 @@
   <app-consultando *ngIf="consultando"></app-consultando>
   <div class="card" *ngIf="!consultando">
     <div *ngFor="let registro of registros; let i = index" class="d-flex p-3 shop-cart-item bg-white mb-2 sem-mb">
-      <div class="shop-cart-left" *ngIf="registro.mostrar_foto">
-        <app-img [base64]="registro.imagem" [consulta]="this" [index]="i" [descricao]="registro.descricao"></app-img>
-      </div>
       <div class="shop-cart-right">
         <h6 style="font-size: 10px !important;" class="font-weight-bold text-dark mb-2 small"
           (click)="mostrarFoto(registro)">

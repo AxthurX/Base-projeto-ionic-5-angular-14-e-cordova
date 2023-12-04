@@ -1,7 +1,7 @@
 <ion-header class="osahan-nav">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <app-btn-voltar [fechar_modal]="true"></app-btn-voltar>
+      <app-btn-voltar></app-btn-voltar>
     </ion-buttons>
     <ion-title>Relatório de saída</ion-title>
   </ion-toolbar>
@@ -16,7 +16,7 @@
           </th>
         </tr>
       </thead>
-      <tbody *ngFor="let obj of objRelatorio?.dados_json?.produtos" class="pb-4">
+      <tbody *ngFor="let obj of objRelatorio?.produtos" class="pb-4">
         <tr>
           <td>Cód: <b>{{obj.id}}</b></td>
           <td>Produto: <b>{{obj?.nome}}</b></td>
@@ -34,7 +34,7 @@
     </table>
   </div>
 
-  <h5 *ngIf="objRelatorio?.dados_json?.produtos?.length === 0" style="margin-top: 5px;"
+  <h5 *ngIf="objRelatorio?.produtos?.length === 0" style="margin-top: 5px;"
     class="text-center font-weight-bold alert alert-warning small">
     Nenhum produto localizado
   </h5>

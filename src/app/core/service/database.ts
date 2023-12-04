@@ -35,23 +35,23 @@ export class DataBaseProvider {
     const id: number = +pesquisa.trim();
     let sql = 'select * from produto';
 
-    if (pesquisa.startsWith('produto.id in')) {
+    if (pesquisa.startsWith('id in')) {
       sql += ` where ${pesquisa}`;
     } else if (filtro_pesquisa === 'geral') {
       if (id > 0) {
-        sql += ` where produto.id = ${id}`;
+        sql += ` where id = ${id}`;
       } else {
         pesquisa = pesquisa.toUpperCase();
-        sql += ` where produto.descricao like '%${pesquisa}%'`;
+        sql += ` where descricao like '%${pesquisa}%'`;
       }
     } else if (filtro_pesquisa === 'id') {
       if (id > 0) {
-        sql += ' where produto.id = ' + id;
+        sql += ' where id = ' + id;
       } else {
         return Promise.resolve(retorno);
       }
     } else if (filtro_pesquisa === 'ids_produtos') {
-      sql += ` where produto.id in (${pesquisa})`;
+      sql += ` where id in (${pesquisa})`;
     }
 
     return this.dados

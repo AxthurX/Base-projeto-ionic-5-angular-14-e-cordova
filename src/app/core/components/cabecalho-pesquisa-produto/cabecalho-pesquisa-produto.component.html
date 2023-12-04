@@ -1,4 +1,4 @@
-<ion-segment scrollable="true" mode="ios" [value]="filtro_pesquisa" (ionChange)="segmentChangedFiltro($event)">
+<ion-segment *ngIf="exibir_filtro_pesquisa" scrollable="true" mode="ios" [value]="filtro_pesquisa" (ionChange)="segmentChangedFiltro($event)">
   <ion-segment-button style="min-width: 90px;" scrollable="true" value="geral">
     <ion-label>Geral</ion-label>
   </ion-segment-button>

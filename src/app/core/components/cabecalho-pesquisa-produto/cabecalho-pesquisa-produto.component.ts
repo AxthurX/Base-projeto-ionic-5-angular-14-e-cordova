@@ -10,7 +10,6 @@ import { ModalController } from '@ionic/angular';
 import { ConsultaProdutoComponent } from 'src/app/views/modais/consulta-produto/consulta-produto.component';
 import { ViewProduto } from '../../model/data-base/view-produto.model';
 import { Util } from '../../util.model';
-import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 import { TelaVendaComponent } from 'src/app/views/abas/vendas/tela-venda/tela-venda.component';
 import { ProdutoUtil } from '../../model/produto-util.model';
 import { OverlayService } from '../../service/overlay.service';
@@ -26,6 +25,7 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
   @ViewChild('pesquisa') pesquisa;
   @Input() texto_pesquisado: string;
   @Input() apenas_consulta: boolean;
+  @Input() exibir_filtro_pesquisa: boolean;
   @Input() tela_consulta: ConsultaProdutoComponent;
   @Input() nao_exibir_consultando: boolean;
   @Input() permitir_quantidade_zero: boolean;
@@ -39,7 +39,6 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
   constructor(
     private prefSrv: PreferenciasService,
     private overlay: OverlayService,
-    private barcodeScanner: BarcodeScanner,
     private dados: DataBaseProvider
   ) {
     this.registros = [];
@@ -52,7 +51,7 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
     this.filtro_pesquisa = this.prefSrv.getPreferenciaProduto();
     this.checkType();
     setTimeout(() => {
-      this.pesquisa.setFocus();
+      this.pesquisa?.setFocus();
     }, 500);
   }
 
@@ -69,7 +68,7 @@ export class CabecalhoPesquisaProdutoComponent implements OnInit {
     this.filtro_pesquisa = event.detail.value;
     this.checkType();
     setTimeout(() => {
-      this.pesquisa.setFocus();
+      this.pesquisa?.setFocus();
     }, 500);
   }
 
