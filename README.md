@@ -53,6 +53,8 @@ ionic cordova resources <br>
 ionic cordova resources ios <br>
 ionic cordova resources android <br>
 
+Instalar Pacotes Npm
 npm i
+npm i -f --legacy-peer-deps
 
 
