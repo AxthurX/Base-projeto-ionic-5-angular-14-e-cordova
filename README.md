@@ -26,7 +26,7 @@ C:\Users\user\AppData\Local\Android\Sdk\build-tools <br>
 C:\Users\user\AppData\Local\Android\Sdk\emulator <br>
 C:\gradle-4.10.2\bin <br>
 <br>
-depois disso tudo e ainda der problema na hora de compilar pra android, ai é um problema (seu, #te vira)! <br>
+depois disso tudo e ainda der problema na hora de compilar pra android, ai é um problema fé em deus <br>
 <br>
 -> gerar apk de Formar simples e ligeira  <br>
 
