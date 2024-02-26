@@ -53,6 +53,7 @@ ionic cordova resources <br>
 ionic cordova resources ios <br>
 ionic cordova resources android <br>
 
+instalar pacotes
 npm i
 
 
